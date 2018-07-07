@@ -31,7 +31,7 @@ sudo pip3 install scipy
 sudo pip3 install matplotlib
 sudo pip3 install pyyaml
 sudo apt-get install pyqt5-dev
-sudp apt-get install pyqt5-tools
+sudo apt-get install pyqt5-tools
 
 sudo apt-get install at-spi2-core
 
