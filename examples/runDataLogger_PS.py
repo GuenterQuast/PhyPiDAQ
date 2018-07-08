@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-'''Data visualisation
-     this script reads data samples from PicoScope and 
-     displays data as effective voltage, history display and xy plot
+'''Data Logger 
+     reads samples from PicoScope and display averages as voltage history
 
-     Usage: ./runDataGraphs_PS.py [<Oscilloscpope_config>.yaml Interval]
+     Usage: ./runDataLogger_PS.py [<Oscilloscpope_config>.yaml Interval]
+
 '''
 
 from __future__ import print_function, division, unicode_literals
@@ -15,7 +15,7 @@ import sys, time, yaml, numpy as np, threading, multiprocessing as mp
 
 # import relevant pieces from picodaqa
 import picodaqa.picoConfig
-from phypidaq.mpDataGraphs import mpDataGraphs
+from phypidaq.mpDataLogger import mpDataLogger
 
 # helper functions
 
@@ -40,8 +40,8 @@ def stop_processes(proclst):
   '''
   for p in proclst: # stop all sub-processes
     if p.is_alive():
-      print('    terminating '+p.name)
-      if p.is_alive(): p.terminate()
+      print('    terminating ' + p.name)
+      p.terminate()
       time.sleep(1.)
 
 if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
@@ -50,16 +50,16 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
 # check for / read command line arguments
   # read DAQ configuration file
-  if len(sys.argv) >= 2:
+  if len(sys.argv)>=2:
     PSconfFile = sys.argv[1]
   else: 
-    PSconfFile = 'PSVoltMeter.yaml'
+    PSconfFile = 'PSdataLogger.yaml'
   print('    PS configuration from file ' + PSconfFile)
 
   if len(sys.argv)==3:
     interval = float(sys.argv[2])
   else: 
-    interval = 0.5
+    interval = 0.2
 
   if interval < 0.05:
     print(" !!! read-out intervals < 0.05 s not reliable, setting to 0.05 s")
@@ -77,9 +77,9 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 # configure and initialize PicoScope
   PSconf=picodaqa.picoConfig.PSconfig(PSconfDict)
   PSconf.init()
+
   # copy some of the important configuration variables
   NChannels = PSconf.NChannels # number of channels in use
-  TSampling = PSconf.TSampling # sampling interval
   NSamples = PSconf.NSamples   # number of samples
   buf = np.zeros( (NChannels, NSamples) ) # data buffer for PicoScope driver
 
@@ -97,27 +97,26 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   PhyPiConfDict['Interval'] = interval
   PhyPiConfDict['ChanNams'] = PSconfDict['picoChannels'] 
   PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
-  PhyPiConfDict['XYmode'] = True 
 
   thrds=[]
   procs=[]
-  deltaT = interval * 1000.   # update interval in ms
-  cmdQ =  mp.Queue(1) # Queue for command input
-  DGmpQ =  mp.Queue(1) # Queue for data transfer to sub-process
-  XY = True  # display Channel A vs. B if True
-  procs.append(mp.Process(name='DataGraphs', target = mpDataGraphs, 
-    args=(DGmpQ, PhyPiConfDict, '(Volt)', cmdQ) ) )
-#         Queue     config     Sigln.name CommandQ
+  cmdQ = mp.Queue(1) # Queue for command input
+  DLmpQ = mp.Queue(1) # Queue for data transfer to sub-process
+  procs.append(mp.Process(name='DataLogger', target = mpDataLogger, 
+             args=(DLmpQ, PhyPiConfDict, '(Volt)', cmdQ) ) )
+#                   Queue        config  Signl. name commandQ
 
   thrds.append(threading.Thread(name='kbdInput', target = kbdInput, 
                args = (cmdQ,)  ) )
 #                           Queue       
 
-# start subprocess(es)
+  # start subprocess(es)
   for prc in procs:
     prc.deamon = True
     prc.start()
     print(' -> starting process ', prc.name, ' PID=', prc.pid)
+
+    sig = np.zeros(NChannels)
 
   ACTIVE = True # thread(s) active 
   # start threads
@@ -126,49 +125,44 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     thrd.deamon = True
     thrd.start()
 
-  DAQ_ACTIVE = True  # Data Acquisition active    
-# -- LOOP 
-  sig = np.zeros(NChannels)
+  DAQ_ACTIVE = True  # Data Acquistion active    
+  # -- LOOP 
+  cnt = 0 
   try:
-    cnt = 0
-    T0 = time.time()
     while True:
       if DAQ_ACTIVE:
-        cnt +=1
+        cnt += 1
         PSconf.acquireData(buf) # read data from PicoScope
-        # construct an "event" like BufferMan.py does and send via Queue
         for i, b in enumerate(buf): # process data 
          # sig[i] = np.sqrt (np.inner(b, b) / NSamples)    # eff. Voltage
           sig[i] = b.sum() / NSamples          # average
-        DGmpQ.put(sig)
-
-   # check for keboard input
+        DLmpQ.put(sig) 
+# check for keboard input
       if not cmdQ.empty():
         cmd = cmdQ.get()
-        if cmd == 'E':
-          DGmpQ.put(None)       # send empty "end" event
+        if cmd == 'E':          # E(nd)  
+          DLmpQ.put(None)       # send empty "end" event
           print('\n' + sys.argv[0] + ': End command recieved - closing down')
           ACTIVE = False
           break
-        elif cmd == 'P':
+        elif cmd == 'P':       # P(ause)
           DAQ_ACTIVE = False     
-        elif cmd == 'R':
-          DAQ_ACTIVE = True
-        elif cmd == 's':  
-          DGmpQ.put(None)       # send empty "end" event
+        elif cmd == 'R':       # R(esume)
+          DAQ_ACTIVE = True    
+        elif cmd == 's':       # s(ave)
           DAQ_ACTIVE = False     
           ACTIVE = False
           print('\n storing data to file, ending')
           pass # to be implemented ...
           break
- 
-  except KeyboardInterrupt:
-    DAQ_ACTIVE = False     
-    ACTIVE = False
-    print('\n' + sys.argv[0]+': keyboard interrupt - closing down ...')
 
+  except KeyboardInterrupt:
+     print(sys.argv[0]+': keyboard interrupt - closing down ...')
+     DAQ_ACTIVE = False     
+     ACTIVE = False
   finally:
     PSconf.closeDevice() # close down hardware device
     time.sleep(1.)
     stop_processes(procs)  # stop all sub-processes in list
-    print('*==* ' + sys.argv[0] + ': normal end')
+    print('*==* ' + sys.argv[0] + ': normal end \n')
+
