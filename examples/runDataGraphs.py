@@ -90,7 +90,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   DGmpQ =  mp.Queue(1) # Queue for data transfer to sub-process
   XY = True  # display Channel A vs. B if True
   procs.append(mp.Process(name='DataGraphs', target = mpDataGraphs, 
-    args=(DGmpQ, PSconf.OscConfDict, deltaT, 'effective Voltage', XY, cmdQ) ) )
+    args=(DGmpQ, PSconf.OscConfDict, deltaT, '(Volt)', XY, cmdQ) ) )
 #                Queue            config                      interval    name
 
   thrds.append(threading.Thread(name='kbdInput', target = kbdInput, 
