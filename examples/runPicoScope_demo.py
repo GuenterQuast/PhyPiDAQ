@@ -5,7 +5,7 @@
      this script reads data samples from PicoScope and 
      displays data as effective voltage, history display and xy plot
 
-     Usage: ./runDataGraphs_PS.py [<Oscilloscpope_config>.yaml Interval]
+     Usage: ./runPicoScope_demo.py [Interval <Oscilloscpope_config>.yaml]
 '''
 
 from __future__ import print_function, division, unicode_literals
@@ -13,8 +13,11 @@ from __future__ import absolute_import
 
 import sys, time, yaml, numpy as np, threading, multiprocessing as mp
 
-# import relevant pieces from picodaqa
+# import relevant pieces from picodaqa ...
 import picodaqa.picoConfig
+
+# ... and from phypidaq
+from phypidaq.mpDataLogger import mpDataLogger
 from phypidaq.mpDataGraphs import mpDataGraphs
 
 # helper functions
@@ -50,14 +53,14 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
 # check for / read command line arguments
   # read DAQ configuration file
-  if len(sys.argv) >= 2:
-    PSconfFile = sys.argv[1]
+  if len(sys.argv) >= 3:
+    PSconfFile = sys.argv[2]
   else: 
     PSconfFile = 'PSVoltMeter.yaml'
   print('    PS configuration from file ' + PSconfFile)
 
-  if len(sys.argv)==3:
-    interval = float(sys.argv[2])
+  if len(sys.argv) >=2:
+    interval = float(sys.argv[1])
   else: 
     interval = 0.5
 
@@ -74,13 +77,15 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     print('     failed to read scope configuration file ' + PSconfFile)
     exit(1)
 
+### ---- code specific to PicoScope
+
 # configure and initialize PicoScope
-  PSconf=picodaqa.picoConfig.PSconfig(PSconfDict)
-  PSconf.init()
+  PS = picodaqa.picoConfig.PSconfig(PSconfDict)
+  PS.init()
   # copy some of the important configuration variables
-  NChannels = PSconf.NChannels # number of channels in use
-  TSampling = PSconf.TSampling # sampling interval
-  NSamples = PSconf.NSamples   # number of samples
+  NChannels = PS.NChannels # number of channels in use
+  TSampling = PS.TSampling # sampling interval
+  NSamples = PS.NSamples   # number of samples
   buf = np.zeros( (NChannels, NSamples) ) # data buffer for PicoScope driver
 
 # Create a dictionary for Data logger or DataGraphs 
@@ -99,12 +104,32 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
   PhyPiConfDict['XYmode'] = True 
 
+  print ('\nConfiguration:')
+  print (yaml.dump(PhyPiConfDict) )
+
+  def getData():
+    # read data sample from PicoScope
+    global sig
+    PS.acquireData(buf) # read data from PicoScope
+    for i, b in enumerate(buf): # process data 
+      #sig[i] = np.sqrt (np.inner(b, b) / NSamples)    # eff. Voltage
+      sig[i] = b.sum() / NSamples          # average
+    return sig
+
+### ---- end PicoScope code
+
+### --- general code
+
   thrds=[]
   procs=[]
-  deltaT = interval * 1000.   # update interval in ms
   cmdQ =  mp.Queue(1) # Queue for command input
+
+  DLmpQ = mp.Queue(1) # Queue for data transfer to sub-process
+  procs.append(mp.Process(name='DataLogger', target = mpDataLogger, 
+             args=(DLmpQ, PhyPiConfDict, '(Volt)', cmdQ) ) )
+#                   Queue        config  Signl. name commandQ
+
   DGmpQ =  mp.Queue(1) # Queue for data transfer to sub-process
-  XY = True  # display Channel A vs. B if True
   procs.append(mp.Process(name='DataGraphs', target = mpDataGraphs, 
     args=(DGmpQ, PhyPiConfDict, '(Volt)', cmdQ) ) )
 #         Queue     config     Sigln.name CommandQ
@@ -135,12 +160,9 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     while True:
       if DAQ_ACTIVE:
         cnt +=1
-        PSconf.acquireData(buf) # read data from PicoScope
-        # construct an "event" like BufferMan.py does and send via Queue
-        for i, b in enumerate(buf): # process data 
-         # sig[i] = np.sqrt (np.inner(b, b) / NSamples)    # eff. Voltage
-          sig[i] = b.sum() / NSamples          # average
-        DGmpQ.put(sig)
+        sig = getData()
+        DGmpQ.put(sig)  # for DataGraphs
+        DLmpQ.put(sig)  # for DataLogger
 
    # check for keboard input
       if not cmdQ.empty():
@@ -168,7 +190,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     print('\n' + sys.argv[0]+': keyboard interrupt - closing down ...')
 
   finally:
-    PSconf.closeDevice() # close down hardware device
+    PS.closeDevice() # close down hardware device
     time.sleep(1.)
     stop_processes(procs)  # stop all sub-processes in list
     print('*==* ' + sys.argv[0] + ': normal end')
