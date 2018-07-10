@@ -69,6 +69,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   PhyPiConfDict={}
   PhyPiConfDict['NChannels'] = NChannels 
   MCP = MCP3008Config(PhyPiConfDict)
+  MCP.init()
 
 # Create a dictionary for Data logger or DataGraphs 
   # use PicoScope config in this example
