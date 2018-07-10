@@ -19,6 +19,19 @@ class MCP3008Config(object):
     else:
       self.NChannels = 1
 
+    if 'VRef' in confdict:
+      self.VRef = confdict['VRef']
+    else
+      self.VRef = 3.3
+
+    if 'NBits' in confdict:
+      NBits = confdict['NBits']
+    else
+      NBits = 10
+
+    self.ADCmax = float( (1 << NBits) - 1)
+    self.Vfac = self.VRef / self.ADCmax
+
   def init(self):
   #Hardware SPI configuration:
     SPI_PORT   = 0
@@ -32,5 +45,5 @@ class MCP3008Config(object):
   def acquireData(self, buf): 
     # read data from ADC
     for i in range(self.NChannels):
-      buf[i] = self.MCP.read_adc(i) * 3.3 / 1023
+      buf[i] = self.MCP.read_adc(i) * self.Vfac
 
