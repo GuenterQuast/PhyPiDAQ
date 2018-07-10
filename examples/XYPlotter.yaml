@@ -1,0 +1,25 @@
+# example of a configuration file for ADC ADS1115
+SensorModel: ADS1115
+Channels: [A, B]
+#graphic Configuration
+Units: [(Volt), (Volt)]
+ChanRanges: [3., 5.]
+#ChanOffsets: [0., 0.]
+Interval: 0.1
+
+# DAC ADS1115 configuration
+# possible values for sampleRate: 8, 16, 32, 64, 128, 250, 475, 860
+# default value: 860
+sampleRate: 860
+# possible values for Gain:
+#  - 2/3 = +/-6.144V
+#  -   1 = +/-4.096V
+#  -   2 = +/-2.048V
+#  -   4 = +/-1.024V
+#  -   8 = +/-0.512V
+#  -  16 = +/-0.256V
+# default value: 1 
+Gain: [1, 1]
+# possible values for ADCChannels: 0, 1, 2, 3 
+ADCChannels: [0, 1]
+
