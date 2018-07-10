@@ -142,7 +142,7 @@ def mpDataGraphs(Q, conf,
   canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
 
 # set up matplotlib animation
-  tw = max(WaitTime-50., 0.5) # smaller than WaitTime to allow for processing
+  tw = max(WaitTime-100., 0.5) # smaller than WaitTime to allow for processing
   DGAnim = anim.FuncAnimation(figDG, DG, yieldEvt_fromQ,
                          interval = tw, init_func = DG.init,
                          blit=True, fargs=None, repeat=True, save_count=None)

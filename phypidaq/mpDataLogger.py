@@ -145,7 +145,7 @@ def mpDataLogger(Q, conf, name='(Veff)', cmdQ = None):
 
 
 # set up matplotlib animation
-  tw = max(WaitTime - 20., 0.5) # smaller than WaitTime to allow for processing
+  tw = max(WaitTime - 100., 0.5) # smaller than WaitTime to allow for processing
   VMAnim = anim.FuncAnimation(figDL, DL, yieldEvt_fromQ,
                          interval = tw , init_func=DL.init,
                          blit=True, fargs=None, repeat=True, save_count=None)

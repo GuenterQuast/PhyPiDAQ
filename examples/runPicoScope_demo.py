@@ -168,7 +168,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
       if not cmdQ.empty():
         cmd = cmdQ.get()
         if cmd == 'E':
-          DGmpQ.put(None)       # send empty "end" event
+          #DGmpQ.put(None)       # send empty "end" event
           print('\n' + sys.argv[0] + ': End command recieved - closing down')
           ACTIVE = False
           break
@@ -177,7 +177,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
         elif cmd == 'R':
           DAQ_ACTIVE = True
         elif cmd == 's':  
-          DGmpQ.put(None)       # send empty "end" event
+          #DGmpQ.put(None)       # send empty "end" event
           DAQ_ACTIVE = False     
           ACTIVE = False
           print('\n storing data to file, ending')

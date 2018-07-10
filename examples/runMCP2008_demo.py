@@ -13,13 +13,11 @@ from __future__ import absolute_import
 
 import sys, time, yaml, numpy as np, threading, multiprocessing as mp
 
-# import relevant pieces from adafruit
-import Adafruit_GPIO.SPI as SPI
-import Adafruit_MCP3008
-
 # ... and from phypidaq
 from phypidaq.mpDataLogger import mpDataLogger
 from phypidaq.mpDataGraphs import mpDataGraphs
+
+from phypidaq.MCP3008Config import MCP3008Config
 
 # helper functions
 
@@ -37,14 +35,6 @@ def kbdInput(cmdQ):
     kbdtxt = get_input(20*' ' + 'type -> P(ause), R(esume), E(nd) or s(ave) + <ret> ')
     cmdQ.put(kbdtxt)
     kbdtxt = ''
-
-def MCP3008Config():
-#Hardware SPI configuration:
-  SPI_PORT   = 0
-  SPI_DEVICE = 0
-  mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
-  return mcp
-
 
 def stop_processes(proclst):
   '''
@@ -75,11 +65,13 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 ### ---- code specific to PicoScope
 
 # configure and initialize ADC
-  MCP = MCP3008Config()
   NChannels = 2
+  PhyPiConfDict={}
+  PhyPiConfDict['NChannels'] = NChannels 
+  MCP = MCP3008Config(PhyPiConfDict)
+
 # Create a dictionary for Data logger or DataGraphs 
   # use PicoScope config in this example
-  PhyPiConfDict={}
   PhyPiConfDict['NChannels'] = NChannels 
   PhyPiConfDict['ChanLimits'] = [ [0., 3.3], [0., 3.3] ]
   PhyPiConfDict['Interval'] = interval
@@ -89,13 +81,6 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
   print ('\nConfiguration:')
   print (yaml.dump(PhyPiConfDict) )
-
-  def getData():
-    global sigs
-    # read data sample from ADC
-    for i in range(NChannels):
-      sigs[i] = MCP.read_adc(i) * 3.3 / 1023
-    return sigs
 
 ### ---- end ADC code
 
@@ -134,14 +119,14 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
   DAQ_ACTIVE = True  # Data Acquisition active    
 # -- LOOP 
-  sigs = np.zeros(NChannels)
+  sig = np.zeros(NChannels)
   try:
     cnt = 0
     T0 = time.time()
     while True:
       if DAQ_ACTIVE:
         cnt +=1
-        sig = getData()
+        MCP.acquireData(sig)
 #        DGmpQ.put(sig)  # for DataGraphs
         DLmpQ.put(sig)  # for DataLogger
 
