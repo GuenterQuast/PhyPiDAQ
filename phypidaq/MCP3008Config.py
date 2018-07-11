@@ -9,7 +9,7 @@ import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
 class MCP3008Config(object):
-  '''set ADC MCP3008 configuration'''
+  '''ADC MCP3008 configuration and interface'''
 
   def __init__(self, confdict = None):
     if confdict==None: confdict={}
