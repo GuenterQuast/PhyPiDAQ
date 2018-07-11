@@ -21,12 +21,12 @@ class MCP3008Config(object):
 
     if 'VRef' in confdict:
       self.VRef = confdict['VRef']
-    else
+    else:
       self.VRef = 3.3
 
     if 'NBits' in confdict:
       NBits = confdict['NBits']
-    else
+    else:
       NBits = 10
 
     self.ADCmax = float( (1 << NBits) - 1)

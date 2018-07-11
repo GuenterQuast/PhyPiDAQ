@@ -24,6 +24,6 @@ __version__ += _version_suffix
 # Import components to be callabel at package level
 __all__ = [ "mpDataLogger", "DataLogger", 
             "mpDataGraphs", "DataGraphs",
-            "MCP3008Config" ]
+            "PSConfig", "MCP3008Config" ]
 
 

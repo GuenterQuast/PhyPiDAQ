@@ -13,12 +13,13 @@ from __future__ import absolute_import
 
 import sys, time, yaml, numpy as np, threading, multiprocessing as mp
 
-# import relevant pieces from picodaqa ...
-import picodaqa.picoConfig
+# import device interface ...
+from phypidaq.PSConfig import PSConfig
 
-# ... and from phypidaq
+# ... and display modules
 from phypidaq.mpDataLogger import mpDataLogger
 from phypidaq.mpDataGraphs import mpDataGraphs
+
 
 # helper functions
 
@@ -56,7 +57,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   if len(sys.argv) >= 3:
     PSconfFile = sys.argv[2]
   else: 
-    PSconfFile = 'PSVoltMeter.yaml'
+    PSconfFile = 'PSConfig.yaml'
   print('    PS configuration from file ' + PSconfFile)
 
   if len(sys.argv) >=2:
@@ -80,21 +81,20 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 ### ---- code specific to PicoScope
 
 # configure and initialize PicoScope
-  PS = picodaqa.picoConfig.PSconfig(PSconfDict)
+  PS = PSConfig(PSconfDict)
   PS.init()
   # copy some of the important configuration variables
-  NChannels = PS.NChannels # number of channels in use
-  TSampling = PS.TSampling # sampling interval
-  NSamples = PS.NSamples   # number of samples
-  buf = np.zeros( (NChannels, NSamples) ) # data buffer for PicoScope driver
+  NChannels = PS.PSconfDict['NChannels']   # number of channels in use
+  TSampling = PS.PSconfDict['TSampling'] # sampling interval
+  NSamples = PS.PSconfDict['NSamples']   # number of samples
 
 # Create a dictionary for Data logger or DataGraphs 
   # use PicoScope config in this example
   PhyPiConfDict={}
-  PhyPiConfDict['NChannels'] = NChannels 
+  PhyPiConfDict['NChannels'] = NChannels
   ChanLims = []
-  CRanges = PSconfDict['ChanRanges']
-  COffsets = PSconfDict['ChanOffsets']
+  CRanges = PS.PSconfDict['CRanges']
+  COffsets = PS.PSconfDict['ChanOffsets']
   for i in range(NChannels):
      ChanLims.append( (-CRanges[i]-COffsets[i], 
                         CRanges[i]-COffsets[i]) )
@@ -107,15 +107,6 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
   print ('\nConfiguration:')
   print (yaml.dump(PhyPiConfDict) )
-
-  def getData():
-    # read data sample from PicoScope
-    global sig
-    PS.acquireData(buf) # read data from PicoScope
-    for i, b in enumerate(buf): # process data 
-      #sig[i] = np.sqrt (np.inner(b, b) / NSamples)    # eff. Voltage
-      sig[i] = b.sum() / NSamples          # average
-    return sig
 
 ### ---- end PicoScope code
 
@@ -161,7 +152,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     while True:
       if DAQ_ACTIVE:
         cnt +=1
-        sig = getData()
+        PS.acquireData(sig)
         DGmpQ.put(sig)  # for DataGraphs
         DLmpQ.put(sig)  # for DataLogger
 

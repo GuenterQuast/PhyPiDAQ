@@ -66,10 +66,10 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
 # configure and initialize ADC
   NChannels = 2
-  VRev = 3.3
+  VRef = 3.3
   PhyPiConfDict={}
   PhyPiConfDict['NChannels'] = NChannels 
-  PhyPiConfDict['VRef'] = Vref 
+  PhyPiConfDict['VRef'] = VRef 
   MCP = MCP3008Config(PhyPiConfDict)
   MCP.init()
 
