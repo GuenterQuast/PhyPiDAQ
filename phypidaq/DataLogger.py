@@ -44,7 +44,7 @@ class DataLogger(object):
       if i > 1:
         break # works for a maximum of 2 Channels only
       axes[i].set_ylim(*self.ChanLim[i])
-      axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLables[i], 
+      axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLabels[i], 
             color=self.ChanColors[i])
       axes[i].grid(True, color=self.ChanColors[i], linestyle = '--', alpha=0.3)
     axes[0].set_xlabel('History (s)')
