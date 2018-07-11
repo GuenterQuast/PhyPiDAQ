@@ -101,6 +101,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   PhyPiConfDict['ChanLimits'] = ChanLims
   PhyPiConfDict['Interval'] = interval
   PhyPiConfDict['ChanNams'] = PSconfDict['picoChannels'] 
+  PhyPiConfDict['ChanLabels'] = ['Voltage (V)', 'Voltage (V)']  
   PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
   PhyPiConfDict['XYmode'] = True 
 

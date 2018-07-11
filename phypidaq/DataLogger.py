@@ -9,7 +9,7 @@ class DataLogger(object):
     forked from picoDAQ.DataLogger
   '''
 
-  def __init__(self, ConfDict, sigName):
+  def __init__(self, ConfDict, Name):
     '''Args:  Wtime: waiting time between updates
               conf: PicoScope Configuration dictionary
     '''
@@ -22,6 +22,10 @@ class DataLogger(object):
     self.ChanLim = ConfDict['ChanLimits']
     self.ChanNams = ConfDict['ChanNams']
     self.ChanColors = ConfDict['ChanColors']
+    if 'ChanLabels' in ConfDict:
+      self.ChanLabels = ConfDict['ChanLabels']
+    else:
+      self.ChanLabels = [''] * self.NChan
 
    # data structures needed throughout the class
     self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
@@ -40,7 +44,8 @@ class DataLogger(object):
       if i > 1:
         break # works for a maximum of 2 Channels only
       axes[i].set_ylim(*self.ChanLim[i])
-      axes[i].set_ylabel('Chan ' + C + ' ' + sigName, color=self.ChanColors[i])
+      axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLables[i], 
+            color=self.ChanColors[i])
       axes[i].grid(True, color=self.ChanColors[i], linestyle = '--', alpha=0.3)
     axes[0].set_xlabel('History (s)')
 
