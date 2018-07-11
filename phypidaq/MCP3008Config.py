@@ -37,7 +37,9 @@ class MCP3008Config(object):
     SPI_PORT   = 0
     SPI_DEVICE = 0
     try:
-      self.MCP = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+      self.MCP = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT,
+                           SPI_DEVICE, max_speed_hz=15600000) )
+                                                      # run bus at 15.6 MHz, default is 0.488MHz
     except:
       print("MCP3008Config: Error initialising device - exit")
       sys.exit(1)

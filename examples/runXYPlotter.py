@@ -27,7 +27,7 @@ def kbdInput(cmdQ):
   ''' 
     read keyboard input, run as backround-thread to aviod blocking
   '''
-# 1st, remove pyhton 2 vs. python 3 incompatibility for keyboard input
+# 1st, remove python 2 vs. python 3 incompatibility for keyboard input
   if sys.version_info[:2] <=(2,7):
     get_input = raw_input
   else: 
@@ -89,6 +89,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   GAIN = SensorConf.gain # programmable gain ADS1115
   RSampling = SensorConf.sampleRate # sample rate ADS1115
   ADCChannels = SensorConf.ADCChannels # ADC-Channels ADS1115
+  ConvFactors = SensorConf.ConvFactors # conversion factors for calculation of sensor value
 
 ### --- determine reference voltage for ADC calculation
 # possible values reference voltage
@@ -98,12 +99,19 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   posGain = [2/3, 1, 2 , 4, 8, 16]
   for i in range(NChannels):
     RefVolt[i] = ADCRefVolt[posGain.index(GAIN[i])]
+    
+# remove python 2 vs. python 3 incompatibility for gain: 2/3 (Adafruit_ADS1x15)
+  for i in range(NChannels):
+      if sys.version_info[:2] <=(2,7):
+        if GAIN[i] == 2/3:
+          GAIN[i] = int(GAIN[i])
 
   def getData():
     # read data sample from ADS1115
     global sig
     for i in range(NChannels):
-      sig[i] = adc.read_adc(ADCChannels[i], gain = GAIN[i], data_rate = RSampling)*RefVolt[i]/32767
+      sig[i] = adc.read_adc(ADCChannels[i], gain = GAIN[i],
+                            data_rate = RSampling)*RefVolt[i]*ConvFactors[i]/32767
     return sig
 
 ### --- general code

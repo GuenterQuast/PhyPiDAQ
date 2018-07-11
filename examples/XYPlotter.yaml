@@ -1,11 +1,14 @@
-# example of a configuration file for ADC ADS1115
+# example of a configuration file for XY-Plotter
 SensorModel: ADS1115
 Channels: [A, B]
 #graphic Configuration
-Units: [(Volt), (Volt)]
-ChanRanges: [3., 5.]
+Units: [Volt, Volt]
+ChanRanges: [3., 3.]
 #ChanOffsets: [0., 0.]
 Interval: 0.1
+
+#conversion factors for calculation of sensor value
+ConversionFactors: [1., 1]
 
 # DAC ADS1115 configuration
 # possible values for sampleRate: 8, 16, 32, 64, 128, 250, 475, 860

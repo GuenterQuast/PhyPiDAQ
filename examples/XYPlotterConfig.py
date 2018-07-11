@@ -20,7 +20,7 @@ class SensorConfig(object):
     if "Units" in confdict: 
       self.Units = confdict["Units"]
     else:
-      self.Units = ['(Volt)', '(Volt)']      
+      self.Units = ['Volt', 'Volt']      
 # -- channels to be used
     if "Channels" in confdict: 
       self.Channels = confdict["Channels"]
@@ -50,11 +50,20 @@ class SensorConfig(object):
     if "Interval" in confdict: 
       self.Interval=confdict["Interval"]
     else:
-      self.Interval = 0.05
+      self.Interval = 0.1
+
+# --  conversion factors for calculation of sensor value
+    if "ConversionFactors" in confdict:
+      self.ConvFactors = confdict["ConversionFactors"]  
+    else:
+      self.ConvFactors = [1, 1]
       
 # -- gain configuration ADC ADS1115
     if "Gain" in confdict:
-      self.gain = confdict["Gain"]  
+      self.gain = confdict["Gain"]
+      for i in range(self.NChannels):
+        if self.gain[i] == '2/3':
+          self.gain[i] = 2/3
     else:
       self.gain = [1, 1]      # gain
     if "sampleRate" in confdict:
@@ -99,12 +108,13 @@ class SensorConfig(object):
                           'ChanLimits' : self.ChanLims,
                           'ChanNams' : self.Channels,
                           'ADCChannels' : self.ADCChannels,
+                          'ConvFactors' : self.ConvFactors,
                           'Units': self.Units,
                           'Gain' : self.gain,
                           'XYmode': self.XYmode,
                           'ChanColors': self.ChanColors}
-    print('\Configuration:')
-    print(yaml.dump(self.SensorConfDict))
+    #print('\Configuration:')
+    #print(yaml.dump(self.SensorConfDict))
 # - end Sensor.init()
 
   def sensorIni(self):
