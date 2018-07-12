@@ -6,15 +6,13 @@ import time, numpy as np
 import matplotlib.pyplot as plt
 
 class DataGraphs(object):
-  ''' Bar graph display of average over samples 
+  ''' Bar graph display, history plot and XY-display
 
-    forked from picoDAQ.DataGraphs
+         forked from picoDAQ.DataGraphs
   '''
 
-  def __init__(self, ConfDict, Name):
-    '''Args:   Wtime: waiting time between updates
-               confDict: PicoScope Configuration dictionary
-               XYmode: bool, xy-display if True
+  def __init__(self, ConfDict):
+    '''Args:   confDict: Configuration dictionary
     '''
  
   # collect relevant configuration parameters

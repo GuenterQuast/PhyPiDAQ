@@ -13,9 +13,7 @@ from __future__ import absolute_import
 
 import sys, time, yaml, numpy as np, threading, multiprocessing as mp
 
-# ... and from phypidaq
-from phypidaq.mpDataLogger import mpDataLogger
-from phypidaq.mpDataGraphs import mpDataGraphs
+from phypidaq.mpTkDisplay import mpTkDisplay
 
 from phypidaq.MCP3008Config import MCP3008Config
 
@@ -95,14 +93,14 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   cmdQ =  mp.Queue(1) # Queue for command input
 
   DLmpQ = mp.Queue(1) # Queue for data transfer to sub-process
-  procs.append(mp.Process(name='DataLogger', target = mpDataLogger, 
-             args=(DLmpQ, PhyPiConfDict, '(Volt)', cmdQ) ) )
-#                   Queue        config  Signl. name commandQ
+  procs.append(mp.Process(name='DataLogger', target = mpTkDisplay, 
+             args=(DLmpQ, PhyPiConfDict, 'DataLogger', cmdQ) ) )
+#                   Queue        config   ModuleName commandQ
 
-  #DGmpQ =  mp.Queue(1) # Queue for data transfer to sub-process
-  #procs.append(mp.Process(name='DataGraphs', target = mpDataGraphs, 
-  #args=(DGmpQ, PhyPiConfDict, '(Volt)', cmdQ) ) )
-#         Queue     config     Sigln.name CommandQ
+#  DGmpQ =  mp.Queue(1) # Queue for data transfer to sub-process
+#  procs.append(mp.Process(name='DataGraphs', target = mpTkDisplay, 
+#    args=(DGmpQ, PhyPiConfDict, 'DataGraphs', cmdQ) ) )
+#         Queue     config       ModuleName  CommandQ
 
   thrds.append(threading.Thread(name='kbdInput', target = kbdInput, 
                args = (cmdQ,)  ) )

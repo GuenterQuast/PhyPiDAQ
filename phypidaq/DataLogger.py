@@ -9,9 +9,8 @@ class DataLogger(object):
     forked from picoDAQ.DataLogger
   '''
 
-  def __init__(self, ConfDict, Name):
-    '''Args:  Wtime: waiting time between updates
-              conf: PicoScope Configuration dictionary
+  def __init__(self, ConfDict):
+    '''Args:  ConfDict: configuration dictionary
     '''
    # collect relevant configuration parameters
     self.Npoints = 120  # number of points for history

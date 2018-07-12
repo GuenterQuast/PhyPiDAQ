@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''effective Voltage and signal history in TKinter window'''
+'''exectue Display Module in Tkinter window '''
 
 from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
@@ -22,19 +22,34 @@ else:
 
 import matplotlib.pyplot as plt, matplotlib.animation as anim
 
-# import DataGraphs class
-from .DataGraphs import *
 
-def mpDataGraphs(Q, conf,  
-                name='Voltage', cmdQ=None):
-  '''effective Voltage of data passed via multiprocessing.Queue
+def mpTkDisplay(Q, conf,  
+                ModuleName='DataGraphs', cmdQ=None):
+  ''' data passed via multiprocessing.Queue
     Args:
-      conf: picoConfig object
       Q:    multiprocessing.Queue()   
+      conf: Config dictionary for Display Module
+      ModuleName: name of Display Module to start
+      cmdQ: Queue to send commands back to calling process
   '''
 
-  interval = conf['Interval']
-  WaitTime = interval * 1000 # in ms
+  # import relevant library
+  try:
+    cmnd ='from .'+ ModuleName + ' import *' 
+    print('  mpTkDisplay: executing: ' + cmnd)
+    exec(cmnd)
+  except:
+    print(' !!! TkDisplay: failed to import module - exiting')
+    sys.exit(1)
+
+  try:
+    cmnd = 'global DG; DG = ' + ModuleName +'(conf)'
+    print('  mpTkDisplay: executing: ' + cmnd)
+    exec(cmnd)
+  except: 
+    print(' !!! TkDisplay: failed to initialize module - exiting')
+    sys.exit(1)
+
 
   # Generator to provide data to animation
   def yieldEvt_fromQ():
@@ -92,14 +107,16 @@ def mpDataGraphs(Q, conf,
       pass
  
 # ------- executable part -------- 
-#  print(' -> mpDataGraph starting')
+#  print(' -> mpTkDisplay starting')
 
-  DG = DataGraphs(conf, name)
+  interval = conf['Interval']
+  WaitTime = interval * 1000 # in ms
+
   figDG = DG.fig
 
 # generate a simple window for graphics display as a tk.DrawingArea
   root = Tk.Tk()
-  root.wm_title("Data Graphs")
+  root.wm_title(ModuleName)
 
 # handle destruction of top-level window
   def _delete_window():
@@ -148,6 +165,8 @@ def mpDataGraphs(Q, conf,
                          blit=True, fargs=None, repeat=True, save_count=None)
                        # save_count=None is a (temporary) work-around 
                        #     to fix memory leak in animate
-  Tk.mainloop()
-  print('*==* mpDataGraphs: terminating')
+  try:
+    Tk.mainloop()
+  except:
+    print('*==* mpTkDisplay running ' + ModuleName + ': forced exit')
   sys.exit()
