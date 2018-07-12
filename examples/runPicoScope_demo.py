@@ -84,7 +84,6 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   PS.init()
   # copy some of the important configuration variables
   NChannels = PS.PSconfDict['NChannels']   # number of channels in use
-  TSampling = PS.PSconfDict['TSampling'] # sampling interval
   NSamples = PS.PSconfDict['NSamples']   # number of samples
 
 # Create a dictionary for Data logger or DataGraphs 
