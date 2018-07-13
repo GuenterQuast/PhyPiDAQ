@@ -66,7 +66,7 @@ class XYPlotter(object):
       if i > 1:
         break # works for a maximum of 2 Channels only
       axes[i].set_ylim(*self.ChanLim[i])
-      axes[i].set_ylabel('Chan ' + C + ' ' + '(' + ChanLabels[i] +')', 
+      axes[i].set_ylabel('Chan ' + C + ' ' + '(' + self.ChanLabels[i] +')', 
                color=self.ChanColors[i])
       axes[i].grid(True, color=self.ChanColors[i], linestyle = '--', alpha=0.3)
     axes[0].set_xlabel('History (s)', size='x-large')
@@ -88,12 +88,12 @@ class XYPlotter(object):
       axbar1.axvline(self.NChan, color = self.ChanColors[1])
     axbar1.set_ylim(*self.ChanLim[0])
     axbar1.axhline(0., color='k', linestyle='-', lw=2, alpha=0.5)
-    axbar1.set_ylabel('Chan ' + self.ChanNams[0] + ' ' + '(' + ChanLabels[0] + ')', 
+    axbar1.set_ylabel('Chan ' + self.ChanNams[0] + ' ' + '(' + self.ChanLabels[0] + ')', 
          size='x-large', color = self.ChanColors[0])
     axbar1.grid(True, color=self.ChanColors[0], linestyle = '--', alpha=0.3)
     if self.NChan > 1:
       axbar2.set_ylim(*self.ChanLim[1])
-      axbar2.set_ylabel('Chan ' + self.ChanNams[1] + ' ' + '(' + ChanLabels[1] + ')', 
+      axbar2.set_ylabel('Chan ' + self.ChanNams[1] + ' ' + '(' + self.ChanLabels[1] + ')', 
        size='x-large', color = self.ChanColors[1])
       axbar2.grid(True, color=self.ChanColors[0], linestyle = '--', alpha=0.3)
 
@@ -114,9 +114,9 @@ class XYPlotter(object):
       axXY = axes[-1]
       axXY.set_xlim(*self.ChanLim[0])
       axXY.set_ylim(*self.ChanLim[1])
-      axXY.set_xlabel('Chan '+self.ChanNams[0]+' ' + '(' + ChanLabels[0] +')', 
+      axXY.set_xlabel('Chan '+self.ChanNams[0]+' ' + '(' + self.ChanLabels[0] +')', 
          size='x-large', color=self.ChanColors[0])
-      axXY.set_ylabel('Chan '+self.ChanNams[1]+ ' ' + '(' + ChanLabels[1] + ')', 
+      axXY.set_ylabel('Chan '+self.ChanNams[1]+ ' ' + '(' + self.ChanLabels[1] + ')', 
          size='x-large', color=self.ChanColors[1])
       axXY.set_title('XY-View', size='xx-large')
       axXY.grid(True, color='grey', linestyle = '--', alpha=0.3)
