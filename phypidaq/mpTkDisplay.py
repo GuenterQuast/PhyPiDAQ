@@ -36,7 +36,7 @@ def mpTkDisplay(Q, conf,
   # import relevant library
   try:
     cmnd ='from .'+ ModuleName + ' import *' 
-    print('  mpTkDisplay: executing: ' + cmnd)
+    # print('  mpTkDisplay: executing: ' + cmnd)
     exec(cmnd)
   except:
     print(' !!! TkDisplay: failed to import module - exiting')
@@ -44,7 +44,7 @@ def mpTkDisplay(Q, conf,
 
   try:
     cmnd = 'global DG; DG = ' + ModuleName +'(conf)'
-    print('  mpTkDisplay: executing: ' + cmnd)
+    # print('  mpTkDisplay: executing: ' + cmnd)
     exec(cmnd)
   except: 
     print(' !!! TkDisplay: failed to initialize module - exiting')

@@ -72,11 +72,12 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   MCP.init()
 
 # Create a dictionary for Data logger or DataGraphs 
-  # use PicoScope config in this example
+  # fror device config
   PhyPiConfDict['NChannels'] = NChannels 
-  PhyPiConfDict['ChanLimits'] = [ [0., 3.3], [0., 3.3] ]
+  PhyPiConfDict['ChanLimits'] = MCP.ChanLims
+  PhyPiConfDict['ChanNams'] = MCP.ChanNams
+#
   PhyPiConfDict['Interval'] = interval
-  PhyPiConfDict['ChanNams'] = ['0', '1'] 
   PhyPiConfDict['ChanLabels'] = ['Voltage (V)', 'Voltage (V)']  
   PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
   PhyPiConfDict['XYmode'] = True 

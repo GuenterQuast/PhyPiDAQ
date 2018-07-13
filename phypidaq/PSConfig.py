@@ -20,12 +20,25 @@ class PSConfig(object):
     # initialize PicoScope and retreive config parameters
     self.PS = PSconfig(self.confdict)
     self.PS.init()
- 
-# data buffer for PicoScope driver
-    self.buf = np.zeros( (self.PS.NChannels, self.PS.NSamples) )
-    self.NSamples = self.PS.NSamples
     self.PSconfDict = self.PS.OscConfDict
- 
+
+# collect configuration parameters
+    self.NChannels = self.PS.NChannels
+    self.ChanNams = self.PSconfDict['Channels']
+    CRanges = self.PSconfDict['CRanges']
+    COffsets = self.PSconfDict['ChanOffsets']
+    self.ChanLims = []
+    for i in range(self.NChannels):
+     self.ChanLims.append( (-CRanges[i]-COffsets[i], 
+                        CRanges[i]-COffsets[i]) )
+    
+# data buffer for PicoScope driver
+    self.NSamples = self.PS.NSamples
+    self.buf = np.zeros( (self.PS.NChannels, self.PS.NSamples) )
+
+
+
+    
   def acquireData(self, sig): 
     # read data from PicoScope
 

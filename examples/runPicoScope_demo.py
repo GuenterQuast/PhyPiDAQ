@@ -82,23 +82,15 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 # configure and initialize PicoScope
   PS = PSConfig(PSconfDict)
   PS.init()
-  # copy some of the important configuration variables
-  NChannels = PS.PSconfDict['NChannels']   # number of channels in use
-  NSamples = PS.PSconfDict['NSamples']   # number of samples
-
+  
 # Create a dictionary for Data logger or DataGraphs 
-  # use PicoScope config in this example
+  # information from Device
   PhyPiConfDict={}
-  PhyPiConfDict['NChannels'] = NChannels
-  ChanLims = []
-  CRanges = PS.PSconfDict['CRanges']
-  COffsets = PS.PSconfDict['ChanOffsets']
-  for i in range(NChannels):
-     ChanLims.append( (-CRanges[i]-COffsets[i], 
-                        CRanges[i]-COffsets[i]) )
-  PhyPiConfDict['ChanLimits'] = ChanLims
+  PhyPiConfDict['NChannels'] = PS.NChannels
+  PhyPiConfDict['ChanLimits'] = PS.ChanLims
+  PhyPiConfDict['ChanNams' ] = PS.ChanNams 
+  # other parameters
   PhyPiConfDict['Interval'] = interval
-  PhyPiConfDict['ChanNams'] = PSconfDict['picoChannels'] 
   PhyPiConfDict['ChanLabels'] = ['Voltage (V)', 'Voltage (V)']  
   PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
   PhyPiConfDict['XYmode'] = True 
@@ -106,10 +98,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   print ('\nConfiguration:')
   print (yaml.dump(PhyPiConfDict) )
 
-### ---- end PicoScope code
-
-### --- general code
-
+  NChannels = PS.NChannels   # number of channels in use
+      
   thrds=[]
   procs=[]
   cmdQ =  mp.Queue(1) # Queue for command input
