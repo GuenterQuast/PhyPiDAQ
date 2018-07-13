@@ -44,11 +44,9 @@ class MCP3008Config(object):
       print("MCP3008Config: Error initialising device - exit")
       sys.exit(1)
 
-# privide configuration parameters
-    self.NChannels = self.PS.NChannels
-    self.ChanNams = [str(i) for i in range(self.NChannels)]
-    self.ChanLims = [[0., self.VRef] for i in range(NChannels)]
-
+# provide configuration parameters
+    self.ChanNams = [ str(i) for i in range(self.NChannels) ]
+    self.ChanLims = [ [0., self.VRef] for i in range(self.NChannels) ]
       
   def acquireData(self, buf): 
     # read data from ADC
