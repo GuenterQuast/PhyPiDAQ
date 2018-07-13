@@ -91,6 +91,9 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   ADCChannels = SensorConf.ADCChannels # ADC-Channels ADS1115
   ConvFactors = SensorConf.ConvFactors # conversion factors for calculation of sensor value
 
+  SensorConfDict['ChanLabels'] = Units  
+
+
 ### --- determine reference voltage for ADC calculation
 # possible values reference voltage
   ADCRefVolt = [6.114, 4.096, 2.048, 1.024, 0.512, 0.256]
@@ -120,8 +123,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   cmdQ = mp.Queue(1) # Queue for command input
 
   DGmpQ =  mp.Queue(1) # Queue for data transfer to sub-process
-  procs.append(mp.Process(name='DataGraphs', target = mpXYPlotter, 
-    args=(DGmpQ, SensorConf.SensorConfDict, Units, cmdQ) ) )
+  procs.append(mp.Process(name='XYPlotter', target = mpTkDisplay, 
+    args=(DGmpQ, SensorConf.SensorConfDict, 'XYPlotter', cmdQ) ) )
 #         Queue     config            Sigln.name  CommandQ
 
   thrds.append(threading.Thread(name='kbdInput', target = kbdInput, 

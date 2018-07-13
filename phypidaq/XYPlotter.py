@@ -11,7 +11,7 @@ class XYPlotter(object):
     forked from picoDAQ.DataGraphs
   '''
 
-  def __init__(self, ConfDict, sigName):
+  def __init__(self, ConfDict):
     '''Args:   Wtime: waiting time between updates
                confDict: PicoScope Configuration dictionary
                XYmode: bool, xy-display if True
@@ -27,8 +27,11 @@ class XYPlotter(object):
     self.ChanLim = ConfDict['ChanLimits']
     self.ChanNams = ConfDict['ChanNams']
     self.ChanColors = ConfDict['ChanColors']
+    if 'ChanLabels' in ConfDict:
+      self.ChanLabels = ConfDict['ChanLabels']
+    else:
+      self.ChanLabels = [''] * self.NChan
     self.XYmode = ConfDict['XYmode']
-    self.sigName = sigName
     if self.NChan < 2: 
       self.XYmode = True
 
@@ -63,7 +66,8 @@ class XYPlotter(object):
       if i > 1:
         break # works for a maximum of 2 Channels only
       axes[i].set_ylim(*self.ChanLim[i])
-      axes[i].set_ylabel('Chan ' + C + ' ' + '(' + sigName[i] +')', color=self.ChanColors[i])
+      axes[i].set_ylabel('Chan ' + C + ' ' + '(' + ChanLabels[i] +')', 
+               color=self.ChanColors[i])
       axes[i].grid(True, color=self.ChanColors[i], linestyle = '--', alpha=0.3)
     axes[0].set_xlabel('History (s)', size='x-large')
 
@@ -84,13 +88,13 @@ class XYPlotter(object):
       axbar1.axvline(self.NChan, color = self.ChanColors[1])
     axbar1.set_ylim(*self.ChanLim[0])
     axbar1.axhline(0., color='k', linestyle='-', lw=2, alpha=0.5)
-    axbar1.set_ylabel('Chan ' + self.ChanNams[0] + ' ' + '(' + sigName[0] + ')', size='x-large', 
-       color = self.ChanColors[0])
+    axbar1.set_ylabel('Chan ' + self.ChanNams[0] + ' ' + '(' + ChanLabels[0] + ')', 
+         size='x-large', color = self.ChanColors[0])
     axbar1.grid(True, color=self.ChanColors[0], linestyle = '--', alpha=0.3)
     if self.NChan > 1:
       axbar2.set_ylim(*self.ChanLim[1])
-      axbar2.set_ylabel('Chan ' + self.ChanNams[1] + ' ' + '(' + sigName[1] + ')', size='x-large', 
-          color = self.ChanColors[1])
+      axbar2.set_ylabel('Chan ' + self.ChanNams[1] + ' ' + '(' + ChanLabels[1] + ')', 
+       size='x-large', color = self.ChanColors[1])
       axbar2.grid(True, color=self.ChanColors[0], linestyle = '--', alpha=0.3)
 
   # Voltage in Text format
@@ -110,9 +114,9 @@ class XYPlotter(object):
       axXY = axes[-1]
       axXY.set_xlim(*self.ChanLim[0])
       axXY.set_ylim(*self.ChanLim[1])
-      axXY.set_xlabel('Chan '+self.ChanNams[0]+' ' + '(' + sigName[0] +')', 
+      axXY.set_xlabel('Chan '+self.ChanNams[0]+' ' + '(' + ChanLabels[0] +')', 
          size='x-large', color=self.ChanColors[0])
-      axXY.set_ylabel('Chan '+self.ChanNams[1]+ ' ' + '(' + sigName[1] + ')', 
+      axXY.set_ylabel('Chan '+self.ChanNams[1]+ ' ' + '(' + ChanLabels[1] + ')', 
          size='x-large', color=self.ChanColors[1])
       axXY.set_title('XY-View', size='xx-large')
       axXY.grid(True, color='grey', linestyle = '--', alpha=0.3)
@@ -180,7 +184,7 @@ class XYPlotter(object):
           self.graphs[i].set_data(self.Ti, self.d[i])
           if self.XYmode:
             self.graphs[-1].set_data(self.d[0], self.d[1])
-        txt.append('  %s:   %.3g %s' % (C, self.Vhist[i,k], self.sigName[i]) )
+        txt.append('  %s:   %.3g %s' % (C, self.Vhist[i,k], self.ChanLabels[i]) )
     # update bar chart
       if n>1: # !!! fix to avoid permanent display of first object in blit mode
         self.bgraph1.set_height(dat[0])
