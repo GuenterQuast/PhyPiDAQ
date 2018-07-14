@@ -93,7 +93,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   PhyPiConfDict['Interval'] = interval
   PhyPiConfDict['ChanLabels'] = ['Voltage (V)', 'Voltage (V)']  
   PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
-  PhyPiConfDict['XYmode'] = True 
+  PhyPiConfDict['XYmode'] = False
 
   print ('\nConfiguration:')
   print (yaml.dump(PhyPiConfDict) )
@@ -109,9 +109,10 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
              args=(DLmpQ, PhyPiConfDict, 'DataLogger', cmdQ) ) )
 #                   Queue        config   ModuleName commandQ
 
-  DGmpQ =  mp.Queue(1) # Queue for data transfer to sub-process
-  procs.append(mp.Process(name='DataGraphs', target = mpTkDisplay, 
-    args=(DGmpQ, PhyPiConfDict, 'DataGraphs', cmdQ) ) )
+# mulit-graph display:
+#  DGmpQ =  mp.Queue(1) # Queue for data transfer to sub-process
+#  procs.append(mp.Process(name='DataGraphs', target = mpTkDisplay, 
+#    args=(DGmpQ, PhyPiConfDict, 'DataGraphs', cmdQ) ) )
 #         Queue     config       ModuleName  CommandQ
 
   thrds.append(threading.Thread(name='kbdInput', target = kbdInput, 
@@ -141,8 +142,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
       if DAQ_ACTIVE:
         cnt +=1
         DEV.acquireData(sig)
-        DGmpQ.put(sig)  # for DataGraphs
         DLmpQ.put(sig)  # for DataLogger
+#        DGmpQ.put(sig)  # for DataGraphs
 
    # check for keboard input
       if not cmdQ.empty():
