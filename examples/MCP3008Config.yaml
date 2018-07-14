@@ -1,0 +1,8 @@
+# example of a configuration file for ADC MCP3008
+
+NChannels:  2     # number of Channels
+
+VRef:       3.3   # Reference Voltage
+NBits:      10    # ACD resolution in Bits
+
+

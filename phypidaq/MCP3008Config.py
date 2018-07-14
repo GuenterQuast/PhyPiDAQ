@@ -53,3 +53,6 @@ class MCP3008Config(object):
     for i in range(self.NChannels):
       buf[i] = self.MCP.read_adc(i) * self.Vfac
 
+  def closeDevice(self):
+   # nothing to do here
+   pass
