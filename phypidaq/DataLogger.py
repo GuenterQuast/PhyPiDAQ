@@ -19,8 +19,14 @@ class DataLogger(object):
     self.dT = ConfDict['Interval'] 
     self.NChan = ConfDict['NChannels']
     self.ChanLim = ConfDict['ChanLimits']
-    self.ChanNams = ConfDict['ChanNams']
-    self.ChanColors = ConfDict['ChanColors']
+    if 'ChanNams' in ConfDict: 
+      self.ChanNams = ConfDict['ChanNams']
+    else:
+      self.ChanNams = [''] * self.NChan 
+    if 'ChanClolors' in ConfDict:
+      self.ChanColors = ConfDict['ChanColors']
+    else:
+      self.ChanColors = ['darkblue','sienna']
     if 'ChanLabels' in ConfDict:
       self.ChanLabels = ConfDict['ChanLabels']
     else:

@@ -1,0 +1,11 @@
+# configuration for PhyPiDAQ 
+
+DeviceFile: MCP83008Config.yaml  # device configuration
+#DeviceFile: PSConfig.yaml         # device configuration
+
+Interval: 0.1                     # logging interval         
+ChanLabels: [Volt, Volt]          # names an units for channels 
+ChanColors: [darkblue, sienna]    # channel colours in display
+XYmode:     false                 # enable XY-display
+#DataFile:   null                  # file name for output file 
+DataFile:   testfile             # file name for output file 

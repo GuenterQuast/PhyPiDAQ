@@ -16,9 +16,7 @@ import sys, time, yaml, numpy as np, threading, multiprocessing as mp
 # display module
 from phypidaq.mpTkDisplay import mpTkDisplay
 
-
-# helper functions
-
+# ----- helper functions --------------------
 def kbdInput(cmdQ):
   ''' 
     read keyboard input, run as backround-thread to aviod blocking
@@ -58,47 +56,63 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     print(" !!! read-out intervals < 0.05 s not reliable, setting to 0.05 s")
     interval = 0.05
 
-  # read DAQ configuration file
+  # read PhyPicDAQ configuration file
   if len(sys.argv) >= 3:
-    DEVconfFile = sys.argv[2]
-  else: 
-    DEVconfFile = 'MCP3008Config.yaml'
-
+    PhyPiConfFile = sys.argv[2]
   # read scope configuration file
-  print('    Device configuration from file ' + DEVconfFile)
+    print('  Configuration from file ' + PhyPiConfFile)
+    try:
+      with open(PhyPiConfFile) as f:
+        PhyPiConfDict = yaml.load(f)
+    except:
+      print('!!! failed to read configuration file ' + PhyPiConfFile)
+      exit(1)
+  else:
+  # define default config dictionary
+    PhyPiConfDict={}
+    PhyPiConfDict['DeviceFile'] = 'MCP3008Config.yaml'
+    PhyPiConfDict['Interval'] = interval
+    PhyPiConfDict['ChanLabels'] = ['Voltage (V)', 'Voltage (V)']  
+    PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
+    PhyPiConfDict['XYmode'] = False
+    PhyPiConfDict['DataFile'] = None
+
+  if 'DeviceFile' in PhyPiConfDict:
+    DEVconfFile = PhyPiConfDict['DeviceFile']
+  else:
+    DEVconfFile = 'MCP3008Config.yaml'
   try:
     with open(DEVconfFile) as f:
-      DEVconfDict=yaml.load(f)
+      DEVconfDict = yaml.load(f)
   except:
-    print('     failed to read scope configuration file ' + DEVconfFile)
+    print('!!! failed to read configuration file ' + DEVconfFile)
     exit(1)
-
-### ---- code specific to PicoScope
 
 # configure and initialize Device
   DEVName = DEVconfFile.split('.')[0]
-  print('   configuring device ' + DEVName)
+  print('  configuring device ' + DEVName)
   # import device class and define an instance
   exec('from phypidaq.' + DEVName +  ' import ' + DEVName)
   exec('global DEV; DEV = ' + DEVName + '(DEVconfDict)' )
   DEV.init()
   
-# Create a dictionary for Data logger or DataGraphs 
+# Add infor for graphical display(s) to PhyPiConfDict
   # information from Device
-  PhyPiConfDict={}
   PhyPiConfDict['NChannels'] = DEV.NChannels
   PhyPiConfDict['ChanLimits'] = DEV.ChanLims
   PhyPiConfDict['ChanNams' ] = DEV.ChanNams 
-  # other parameters
-  PhyPiConfDict['Interval'] = interval
-  PhyPiConfDict['ChanLabels'] = ['Voltage (V)', 'Voltage (V)']  
-  PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
-  PhyPiConfDict['XYmode'] = False
-
-  print ('\nConfiguration:')
-  print (yaml.dump(PhyPiConfDict) )
 
   NChannels = DEV.NChannels   # number of channels in use
+  if PhyPiConfDict['DataFile'] != None:
+    FName = PhyPiConfDict['DataFile']
+    from phypidaq.DataRecorder import DataRecorder
+    DatRec = DataRecorder(FName, PhyPiConfDict)
+  else:
+    DatRec = None
+
+  print ('\nPhyPiDAQ Configuration:')
+  print (yaml.dump(PhyPiConfDict) )
+
       
   thrds=[]
   procs=[]
@@ -144,7 +158,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
         DEV.acquireData(sig)
         DLmpQ.put(sig)  # for DataLogger
 #        DGmpQ.put(sig)  # for DataGraphs
-
+        if DatRec: DatRec(sig) # for data recorder
    # check for keboard input
       if not cmdQ.empty():
         cmd = cmdQ.get()
@@ -171,6 +185,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     print('\n' + sys.argv[0]+': keyboard interrupt - closing down ...')
 
   finally:
+    if DatRec: DatRec.close()
     DEV.closeDevice() # close down hardware device
     time.sleep(1.)
     stop_processes(procs)  # stop all sub-processes in list
