@@ -1,6 +1,6 @@
 # configuration for PhyPiDAQ 
 
-DeviceFile: MCP83008Config.yaml  # device configuration
+DeviceFile: MCP3008Config.yaml  # device configuration
 #DeviceFile: PSConfig.yaml         # device configuration
 
 Interval: 0.1                     # logging interval         
