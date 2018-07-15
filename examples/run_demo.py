@@ -5,7 +5,7 @@
      this script reads data samples from PicoScope and 
      displays data as effective voltage, history display and xy plot
 
-     Usage: ./runPicoScope_demo.py [Interval <Oscilloscpope_config>.yaml]
+     Usage: ./runPicoScope_demo.py [Interval <PhyPiConf_file>.yaml]
 '''
 
 from __future__ import print_function, division, unicode_literals
@@ -71,10 +71,15 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   # define default config dictionary
     PhyPiConfDict={}
     PhyPiConfDict['DeviceFile'] = 'MCP3008Config.yaml'
-    PhyPiConfDict['Interval'] = interval
-    PhyPiConfDict['ChanLabels'] = ['Voltage (V)', 'Voltage (V)']  
+    PhyPiConfDict['ChanLabels'] = ['(V)', '(V)']  
     PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
+
+# set default options:
+  if 'Interval' not in PhyPiConfDict:
+    PhyPiConfDict['Interval'] = interval
+  if 'XYmode' not in PhyPiConfDict:
     PhyPiConfDict['XYmode'] = False
+  if 'DataFile' not in PhyPiConfDict:
     PhyPiConfDict['DataFile'] = None
 
   if 'DeviceFile' in PhyPiConfDict:
