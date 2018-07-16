@@ -12,6 +12,8 @@ from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
 
 import sys, time, yaml, numpy as np, threading, multiprocessing as mp
+sys.path.append('..')
+
 
 # display module
 from phypidaq.mpTkDisplay import mpTkDisplay
@@ -48,7 +50,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
 # check for / read command line arguments
   if len(sys.argv) >=2:
-    interval = float(sys.argv[1])
+    interval = 0.5
+    #interval = float(sys.argv[1])
   else: 
     interval = 0.5
 
@@ -70,7 +73,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   else:
   # define default config dictionary
     PhyPiConfDict={}
-    PhyPiConfDict['DeviceFile'] = 'MCP3008Config.yaml'
+    PhyPiConfDict['DeviceFile'] = 'ADS1115Config.yaml'
     PhyPiConfDict['ChanLabels'] = ['(V)', '(V)']  
     PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
 
@@ -85,7 +88,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   if 'DeviceFile' in PhyPiConfDict:
     DEVconfFile = PhyPiConfDict['DeviceFile']
   else:
-    DEVconfFile = 'MCP3008Config.yaml'
+    DEVconfFile = 'ADS1115Config.yaml'
   try:
     with open(DEVconfFile) as f:
       DEVconfDict = yaml.load(f)
@@ -95,6 +98,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
 # configure and initialize Device
   DEVName = DEVconfFile.split('.')[0]
+  print(DEVName)
   print('  configuring device ' + DEVName)
   # import device class and define an instance
   exec('from phypidaq.' + DEVName +  ' import ' + DEVName)
