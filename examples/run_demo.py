@@ -49,19 +49,14 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   print('\n*==* script ' + sys.argv[0] + ' running \n')
 
 # check for / read command line arguments
-  if len(sys.argv) >=2:
-    interval = 0.5
-    #interval = float(sys.argv[1])
+  if len(sys.argv) >=3:
+    interval = float(sys.argv[2])
   else: 
     interval = 0.5
 
-  if interval < 0.05:
-    print(" !!! read-out intervals < 0.05 s not reliable, setting to 0.05 s")
-    interval = 0.05
-
   # read PhyPicDAQ configuration file
-  if len(sys.argv) >= 3:
-    PhyPiConfFile = sys.argv[2]
+  if len(sys.argv) >= 2:
+    PhyPiConfFile = sys.argv[1]
   # read scope configuration file
     print('  Configuration from file ' + PhyPiConfFile)
     try:
@@ -80,8 +75,13 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 # set default options:
   if 'Interval' not in PhyPiConfDict:
     PhyPiConfDict['Interval'] = interval
+  if PhyPiConfDict['Interval'] < 0.05:
+    print(" !!! read-out intervals < 0.05 s not reliable, setting to 0.05 s")
+    PhyPiConfDict['Interval'] = 0.05
+
   if 'XYmode' not in PhyPiConfDict:
     PhyPiConfDict['XYmode'] = False
+
   if 'DataFile' not in PhyPiConfDict:
     PhyPiConfDict['DataFile'] = None
 
@@ -122,7 +122,6 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   print ('\nPhyPiDAQ Configuration:')
   print (yaml.dump(PhyPiConfDict) )
 
-      
   thrds=[]
   procs=[]
   cmdQ =  mp.Queue(1) # Queue for command input
