@@ -1,0 +1,9 @@
+# example of a configuration file for ADC ADS1115
+
+DT: 5                   # chosen DT-GPIO
+SCK: 6                  # chosen SCK-GPIO
+Gain: 128               # programmable gain:
+                          # possible values for Gain:
+                            # 128 (use Channel A!)
+                            #  64 (use Channel A!)
+                            #  32 (use Channel B!)
