@@ -61,12 +61,11 @@ class DataLogger(object):
       if self.NChan > 1:
         axes.append(axes[0].twinx())
       for i, C in enumerate(self.ChanNams):
-        if i > 1:
-          break # works for a maximum of 2 Channels only
-        axes[i].set_ylim(*self.ChanLim[i])
-        axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLabels[i], 
-            color=self.ChanColors[i])
-        axes[i].grid(True, color=self.ChanColors[i], 
+        if i < min(2, len(self.ChanLim)):  # maximum of two axis lables
+          axes[i].set_ylim(*self.ChanLim[i])
+          axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLabels[i], 
+                 color=self.ChanColors[i])
+          axes[i].grid(True, color=self.ChanColors[i], 
                      linestyle = '--', alpha=0.3)
       axes[0].set_xlabel('History (s)')
     else:
@@ -93,16 +92,20 @@ class DataLogger(object):
     self.graphs=()
     if not self.XYmode:
       for i, C in enumerate(self.ChanNams):
-        if i > 1:
-          break  # max. of 2 channels
+        nax = min(i, len(self.ChanLim)-1)
+        if i > nax: 
+          colr = None
+        else:
+          colr = self.ChanColors[i]
    # intitialize with graph outside range
-        g,= self.axes[i].plot(self.Ti, 
-            self.ChanLim[i][1] * 1.1 * np.ones(self.Npoints), 
-            color=self.ChanColors[i])
+        g,= self.axes[nax].plot(self.Ti, 
+        self.ChanLim[nax][1] * 1.1 * np.ones(self.Npoints), color= colr)
         self.graphs += (g,)
     else:
-      g, = self.axes[-1].plot([0.], [0.], color='firebrick')
-      self.graphs += (g,)
+      # plot XY-graph(s)
+      for i in range(1, self.NChan):
+        g, = self.axes[-1].plot([0.], [i])
+        self.graphs += (g,)
 
     return self.graphs
 # -- end DataLogger.init()
@@ -114,8 +117,6 @@ class DataLogger(object):
 
       k = n % self.Npoints
       for i, C in enumerate(self.ChanNams):
-        if i > 1: 
-          break  # works for 2 channels only
         self.Vhist[i, k] = dat[i]
         self.d[i] = np.concatenate((self.Vhist[i, k+1:], self.Vhist[i, :k+1]), axis=0)
 
@@ -127,7 +128,8 @@ class DataLogger(object):
       else:
       # update XY display 
           if self.XYmode:
-            self.graphs[-1].set_data( self.d[0], self.d[1])
+            for i in range(1, self.NChan):
+                self.graphs[-1].set_data( self.d[0], self.d[i])
     return self.graphs
 #- -end def DataLogger.__call__
 #-end class DataLogger
