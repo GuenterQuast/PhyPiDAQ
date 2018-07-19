@@ -57,15 +57,17 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   # read PhyPicDAQ configuration file
   if len(sys.argv) >= 2:
     PhyPiConfFile = sys.argv[1]
-  # read scope configuration file
-    print('  Configuration from file ' + PhyPiConfFile)
-    try:
-      with open(PhyPiConfFile) as f:
-        PhyPiConfDict = yaml.load(f)
-    except:
-      print('!!! failed to read configuration file ' + PhyPiConfFile)
-      exit(1)
   else:
+    PhyPiConfFile = 'PhyPiConf.yaml'
+
+  # read scope configuration file
+  print('  Configuration from file ' + PhyPiConfFile)
+  try:
+    with open(PhyPiConfFile) as f:
+      PhyPiConfDict = yaml.load(f)
+  except:
+    print('!!! failed to read configuration file ' + PhyPiConfFile)
+    print('   using default settings')
   # define default config dictionary
     PhyPiConfDict={}
     PhyPiConfDict['DeviceFile'] = 'ADS1115Config.yaml'
@@ -96,20 +98,30 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     print('!!! failed to read configuration file ' + DEVconfFile)
     exit(1)
 
+  if 'DisplayModule' in PhyPiConfDict:
+    DisplayModule = PhyPiConfDict['DisplayModule']
+  else:
+    DisplayModule = 'DataLogger'
+
+
 # configure and initialize Device
-  DEVName = DEVconfFile.split('.')[0]
-  print(DEVName)
+  if 'DAQModule' in PhyPiConfDict:
+    DEVName = PhyPiConfDict['DAQModule']
+  else:  # try to derive from name of Device Config File
+    DEVName = DEVconfFile.split('.')[0]
+
   print('  configuring device ' + DEVName)
   # import device class and define an instance
   exec('from phypidaq.' + DEVName +  ' import ' + DEVName)
   exec('global DEV; DEV = ' + DEVName + '(DEVconfDict)' )
   DEV.init()
   
-# Add infor for graphical display(s) to PhyPiConfDict
+# Add information for graphical display(s) to PhyPiConfDict
   # information from Device
   PhyPiConfDict['NChannels'] = DEV.NChannels
-  PhyPiConfDict['ChanLimits'] = DEV.ChanLims
   PhyPiConfDict['ChanNams' ] = DEV.ChanNams 
+  if 'ChanLimits' not in PhyPiConfDict:  
+    PhyPiConfDict['ChanLimits'] = DEV.ChanLims # take from device if not set
 
   NChannels = DEV.NChannels   # number of channels in use
   if PhyPiConfDict['DataFile'] != None:
@@ -122,14 +134,15 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   print ('\nPhyPiDAQ Configuration:')
   print (yaml.dump(PhyPiConfDict) )
 
+
   thrds=[]
   procs=[]
   cmdQ =  mp.Queue(1) # Queue for command input
 
   DLmpQ = mp.Queue(1) # Queue for data transfer to sub-process
   procs.append(mp.Process(name='DataLogger', target = mpTkDisplay, 
-             args=(DLmpQ, PhyPiConfDict, 'DataLogger', cmdQ) ) )
-#                   Queue        config   ModuleName commandQ
+             args=(DLmpQ, PhyPiConfDict, DisplayModule , cmdQ) ) )
+#                   Queue    config        ModuleName    commandQ
 
 # mulit-graph display:
 #  DGmpQ =  mp.Queue(1) # Queue for data transfer to sub-process
