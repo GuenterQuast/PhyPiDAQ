@@ -61,7 +61,7 @@ class DataLogger(object):
       if self.NChan > 1:
         axes.append(axes[0].twinx())
       for i, C in enumerate(self.ChanNams):
-        if i < min(2, len(self.ChanLim)):  # maximum of two axis lables
+        if i < min(2, len(self.ChanColors) ):  # maximum of two axis lables
           axes[i].set_ylim(*self.ChanLim[i])
           axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLabels[i], 
                  color=self.ChanColors[i])
@@ -92,8 +92,8 @@ class DataLogger(object):
     self.graphs=()
     if not self.XYmode:
       for i, C in enumerate(self.ChanNams):
-        nax = min(i, len(self.ChanLim)-1)
-        if i > nax: 
+        nax = min(i, len(self.ChanColors)-1)
+        if i >= len(self.ChanColors): 
           colr = None
         else:
           colr = self.ChanColors[i]
@@ -104,7 +104,7 @@ class DataLogger(object):
     else:
       # plot XY-graph(s)
       for i in range(1, self.NChan):
-        g, = self.axes[-1].plot([0.], [i])
+        g, = self.axes[-1].plot([0.], [0.])
         self.graphs += (g,)
 
     return self.graphs
@@ -129,7 +129,7 @@ class DataLogger(object):
       # update XY display 
           if self.XYmode:
             for i in range(1, self.NChan):
-                self.graphs[-1].set_data( self.d[0], self.d[i])
+                self.graphs[i-1].set_data( self.d[0], self.d[i])
     return self.graphs
 #- -end def DataLogger.__call__
 #-end class DataLogger
