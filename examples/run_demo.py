@@ -44,9 +44,10 @@ def stop_processes(proclst):
       if p.is_alive(): p.terminate()
       time.sleep(1.)
 
-if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
+def setup():
+# set up data source, display module and options
 
-  print('\n*==* script ' + sys.argv[0] + ' running \n')
+  global interval, PhyPiConfDict, DEV, DatRec
 
 # check for / read command line arguments
   if len(sys.argv) >=3:
@@ -98,11 +99,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     print('!!! failed to read configuration file ' + DEVconfFile)
     exit(1)
 
-  if 'DisplayModule' in PhyPiConfDict:
-    DisplayModule = PhyPiConfDict['DisplayModule']
-  else:
-    DisplayModule = 'DataLogger'
-
+  if 'DisplayModule' not in PhyPiConfDict:
+    PhyPiConfDict['DisplayModule'] = 'DataLogger'
 
 # configure and initialize Device
   if 'DAQModule' in PhyPiConfDict:
@@ -123,7 +121,6 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   if 'ChanLimits' not in PhyPiConfDict:  
     PhyPiConfDict['ChanLimits'] = DEV.ChanLims # take from device if not set
 
-  NChannels = DEV.NChannels   # number of channels in use
   if PhyPiConfDict['DataFile'] != None:
     FName = PhyPiConfDict['DataFile']
     from phypidaq.DataRecorder import DataRecorder
@@ -134,6 +131,15 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   print ('\nPhyPiDAQ Configuration:')
   print (yaml.dump(PhyPiConfDict) )
 
+
+
+if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
+
+  print('\n*==* script ' + sys.argv[0] + ' running \n')
+
+  setup()
+  NChannels = PhyPiConfDict['NChannels']
+  DisplayModule = PhyPiConfDict['DisplayModule']
 
   thrds=[]
   procs=[]
