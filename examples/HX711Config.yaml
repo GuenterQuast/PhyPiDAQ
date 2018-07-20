@@ -1,4 +1,4 @@
-# example of a configuration file for ADC ADS1115
+# example of a configuration file for HX711
 
 DT: 5                   # chosen DT-GPIO
 SCK: 6                  # chosen SCK-GPIO

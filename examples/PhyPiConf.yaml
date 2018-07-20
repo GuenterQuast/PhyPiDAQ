@@ -1,12 +1,12 @@
 # configuration for PhyPiDAQ 
 
 # configuration module for DAQ device
-DAQModule: ADS1114Config  
+DAQModule: ADS1115Config  
 #DAQModule: MCP3008Config  
 #DAQModule: PSConfig         
 
 # device configuration files 
-DeviceFile: ADS1114Config.yaml  
+DeviceFile: ADS1115Config.yaml  
 #DeviceFile: MCP3008Config.yaml  
 #DeviceFile: PSConfig.yaml         
 
