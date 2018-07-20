@@ -19,12 +19,13 @@ class ADS1115Config(object):
     else:
       self.NChannels = 1
       
-# --  conversion factors for calculation of sensor value
-    if "ConvFactors" in confdict:
-      self.ConvFactors = confdict["ConvFactors"]
+# -- differential mode
+
+    if 'DifModeChan' in confdict:
+      self.DifModeChan = confdict['DifModeChan']
     else:
-      self.ConvFactors = [1, 1]
-      
+      self.DifModeChan = [ False for i in range(self.NChannels) ]
+
 # -- sample rate ADC ADS1115
     if "sampleRate" in confdict:
       self.sampleRate = confdict["sampleRate"]
@@ -38,13 +39,13 @@ class ADS1115Config(object):
         if self.gain[i] == '2/3':
           self.gain[i] = 2/3
     else:
-      self.gain = [1., 1., 1., 1.]
+      self.gain = [ 2/3 for i in range(self.NChannels) ]
 
 # -- sample rate configuration of ADC ADS1115
     if "ADCChannels" in confdict:
       self.ADCChannels = confdict["ADCChannels"]  
     else:
-      self.ADCChannels = [0, 1, 2, 3]
+      self.ADCChannels = [ i for i in range(self.NChannels) ]
 
 ### --- determine reference voltage for ADC calculation
   # possible values reference voltage
@@ -56,6 +57,8 @@ class ADS1115Config(object):
       self.VRef[i] = self.ADCVRef[self.posGain.index(self.gain[i])]
     
   #   remove python 2 vs. python 3 incompatibility for gain: 2/3 (Adafruit_ADS1x15)
+  #   when using Python 2 Adafruit_ADS1x15 expects an integer
+  #   (in case of gain = 2/3 int(self.gain[i] = 0)
     for i in range(self.NChannels):
       if sys.version_info[:2] <=(2,7):
         if self.gain[i] == 2/3:
@@ -72,14 +75,23 @@ class ADS1115Config(object):
 
  # provide configuration parameters
     self.ChanNams = [ str(i) for i in range(self.NChannels) ]
-    self.ChanLims = [ [0., self.VRef[i]] for i in range(self.NChannels) ]
-    print(self.ChanLims)
+    self.ChanLims = [ [0., 0.] for i in range(self.NChannels) ]
+    for i in range(self.NChannels):
+      if self.DifModeChan[i]:
+        self.ChanLims[i] = [-self.VRef[i], self.VRef[i]]
+      else:
+        self.ChanLims[i] = [0, self.VRef[i]]
       
   def acquireData(self, buf): 
-    # read data from ADC
     for i in range(self.NChannels):
-      buf[i] = self.ADS.read_adc(self.ADCChannels[i], gain = self.gain[i],
-                            data_rate = self.sampleRate)*self.VRef[i]*self.ConvFactors[i]/32767
+      # read data from ADC in differential mode
+      if self.DifModeChan[i]:
+        buf[i] = self.ADS.read_adc_difference(self.ADCChannels[i], gain = self.gain[i],
+                            data_rate = self.sampleRate)*self.VRef[i]/32767
+      else:
+      # read data from adc in single mode
+        buf[i] = self.ADS.read_adc(self.ADCChannels[i], gain = self.gain[i],
+                            data_rate = self.sampleRate)*self.VRef[i]/32767
 
   def closeDevice(self):
    # nothing to do here
