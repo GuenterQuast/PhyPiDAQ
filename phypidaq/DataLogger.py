@@ -23,7 +23,7 @@ class DataLogger(object):
       self.ChanNams = ConfDict['ChanNams']
     else:
       self.ChanNams = [''] * self.NChan 
-    if 'ChanClolors' in ConfDict:
+    if 'ChanColors' in ConfDict:
       self.ChanColors = ConfDict['ChanColors']
     else:
       self.ChanColors = ['darkblue','sienna']
@@ -45,14 +45,14 @@ class DataLogger(object):
       self.Chan2Axis = ConfDict['Chan2Axes']
     else:
     # default: 0 -> ax0, >0 -> ax2 
-      self.Chan2Axis = [0] + [1] * (self.NChan - 1)
+      self.Chan2Axis = [0] + [self.NAxes-1] * (self.NChan - 1)
 
    # data structures needed throughout the class
     self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
     self.Vhist = np.zeros( [self.NChan, self.Npoints] )
     self.d = np.zeros( [self.NChan, self.Npoints] ) 
 
-# set up a figure to plot actual voltage and samplings from Picoscope
+# set up a figure to plot actual voltage(s)
     if self.XYmode:
       fig = plt.figure("DataLogger", figsize=(6.3, 6.) )
       fig.subplots_adjust(left=0.2, bottom=0.15, right=0.95, top=0.95,
@@ -66,7 +66,7 @@ class DataLogger(object):
     if not self.XYmode:
   # history plot
       axes.append(fig.add_subplot(1,1,1, facecolor='ivory'))
-      if self.NChan > 1:
+      if self.NAxes > 1:
         axes.append(axes[0].twinx())
       for i, C in enumerate(self.ChanNams):
         if i < self.NAxes:  # maximum of two axis lables
@@ -107,12 +107,16 @@ class DataLogger(object):
           colr = self.ChanColors[i]
    # intitialize with graph outside range
         g,= self.axes[iax].plot(self.Ti, 
-        self.ChanLim[iax][1] * 1.1 * np.ones(self.Npoints), color= colr)
+                      self.ChanLim[iax][1] * 1.1 * np.ones(self.Npoints), color= colr)
         self.graphs += (g,)
     else:
       # plot XY-graph(s)
       for i in range(1, self.NChan):
-        g, = self.axes[-1].plot([0.], [0.])
+        if i >= len(self.ChanColors): 
+          colr = None
+        else:
+          colr = self.ChanColors[i]
+        g, = self.axes[-1].plot( [0.], [0.], color=colr )
         self.graphs += (g,)
 
     return self.graphs
