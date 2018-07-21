@@ -30,7 +30,7 @@ class DataLogger(object):
     if 'ChanLabels' in ConfDict:
       self.ChanLabels = ConfDict['ChanLabels']
     else:
-      self.ChanLabels = [''] * self.NChan
+      self.ChanLabels = [''] * min(2, self.NChan)
 
     if 'XYmode' in ConfDict:
       self.XYmode = ConfDict['XYmode']
@@ -38,6 +38,14 @@ class DataLogger(object):
       self.XYmode = False
     if self.NChan < 2: 
       self.XYmode = False
+
+# assign Chanels to axes
+    self.NAxes = min(2, len(self.ChanLabels))
+    if 'Chan2Axes' in ConfDict:
+      self.Chan2Axis = ConfDict['Chan2Axes']
+    else:
+    # default: 0 -> ax0, >0 -> ax2 
+      self.Chan2Axis = [0] + [1] * (self.NChan - 1)
 
    # data structures needed throughout the class
     self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
@@ -61,7 +69,7 @@ class DataLogger(object):
       if self.NChan > 1:
         axes.append(axes[0].twinx())
       for i, C in enumerate(self.ChanNams):
-        if i < min(2, len(self.ChanColors) ):  # maximum of two axis lables
+        if i < self.NAxes:  # maximum of two axis lables
           axes[i].set_ylim(*self.ChanLim[i])
           axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLabels[i], 
                  color=self.ChanColors[i])
@@ -88,18 +96,18 @@ class DataLogger(object):
   def init(self):
   # initialize objects to be animated
 
-  # history graphs
     self.graphs=()
+  # history graphs
     if not self.XYmode:
       for i, C in enumerate(self.ChanNams):
-        nax = min(i, len(self.ChanColors)-1)
+        iax = self.Chan2Axis[i]
         if i >= len(self.ChanColors): 
           colr = None
         else:
           colr = self.ChanColors[i]
    # intitialize with graph outside range
-        g,= self.axes[nax].plot(self.Ti, 
-        self.ChanLim[nax][1] * 1.1 * np.ones(self.Npoints), color= colr)
+        g,= self.axes[iax].plot(self.Ti, 
+        self.ChanLim[iax][1] * 1.1 * np.ones(self.Npoints), color= colr)
         self.graphs += (g,)
     else:
       # plot XY-graph(s)
@@ -118,8 +126,8 @@ class DataLogger(object):
       k = n % self.Npoints
       for i, C in enumerate(self.ChanNams):
         self.Vhist[i, k] = dat[i]
-        self.d[i] = np.concatenate((self.Vhist[i, k+1:], self.Vhist[i, :k+1]), axis=0)
-
+        self.d[i] = np.concatenate((self.Vhist[i, k+1:], 
+                                    self.Vhist[i, :k+1]), axis=0)
       if not self.XYmode:       
       # update history graph(s) 
         for i in range(self.NChan):
