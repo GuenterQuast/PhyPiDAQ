@@ -38,6 +38,9 @@ class DataLogger(object):
       self.XYmode = False
     if self.NChan < 2: 
       self.XYmode = False
+    if self.XYmode and len(self.ChanLabels) < 2:
+       print(' *==* DataGraphs: need more than 1 Channel Label in XY mode')
+       self.ChanLabels.append('???')
 
 # assign Chanels to axes
     self.NAxes = min(2, len(self.ChanLabels))
