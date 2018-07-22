@@ -15,10 +15,6 @@ class DataGraphs(object):
     '''Args:   confDict: Configuration dictionary
     '''
  
-  # collect relevant configuration parameters
-    self.Npoints = 120  # number of points for history
-    self.bwidth = 0.5   # width of bars
-
    # get relevant settings from PhyPiConfDict
     self.dT = ConfDict['Interval'] 
     self.NChan = ConfDict['NChannels']
@@ -37,14 +33,24 @@ class DataGraphs(object):
     if self.NChan < 2: 
       self.XYmode = False
 
-   # data structures needed throughout the class
+# assign Chanels to Axes
+    self.NAxes = min(2, len(self.ChanLabels))
+    if 'Chan2Axes' in ConfDict:
+      self.Chan2Axis = ConfDict['Chan2Axes']
+    else:
+    # default: 0 -> ax0, >0 -> ax2 
+      self.Chan2Axis = [0] + [self.NAxes-1] * (self.NChan - 1)
+
+# config data needed throughout the class
+    self.Npoints = 120  # number of points for history
     self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
-    self.ind = self.bwidth + np.arange(self.NChan) # bar position for voltages
+    self.bwidth = 0.5   # width of bars
+    self.ind = self.bwidth + np.arange(self.NChan) # bar position
   # 
     self.Vhist = np.zeros( [self.NChan, self.Npoints] )
     self.d = np.zeros( [self.NChan, self.Npoints] ) 
 
-# set up a figure to plot actual voltage and samplings from Picoscope
+# set up a figure to plot voltage(s)
     if self.XYmode:
       fig = plt.figure("DataGraphs", figsize=(10., 5.5) )
       fig.subplots_adjust(left=0.09, bottom=0.1, right=0.975, top=0.94,
@@ -55,50 +61,47 @@ class DataGraphs(object):
                   wspace=None, hspace=.25)
 
     axes=[]
-
-  # history plot
-    if self.XYmode:
-      axes.append(plt.subplot2grid((6,5),(4,0), rowspan=2, colspan=2) )
-    else:
+    if not self.XYmode:  # only history plot
       axes.append(plt.subplot2grid((6,1),(4,0), rowspan=2) )
-    if self.NChan > 1:
+    else:                # also include XY display
+      axes.append(plt.subplot2grid((6,5),(4,0), rowspan=2, colspan=2) )
+    if self.NAxes > 1:
       axes.append(axes[0].twinx())
 
+    # history plot
     for i, C in enumerate(self.ChanNams):
-      if i > 1:
-        break # works for a maximum of 2 Channels only
-      axes[i].set_ylim(*self.ChanLim[i])
-      axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLabels[i],
+      if i < self.NAxes:
+        axes[i].set_ylim(*self.ChanLim[i])
+        axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLabels[i],
                          color=self.ChanColors[i])
-      axes[i].grid(True, color=self.ChanColors[i], linestyle = '--', alpha=0.3)
+        axes[i].grid(True, color=self.ChanColors[i], linestyle = '--', alpha=0.3)
     axes[0].set_xlabel('History (s)', size='x-large')
 
-  # barchart
     if self.XYmode:
       axes.append(plt.subplot2grid((6,5),(1,0), rowspan=3, colspan=2) )
     else:
       axes.append(plt.subplot2grid((6,1),(1,0), rowspan=3) )
-    axbar1 = axes[-1]
-    axbar1.set_frame_on(False)
-    if self.NChan > 1:
-      axbar2=axbar1.twinx()
-      axbar2.set_frame_on(False)
-    axbar1.get_xaxis().set_visible(False)
-    axbar1.set_xlim(0., self.NChan)
-    axbar1.axvline(0, color = self.ChanColors[0])
-    if self.NChan > 1:
-      axbar1.axvline(self.NChan, color = self.ChanColors[1])
-    axbar1.set_ylim(*self.ChanLim[0])
-    axbar1.axhline(0., color='k', linestyle='-', lw=2, alpha=0.5)
-    axbar1.set_ylabel(self.ChanNams[0] + ' ' + self.ChanLabels[0],
-                      size='x-large',  color = self.ChanColors[0])
-    axbar1.grid(True, color=self.ChanColors[0], linestyle = '--', alpha=0.3)
-    if self.NChan > 1:
-      axbar2.set_ylim(*self.ChanLim[1])
-      axbar2.set_ylabel(self.ChanNams[1] + ' ' + self.ChanLabels[1],
-                        size='x-large', color = self.ChanColors[1])
-      axbar2.grid(True, color=self.ChanColors[0], linestyle = '--', alpha=0.3)
 
+    axbar = []
+  # barchart
+    axbar.append(axes[-1])
+    axbar[0].set_frame_on(False)
+    axbar[0].get_xaxis().set_visible(False)
+    axbar[0].set_xlim(0., self.NChan)
+    axbar[0].axvline(0, color = self.ChanColors[0])
+    axbar[0].set_ylim(*self.ChanLim[0])
+    axbar[0].axhline(0., color='k', linestyle='-', lw=2, alpha=0.5)
+    axbar[0].set_ylabel(self.ChanNams[0] + ' ' + self.ChanLabels[0],
+                      size='x-large',  color = self.ChanColors[0])
+    axbar[0].grid(True, color=self.ChanColors[0], linestyle = '--', alpha=0.3)
+    if self.NAxes > 1:
+      axbar.append(axbar[0].twinx() )
+      axbar[1].set_frame_on(False)
+      axbar[1].axvline(self.NChan, color = self.ChanColors[1])
+      axbar[1].set_ylim(*self.ChanLim[1])
+      axbar[1].set_ylabel(self.ChanNams[1] + ' ' + self.ChanLabels[1],
+                        size='x-large', color = self.ChanColors[1])
+      axbar[1].grid(True, color=self.ChanColors[1], linestyle = '--', alpha=0.3)
   # Voltage in Text format
     if self.XYmode:
       axes.append(plt.subplot2grid((6,5), (0,0), rowspan=1, colspan=2) )
@@ -127,9 +130,7 @@ class DataGraphs(object):
 
     self.fig = fig
     self.axes = axes
-    self.axbar1 = axbar1
-    if self.NChan > 1:
-      self.axbar2 = axbar2
+    self.axbar = axbar
     self.axtxt = axtxt
     self.axXY = axXY
 # -- end def grVMeterIni
@@ -137,35 +138,51 @@ class DataGraphs(object):
   def init(self):
   # initialize objects to be animated
 
-  # a bar graph for the actual voltages
-    self.bgraph1, = self.axbar1.bar(self.ind[0], 0. , self.bwidth,
-       align='center', color = self.ChanColors[0], alpha=0.5) 
-    if self.NChan > 1:
-      self.bgraph2, = self.axbar2.bar(self.ind[1], 0. , self.bwidth,
-          align='center', color = self.ChanColors[1], alpha=0.5) 
+  # bar graph for voltages
+    self.bgraphs = ()
+    for i, C in enumerate(self.ChanNams):
+      iax = self.Chan2Axis[i]
+      if i >= len(self.ChanColors): 
+        colr = None
+      else:
+        colr = self.ChanColors[i]
+      bg, = self.axbar[iax].bar(self.ind[i], 0. , self.bwidth,
+                        align='center', color = colr, alpha=0.5) 
+      self.bgraphs += (bg,)
+
   # history graphs
     self.graphs=()
     for i, C in enumerate(self.ChanNams):
-      if i > 1:
-        break  # max. of 2 channels
-      g,= self.axes[i].plot(self.Ti, np.zeros(self.Npoints), 
-          color=self.ChanColors[i])
+      iax = self.Chan2Axis[i]
+      if i >= len(self.ChanColors): 
+        colr = None
+      else:
+        colr = self.ChanColors[i]
+   # intitialize with graph outside range
+      g,= self.axes[iax].plot(self.Ti, np.zeros(self.Npoints), 
+                              color=colr)
       self.graphs += (g,)
-    self.animtxt = self.axtxt.text(0.01, 0.05 , ' ',
+
+  # Voltage in Text form
+    self.animtxt = self.axtxt.text(0.01, 0.025 , ' ',
               transform=self.axtxt.transAxes,
               size='large', color='darkblue')
   
+    self.XYgraphs = ()
     if self.XYmode:
-      g, = self.axXY.plot([0.], [0.], color='firebrick')
-      self.graphs += (g,)
+      # plot XY-graph(s)
+      for i in range(1, self.NChan):
+        if i >= len(self.ChanColors): 
+          colr = None
+        else:
+          colr = self.ChanColors[i]
+        XYg, = self.axes[-1].plot( [0.], [0.], color=colr )
+        self.XYgraphs += (XYg,)
 
     self.t0=time.time() # remember start time
 
-    if self.NChan > 1 :
-      return (self.bgraph1,) + (self.bgraph2,) + self.graphs + (self.animtxt,)  
-    else:
+    return self.bgraphs + self.graphs + self.XYgraphs + (self.animtxt,)  
 # -- end DataGraphs.init()
-      return (self.bgraph1,) + self.graphs + (self.animtxt,)  
 
   def __call__( self, data ):
     # update graphics with actual data
@@ -175,37 +192,24 @@ class DataGraphs(object):
         return self.init()
 
       k = n % self.Npoints
-      txt=[]
+      txt=''
       for i, C in enumerate(self.ChanNams):
-        if i > 1: 
-          break  # works for 2 channels only
         self.Vhist[i, k] = dat[i]
     # update history graph
-        if n>1: # !!! fix to avoid permanent display of first object in blit mode
-          self.d[i] = np.concatenate((self.Vhist[i, k+1:], self.Vhist[i, :k+1]), axis=0)
+        self.d[i] = np.concatenate((self.Vhist[i, k+1:], self.Vhist[i, :k+1]), axis=0)
+        if n > 1: # !!! fix to avoid permanent display of first object in blit mode
           self.graphs[i].set_data(self.Ti, self.d[i])
-          if self.XYmode:
-            self.graphs[-1].set_data(self.d[0], self.d[1])
-        txt.append('  %s:   %.3gV' % (C, self.Vhist[i,k]) )
+    # update XY display
+          if self.XYmode and i>0:
+            self.XYgraphs[i-1].set_data(self.d[0], self.d[i]) 
+    # update text display
+          endl = ''
+          if i%2: endl = '\n'
+          txt += '  %s:   %.3gV' % (C, self.Vhist[i,k]) + endl 
     # update bar chart
-      if n>1: # !!! fix to avoid permanent display of first object in blit mode
-        self.bgraph1.set_height(dat[0])
-        if self.NChan > 1:
-          self.bgraph2.set_height(dat[1])
-      else:  
-        self.bgraph1.set_height(0.)
-        if self.NChan > 1:
-          self.bgraph2.set_height(0.)
-
-      if self.NChan > 1:
-        self.animtxt.set_text(txt[0] + '\n' + txt[1])
-      else:
-        self.animtxt.set_text(txt[0])
-     # -- end if != None
-
-    if self.NChan > 1 :
-      return (self.bgraph1,) + (self.bgraph2,) + self.graphs + (self.animtxt,)
-    else:
-      return (self.bgraph1,) + self.graphs + (self.animtxt,)
+          self.bgraphs[i].set_height(dat[i])
+          self.animtxt.set_text(txt)
+    # -- end if != None
+    return self.bgraphs + self.graphs + self.XYgraphs + (self.animtxt,)  
 #- -end def DataGraphs.__call__
-#-end class VoltMeter
+#-end class DataGraphs
