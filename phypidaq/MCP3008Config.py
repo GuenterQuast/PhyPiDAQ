@@ -17,7 +17,7 @@ class MCP3008Config(object):
     if 'ADCChannels' in confdict:
       self.ADCChannels = confdict['ADCChannels']
     else:
-      self.ADCChannels = [1]
+      self.ADCChannels = [0]
     self.NChannels = len(self.ADCChannels)
 
     if 'DifModeChan' in confdict:

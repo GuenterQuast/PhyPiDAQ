@@ -60,7 +60,7 @@ class DataGraphs(object):
                           wspace=3.5, hspace=.25)
     else:
       fig = plt.figure("DataGraphs", figsize=(4., 5.3) )
-      fig.subplots_adjust(left=0.2, bottom=0.08, right=0.8, top=0.94,
+      fig.subplots_adjust(left=0.2, bottom=0.1, right=0.8, top=0.94,
                   wspace=None, hspace=.25)
 
     axes=[]
