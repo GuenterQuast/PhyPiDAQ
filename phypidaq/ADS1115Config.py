@@ -29,11 +29,11 @@ class ADS1115Config(object):
 # -- gain configuration ADC ADS1115
     if "Gain" in confdict:
       self.gain = confdict["Gain"]
-      for i, c in enumerate(self.ADCChannels):
+      for i in range(self.NChannels):
         if self.gain[i] == '2/3':
           self.gain[i] = 2/3
     else:
-      self.gain = [ 2/3 for i, c in enumerate(self.ADCChannels)]
+      self.gain = [ 2/3 for i in range(self.NChannels)]
 
 # -- sample rate ADC ADS1115
     if "sampleRate" in confdict:
@@ -48,13 +48,13 @@ class ADS1115Config(object):
   # determine the corresponding index
     self.VRef = [0., 0., 0., 0.]
     self.posGain = [2/3, 1, 2 , 4, 8, 16]
-    for i, c in enumerate(self.ADCChannels):
+    for i in range(self.NChannels):
       self.VRef[i] = self.ADCVRef[self.posGain.index(self.gain[i])]
     
   #   remove python 2 vs. python 3 incompatibility for gain: 2/3 (Adafruit_ADS1x15)
   #   when using Python 2 Adafruit_ADS1x15 expects an integer
   #   (in case of gain = 2/3 int(self.gain[i] = 0)
-    for i, c in enumerate(self.ADCChannels):
+    for i in range(self.NChannels):
       if sys.version_info[:2] <=(2,7):
         if self.gain[i] == 2/3:
           self.gain[i] = int(self.gain[i])
@@ -69,17 +69,17 @@ class ADS1115Config(object):
       sys.exit(1)
 
  # provide configuration parameters
+    self.ChanLims = [0., 0.] * self.NChannels
     self.ChanNams = [ str(c) for c in self.ADCChannels]
-    self.ChanLims = [ [0., 0.] * self.Nchannels]
     for i, c in enumerate(self.ADCChannels):
       if self.DifModeChan[i]:
-        self.ChanLims[i] = [-self.VRef[i], self.VRef[i]]
+        self.ChanLims[i] = [-self.VRef[i], self.VRef[i] ]
         if c == 0: 
           self.ChanNams[i] = str(c) +'-1'
         else:
-          self.ChanNams[i] = str(c) +'-3'
+          self.ChanNams[i] = str(c-1) +'-3'
       else:
-        self.ChanLims[i] = [0, self.VRef[i]]
+        self.ChanLims[i] = [0., self.VRef[i]]
       
   def acquireData(self, buf): 
     for i, c in enumerate(self.ADCChannels):
