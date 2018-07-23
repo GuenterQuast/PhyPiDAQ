@@ -69,11 +69,15 @@ class ADS1115Config(object):
       sys.exit(1)
 
  # provide configuration parameters
-    self.ChanNams = [ str(i) for i, c in enumerate(self.ADCChannels) ]
-    self.ChanLims = [ [0., 0.] for i, c in enumerate(self.ADCChannels) ]
+    self.ChanNams = [ str(c) for c in self.ADCChannels]
+    self.ChanLims = [ [0., 0.] * self.Nchannels]
     for i, c in enumerate(self.ADCChannels):
       if self.DifModeChan[i]:
         self.ChanLims[i] = [-self.VRef[i], self.VRef[i]]
+        if c == 0: 
+          self.ChanNams[i] = str(c) +'-1'
+        else:
+          self.ChanNams[i] = str(c) +'-3'
       else:
         self.ChanLims[i] = [0, self.VRef[i]]
       
