@@ -12,19 +12,28 @@ class ADS1115Config(object):
 
   def __init__(self, confdict = None):
     if confdict==None: confdict={}
-    
-# -- number of Channels
-    if 'NChannels' in confdict:
-      self.NChannels = confdict['NChannels']
+          
+# -- chosen ADCChannels ADC ADS1115
+    if "ADCChannels" in confdict:
+      self.ADCChannels = confdict["ADCChannels"]  
     else:
-      self.NChannels = 1
-      
+      self.ADCChannels = [0]
+    self.NChannels = len(self.ADCChannels)
+    
 # -- differential mode
-
     if 'DifModeChan' in confdict:
       self.DifModeChan = confdict['DifModeChan']
     else:
-      self.DifModeChan = [ False for i in range(self.NChannels) ]
+      self.DifModeChan = [ False for i, c in enumerate(self.ADCChannels) ]
+
+# -- gain configuration ADC ADS1115
+    if "Gain" in confdict:
+      self.gain = confdict["Gain"]
+      for i, c in enumerate(self.ADCChannels):
+        if self.gain[i] == '2/3':
+          self.gain[i] = 2/3
+    else:
+      self.gain = [ 2/3 for i, c in enumerate(self.ADCChannels)]
 
 # -- sample rate ADC ADS1115
     if "sampleRate" in confdict:
@@ -32,20 +41,6 @@ class ADS1115Config(object):
     else:
       self.sampleRate = 860 # sample rate
 
-# -- gain configuration ADC ADS1115
-    if "Gain" in confdict:
-      self.gain = confdict["Gain"]
-      for i in range(self.NChannels):
-        if self.gain[i] == '2/3':
-          self.gain[i] = 2/3
-    else:
-      self.gain = [ 2/3 for i in range(self.NChannels) ]
-
-# -- sample rate configuration of ADC ADS1115
-    if "ADCChannels" in confdict:
-      self.ADCChannels = confdict["ADCChannels"]  
-    else:
-      self.ADCChannels = [ i for i in range(self.NChannels) ]
 
 ### --- determine reference voltage for ADC calculation
   # possible values reference voltage
@@ -53,13 +48,13 @@ class ADS1115Config(object):
   # determine the corresponding index
     self.VRef = [0., 0., 0., 0.]
     self.posGain = [2/3, 1, 2 , 4, 8, 16]
-    for i in range(self.NChannels):
+    for i, c in enumerate(self.ADCChannels):
       self.VRef[i] = self.ADCVRef[self.posGain.index(self.gain[i])]
     
   #   remove python 2 vs. python 3 incompatibility for gain: 2/3 (Adafruit_ADS1x15)
   #   when using Python 2 Adafruit_ADS1x15 expects an integer
   #   (in case of gain = 2/3 int(self.gain[i] = 0)
-    for i in range(self.NChannels):
+    for i, c in enumerate(self.ADCChannels):
       if sys.version_info[:2] <=(2,7):
         if self.gain[i] == 2/3:
           self.gain[i] = int(self.gain[i])
@@ -74,16 +69,16 @@ class ADS1115Config(object):
       sys.exit(1)
 
  # provide configuration parameters
-    self.ChanNams = [ str(i) for i in range(self.NChannels) ]
-    self.ChanLims = [ [0., 0.] for i in range(self.NChannels) ]
-    for i in range(self.NChannels):
+    self.ChanNams = [ str(i) for i, c in enumerate(self.ADCChannels) ]
+    self.ChanLims = [ [0., 0.] for i, c in enumerate(self.ADCChannels) ]
+    for i, c in enumerate(self.ADCChannels):
       if self.DifModeChan[i]:
         self.ChanLims[i] = [-self.VRef[i], self.VRef[i]]
       else:
         self.ChanLims[i] = [0, self.VRef[i]]
       
   def acquireData(self, buf): 
-    for i in range(self.NChannels):
+    for i, c in enumerate(self.ADCChannels):
       # read data from ADC in differential mode
       if self.DifModeChan[i]:
         buf[i] = self.ADS.read_adc_difference(self.ADCChannels[i], gain = self.gain[i],
