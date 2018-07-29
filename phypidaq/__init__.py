@@ -23,4 +23,5 @@ __version__ += _version_suffix
 
 # Import components to be callabel at package level
 __all__ = [ "mpTkDisplay", "DataLogger", "DataRecorder", "DataGraphs",
-            "PSConfig", "MCP3008Config, ADS1115Config, HX711Config, GPIOCount" ]
+                  "PSConfig", "MCP3008Config", "ADS1115Config", "HX711Config", 
+                  "MAX31865Config", "GPIOCount" ]
