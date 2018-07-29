@@ -43,15 +43,15 @@ class HX711Config(object):
         self.setGain()
         # setting offset
         self.OFFSET = self.readAverage()
-        #self.setOffset(self.OFFSET)
+        self.setOffset(self.OFFSET)
     except:
         print("HX711Config: Error initialising device - exit")
-        sys.exit(1)
+        #sys.exit(1)
 
  # provide configuration parameters
     self.NChannels = 1
     self.ChanNams = [ str(i) for i in range(self.NChannels) ]
-    self.ChanLims = [ [-200000, 200000] for i in range(self.NChannels) ]
+    self.ChanLims = [ [-8388607, 8388607] for i in range(self.NChannels) ]
 
   def isReady(self):
     return GPIO.input(self.DT) == 0
@@ -72,8 +72,8 @@ class HX711Config(object):
         
     # setting channel and gain factor for next reading
     for i in range(self.GAIN):   
-      GPIO.output(self.PD_SCK, True)
-      GPIO.output(self.PD_SCK, False)
+      GPIO.output(self.SCK, True)
+      GPIO.output(self.SCK, False)
 
     # packing eight bit to one byte
     dataByte = np.packbits(dataBit)
@@ -115,7 +115,7 @@ class HX711Config(object):
       
   def acquireData(self, buf): 
     # read data from HX711
-    buf = self.readData()-self.OFFSET
+    buf[0] = self.readData()-self.OFFSET
                         
 # -- HX711 datasheet states that setting the SCK pin on high for >60 microseconds would power off the chip
   def powerDown(self):
