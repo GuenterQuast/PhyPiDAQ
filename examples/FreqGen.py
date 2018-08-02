@@ -21,10 +21,14 @@ def pulse(pin, dt):
   gpio.output(pin, 0)
 
 try:
+  dtcum = 0.
+  T0 = time.time()
   while True:
     flashThread=threading.Thread(target=pulse, args=(GPIOpin, tflash,))
     flashThread.start()
-    time.sleep(dt)
+    dtcor = dt - time.time() + T0  + dtcum
+    if dtcor > 0.: time.sleep(dtcor)
+    dtcum += dt
                      
 except  KeyboardInterrupt:
   print ("keyboard interrupt - ending")
