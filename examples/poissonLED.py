@@ -23,14 +23,19 @@ def LEDflash(pin, dt):
   time.sleep(dt)
   gpio.output(pin, 0)
 
+
 try:
+  dtcum = 0.
+  T0 = time.time()
   while True:
     flashThread=threading.Thread(target=LEDflash, args=(pLED, tflash,))
     flashThread.start()
     # generate exponentially distributed waiting time
     dt = -tau * math.log(random.uniform(0., 1.) )
-    time.sleep(dt)
-                     
+    dtcor = dt - time.time() + T0  + dtcum
+    if dtcor > 0.: time.sleep(dtcor)
+    dtcum += dt
+
 except  KeyboardInterrupt:
     print ("keyboard interrupt - ending")
 
