@@ -1,0 +1,28 @@
+# configuration for PhyPiDAQ 
+
+# configuration module for DAQ device
+DAQModule: ADS1115Config  
+#DAQModule: MCP3008Config  
+#DAQModule: PSConfig         
+#DAQModule: GPIOCount
+
+# device configuration files 
+DeviceFile: config/ADS1115Config.yaml  
+#DeviceFile: config/MCP3008Config.yaml  
+#DeviceFile: config/PSConfig.yaml         
+#DeviceFile: config/GPIOCount.yaml
+
+DisplayModule: DataLogger
+
+Interval: 0.1                     # logging interval         
+ChanLabels: [Volt, Volt]          # names an units for channels 
+ChanColors: [darkblue, sienna]    # channel colours in display
+XYmode:     false                 # enable XY-display
+
+# overwrite Channel Limits of Device 
+##ChanLimits: 
+## - [0., 1.]
+## - [0., 1.]
+
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 
