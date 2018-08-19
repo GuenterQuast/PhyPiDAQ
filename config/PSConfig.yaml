@@ -1,6 +1,8 @@
 # example of a configuration file for PicoScope 2000 Series
-PSmodel: 2000a
 
+DAQModule: PSConfig         
+
+PSmodel: 2000a
 # channel configuration 
 picoChannels: [A, B]
 ChanRanges: [2., 2.]

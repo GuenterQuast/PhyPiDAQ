@@ -1,0 +1,7 @@
+# example of a configuration file for MAX31865
+
+DAQModule: MAX31865Config
+
+NWires: 3         # numbers of wires PT100
+Rref: 430         # value reference resistor MAX31865
+R0: 100.          # value resistor PT100 at 0°C

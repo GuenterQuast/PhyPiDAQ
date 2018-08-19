@@ -88,6 +88,9 @@ def setup():
   if 'DataFile' not in PhyPiConfDict:
     PhyPiConfDict['DataFile'] = None
 
+  if 'DisplayModule' not in PhyPiConfDict:
+    PhyPiConfDict['DisplayModule'] = 'DataLogger'
+
   if 'DeviceFile' in PhyPiConfDict:
     DEVconfFile = PhyPiConfDict['DeviceFile']
   else:
@@ -99,11 +102,10 @@ def setup():
     print('!!! failed to read configuration file ' + DEVconfFile)
     exit(1)
 
-  if 'DisplayModule' not in PhyPiConfDict:
-    PhyPiConfDict['DisplayModule'] = 'DataLogger'
-
 # configure and initialize Device
-  if 'DAQModule' in PhyPiConfDict:
+  if 'DAQModule' in DEVconfDict:
+    DEVName = DEVconfDict['DAQModule']
+  elif 'DAQModule' in PhyPiConfDict:
     DEVName = PhyPiConfDict['DAQModule']
   else:  # try to derive from name of Device Config File
     DEVName = DEVconfFile.split('.')[0]
