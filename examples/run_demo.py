@@ -5,7 +5,7 @@
      this script reads data samples from PicoScope and 
      displays data as effective voltage, history display and xy plot
 
-     Usage: ./runPicoScope_demo.py [Interval <PhyPiConf_file>.yaml]
+     Usage: ./runPicoScope_demo.py [Interval <PhyPiConf_file>.daq]
 '''
 
 from __future__ import print_function, division, unicode_literals
@@ -59,7 +59,7 @@ def setup():
   if len(sys.argv) >= 2:
     PhyPiConfFile = sys.argv[1]
   else:
-    PhyPiConfFile = 'PhyPiConf.yaml'
+    PhyPiConfFile = 'PhyPiConf.daq'
 
   # read scope configuration file
   print('  Configuration from file ' + PhyPiConfFile)
@@ -103,7 +103,9 @@ def setup():
     PhyPiConfDict['DisplayModule'] = 'DataLogger'
 
 # configure and initialize Device
-  if 'DAQModule' in PhyPiConfDict:
+  if 'DAQModule' in DEVconfDict:
+    DEVName = DEVconfDict['DAQModule']
+  elif 'DAQModule' in PhyPiConfDict:
     DEVName = PhyPiConfDict['DAQModule']
   else:  # try to derive from name of Device Config File
     DEVName = DEVconfFile.split('.')[0]
