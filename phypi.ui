@@ -159,6 +159,9 @@
         <pointsize>11</pointsize>
        </font>
       </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;common name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="text">
        <string>Run Tag:</string>
       </property>
@@ -355,7 +358,7 @@
       </property>
       <widget class="QWidget" name="tab_phypiConfig">
        <attribute name="title">
-        <string>phypi Config</string>
+        <string>PhyPi Config</string>
        </attribute>
        <widget class="QPlainTextEdit" name="pTE_phypiConfig">
         <property name="geometry">
@@ -383,10 +386,14 @@
          </rect>
         </property>
         <property name="toolTip">
-         <string>accept changes</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;accept and reload all dependencies&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>reload all</string>
+         <string>  accept</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>images/ok.png</normaloff>images/ok.png</iconset>
         </property>
        </widget>
       </widget>
@@ -412,6 +419,9 @@
           <width>181</width>
           <height>34</height>
          </rect>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;load template device configuration&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>   load Device Config</string>
@@ -440,13 +450,13 @@
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>514</y>
+        <y>520</y>
         <width>141</width>
         <height>34</height>
        </rect>
       </property>
       <property name="toolTip">
-       <string>Save as default configuration</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;save all config files&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
        <string>Save Config</string>
@@ -465,7 +475,7 @@
        <rect>
         <x>10</x>
         <y>30</y>
-        <width>521</width>
+        <width>691</width>
         <height>481</height>
        </rect>
       </property>
