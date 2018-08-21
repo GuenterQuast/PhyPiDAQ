@@ -332,7 +332,12 @@ class Ui_PhyPiWindow(object):
       if DevFile != self.DeviceFile:
         fname = self.cwd + '/' + DevFile
         self.setDevConfig_fromFile(fname)
+        if self.DeviceFile != '':
+          message = QtWidgets.QMessageBox.about(self.Window, 
+           'Info', 'Device Configuration re-read, please check')       
         self.DeviceFile = DevFile
+ 
+
 
     def selectConfigFile(self):
       path2File = QtWidgets.QFileDialog.getOpenFileName(None,
