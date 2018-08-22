@@ -1,11 +1,11 @@
-# global configuration for PhyPiDAQ 
+# configuration for PhyPiDAQ 
 
-# possible device configuration files 
-DeviceFile: ADS1115Config.yaml  
-#DeviceFile: MCP3008Config.yaml  
-#DeviceFile: PSConfig.yaml         
-#DeviceFile: MAX31865Config.yaml 
-#DeviceFile: GPIOCount.yaml
+# device configuration files 
+DeviceFile: config/ADS1115Config.yaml  
+#DeviceFile: config/MCP3008Config.yaml  
+#DeviceFile: config/PSConfig.yaml         
+#DeviceFile: config/MAX31865Config.yaml 
+#DeviceFile: confg/GPIOCount.yaml
 
 DisplayModule: DataLogger
 
