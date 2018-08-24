@@ -357,6 +357,12 @@
        <number>0</number>
       </property>
       <widget class="QWidget" name="tab_phypiConfig">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;PhyPi Configuration&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <attribute name="title">
         <string>PhyPi Config</string>
        </attribute>
@@ -397,11 +403,14 @@
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="tab_DeviceConfig">
+      <widget class="QWidget" name="tab_DeviceConfig0">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(1st) Device Configuration&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <attribute name="title">
         <string>Device Config</string>
        </attribute>
-       <widget class="QPlainTextEdit" name="pTE_DeviceConfig">
+       <widget class="QPlainTextEdit" name="pTE_DeviceConfig0">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -413,12 +422,15 @@
         <property name="toolTip">
          <string>Device Configuration</string>
         </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
        </widget>
-       <widget class="QPushButton" name="pB_DeviceSelect">
+       <widget class="QPushButton" name="pB_DeviceSelect0">
         <property name="geometry">
          <rect>
-          <x>490</x>
-          <y>423</y>
+          <x>487</x>
+          <y>426</y>
           <width>181</width>
           <height>34</height>
          </rect>
@@ -428,6 +440,47 @@
         </property>
         <property name="text">
          <string>   load Device Config</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>images/open-folder.jpg</normaloff>images/open-folder.jpg</iconset>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_DeviceConfig1">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;2nd Device Configuration &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <attribute name="title">
+        <string>2nd DeviceConfig</string>
+       </attribute>
+       <widget class="QPlainTextEdit" name="pTE_DeviceConfig1">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>681</width>
+          <height>421</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pB_DeviceSelect1">
+        <property name="geometry">
+         <rect>
+          <x>485</x>
+          <y>424</y>
+          <width>181</width>
+          <height>34</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>     load Device Config</string>
         </property>
         <property name="icon">
          <iconset>
