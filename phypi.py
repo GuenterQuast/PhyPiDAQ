@@ -258,6 +258,16 @@ class Ui_PhyPiWindow(object):
       msg.setStandardButtons(QMessageBox.Ok)
       return msg.exec_()
 
+    def MB_Warning(self, Title, Text):
+    # wrapper for QMessageBox Info
+      msg = QMessageBox()
+      msg.setIcon(QMessageBox.Warning)
+      msg.setWindowTitle(Title)
+      msg.setText(Text)       
+      msg.setStandardButtons(QMessageBox.Ok)
+      return msg.exec_()
+
+
     def init(self, Window, DAQconfFile ):
 # initialisation 
       self.Window = Window
@@ -388,6 +398,24 @@ class Ui_PhyPiWindow(object):
         self.pTE_DeviceConfig.setReadOnly(not checked)
 
     def saveConfig(self, confdir):
+
+      # retrieve actual configuration from GUI
+      DAQconf = self.pTE_phypiConfig.toPlainText() 
+      DevConf = self.pTE_DeviceConfig.toPlainText() 
+      # check if valid yaml syntax
+      try:
+        DAQconfdict=yaml.load(DAQconf)       
+      except: 
+        self.MB_Warning('Warning', 
+             'PhyPi Config is not valid yaml format')       
+        return
+      try:
+        DevConfdict=yaml.load(DevConf)       
+      except: 
+        self.MB_Warning('Warning', 
+             'Device Config is not valid yaml format')       
+        return
+
       # save DAQ configuration in cdir
       RunTag = str(self.lE_RunTag.text() ).replace(' ','')
 
@@ -397,14 +425,11 @@ class Ui_PhyPiWindow(object):
        'saving Config to file ' + fullDAQfile)       
       if retval == QMessageBox.Cancel: return
       fDAQ = open(fullDAQfile, 'w')
-      # retrieve actual configuration from GUI
-      DAQconf = self.pTE_phypiConfig.toPlainText() 
       print(DAQconf, file = fDAQ )
       self.DAQfile = DAQfile
       fDAQ.close()     
 
       # save device config
-      DAQconfdict=yaml.load(DAQconf)       
       DevFile = DAQconfdict["DeviceFile"] 
       cdir, fnam = os.path.split(DevFile)
       # make sub-directory if needed an non-existent        
@@ -412,7 +437,6 @@ class Ui_PhyPiWindow(object):
         if not os.path.exists(confdir + '/' + cdir):
           os.makedirs(confdir + '/' + cdir) 
       fDev = open(confdir + '/' + DevFile, 'w')
-      DevConf = self.pTE_DeviceConfig.toPlainText() 
       print(DevConf, file = fDev )
       fDev.close()
 
