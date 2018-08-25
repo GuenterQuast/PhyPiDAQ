@@ -122,6 +122,8 @@ def setup():
   ChanNams = []
   ChanLims = []
   ChanIdx_ofDevice = []
+
+  DEVs = []
   for i in range(NDevices):
     if 'DAQModule' in DEVconfDicts[i]:
       DEVNames.append(DEVconfDicts[i]['DAQModule'])
@@ -130,17 +132,17 @@ def setup():
     else:  # try to derive from name of Device Config File
       DEVNames.append(DevFiles[i].split('.')[0])
 
-#    DEVs = []
     print('  configuring device ' + DEVNames[i])
     # import device class ...
     exec('from phypidaq.' + DEVNames[i] +  ' import ' + DEVNames[i])
     # ...  and instantiate device handler
-    exec('global DEVs; DEVs=[]; DEVs.append(' + DEVNames[i] + '(DEVconfDicts[i]) )' )
+    exec('global DEVs;  DEVs.append(' + DEVNames[i] + '(DEVconfDicts[i]) )' )
     DEVs[i].init()
     ChanIdx_ofDevice.append(NChannels)
-    NChannels += DEVs[i].NChannels  
-    ChanNams.append(DEVs[i].ChanNams)
-    ChanLims.append(DEVs[i].ChanLims)
+    nC = DEVs[i].NChannels  
+    NChannels += nC
+    ChanNams += DEVs[i].ChanNams[0 : nC]
+    ChanLims += DEVs[i].ChanLims[0 : nC]
 
 # Add information for graphical display(s) to PhyPiConfDict
   PhyPiConfDict['NChannels'] = NChannels
@@ -209,8 +211,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     while True:
       if DAQ_ACTIVE:
         cnt +=1
-        for DEV in DEVs:
-          DEV.acquireData(sig[ChanIdx_ofDevice:])
+        for i, DEV in enumerate(DEVs):
+          DEV.acquireData(sig[ChanIdx_ofDevice[i]:])
         DLmpQ.put(sig)  # for DataLogger
 #        DGmpQ.put(sig)  # for DataGraphs
         if DatRec: DatRec(sig) # for data recorder
