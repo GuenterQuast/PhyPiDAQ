@@ -72,10 +72,10 @@ class DataGraphs(object):
       axes.append(axes[0].twinx())
 
     # history plot
-    for i, C in enumerate(self.ChanNams):
+    for i in range(self.NChan):
       if i < self.NAxes:
         axes[i].set_ylim(*self.ChanLim[i])
-        axes[i].set_ylabel('Chan ' + C + ' ' + self.AxisLabels[i],
+        axes[i].set_ylabel('Chan ' + self.ChanNams[i] + ' ' + self.AxisLabels[i],
                          color=self.ChanColors[i])
         axes[i].grid(True, color=self.ChanColors[i], linestyle = '--', alpha=0.3)
     axes[0].set_xlabel('History (s)', size='x-large')
@@ -143,7 +143,7 @@ class DataGraphs(object):
 
   # bar graph for voltages
     self.bgraphs = ()
-    for i, C in enumerate(self.ChanNams):
+    for i in range(self.NChan):
       iax = self.Chan2Axis[i]
       if i >= len(self.ChanColors): 
         colr = None
@@ -155,7 +155,7 @@ class DataGraphs(object):
 
   # history graphs
     self.graphs=()
-    for i, C in enumerate(self.ChanNams):
+    for i in range(self.NChan):
       iax = self.Chan2Axis[i]
       if i >= len(self.ChanColors): 
         colr = None
@@ -196,7 +196,7 @@ class DataGraphs(object):
 
       k = n % self.Npoints
       txt=''
-      for i, C in enumerate(self.ChanNams):
+      for i in range(self.NChan):
         self.Vhist[i, k] = dat[i]
     # update history graph
         self.d[i] = np.concatenate((self.Vhist[i, k+1:], self.Vhist[i, :k+1]), axis=0)
@@ -208,7 +208,7 @@ class DataGraphs(object):
     # update text display
           endl = ''
           if i%2: endl = '\n'
-          txt += '  %s:   %.3gV' % (C, self.Vhist[i,k]) + endl 
+          txt += '  %s:   %.3gV' % (self.ChanNams[i], self.Vhist[i,k]) + endl 
     # update bar chart
           self.bgraphs[i].set_height(dat[i])
           self.animtxt.set_text(txt)

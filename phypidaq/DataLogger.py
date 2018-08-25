@@ -131,7 +131,7 @@ class DataLogger(object):
       n, dat = data
 
       k = n % self.Npoints
-      for i range(self.NChan):
+      for i in range(self.NChan):
         self.Vhist[i, k] = dat[i]
         self.d[i] = np.concatenate((self.Vhist[i, k+1:], 
                                     self.Vhist[i, :k+1]), axis=0)
