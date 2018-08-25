@@ -47,7 +47,7 @@ def stop_processes(proclst):
 def setup():
 # set up data source, display module and options
 
-  global interval, PhyPiConfDict, DEV, DatRec
+  global interval, PhyPiConfDict, DEVs, ChanIdx_ofDevice, DatRec 
 
 # check for / read command line arguments
   if len(sys.argv) >=3:
@@ -59,9 +59,9 @@ def setup():
   if len(sys.argv) >= 2:
     PhyPiConfFile = sys.argv[1]
   else:
-    PhyPiConfFile = 'PhyPiConf.yaml'
+    PhyPiConfFile = 'PhyPiConf.daq'
 
-  # read scope configuration file
+  # read DAQ configuration file
   print('  Configuration from file ' + PhyPiConfFile)
   try:
     with open(PhyPiConfFile) as f:
@@ -91,37 +91,63 @@ def setup():
   if 'DisplayModule' not in PhyPiConfDict:
     PhyPiConfDict['DisplayModule'] = 'DataLogger'
 
+# read Device configuration(s) and instantiate device handler(s)
   if 'DeviceFile' in PhyPiConfDict:
-    DEVconfFile = PhyPiConfDict['DeviceFile']
+    DevFiles = PhyPiConfDict['DeviceFile']
+  elif "DAQModule" in phypiConfD: 
+    DevFiles = phypiConfD["DAQModule"] + '.yaml' 
   else:
-    DEVconfFile = 'ADS1115Config.yaml'
-  try:
-    with open(DEVconfFile) as f:
-      DEVconfDict = yaml.load(f)
-  except:
-    print('!!! failed to read configuration file ' + DEVconfFile)
-    exit(1)
+    DevFiles = 'ADS1115Config.yaml'
+    print("Configuring for ADC ADS1115")
 
-# configure and initialize Device
-  if 'DAQModule' in DEVconfDict:
-    DEVName = DEVconfDict['DAQModule']
-  elif 'DAQModule' in PhyPiConfDict:
-    DEVName = PhyPiConfDict['DAQModule']
-  else:  # try to derive from name of Device Config File
-    DEVName = DEVconfFile.split('.')[0]
+  # if not a list, make it one
+  if type(DevFiles) != type([]):
+    DevFiles = [DevFiles]
+  NDevices = len(DevFiles)
 
-  print('  configuring device ' + DEVName)
-  # import device class and define an instance
-  exec('from phypidaq.' + DEVName +  ' import ' + DEVName)
-  exec('global DEV; DEV = ' + DEVName + '(DEVconfDict)' )
-  DEV.init()
-  
+  # open all device config files
+  DEVconfDicts = []
+  for fnam in DevFiles:  
+    try:
+      f = open(fnam)
+      DEVconfDicts.append(yaml.load(f))
+      f.close()
+    except:
+      print('!!! failed to read configuration file ' + fnam)
+      exit(1)
+
+# configure and initialize all Devices
+  DEVNames = []
+  NChannels = 0
+  ChanNams = []
+  ChanLims = []
+  ChanIdx_ofDevice = []
+  for i in range(NDevices):
+    if 'DAQModule' in DEVconfDicts[i]:
+      DEVNames.append(DEVconfDicts[i]['DAQModule'])
+    elif 'DAQModule' in PhyPiConfDict:
+      DEVNames.append(PhyPiConfDict['DAQModule'][i])
+    else:  # try to derive from name of Device Config File
+      DEVNames.append(DevFiles[i].split('.')[0])
+
+#    DEVs = []
+    print('  configuring device ' + DEVNames[i])
+    # import device class ...
+    exec('from phypidaq.' + DEVNames[i] +  ' import ' + DEVNames[i])
+    # ...  and instantiate device handler
+    exec('global DEVs; DEVs=[]; DEVs.append(' + DEVNames[i] + '(DEVconfDicts[i]) )' )
+    DEVs[i].init()
+    ChanIdx_ofDevice.append(NChannels)
+    NChannels += DEVs[i].NChannels  
+    ChanNams.append(DEVs[i].ChanNams)
+    ChanLims.append(DEVs[i].ChanLims)
+
 # Add information for graphical display(s) to PhyPiConfDict
-  # information from Device
-  PhyPiConfDict['NChannels'] = DEV.NChannels
-  PhyPiConfDict['ChanNams' ] = DEV.ChanNams 
+  PhyPiConfDict['NChannels'] = NChannels
+  if 'ChanNams' not in PhyPiConfDict:
+    PhyPiConfDict['ChanNams' ] = ChanNams 
   if 'ChanLimits' not in PhyPiConfDict:  
-    PhyPiConfDict['ChanLimits'] = DEV.ChanLims # take from device if not set
+    PhyPiConfDict['ChanLimits'] = ChanLims # take from devices if not set
 
   if PhyPiConfDict['DataFile'] != None:
     FName = PhyPiConfDict['DataFile']
@@ -132,7 +158,6 @@ def setup():
 
   print ('\nPhyPiDAQ Configuration:')
   print (yaml.dump(PhyPiConfDict) )
-
 
 
 if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
@@ -184,7 +209,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     while True:
       if DAQ_ACTIVE:
         cnt +=1
-        DEV.acquireData(sig)
+        for DEV in DEVs:
+          DEV.acquireData(sig[ChanIdx_ofDevice:])
         DLmpQ.put(sig)  # for DataLogger
 #        DGmpQ.put(sig)  # for DataGraphs
         if DatRec: DatRec(sig) # for data recorder
