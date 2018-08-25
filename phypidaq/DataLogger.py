@@ -71,10 +71,10 @@ class DataLogger(object):
       axes.append(fig.add_subplot(1,1,1, facecolor='ivory'))
       if self.NAxes > 1:
         axes.append(axes[0].twinx())
-      for i, C in enumerate(self.ChanNams):
+      for i in range(self.NChan):
         if i < self.NAxes:  # maximum of two axis lables
           axes[i].set_ylim(*self.ChanLim[i])
-          axes[i].set_ylabel('Chan ' + C + ' ' + self.AxisLabels[i], 
+          axes[i].set_ylabel('Chan ' + self.ChanNams[i] + ' ' + self.AxisLabels[i], 
                  color=self.ChanColors[i])
           axes[i].grid(True, color=self.ChanColors[i], 
                      linestyle = '--', alpha=0.3)
@@ -102,7 +102,7 @@ class DataLogger(object):
     self.graphs=()
   # history graphs
     if not self.XYmode:
-      for i, C in enumerate(self.ChanNams):
+      for i in range(self.NChan):
         iax = self.Chan2Axis[i]
         if i >= len(self.ChanColors): 
           colr = None
@@ -131,7 +131,7 @@ class DataLogger(object):
       n, dat = data
 
       k = n % self.Npoints
-      for i, C in enumerate(self.ChanNams):
+      for i range(self.NChan):
         self.Vhist[i, k] = dat[i]
         self.d[i] = np.concatenate((self.Vhist[i, k+1:], 
                                     self.Vhist[i, :k+1]), axis=0)
