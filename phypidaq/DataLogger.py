@@ -27,10 +27,15 @@ class DataLogger(object):
       self.ChanColors = ConfDict['ChanColors']
     else:
       self.ChanColors = ['darkblue','sienna']
+
+    # Channel Labels are not shown, only support two axis labels
     if 'ChanLabels' in ConfDict:
       self.AxisLabels = ConfDict['ChanLabels']
     else:
       self.AxisLabels = [''] * min(2, self.NChan)
+
+    if 'AxisLabels' in ConfDict:
+      self.AxisLabels = ConfDict['AxisLabels']
 
     if 'XYmode' in ConfDict:
       self.XYmode = ConfDict['XYmode']

@@ -21,10 +21,15 @@ class DataGraphs(object):
     self.ChanLim = ConfDict['ChanLimits']
     self.ChanNams = ConfDict['ChanNams']
     self.ChanColors = ConfDict['ChanColors']
+
+    # Channel Labels are not shown, use first as two axis labels
     if 'ChanLabels' in ConfDict:
       self.AxisLabels = ConfDict['ChanLabels']
     else:
       self.AxisLabels = [''] * self.NChan
+
+    if 'AxisLabels' in ConfDict:
+      self.AxisLabels = ConfDict['AxisLabels']
 
     if 'XYmode' in ConfDict:
       self.XYmode = ConfDict['XYmode']
