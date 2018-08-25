@@ -2,7 +2,7 @@
 
 DAQModule: ADS1115Config  
 
-ADCChannels: [0, 1]         # active ADC-Channels
+ADCChannels: [0, 3]         # active ADC-Channels
                             # possible values: 0, 1, 2, 3
                               # when using differential mode:
                                 #  -  0 = ADCChannel 0 minus ADCChannel 1
