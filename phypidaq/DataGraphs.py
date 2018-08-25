@@ -32,14 +32,10 @@ class DataGraphs(object):
     else:
       self.ChanColors = ['darkblue','sienna'] + ColorList[0 : self.NChan]
 
-    # Channel Labels are not shown presently, use first two as axis labels
     if 'ChanLabels' in ConfDict:
-      self.AxisLabels = ConfDict['ChanLabels']
+      self.ChanLabels = ConfDict['ChanLabels']
     else:
-      self.AxisLabels = [''] * self.NChan
-
-    if 'AxisLabels' in ConfDict:
-      self.AxisLabels = ConfDict['AxisLabels']
+      self.ChanLabels = [''] * self.NChan
 
     if 'XYmode' in ConfDict:
       self.XYmode = ConfDict['XYmode']
@@ -47,17 +43,17 @@ class DataGraphs(object):
       self.XYmode = False
     if self.NChan < 2: 
       self.XYmode = False
-    if self.XYmode and len(self.AxisLabels) < 2:
-       print(' *==* DataGraphs: need more than 1 Channel Label in XY mode')
-       self.AxisLabels.append('???')
 
 # assign Chanels to Axes
-    self.NAxes = min(2, len(self.AxisLabels))
+    self.NAxes = min(2, len(self.ChanLabels))
     if 'Chan2Axes' in ConfDict:
       self.Chan2Axes = ConfDict['Chan2Axes']
     else:
     # default: 0 -> ax0, >0 -> ax2 
       self.Chan2Axes = [0] + [self.NAxes-1] * (self.NChan - 1)
+    self.Cidx0 = self.Chan2Axes.index(0)  # 1st Channel axis0
+    self.Cidx1 = self.Chan2Axes.index(1)    # 1st Channel axis1
+    self.AxisLabels = [self.ChanLabels[self.Cidx0], self.ChanLabels[self.Cidx1] ]
 
 # config data needed throughout the class
     self.Npoints = 120  # number of points for history
@@ -137,12 +133,12 @@ class DataGraphs(object):
     if self.XYmode:
       axes.append(plt.subplot2grid((6,5),(0,2), rowspan=6, colspan=3) )
       axXY = axes[-1]
-      axXY.set_xlim(*self.ChanLim[0])
-      axXY.set_ylim(*self.ChanLim[1])
-      axXY.set_xlabel('Chan ' + self.ChanNams[0] + ' ' + self.AxisLabels[0], 
-         size='x-large', color=self.ChanColors[0])
-      axXY.set_ylabel('Chan ' + self.ChanNams[1] + ' ' + self.AxisLabels[1], 
-         size='x-large', color=self.ChanColors[1])
+      axXY.set_xlim(*self.ChanLim[self.Cidx0])
+      axXY.set_ylim(*self.ChanLim[self.Cidx1])
+      axXY.set_xlabel('Chan ' + self.ChanNams[self.Cidx0] + ' ' + self.AxisLabels[0], 
+         size='x-large', color=self.ChanColors[self.Cidx0])
+      axXY.set_ylabel('Chan ' + self.ChanNams[self.Cidx1] + ' ' + self.AxisLabels[1], 
+         size='x-large', color=self.ChanColors[self.Cidx1])
       axXY.set_title('XY-View', size='xx-large')
       axXY.grid(True, color='grey', linestyle = '--', alpha=0.3)
     else:
@@ -162,25 +158,17 @@ class DataGraphs(object):
     self.bgraphs = ()
     for i in range(self.NChan):
       iax = self.Chan2Axes[i]
-      if i >= len(self.ChanColors): 
-        colr = None
-      else:
-        colr = self.ChanColors[i]
       bg, = self.axbar[iax].bar(self.ind[i], 0. , self.bwidth,
-                        align='center', color = colr, alpha=0.5) 
+            align='center', color = self.ChanColors[i], alpha=0.5) 
       self.bgraphs += (bg,)
 
   # history graphs
     self.graphs=()
     for i in range(self.NChan):
       iax = self.Chan2Axes[i]
-      if i >= len(self.ChanColors): 
-        colr = None
-      else:
-        colr = self.ChanColors[i]
    # intitialize with graph outside range
       g,= self.axes[iax].plot(self.Ti, np.zeros(self.Npoints), 
-                              color=colr)
+                              color=self.ChanColors[i])
       self.graphs += (g,)
 
   # Voltage in Text form
@@ -192,11 +180,7 @@ class DataGraphs(object):
     if self.XYmode:
       # plot XY-graph(s)
       for i in range(1, self.NChan):
-        if i >= len(self.ChanColors): 
-          colr = None
-        else:
-          colr = self.ChanColors[i]
-        XYg, = self.axes[-1].plot( [0.], [0.], color=colr )
+        XYg, = self.axes[-1].plot( [0.], [0.], color=self.ChanColors[i] )
         self.XYgraphs += (XYg,)
 
     self.t0=time.time() # remember start time
@@ -225,7 +209,7 @@ class DataGraphs(object):
     # update text display
           endl = ''
           if i%2: endl = '\n'
-          txt += '  %s:   %.3gV' % (self.ChanNams[i], self.Vhist[i,k]) + endl 
+          txt += '  %s:   %.3g' % (self.ChanNams[i], self.Vhist[i,k]) + endl 
     # update bar chart
           self.bgraphs[i].set_height(dat[i])
           self.animtxt.set_text(txt)

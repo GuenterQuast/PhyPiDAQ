@@ -33,12 +33,9 @@ class DataLogger(object):
 
     # Channel Labels are not shown, only support two axis labels
     if 'ChanLabels' in ConfDict:
-      self.AxisLabels = ConfDict['ChanLabels']
+      self.ChanLabels = ConfDict['ChanLabels']
     else:
-      self.AxisLabels = [''] * min(2, self.NChan)
-
-    if 'AxisLabels' in ConfDict:
-      self.AxisLabels = ConfDict['AxisLabels']
+      self.ChanLabels = [''] * self.NChan
 
     if 'XYmode' in ConfDict:
       self.XYmode = ConfDict['XYmode']
@@ -46,17 +43,17 @@ class DataLogger(object):
       self.XYmode = False
     if self.NChan < 2: 
       self.XYmode = False
-    if self.XYmode and len(self.AxisLabels) < 2:
-       print(' *==* DataGraphs: need more than 1 Channel Label in XY mode')
-       self.AxisLabels.append('???')
 
-# assign Chanels to axes
-    self.NAxes = min(2, len(self.AxisLabels))
+   # assign Chanels to axes
+    self.NAxes = min(2, self.NChan)
     if 'Chan2Axes' in ConfDict:
       self.Chan2Axes = ConfDict['Chan2Axes']
     else:
     # default: 0 -> ax0, >0 -> ax2 
       self.Chan2Axes = [0] + [self.NAxes-1] * (self.NChan - 1)
+    self.Cidx0 = self.Chan2Axes.index(0)  # 1st Channel axis0
+    self.Cidx1 = self.Chan2Axes.index(1)    # 1st Channel axis1
+    self.AxisLabels = [self.ChanLabels[self.Cidx0], self.ChanLabels[self.Cidx1] ]
 
    # data structures needed throughout the class
     self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
@@ -90,12 +87,12 @@ class DataLogger(object):
   # XY plot
       axes.append(fig.add_subplot(1,1,1, facecolor='ivory'))
       axXY = axes[-1]
-      axXY.set_xlim(*self.ChanLim[0])
-      axXY.set_ylim(*self.ChanLim[1])
-      axXY.set_xlabel('Chan ' + self.ChanNams[0] + ' ' + self.AxisLabels[0], 
-         size='x-large', color=self.ChanColors[0])
-      axXY.set_ylabel('Chan ' + self.ChanNams[1] + ' ' + self.AxisLabels[1], 
-         size='x-large', color=self.ChanColors[1])
+      axXY.set_xlim(*self.ChanLim[self.Cidx0])
+      axXY.set_ylim(*self.ChanLim[self.Cidx1])
+      axXY.set_xlabel('Chan ' + self.ChanNams[self.Cidx0] + ' ' + self.AxisLabels[0], 
+                      size='x-large', color=self.ChanColors[self.Cidx0])
+      axXY.set_ylabel('Chan ' + self.ChanNams[self.Cidx1] + ' ' + self.AxisLabels[1], 
+                      size='x-large', color=self.ChanColors[self.Cidx1])
       axXY.set_title('XY-View', size='xx-large')
       axXY.grid(True, color='grey', linestyle = '--', alpha=0.3)
   
@@ -122,11 +119,7 @@ class DataLogger(object):
     else:
       # plot XY-graph(s)
       for i in range(1, self.NChan):
-        if i >= len(self.ChanColors): 
-          colr = None
-        else:
-          colr = self.ChanColors[i]
-        g, = self.axes[-1].plot( [0.], [0.], color=colr )
+        g, = self.axes[-1].plot( [0.], [0.], color=self.ChanColors[i] )
         self.graphs += (g,)
 
     return self.graphs
