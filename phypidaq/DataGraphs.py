@@ -22,9 +22,9 @@ class DataGraphs(object):
     self.ChanNams = ConfDict['ChanNams']
     self.ChanColors = ConfDict['ChanColors']
     if 'ChanLabels' in ConfDict:
-      self.ChanLabels = ConfDict['ChanLabels']
+      self.AxisLabels = ConfDict['ChanLabels']
     else:
-      self.ChanLabels = [''] * self.NChan
+      self.AxisLabels = [''] * self.NChan
 
     if 'XYmode' in ConfDict:
       self.XYmode = ConfDict['XYmode']
@@ -32,12 +32,12 @@ class DataGraphs(object):
       self.XYmode = False
     if self.NChan < 2: 
       self.XYmode = False
-    if self.XYmode and len(self.ChanLabels) < 2:
+    if self.XYmode and len(self.AxisLabels) < 2:
        print(' *==* DataGraphs: need more than 1 Channel Label in XY mode')
-       self.ChanLabels.append('???')
+       self.AxisLabels.append('???')
 
 # assign Chanels to Axes
-    self.NAxes = min(2, len(self.ChanLabels))
+    self.NAxes = min(2, len(self.AxisLabels))
     if 'Chan2Axes' in ConfDict:
       self.Chan2Axis = ConfDict['Chan2Axes']
     else:
@@ -75,7 +75,7 @@ class DataGraphs(object):
     for i, C in enumerate(self.ChanNams):
       if i < self.NAxes:
         axes[i].set_ylim(*self.ChanLim[i])
-        axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLabels[i],
+        axes[i].set_ylabel('Chan ' + C + ' ' + self.AxisLabels[i],
                          color=self.ChanColors[i])
         axes[i].grid(True, color=self.ChanColors[i], linestyle = '--', alpha=0.3)
     axes[0].set_xlabel('History (s)', size='x-large')
@@ -94,7 +94,7 @@ class DataGraphs(object):
     axbar[0].axvline(0, color = self.ChanColors[0])
     axbar[0].set_ylim(*self.ChanLim[0])
     axbar[0].axhline(0., color='k', linestyle='-', lw=2, alpha=0.5)
-    axbar[0].set_ylabel(self.ChanNams[0] + ' ' + self.ChanLabels[0],
+    axbar[0].set_ylabel(self.ChanNams[0] + ' ' + self.AxisLabels[0],
                       size='x-large',  color = self.ChanColors[0])
     axbar[0].grid(True, color=self.ChanColors[0], linestyle = '--', alpha=0.3)
     if self.NAxes > 1:
@@ -102,7 +102,7 @@ class DataGraphs(object):
       axbar[1].set_frame_on(False)
       axbar[1].axvline(self.NChan, color = self.ChanColors[1])
       axbar[1].set_ylim(*self.ChanLim[1])
-      axbar[1].set_ylabel(self.ChanNams[1] + ' ' + self.ChanLabels[1],
+      axbar[1].set_ylabel(self.ChanNams[1] + ' ' + self.AxisLabels[1],
                         size='x-large', color = self.ChanColors[1])
       axbar[1].grid(True, color=self.ChanColors[1], linestyle = '--', alpha=0.3)
   # Voltage in Text format
@@ -122,9 +122,9 @@ class DataGraphs(object):
       axXY = axes[-1]
       axXY.set_xlim(*self.ChanLim[0])
       axXY.set_ylim(*self.ChanLim[1])
-      axXY.set_xlabel('Chan ' + self.ChanNams[0] + ' ' + self.ChanLabels[0], 
+      axXY.set_xlabel('Chan ' + self.ChanNams[0] + ' ' + self.AxisLabels[0], 
          size='x-large', color=self.ChanColors[0])
-      axXY.set_ylabel('Chan ' + self.ChanNams[1] + ' ' + self.ChanLabels[1], 
+      axXY.set_ylabel('Chan ' + self.ChanNams[1] + ' ' + self.AxisLabels[1], 
          size='x-large', color=self.ChanColors[1])
       axXY.set_title('XY-View', size='xx-large')
       axXY.grid(True, color='grey', linestyle = '--', alpha=0.3)

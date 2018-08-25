@@ -28,9 +28,9 @@ class DataLogger(object):
     else:
       self.ChanColors = ['darkblue','sienna']
     if 'ChanLabels' in ConfDict:
-      self.ChanLabels = ConfDict['ChanLabels']
+      self.AxisLabels = ConfDict['ChanLabels']
     else:
-      self.ChanLabels = [''] * min(2, self.NChan)
+      self.AxisLabels = [''] * min(2, self.NChan)
 
     if 'XYmode' in ConfDict:
       self.XYmode = ConfDict['XYmode']
@@ -38,12 +38,12 @@ class DataLogger(object):
       self.XYmode = False
     if self.NChan < 2: 
       self.XYmode = False
-    if self.XYmode and len(self.ChanLabels) < 2:
+    if self.XYmode and len(self.AxisLabels) < 2:
        print(' *==* DataGraphs: need more than 1 Channel Label in XY mode')
-       self.ChanLabels.append('???')
+       self.AxisLabels.append('???')
 
 # assign Chanels to axes
-    self.NAxes = min(2, len(self.ChanLabels))
+    self.NAxes = min(2, len(self.AxisLabels))
     if 'Chan2Axes' in ConfDict:
       self.Chan2Axis = ConfDict['Chan2Axes']
     else:
@@ -74,7 +74,7 @@ class DataLogger(object):
       for i, C in enumerate(self.ChanNams):
         if i < self.NAxes:  # maximum of two axis lables
           axes[i].set_ylim(*self.ChanLim[i])
-          axes[i].set_ylabel('Chan ' + C + ' ' + self.ChanLabels[i], 
+          axes[i].set_ylabel('Chan ' + C + ' ' + self.AxisLabels[i], 
                  color=self.ChanColors[i])
           axes[i].grid(True, color=self.ChanColors[i], 
                      linestyle = '--', alpha=0.3)
@@ -85,9 +85,9 @@ class DataLogger(object):
       axXY = axes[-1]
       axXY.set_xlim(*self.ChanLim[0])
       axXY.set_ylim(*self.ChanLim[1])
-      axXY.set_xlabel('Chan ' + self.ChanNams[0] + ' ' + self.ChanLabels[0], 
+      axXY.set_xlabel('Chan ' + self.ChanNams[0] + ' ' + self.AxisLabels[0], 
          size='x-large', color=self.ChanColors[0])
-      axXY.set_ylabel('Chan ' + self.ChanNams[1] + ' ' + self.ChanLabels[1], 
+      axXY.set_ylabel('Chan ' + self.ChanNams[1] + ' ' + self.AxisLabels[1], 
          size='x-large', color=self.ChanColors[1])
       axXY.set_title('XY-View', size='xx-large')
       axXY.grid(True, color='grey', linestyle = '--', alpha=0.3)
