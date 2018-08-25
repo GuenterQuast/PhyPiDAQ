@@ -403,7 +403,7 @@ class Ui_PhyPiWindow(object):
         print('     no device configuration file given - exiting')
         exit(1)
 
-# it not a list, make it one
+# if not a list, make it one
       if type(DevFiles) != type([]):
         DevFiles = [DevFiles]
       self.NDeviceConfigs = len(DevFiles)
