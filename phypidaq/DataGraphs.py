@@ -19,10 +19,20 @@ class DataGraphs(object):
     self.dT = ConfDict['Interval'] 
     self.NChan = ConfDict['NChannels']
     self.ChanLim = ConfDict['ChanLimits']
-    self.ChanNams = ConfDict['ChanNams']
-    self.ChanColors = ConfDict['ChanColors']
+    if 'ChanNams' in ConfDict: 
+      self.ChanNams = ConfDict['ChanNams']
+    else:
+      self.ChanNams = [''] * self.NChan 
 
-    # Channel Labels are not shown, use first as two axis labels
+    ColorList=['C1','C2','C3','C4','C5','C6','C7','C8','C9','C10','C11','C12'] 
+    if 'ChanColors' in ConfDict:
+      self.ChanColors = ConfDict['ChanColors']
+      if len(self.ChanColors) < self.NChan:
+        self.ChanColors += ColorList[0: self.NChan - len(self.ChanColors)]
+    else:
+      self.ChanColors = ['darkblue','sienna'] + ColorList[0 : self.NChan]
+
+    # Channel Labels are not shown presently, use first two as axis labels
     if 'ChanLabels' in ConfDict:
       self.AxisLabels = ConfDict['ChanLabels']
     else:
@@ -44,10 +54,10 @@ class DataGraphs(object):
 # assign Chanels to Axes
     self.NAxes = min(2, len(self.AxisLabels))
     if 'Chan2Axes' in ConfDict:
-      self.Chan2Axis = ConfDict['Chan2Axes']
+      self.Chan2Axes = ConfDict['Chan2Axes']
     else:
     # default: 0 -> ax0, >0 -> ax2 
-      self.Chan2Axis = [0] + [self.NAxes-1] * (self.NChan - 1)
+      self.Chan2Axes = [0] + [self.NAxes-1] * (self.NChan - 1)
 
 # config data needed throughout the class
     self.Npoints = 120  # number of points for history
@@ -77,12 +87,12 @@ class DataGraphs(object):
       axes.append(axes[0].twinx())
 
     # history plot
-    for i in range(self.NChan):
-      if i < self.NAxes:
-        axes[i].set_ylim(*self.ChanLim[i])
-        axes[i].set_ylabel('Chan ' + self.ChanNams[i] + ' ' + self.AxisLabels[i],
-                         color=self.ChanColors[i])
-        axes[i].grid(True, color=self.ChanColors[i], linestyle = '--', alpha=0.3)
+    for i in range(self.NAxes):
+      Cidx = self.Chan2Axes.index(i)
+      axes[i].set_ylim(*self.ChanLim[Cidx])
+      axes[i].set_ylabel('Chan ' + self.ChanNams[Cidx] + ' ' + self.AxisLabels[i],
+                           color=self.ChanColors[Cidx])
+      axes[i].grid(True, color=self.ChanColors[Cidx], linestyle = '--', alpha=0.3)
     axes[0].set_xlabel('History (s)', size='x-large')
 
     if self.XYmode:
@@ -105,11 +115,13 @@ class DataGraphs(object):
     if self.NAxes > 1:
       axbar.append(axbar[0].twinx() )
       axbar[1].set_frame_on(False)
+      Cidx = self.Chan2Axes.index(1)
       axbar[1].axvline(self.NChan, color = self.ChanColors[1])
-      axbar[1].set_ylim(*self.ChanLim[1])
-      axbar[1].set_ylabel(self.ChanNams[1] + ' ' + self.AxisLabels[1],
-                        size='x-large', color = self.ChanColors[1])
-      axbar[1].grid(True, color=self.ChanColors[1], linestyle = '--', alpha=0.3)
+      axbar[1].set_ylim(*self.ChanLim[Cidx])
+      axbar[1].set_ylabel(self.ChanNams[Cidx] + ' ' + self.AxisLabels[1],
+                          size='x-large', color = self.ChanColors[Cidx])
+      axbar[1].grid(True, color=self.ChanColors[Cidx], 
+                    linestyle = '--', alpha=0.3)
   # Voltage in Text format
     if self.XYmode:
       axes.append(plt.subplot2grid((6,5), (0,0), rowspan=1, colspan=2) )
@@ -149,7 +161,7 @@ class DataGraphs(object):
   # bar graph for voltages
     self.bgraphs = ()
     for i in range(self.NChan):
-      iax = self.Chan2Axis[i]
+      iax = self.Chan2Axes[i]
       if i >= len(self.ChanColors): 
         colr = None
       else:
@@ -161,7 +173,7 @@ class DataGraphs(object):
   # history graphs
     self.graphs=()
     for i in range(self.NChan):
-      iax = self.Chan2Axis[i]
+      iax = self.Chan2Axes[i]
       if i >= len(self.ChanColors): 
         colr = None
       else:

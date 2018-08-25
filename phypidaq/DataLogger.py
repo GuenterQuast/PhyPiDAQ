@@ -23,10 +23,13 @@ class DataLogger(object):
       self.ChanNams = ConfDict['ChanNams']
     else:
       self.ChanNams = [''] * self.NChan 
+    ColorList=['C1','C2','C3','C4','C5','C6','C7','C8','C9','C10','C11','C12'] 
     if 'ChanColors' in ConfDict:
       self.ChanColors = ConfDict['ChanColors']
+      if len(self.ChanColors) < self.NChan:
+        self.ChanColors += ColorList[0: self.NChan - len(self.ChanColors)]
     else:
-      self.ChanColors = ['darkblue','sienna']
+      self.ChanColors = ['darkblue','sienna'] + ColorList[0 : self.NChan]
 
     # Channel Labels are not shown, only support two axis labels
     if 'ChanLabels' in ConfDict:
@@ -50,10 +53,10 @@ class DataLogger(object):
 # assign Chanels to axes
     self.NAxes = min(2, len(self.AxisLabels))
     if 'Chan2Axes' in ConfDict:
-      self.Chan2Axis = ConfDict['Chan2Axes']
+      self.Chan2Axes = ConfDict['Chan2Axes']
     else:
     # default: 0 -> ax0, >0 -> ax2 
-      self.Chan2Axis = [0] + [self.NAxes-1] * (self.NChan - 1)
+      self.Chan2Axes = [0] + [self.NAxes-1] * (self.NChan - 1)
 
    # data structures needed throughout the class
     self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
@@ -76,13 +79,12 @@ class DataLogger(object):
       axes.append(fig.add_subplot(1,1,1, facecolor='ivory'))
       if self.NAxes > 1:
         axes.append(axes[0].twinx())
-      for i in range(self.NChan):
-        if i < self.NAxes:  # maximum of two axis lables
-          axes[i].set_ylim(*self.ChanLim[i])
-          axes[i].set_ylabel('Chan ' + self.ChanNams[i] + ' ' + self.AxisLabels[i], 
-                 color=self.ChanColors[i])
-          axes[i].grid(True, color=self.ChanColors[i], 
-                     linestyle = '--', alpha=0.3)
+      for i in range(self.NAxes):
+        Cidx = self.Chan2Axes.index(i)
+        axes[i].set_ylim(*self.ChanLim[Cidx])
+        axes[i].set_ylabel('Chan ' + self.ChanNams[Cidx] + ' ' + self.AxisLabels[i], 
+                           color=self.ChanColors[Cidx])
+        axes[i].grid(True, color=self.ChanColors[Cidx], linestyle = '--', alpha=0.3)
       axes[0].set_xlabel('History (s)')
     else:
   # XY plot
@@ -108,7 +110,7 @@ class DataLogger(object):
   # history graphs
     if not self.XYmode:
       for i in range(self.NChan):
-        iax = self.Chan2Axis[i]
+        iax = self.Chan2Axes[i]
         if i >= len(self.ChanColors): 
           colr = None
         else:
