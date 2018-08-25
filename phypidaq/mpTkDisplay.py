@@ -36,22 +36,14 @@ def mpTkDisplay(Q, conf,
   # import relevant library
   try:
     cmnd ='from .'+ ModuleName + ' import *' 
-    # print('  mpTkDisplay: executing: ' + cmnd)
-    if sys.version_info[:2] <=(2,7):
-      exec cmnd in globals(), locals()
-    else: 
-      exec(cmnd)
+    exec(cmnd, globals(), locals())
   except:
     print(' !!! TkDisplay: failed to import module - exiting')
     sys.exit(1)
 
   try:
     cmnd = 'global DG; DG = ' + ModuleName +'(conf)'
-    # print('  mpTkDisplay: executing: ' + cmnd)
-    if sys.version_info[:2] <=(2,7):
-      exec cmnd in globals(),locals()
-    else:
-      exec(cmnd) 
+    exec(cmnd, globals(), locals()) 
   except: 
     print(' !!! TkDisplay: failed to initialize module - exiting')
     sys.exit(1)
