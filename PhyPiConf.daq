@@ -10,14 +10,21 @@ DeviceFile: config/ADS1115Config.yaml
 DisplayModule: DataLogger
 
 Interval: 0.1                     # logging interval         
-ChanLabels: [Volt, Volt]          # names an units for channels 
+ChanLabels: [Volt, Volt]          # names and/or units for channels 
 ChanColors: [darkblue, sienna]    # channel colours in display
 XYmode:     false                 # enable XY-display
 
 # overwrite Channel Limits of Device 
 ##ChanLimits: 
-## - [0., 1.]
-## - [0., 1.]
+## - [0., 1.]   # chan 1
+## - [0., 1.]   # chan 2
+## - [0., 1.]   # chan 3
+
+ChanCalib:
+##  - null    or  - <factor> or  - [ [ <true values ], [ <raw values> ] ] 
+#  - null                    # chan1: no calbration
+  - 1.                       # chan2: simple calibration factor
+  - [ [0.,1.], [0., 1.] ] # chan3: interpolation: [true] [raw]
 
 DataFile:   null                  # file name for output file 
 #DataFile:   testfile             # file name for output file 

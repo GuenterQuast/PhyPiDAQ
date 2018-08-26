@@ -12,11 +12,12 @@ from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
 
 import sys, time, yaml, numpy as np, threading, multiprocessing as mp
-sys.path.append('..')
-
+from scipy import interpolate 
 
 # display module
 from phypidaq.mpTkDisplay import mpTkDisplay
+# more imports from phypidaq depend on configuration options
+
 
 # ----- helper functions --------------------
 def kbdInput(cmdQ):
@@ -34,20 +35,56 @@ def kbdInput(cmdQ):
     cmdQ.put(kbdtxt)
     kbdtxt = ''
 
+def generateCalibrationFunction(calibd):
+  '''
+   interpolate calibration table t= true, r = raw values ; 
+   if only one number for trueVals given, then this is 
+   interpreted as a simple calibration factor
+ 
+   Args: 
+     calibd:   calibration data
+         either a single number as calibration factor: fc
+         or a list or two arrays: [ [true values], [raw values] ]    
+   Returns: interpolation function
+  ''' 
+  try:
+    iter(calibd)
+    # if no error, input is an array
+    r = calibd[1]
+    t = calibd[0]
+  except:
+   # input is only one number
+    r = [0., 1.]
+    t = [0., calibd]    
+  # check input
+  if len(t) != len(r):
+    print('!!! generateCalibrationFunction: lengths of input arrays not equal - exiting') 
+    exit(1)
+  # perform spline fit of appropriate order k
+  return interpolate.UnivariateSpline(r, t, k = min(3, len(t)-1) )
+
 def stop_processes(proclst):
   '''
     Close all running processes at end of run
   '''
   for p in proclst: # stop all sub-processes
     if p.is_alive():
-      print('    terminating '+p.name)
+      print('    terminating ' + p.name)
       if p.is_alive(): p.terminate()
       time.sleep(1.)
 
 def setup():
 # set up data source, display module and options
 
-  global interval, PhyPiConfDict, DEVs, ChanIdx_ofDevice, DatRec 
+  global interval, PhyPiConfDict, DEVs, ChanIdx_ofDevice, CalibFuncts, DatRec 
+  ''' 
+    interval:            sampling interval
+    PhyPiConfDict:       dictionary with config options
+    DEVs:                list of instances of device classes
+    ChanIdx_ofDevice:    index to store 1st chanel of device i
+    CalibFuncts:         functions for calibration of raw channel readings
+    DatRec:              instance of DataRecorder
+  '''
 
 # check for / read command line arguments
   if len(sys.argv) >=3:
@@ -55,7 +92,7 @@ def setup():
   else: 
     interval = 0.5
 
-  # read PhyPicDAQ configuration file
+  # read PhyPiDAQ configuration file
   if len(sys.argv) >= 2:
     PhyPiConfFile = sys.argv[1]
   else:
@@ -144,6 +181,16 @@ def setup():
     ChanNams += DEVs[i].ChanNams[0 : nC]
     ChanLims += DEVs[i].ChanLims[0 : nC]
 
+# set up calibration Functions
+  CalibFuncts = [None] * NChannels    
+  if 'ChanCalib' in PhyPiConfDict:
+    calibData = PhyPiConfDict['ChanCalib']
+    print('  Calibrating channels:')   
+    for ic in range( NChannels): 
+      print('   Chan ', ic, '   ', calibData[ic])   
+      if calibData[ic] is not None: 
+        CalibFuncts[ic] = generateCalibrationFunction(calibData[ic])
+
 # Add information for graphical display(s) to PhyPiConfDict
   PhyPiConfDict['NChannels'] = NChannels
   if 'ChanNams' not in PhyPiConfDict:
@@ -151,6 +198,7 @@ def setup():
   if 'ChanLimits' not in PhyPiConfDict:  
     PhyPiConfDict['ChanLimits'] = ChanLims # take from devices if not set
 
+# start data recording to disk if required
   if PhyPiConfDict['DataFile'] != None:
     FName = PhyPiConfDict['DataFile']
     from phypidaq.DataRecorder import DataRecorder
@@ -172,22 +220,16 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
   thrds=[]
   procs=[]
-  cmdQ =  mp.Queue(1) # Queue for command input
 
+  cmdQ =  mp.Queue(1) # Queue for command input
   DLmpQ = mp.Queue(1) # Queue for data transfer to sub-process
-  procs.append(mp.Process(name='DataLogger', target = mpTkDisplay, 
+  procs.append(mp.Process(name=DisplayModule, target = mpTkDisplay, 
              args=(DLmpQ, PhyPiConfDict, DisplayModule , cmdQ) ) )
 #                   Queue    config        ModuleName    commandQ
 
-# mulit-graph display:
-#  DGmpQ =  mp.Queue(1) # Queue for data transfer to sub-process
-#  procs.append(mp.Process(name='DataGraphs', target = mpTkDisplay, 
-#    args=(DGmpQ, PhyPiConfDict, 'DataGraphs', cmdQ) ) )
-#         Queue     config       ModuleName  CommandQ
-
   thrds.append(threading.Thread(name='kbdInput', target = kbdInput, 
                args = (cmdQ,)  ) )
-#                           Queue       
+#                      Queue       
 
 # start subprocess(es)
   for prc in procs:
@@ -209,14 +251,22 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     cnt = 0
     T0 = time.time()
     while True:
+
       if DAQ_ACTIVE:
         cnt +=1
+        # read data
         for i, DEV in enumerate(DEVs):
           DEV.acquireData(sig[ChanIdx_ofDevice[i]:])
-        DLmpQ.put(sig)  # for DataLogger
-#        DGmpQ.put(sig)  # for DataGraphs
+        # calibrate raw readings
+        for i in range(NChannels):
+          if CalibFuncts[i] is not None:
+            sig[i] = CalibFuncts[i](sig[i])
+        # display calibrated data
+        DLmpQ.put(sig)
+        # record data to disc
         if DatRec: DatRec(sig) # for data recorder
-   # check for keboard input
+
+   # check for control input (from keyboard or display module)
       if not cmdQ.empty():
         cmd = cmdQ.get()
         if cmd == 'E':
