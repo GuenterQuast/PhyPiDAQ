@@ -31,9 +31,11 @@ install all necessary packages:
 ```
 sudo apt-get update
 sudo apt-get upgrade
+sudo apt-get install python3-scipy
+sudo apt-get install pyqt5-dev
+sudo apt-get install pyqt5-tools
 
 sudo pip3 install --upgrade numpy
-sudo pip3 install scipy
 sudo pip3 install matplotlib
 sudo pip3 install pyyaml
 
