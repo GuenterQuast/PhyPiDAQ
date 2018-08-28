@@ -1,23 +1,38 @@
-# configuration for PhyPiDAQ 
+# Configuration Options for PhyPiDAQ 
 
 # device configuration files 
 DeviceFile: config/ADS1115Config.yaml  
 #DeviceFile: config/MCP3008Config.yaml  
 #DeviceFile: config/PSConfig.yaml         
 #DeviceFile: config/MAX31865Config.yaml 
-#DeviceFile: confg/GPIOCount.yaml
+#DeviceFile: config/GPIOCount.yaml
+
+## an example for multiple devices
+#DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
 
 DisplayModule: DataLogger
-
+# DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
 Interval: 0.1                     # logging interval         
-ChanLabels: [Volt, Volt]          # names an units for channels 
+XYmode:     false                 # enable/disable XY-display
+
+
+# channel-specific information
+ChanLabels: [(V), (V) ]          # names and/or units for channels 
 ChanColors: [darkblue, sienna]    # channel colours in display
-XYmode:     false                 # enable XY-display
 
-# overwrite Channel Limits of Device 
+# eventually overwrite Channel Limits obtained from device config 
 ##ChanLimits: 
-## - [0., 1.]
-## - [0., 1.]
+## - [0., 1.]   # chan 1
+## - [0., 1.]   # chan 2
+## - [0., 1.]   # chan 3
 
+#ChanCalib:
+##  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ] 
+#  - 1.                        # chan1: simple calibration factor
+#  - [ [0.,1.], [0., 1.] ]     # chan2: interpolation: [true]([<raw>] )
+#  - null                     # chan3: no calbration
+
+# name of output file
 DataFile:   null                  # file name for output file 
 #DataFile:   testfile             # file name for output file 
