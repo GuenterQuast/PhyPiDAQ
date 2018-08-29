@@ -63,6 +63,20 @@ def generateCalibrationFunction(calibd):
   # perform spline fit of appropriate order k
   return interpolate.UnivariateSpline(r, t, k = min(3, len(t)-1) )
 
+def apply_calibs():
+  global sig
+  for i in range(NChannels):
+    if CalibFuncts[i] is not None:
+      sig[i] = CalibFuncts[i](sig[i])
+
+def apply_formulae():
+  global sig
+  for i in range(NChannels):
+    exec('c'+str(i) + '=sig['+str(i)+']')
+  for ic in range(NChannels):
+    if Formulae[i]:
+      sig[ic] = eval(Formulae[ic])
+
 def stop_processes(proclst):
   '''
     Close all running processes at end of run
@@ -76,7 +90,8 @@ def stop_processes(proclst):
 def setup():
 # set up data source, display module and options
 
-  global interval, PhyPiConfDict, DEVs, ChanIdx_ofDevice, CalibFuncts, DatRec 
+  global interval, PhyPiConfDict, DEVs, ChanIdx_ofDevice,\
+         CalibFuncts, Formulae, DatRec 
   ''' 
     interval:            sampling interval
     PhyPiConfDict:       dictionary with config options
@@ -182,14 +197,23 @@ def setup():
     ChanLims += DEVs[i].ChanLims[0 : nC]
 
 # set up calibration Functions
-  CalibFuncts = [None] * NChannels    
+  CalibFuncts = None
   if 'ChanCalib' in PhyPiConfDict:
+    CalibFuncts = [None] * NChannels    
     calibData = PhyPiConfDict['ChanCalib']
     print('  Calibrating channels:')   
     for ic in range( NChannels): 
       print('   Chan ', ic, '   ', calibData[ic])   
       if calibData[ic] is not None: 
         CalibFuncts[ic] = generateCalibrationFunction(calibData[ic])
+
+# Apply Formula(e) to calibrated channel reading(s)
+  Formulae = None
+  if 'ChanFormula' in PhyPiConfDict:
+    Formulae = PhyPiConfDict['ChanFormula']
+    print('  Applying formulae:')   
+    for ic in range( NChannels): 
+      if Formulae[ic]: print('   Chan ', ic, '   ', Formulae[ic])   
 
 # Add information for graphical display(s) to PhyPiConfDict
   PhyPiConfDict['NChannels'] = NChannels
@@ -217,6 +241,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   setup()
   NChannels = PhyPiConfDict['NChannels']
   DisplayModule = PhyPiConfDict['DisplayModule']
+  if Formulae: from math import *   # make math functions available
 
   thrds=[]
   procs=[]
@@ -254,16 +279,16 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
       if DAQ_ACTIVE:
         cnt +=1
-        # read data
+      # read data
         for i, DEV in enumerate(DEVs):
           DEV.acquireData(sig[ChanIdx_ofDevice[i]:])
-        # calibrate raw readings
-        for i in range(NChannels):
-          if CalibFuncts[i] is not None:
-            sig[i] = CalibFuncts[i](sig[i])
-        # display calibrated data
+      # calibrate raw readings
+        if CalibFuncts: apply_calibs()
+      # apply fromula(e) 
+        if Formulae: apply_formulae()
+      # display calibrated data
         DLmpQ.put(sig)
-        # record data to disc
+      # record data to disc
         if DatRec: DatRec(sig) # for data recorder
 
    # check for control input (from keyboard or display module)
