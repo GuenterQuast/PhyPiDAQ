@@ -11,7 +11,7 @@
 from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
 
-import sys, time, yaml, numpy as np, threading, multiprocessing as mp
+import sys, os, time, yaml, numpy as np, threading, multiprocessing as mp
 from scipy import interpolate 
 
 # display module
@@ -182,7 +182,8 @@ def setup():
     elif 'DAQModule' in PhyPiConfDict:
       DEVNames.append(PhyPiConfDict['DAQModule'][i])
     else:  # try to derive from name of Device Config File
-      DEVNames.append(DevFiles[i].split('.')[0])
+      cdir, cfnam = os.path.split(DeviceFiles[i])
+      DEVNames.append(cfnam.split('.')[0])
 
     print('  configuring device ' + DEVNames[i])
     # import device class ...
