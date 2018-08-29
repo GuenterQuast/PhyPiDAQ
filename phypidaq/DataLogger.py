@@ -54,11 +54,10 @@ class DataLogger(object):
     self.Cidx0 = self.Chan2Axes.index(0)  # 1st Channel axis0
     try:
       self.Cidx1 = self.Chan2Axes.index(1)    # 1st Channel axis1
-      self.AxisLabels = [self.ChanLabels[self.Cidx0], self.ChanLabels[self.Cidx1] ]
     except:
       self.NAxes = 1
       self.Cidx1 = self.Cidx0
-    self.AxisLabels = [self.ChanLabels[self.Cidx0], self.ChanLabels[self.Cidx0] ]
+    self.AxisLabels = [self.ChanLabels[self.Cidx0], self.ChanLabels[self.Cidx1] ]
    # data structures needed throughout the class
     self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
     self.Vhist = np.zeros( [self.NChan, self.Npoints] )

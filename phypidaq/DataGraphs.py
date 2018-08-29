@@ -52,7 +52,11 @@ class DataGraphs(object):
     # default: 0 -> ax0, >0 -> ax2 
       self.Chan2Axes = [0] + [self.NAxes-1] * (self.NChan - 1)
     self.Cidx0 = self.Chan2Axes.index(0)  # 1st Channel axis0
-    self.Cidx1 = self.Chan2Axes.index(1)    # 1st Channel axis1
+    try:
+      self.Cidx1 = self.Chan2Axes.index(1)    # 1st Channel axis1
+    except:
+      self.NAxes = 1
+      self.Cidx1 = self.Cidx0
     self.AxisLabels = [self.ChanLabels[self.Cidx0], self.ChanLabels[self.Cidx1] ]
 
 # config data needed throughout the class
