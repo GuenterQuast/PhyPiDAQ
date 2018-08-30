@@ -25,18 +25,18 @@ This package relies on code from some other packages that need to be installed f
 For conveniencs, installation files for external packages in pip wheel format are provided 
 in subrirectory *.whl*.
 
-After setting up your Raspberry Pi, the following steps should be taken to update and  
-install all necessary packages:
+After setting up your Raspberry Pi with the actual
+stable debian release *stretch*, the following steps should be taken to update and install all necessary packages:
 
 ```
 sudo apt-get update
 sudo apt-get upgrade
+sudo apt-get install python3-numpy
 sudo apt-get install python3-scipy
+sudo apt-get install python3-matplotlib
 sudo apt-get install pyqt5-dev
-sudo apt-get install pyqt5-tools
+sudo apt-get install python3-pyqt5
 
-sudo pip3 install --upgrade numpy
-sudo pip3 install matplotlib
 sudo pip3 install pyyaml
 
 # PicoTech base drivers for picoScope usb devices
@@ -44,7 +44,9 @@ sudo pip3 install pyyaml
 
 # get picoCosmo code and dependencies
 mkdir git
-cd git/PhyPicDAQ/whl
+cd git
+git clone https://GuenterQuast/PhyPiDAQ
+cd PhyPicDAQ/whl
 sudo pip3 install *.whl
 ```
 ## Recommended Sensors and Devices
