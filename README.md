@@ -31,8 +31,7 @@ This package relies on code from some other packages that need to be installed f
 - http://github.com/GuenterQuast/picoDAQ
 - the  *python* bindings of the *pico-python* project by Colin O'Flynn  
    <https://github.com/colinoflynn/pico-python> and
-- the low-level drivers contained in the Pico Technology Software Development Kit,
-  <https://www.picotech.com/downloads>
+- the low-level drivers contained in the Pico Technology Software Development Kit <https://www.picotech.com/downloads>
 ```
 
 For conveniencs, installation files for external packages in pip wheel format are provided in subrirectory *.whl*.
@@ -53,6 +52,8 @@ sudo pip3 install pyyaml
 #   see https://www.picotech.com/support/topic14649.html
 # after inclusion of the picotech raspbian repository:  
 sudo apt-get install libps2000a
+# allow access of user pi to usb port
+sudo usermod -a -G tty pi
 
 # get PhyPiDAQ code and dependencies
 mkdir git
