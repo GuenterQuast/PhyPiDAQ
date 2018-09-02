@@ -32,7 +32,7 @@ In den nächsten Stunden befassen wir uns damit, wie man digitale Messwerte erfa
 
 ### Die LED
 
-![Abb. Übersicht LED](images/course/led_overview.PNG)
+![](images/course/led_overview.PNG)
 
 In unserem Projekt verwenden wir keine Glühlampen, sondern LEDs, wenn wir etwas optisch anzeigen wollen. **LED** ist die Abkürzung für  **L**ight **E**mitting **D**iode, was auf Deutsch so viel bedeutet wie Licht emittierende bzw. aussendende Diode. Um die LED zum Leuchten zu bringen, kann diese im Gegensatz zu einer Glühlampe nicht einfach an eine Spannungsversorgung angeschlossen werden.
 Es sind **zwei Dinge** zu beachten:
@@ -92,7 +92,7 @@ Damit wir über die GPIO-Pins mit dem Raspberry Pi kommunizieren können, müsse
 <span style="color:#5882FA; font-size: 12pt ">1. </span>Stecken Sie die Schaltung gemäß des  nachfolgenden Schaltplans und der Abbildung des Schaltungsaufbaus auf dem Breadboard und schließen Sie das Netzteil an die Spannungsversorgung des Breadboards an.  
 Mit Hilfe des Potentiometers kann die elektrische Spannung am Eingangspin GPIO17 in einem Bereich zwischen 0 und 3.3V eingestellt werden. Das Voltmeter wird über die beiden Leitungen zu den Bananenbuchsen so angeschlossen, dass die Spannung zwischen dem Schleifer (dem mittleren Pin) des Potentiometers und GND (0V) gemessen werden kann.
 
-![Abb. Schaltplan digitale Schaltschwelle GPIO](images/course/digital_circuit.JPG)
+![](images/course/digital_circuit.JPG)
 
 ![Abb.  Schaltungsaufbau Breadboard digitale Schaltschwelle GPIO](images/course/digital_breadboard.png)
 
@@ -100,34 +100,34 @@ Mit Hilfe des Potentiometers kann die elektrische Spannung am Eingangspin GPIO17
 
 <span style="color:#5882FA; font-size: 12pt ">3. </span>Nun müssen wir den Raspberry Pi über das Flachbandkabel mit dem Breadboard verbinden. Der Raspberry Pi hat keinen Ein-/Ausschalter, sondern wird einfach durch Verbinden mit der Spannungsversorgung gestartet. 
 
-![connect_ribbon_cable](images\course\connect_ribbon_cable.png)
+![](images/course/connect_ribbon_cable.png)
 
 <span style="color:#5882FA; font-size: 12pt ">4. </span>Für alle, die mit dem VNC-Viewer per Fernzugriff arbeiten möchten (wer stattdessen mit Bildschirm etc. direkt am Raspberry Pi arbeitet, kann direkt zu Schritt 5 übergehen):  
 Wenn der Raspberry Pi gestartet ist, können wir uns vom Laptop (oder einem anderen Anzeigegerät) aus über den VNC-Viewer mit dem Raspberry Pi verbinden:
 
 + Als erstes den VNC-Viewer aufrufen.
 
-  ![open_vnc_viewer](images\course\open_vnc_viewer.PNG)
+  ![](images/course/open_vnc_viewer.PNG)
 
 + Als nächstes oben in die Zeile die IP-Adresse des verwendeten Raspberry Pi eingeben (steht auf einem Zettel auf dem Raspberry Pi) und mit Enter bestätigen. 
 
 + Nun wird über das WLAN mit dem Raspberry Pi eine Verbindung aufgebaut und es sollte das nachfolgend dargestellte Fenster auftauchen. Hier muss nur noch der der Benutzername pi und das Kennwort (steht auf dem Raspberry Pi) angegeben werden und die Verbindung mit OK gestartet werden.
 
-  ![authentification_vnc_viewer](images\course\authentification_vnc_viewer.PNG)
+  ![](images/course/authentification_vnc_viewer.PNG)
 
 + Wenn alles richtig angegeben wurde, sieht man jetzt die Bildschirmansicht des Raspberry Pi und kann über den VNC-Viewer mit dem Raspberry Pi arbeiten.
 
-  ![vnc_is_connected](images\course\vnc_is_connected.PNG)
+  ![](images/course/vnc_is_connected.PNG)
 
 + Für das nächste Mal ist die Verbindung jetzt schon angelegt und kann zukünftig mit einem Doppelklick auf das Bildschirmsymbol mit der passenden IP-Adresse gestartet werden.
 
-  ![vnc_connection](images\course\vnc_connection.PNG)
+  ![](images/course/vnc_connection.PNG)
 
 <span style="color:#5882FA; font-size: 12pt ">5. </span>Um herauszufinden, welchen Zustand der GPIO-Pin 17 hat und uns diesen Zustand anzeigen zu lassen, schreiben wir nun unser erstes kleines Programm:
 
 - Dazu öffnen wir als erstes die Kommandozeile, über die wir direkt über Befehle mit dem Raspberry Pi kommunizieren können.
 
-  ![command_line](images\course\command_line.png)
+  ![](images/course/command_line.png)
 
 - Durch eingeben des Befehls ```mkdir MeineProgramme``` und bestätigen mit **Enter** erzeugen wir ein neues Verzeichnis "Meine Programme", in dem wir unsere Programme speichern.
 
@@ -153,7 +153,7 @@ Wenn der Raspberry Pi gestartet ist, können wir uns vom Laptop (oder einem ande
 
 <span style="color:#5882FA; font-size: 12pt ">6. </span>Bevor wir unser Programm starten können, müssen wir die Datei noch speichern und schließen.
 
-![save_digital_py](images\course\save_digital_py.PNG)
+![](images/course/save_digital_py.PNG)
 
 <span style="color:#5882FA; font-size: 12pt ">7. </span>Mit ```python3 digital.py``` starten wir über die Kommandozeile unser Programm und bekommen jetzt alle 0,1 Sekunden den Zustand des GPIO-Pins 17 angezeigt. 
 
@@ -219,11 +219,11 @@ Jeder kennt bei neueren Autos die Lichtautomatik, die das Licht automatisch ansc
 
 <span style="color:#5882FA; font-size: 12pt ">1. </span>Stecken die abgebildete Schaltung gemäß des nachfolgenden Schaltplans und der Abbildung des Schaltungsaufbaus auf dem Breadboard und schließen Sie Spannungsversorgung und Netzteil an.  
 
-![Abb. Schaltplan Spannungsteiler LDR](images/course/ldr_digital_circuit.PNG)
+![](images/course/ldr_digital_circuit.PNG)
 
 
 
-![Abb. Schaltungsaufbau Spannungsteiler LDR](images/course/ldr_digital.PNG)  
+![](images/course/ldr_digital.PNG)  
 
 <span style="color:#5882FA; font-size: 12pt ">2. </span>Öffnen Sie die Kommandozeile und wechseln Sie mit ```cd MeineProgramme``` in das Verzeichnis "MeineProgramme". Starten Sie nun mit ```sudo python digital.py``` das zuvor erstellte Programm.
 Dunkeln Sie den Fotowiderstand (LDR) mit der Hand ab. Wechseln Sie mehrfach zwischen abgedunkteltem und hellem Zustand ab und notieren Sie Ihre Beobachtungen.
@@ -243,7 +243,7 @@ Dunkeln Sie den Fotowiderstand (LDR) mit der Hand ab. Wechseln Sie mehrfach zwis
 
 
 <span style="color:#5882FA; font-size: 12pt ">3. </span>Wie kommt es zu dem beobachteten Verhalten? Schauen wir uns dazu den Fotowiderstand LDR (**L**ight **D**ependent **R**esistor) genauer an:  
-![Abb. Kennlinie und Schaltzeichen Fotowiderstand (LDR)](images/course/ldr.PNG)  
+![](images/course/ldr.PNG)  
 Formulieren Sie auf Grundlage der Abbildung einen Merksatz, wie sich der ohmsche Widerstand des Fotowiderstands in Abhängigkeit von der Beleuchtungsstärke verhält.
 
 
@@ -365,7 +365,7 @@ Welchen Zustand besitzt der GPIO-Pin 17 in diesem Fall? Begründen Sie.
 
 <span style="color:#5882FA; font-size: 12pt ">5. </span>Wir haben also aus einem Fotowiderstand und einem zweiten Widerstand einen einfachen Sensor gebaut, mit dem wir nach der Digitalisierung zwischen hell und dunkel unterscheiden können. Damit wir eine Lichtautomatik haben, fehlt uns noch eine Beleuchtung, die abhängig von unserem Sensor ein- bzw. ausgeschaltet wird. Dafür ergänzen wir unsere Schaltung um eine weiße LED (Polung beachten) mit Vorwiderstand, die wir an den GPIO-Pin 27 anschließen.
 
-![ldr_led_breadboard](images\course\ldr_led_breadboard.PNG)
+![](images/course/ldr_led_breadboard.PNG)
 
 <span style="color:#5882FA; font-size: 12pt ">6. </span>Jetzt müssen wir nur noch unser Programm anpassen, sodass die LED abhängig vom Zustand des GPIO-Pins 17 an- bzw. ausgeschaltet wird.
 
@@ -403,12 +403,12 @@ Welchen Zustand besitzt der GPIO-Pin 17 in diesem Fall? Begründen Sie.
 
 beleuchtungsabhängiger Widerstand, Beleuchtungsstärke, GPIO-Pin, LED-Ein / LED-Aus, Spannungsteiler  
 
-![measuring_chain](images\course\measuring_chain.PNG)
+![](images/course/measuring_chain.PNG)
 
 
 # 6. Wir bauen ein digitales Thermometer
 
-![tree_adc_1](images\course\tree_adc.png)
+![](images/course/tree_adc.png)
 
 Bevor wir gleich zum Thermometer kommen, müssen wir zuerst ein bisschen ausholen. Wenn die Person am Boden wissen möchte, wo genau sich ihr Freund befindet, hilft ihr die Antwort "Auf Stufe 10!" sicher mehr weiter als "In der Baumkrone!". 
 
@@ -425,7 +425,7 @@ Was hat das aber jetzt mit unserem digitalen Thermometer zu tun? Im Beispiel uns
 
 ### Die Analog-Digital-Wandlung (AD-Wandlung)
 
-![analog_digital_signal](images\course\analog_digital_signal.PNG)
+![](images/course/analog_digital_signal.PNG)
 
 Der Analog-Digital-Wandler wandelt ein analoges in ein digitales Signal. Das heißt er wandelt ein kontinuierliches Signal mit unendlich vielen Signalwerten in eine Folge von Wertepaaren aus einem Zeitwert und einem Signalwert um. Es wird zu festen Zeitpunkten (Abtastung) je ein Signalwert erfasst. Die Signalwerte können dabei nur die Werte festgelegter Stufen (Quantisierung) annehmen. Dabei wird immer zur nächstgelegenen Stufe gerundet. 
 
@@ -439,7 +439,7 @@ Nun aber zum Bau unseres digitalen Thermometers. Wie auch bei der Lichtautomatik
 
 Betrachten wir zuerst seine Kennlinie.
 
-![ntc_characteristic](images\course\ntc_characteristic.png)
+![](images/course/ntc_characteristic.png)
 
 <span style="color:#5882FA; font-size: 12pt">Aufgabe 2: </span> Formulieren Sie auf Grundlage der Abbildung einen Merksatz, wie sich der ohmsche Widerstand des NTC-Widerstands in Abhängigkeit von der Temperatur verhält.
 
@@ -457,7 +457,7 @@ Betrachten wir zuerst seine Kennlinie.
 
 <span style="color:#5882FA; font-size: 12pt">Aufgabe 3: </span>Ergänzen Sie die nachfolgende Schaltung so, dass sich die am Anschlusspin des AD-Wandlers anliegende elektrische Spannung *U<sub>2</sub>* erhöht, wenn die Temperatur steigt (Tipp: Spannungsteiler).
 
-![voltage_divider_NTC](images\course\voltage_divider_NTC.PNG)
+![](images/course/voltage_divider_NTC.PNG)
 
 Mit der entworfenen Schaltung haben wir nun die Grundlage für unser Thermometer gelegt. Der Spannungsteiler mit dem NTC-Widerstand stellt uns ein temperaturabhängiges analoges Spannungssignal zur Verfügung. Nun müssen wir uns noch um die Digitalisierung dieses Spannungssignals und die Berechnung des Temperaturwerts kümmern.
 
@@ -481,7 +481,7 @@ Mit der entworfenen Schaltung haben wir nun die Grundlage für unser Thermometer
 
 <span style="color:#5882FA; font-size: 12pt ">1. </span>Ergänzen Sie den nachfolgenden Schaltungsaufbau auf dem Breadboard durch Leitungen, sodass der Spannungsteiler aus 10 k&Omega; Widerstand und NTC-Widerstand der oben entworfenen Schaltung entspricht.
 
-![breadboard_ntc](images\course\breadboard_ntc.PNG)
+![](images/course/breadboard_ntc.PNG)
 
 <span style="color:#5882FA; font-size: 12pt ">2. </span>Bauen Sie die Schaltung auf dem Breadboard auf. Aus der nachfolgenden Tabelle kann entnommen werden, wie der AD-Wandler auf dem Breadboard anzuschließen ist.
 
@@ -584,7 +584,6 @@ $$
 
    - Notieren Sie den ungefähren Spannungswert bei Zimmertemperatur. Was passiert, wenn der NTC-Widerstand zwischen den Handflächen auf Handtemperatur gebracht wird? Notieren Sie Ihre Beobachtungen.
 
-
 ___
 
 
@@ -686,4 +685,4 @@ Ergänzen wir also die Berechnung der Temperatur:
 
 Ergänzen Sie die fehlenden Begriffe für unser Beispiel des digitalen Thermometers.
 
-![measuring_chain_NTC](images\course\measuring_chain_NTC.PNG)
+![](images/course/measuring_chain_NTC.PNG)
