@@ -94,7 +94,7 @@ Mit Hilfe des Potentiometers kann die elektrische Spannung am Eingangspin GPIO17
 
 ![](images/course/digital_circuit.JPG)
 
-![Abb.  Schaltungsaufbau Breadboard digitale Schaltschwelle GPIO](images/course/digital_breadboard.png)
+![](images/course/digital_breadboard.png)
 
 <span style="color:#5882FA; font-size: 12pt ">2. </span>Für alle, die am Raspberry Pi mit Bildschirm, Tastatur und Maus arbeiten wollen (wer stattdessen mit dem VNC-Viewer per Fernzugriff arbeiten möchte, kann direkt zu Schritt 3 übergehen): Schließen Sie Bildschirm, Tastatur und Maus an den Raspberry Pi an.
 
@@ -508,7 +508,7 @@ Mit der entworfenen Schaltung haben wir nun die Grundlage für unser Thermometer
   
   while True: # Dauerschleife.
       adWert = adWandler.read_adc(0,2/3)  # Wir lesen den aktuellen Wert des AD-Wandlers am Anschluss A0 und speichern diesen in "adWert".
-      print("Aktueller Wert AD-Wandler:") # Wir geben den Text "Aktueller Wert 										   des Ad-Wandlers:" aus.
+      print("Aktueller Wert AD-Wandler:") # Wir geben den Text "Aktueller Wert des Ad-Wandlers:" aus.
       print(adWert) # Wir geben den aktuellen Wert des AD-Wandlers aus.
       time.sleep(1) # Wir warten 1 s (Raspberry Pi "schlaeft").
   ```
@@ -658,11 +658,11 @@ Ergänzen wir also die Berechnung der Temperatur:
   from scipy.interpolate import UnivariateSpline # Wir importieren die Bibliothek für die Interpolation.
   import time # Wir importieren die Bibliothek "time".
   
-  adWandler = Adafruit_ADS1x15.ADS1115() #Wir nennen unseren ADS1115 adWandler.
+  adWandler = Adafruit_ADS1x15.ADS1115() # Wir nennen unseren ADS1115 adWandler.
   aufloesung = 6.114/32767 # Wir berechnen die Aufloesung des AD-Wandlers.
   U = [Wert1, Wert2, Wert3 , Wert4] # Spannungswerte aus der Kalibrierung.
   T = [Wert1, Wert2, Wert3 , Wert4] # Temperaturwerte aus der Kalibrierung.
-  kalibFunkt = UnivariateSpline(U,T) #Wir berechnen die Kalibrierungsfunktion.
+  kalibFunkt = UnivariateSpline(U,T) # Wir berechnen die Kalibrierungsfunktion.
   
   while True: # Dauerschleife.
       adWert = adWandler.read_adc(0,2/3) * aufloesung # Wert Ad-Wandler.
