@@ -47,9 +47,9 @@ Die Sortimente 1., 2. und 3. reichen für bis zu 10 PhyPi-Schülersets. Das LED-
 
 ## 4. Pico-Scope (Oszilloskop)
 
-|      | Komponente                  | mögliche Bezugsquelle                | Link                                                         | Preis in € |
-| ---- | --------------------------- | ------------------------------------ | ------------------------------------------------------------ | ---------: |
-| 1.   | PicoScope 2200A Oszilloskop | [reichelt](https://www.reichelt.de/) | [PS 2204A](https://www.reichelt.de/usb-oszilloskop-10-mhz-2-kanaele-awg-ps-2204a-p143637.html?&trstct=pos_2) |     133,70 |
+|      | Komponente                      | mögliche Bezugsquelle                | Link                                                    | Preis in € |
+| ---- | ------------------------------- | ------------------------------------ | ------------------------------------------------------- | ---------: |
+| 1.   | PicoScope 2200A USB-Oszilloskop | [Meilhaus ](https://www.meilhaus.de) | [PS 2204A](https://www.meilhaus.de/picoscope-2204a.htm) |      95,00 |
 
 ## 5. Sonstige Chips zur Sensorauswertung
 
