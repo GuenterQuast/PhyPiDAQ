@@ -2,16 +2,24 @@
 
 Data Acquisition and analysis for Physics education with Raspberry Pi
 
-This *python3*  code provides some basic functionality for data acquisition and visualization like data logger, bar-chart, XY- or oscilloscope display. The visualization depends on *matplotlib.pyplot*, *Tkinter* and *pyQt5*.
+This *python3*  code provides some basic functionality for data acquisition and visualisation like data logger, bar-chart, XY- or oscilloscope display and data recording on disk.  
 
-In addition to the GPIO inputs/outputs of the Raspberry Pi, the analog-to-digital converters MCP3008 and ADS1115 and PicoScope USB-Oscilloscopes are supported as input devices for analog data, as well as a number of digital sensors using protocols like I²C or SPI. 
+In addition to the GPIO inputs/outputs of the Raspberry Pi, the analog-to-digital converters ADS1115 and MCP3008 and PicoScope USB-oscilloscopes are supported as input devices for analog data, as well as a number of digital sensors using protocols like I²C or SPI.
+
+The package provides an abstraction layer for measurement devices and sensors connected to a Raspberry Pi.  Dedicated classes for each device provide a simple, unified interface, containing only the methods `init(<config_dictionary>)`, `acquireData(buffer)` and `close()`. Simple examples with minimalist code illustrate the usage. The graphical user interface `phypi.py` and the script `run_phypi.py` provide a configurable environment for more complex measurements.
+
+ *Figure 1*:  Visualisation of  the time  dependence of two signals connected to an ADC
+
+![Figure 1](doc/Kondensator.png)
+
+
 
 ## Quick-start guide
 
-After installation - see below - a number of unified classes for data acquisition is available from the sub-directory `./phypidaq`.
-Each device needs a specific configuration, which is read from configuration files in sub-directory `./config`. The overall configuration is given in files of type `.daq`, specifying which devices and display modules to use, the readout rate, calibrations or analytical formulae to be applied to recorded data, or ranges and axis labels of the graphical output. 
+After installation - see below - a number of unified classes for data acquisition, visualisation and recording is available from the sub-directory `./phypidaq`.
+Each supported device needs a specific configuration, which is read from configuration files in sub-directory `./config`. The overall configuration is given in files of type `.daq`, specifying which devices and display modules to use, the readout rate, calibrations or analytical formulae to be applied to recorded data, or ranges and axis labels of the graphical output. 
 
-A graphical user interface `phypi.py` aids in the administration of the configuration options and can be used to start data acquisition. In this case, configurations and produced data files are stored in a dedicated sub-directory in `$HOME/PhyPi`.The name is derived from a user-defined tag and the current date and time.
+The graphical user interface `phypi.py` aids in the administration of the configuration options and can be used to start data acquisition. In this case, configurations and produced data files are stored in a dedicated sub-directory in `$HOME/PhyPi`. The name is derived from a user-defined tag and the current date and time.
 
 Data acquisition may also be started via the command line:
 
@@ -21,54 +29,54 @@ If no configuration file is given, the default `PhyPiConf.daq` is used.
 
 The sub-directory `./examples` contains a number of simple *python* scripts illustrating the usage of data acquisition and display modules with minimalist code.
 
-## Konfiguration
+## Configuration
 
 The script run_phypi.py allows users to perform very general measurement tasks without the need to write custom code. The options for configuration of input devices and their channels as well as for the display and data storage modules are specified in a global configuration file of type `.daq` (in yaml markup
 language), which contains references to device configuration files of type `.yaml`.
 
 A typical, commented example is shown here:
 
-### file PhyPi.daq
+**file PhyPiConf.daq**
 
     # Configuration Options for PhyPiDAQ
-
+    
     # device configuration files
     DeviceFile: config/ADS1115Config.yaml
     #DeviceFile: config/MCP3008Config.yaml
     #DeviceFile: config/PSConfig.yaml
     #DeviceFile: config/MAX31865Config.yaml
     #DeviceFile: config/GPIOCount.yaml
-
+    
     ## an example for multiple devices
     #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
-
+    
     DisplayModule: DataLogger
     # DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
     Interval: 0.1                     # logging interval
     XYmode:     false                 # enable/disable XY-display
-
+    
     # channel-specific information
     ChanLabels: [(V), (V) ]          # names and/or units for channels 
     ChanColors: [darkblue, sienna]    # channel colours in display
-
+    
     # eventually overwrite Channel Limits obtained from device config 
     ##ChanLimits: 
     ## - [0., 1.]   # chan 0
     ## - [0., 1.]   # chan 1
     ## - [0., 1.]   # chan 2
-
+    
     #ChanCalib:
     #  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ] 
     #  - 1.                       # chan0: simple calibration factor
     #  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
     #  - null                     # chan2: no calbration
-
+    
     # apply formulae to calibrated channel values
     #ChanFormula:
     #  - c0 + c1  # chan0
     #  - c1          # chan1
     #  - null        # chan2 : no formula
-
+    
     # name of output file
     DataFile:   null                  # file name for output file 
     #DataFile:   testfile             # file name for output file 
@@ -76,12 +84,12 @@ A typical, commented example is shown here:
 The device configuration file for the analog-to-digital converter **ADS1115**
 specifies the active channels and their ranges:
 
-### file ADS1115Config.yaml
+**file ADS1115Config.yaml**
 
     # example of a configuration file for ADC ADS1115
-
+    
     DAQModule: ADS1115Config    # phypidaq module to be loaded
-
+    
     ADCChannels: [0, 3]         # active ADC-Channels
                             # possible values: 0, 1, 2, 3
                             # when using differential mode:
@@ -93,9 +101,9 @@ specifies the active channels and their ranges:
                                 #            minus ADCChannel 3
                                 #    -  3 = ADCChannel 2 
                                 #            minus ADCChannel 3
-
+    
     DifModeChan: [true, true] # enable differential mode for Channels
-
+    
     Gain: [2/3, 2/3]          # programmable gain of ADC-Channel
                               #   possible values for Gain:
                               #     - 2/3 = +/-6.144V
@@ -110,10 +118,9 @@ specifies the active channels and their ranges:
 
 Examples for other devices like the PicoTech USB-scope PicoScope, the analog-to-digital converter MCP3008 or for rate measurements via the GPIO pins are contained in the configuration directory, `PSConfig.yaml`, `MCP3008Config.yaml and `GPIOcount.yaml`, respectively.
 
-
 ## Installation
 
-This package relies on code from some other packages that need to be installed first:
+This package relies on code from other packages providing the drivers for the supported devices:
 
 ```html
 - Adafruit Pyhon MCP3008 library, <https://github.com/adafruit/Adafruit_Python_MCP3008>
@@ -126,8 +133,9 @@ This package relies on code from some other packages that need to be installed f
 
 For conveniencs, installation files for external packages in pip wheel format are provided in subrirectory *.whl*.
 
-After setting up your Raspberry Pi with the actual
-stable debian release *stretch*, the following steps should be taken to update and install all necessary packages:
+The visualization modules depend on *matplotlib.pyplot*, *Tkinter* and *pyQt5*, which must also be installed.
+
+After setting up your Raspberry Pi with the actual stable debian release *stretch*, the following steps should be taken to update and install all necessary packages:
 
 ```bash
 sudo apt-get update
@@ -138,7 +146,7 @@ sudo apt-get install python3-pyqt5
 
 sudo pip3 install pyyaml
 
-# PicoTech base drivers for picoScope usb devices
+# PicoTech base drivers for picoScope USB devices
 #   see https://www.picotech.com/support/topic14649.html
 # after inclusion of the picotech raspbian repository:  
 sudo apt-get install libps2000a
