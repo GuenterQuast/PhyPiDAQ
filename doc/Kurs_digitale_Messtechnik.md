@@ -14,7 +14,7 @@ Hier entsteht eine Übersichtsseite mit Bildern aller relevanten Komponenten:
 
 Digitale Messtechnik begegnet uns im Alltag überall. Die digitale Temperaturanzeige am Gefrierschrank, eine Pulsuhr beim Sport, eine digitale Küchenwaage oder die Einparkhilfe beim Auto...unsere Welt wäre eine andere ohne digitale Messtechnik!
 
-<span style="color:#5882FA; font-size: 12pt">Aufgabe 1: </span> Nennen Sie weitere Geräte oder Anwendungen, in denen digitale Messtechnik vorkommt und nenne die physikalische Größe, die dabei gemessen wird.
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 1: </span> Nennen Sie drei weitere Geräte oder Anwendungen, in denen digitale Messtechnik vorkommt und nennen Sie die physikalische Größe, die dabei gemessen wird.
 
 
 |  |Gerät / Anwendung| physikalische Größe|
@@ -22,8 +22,6 @@ Digitale Messtechnik begegnet uns im Alltag überall. Die digitale Temperaturanz
 |1.|                               |                                |
 |2.|                               |                                |
 |3.|                               |                                |
-|4.|                               |                                |
-|5.|                               |                                |
 
 # 3. Das Breadboard und die LED
 
@@ -51,24 +49,25 @@ In der nachfolgenden Abbildung sind die elektrisch verbundenen Steckkontakte dur
 **Schaltung 2:**
 ![](images/course/led2_fritzing.png)
 
-
+  
 
 **Schaltung 3:**
 ![](images/course/led3_fritzing.png)
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
+&nbsp;
 
 # 4. Was bedeutet digitales Messen?  
 
@@ -77,6 +76,7 @@ Bevor wir richtig loslegen können, müssen wir uns zuerst damit befassen, wie d
 Damit wir über die GPIO-Pins mit dem Raspberry Pi kommunizieren können, müssen wir zuerst untersuchen, wie der Raspberry Pi zwischen den beiden Zuständen 0 und 1 unterscheidet. Dazu bauen wir nun eine Schaltung auf und schreiben unser erstes kleines Programm. 
 
 ### GPIO-Pin
+
 
 **Material:**
 
@@ -160,36 +160,42 @@ Wenn der Raspberry Pi gestartet ist, können wir uns vom Laptop (oder einem ande
 <span style="color:#5882FA; font-size: 12pt ">8. </span>Drehen Sie am Potentiometer und verändern Sie damit die Spannung am GPIO-Pin 17. Notieren Sie Ihre Beobachtungen.
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
+
+
+&nbsp;
 
 <span style="color:#5882FA; font-size: 12pt ">9. </span>Alles was eingerückt (nach Zeile 6) in unserer Dauerschleife ```while(True):```  steht, wird jetzt immer weiter wiederholt. Wenn wir unser Programm beenden wollen, müssen wir also unsere Dauerschleife unterbrechen. Dafür drücken wir gleichzeitig ```Strg + c```.
 
 <span style="color:#5882FA; font-size: 12pt ">10. </span>Formulieren Sie einen Merksatz: Was muss für die Spannung zwischen dem GPIO-Pin 17 und GND (0V) gelten, wenn der GPIO-Pin 17 den Zustand 1 (true) bzw. 0 (false) besitzt?
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
+
+
+&nbsp;
 
 <span style="color:#5882FA; font-size: 12pt ">11. </span>Was bedeutet also digitales Messen?
 Wählen Sie aus den folgenden Begriffen die passenden aus und vervollständigen Sie den Lückentext.
@@ -229,42 +235,47 @@ Jeder kennt bei neueren Autos die Lichtautomatik, die das Licht automatisch ansc
 Dunkeln Sie den Fotowiderstand (LDR) mit der Hand ab. Wechseln Sie mehrfach zwischen abgedunkteltem und hellem Zustand ab und notieren Sie Ihre Beobachtungen.
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
+&nbsp;
 
 <span style="color:#5882FA; font-size: 12pt ">3. </span>Wie kommt es zu dem beobachteten Verhalten? Schauen wir uns dazu den Fotowiderstand LDR (**L**ight **D**ependent **R**esistor) genauer an:  
 ![](images/course/ldr.PNG)  
 Formulieren Sie auf Grundlage der Abbildung einen Merksatz, wie sich der ohmsche Widerstand des Fotowiderstands in Abhängigkeit von der Beleuchtungsstärke verhält.
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
+
+&nbsp;
 
 <span style="color:#5882FA; font-size: 12pt ">4. </span>Noch einmal zurück zu unserer Beobachtung aus 3. Wie kommt es zu diesem Verhalten?
 Dazu müssen wir uns die verwendete Schaltung genauer anschauen. Wir haben einen einfachen Spannungsteiler (Reihenschaltung aus zwei Widerständen) verwendet.  
-Die Widerstände werden vom selben Strom *I* durchflossen, sodass der Spannungsteiler die Gesamtspannung *U<sub>ges</sub>* im Verhältnis der Widerstände aufteilt, d.h. das Verhältnis zwischen den Spannungen *U<sub>1</sub>* und *U<sub>2</sub>* ist gleich dem Verhältnis zwischen den Widerständen *R<sub>1</sub>* und *R<sub>2</sub>*:
+Die Widerstände werden vom selben Strom *I* durchflossen, sodass der Spannungsteiler die Gesamtspannung *U<sub>ges</sub>* im Verhältnis der Widerstände aufteilt, d.h. das Verhältnis zwischen den Spannungen *U<sub>1</sub>* und *U<sub>2</sub>* ist gleich dem Verhältnis zwischen den Widerständen.
+
+Die Widerstände werden vom selben Strom *I* durchflossen, sodass der Spannungsteiler die Gesamtspannung *U<sub>ges</sub>* im Verhältnis der Widerstände aufteilt, d.h. das Verhältnis zwischen den Spannungen *U<sub>1</sub>* und *U<sub>2</sub>* ist gleich dem Verhältnis zwischen den Widerständen *R<sub>1</sub>* und *R<sub>2</sub>*:  
 $$
 \frac{U_1}{U_2}=\frac{R_1}{R_2}
 $$
-Genauso kann auch über das Verhältnis des Teilwiderstands (*R<sub>1</sub>* oder *R<sub>2</sub>*) zum Gesamtwiderstand (*R<sub>ges</sub>* = 				*R<sub>1</sub>* + *R<sub>2</sub>*), auf das Verhältnis zwischen der Teilspannung (*U<sub>1</sub>* oder *U<sub>2</sub>*) und der Gesamtspannung *U<sub>ges</sub>* geschlossen werden.
+Genauso kann auch über das Verhältnis des Teilwiderstands (*R<sub>1</sub>* oder *R<sub>2</sub>*) zum Gesamtwiderstand (*R<sub>ges</sub>* = 				*R<sub>1</sub>* + *R<sub>2</sub>*), auf das Verhältnis zwischen der Teilspannung (*U<sub>1</sub>* oder *U<sub>2</sub>*) und der Gesamtspannung *U<sub>ges</sub>* geschlossen werden.  
 $$
 \frac{U_1}{U_{ges}}=\frac{R_1}{R_{ges}}=\frac{R_1}{R_1+R_2}
 $$
@@ -272,12 +283,11 @@ $$
 $$
 \frac{U_2}{U_{ges}}=\frac{R_2}{R_{ges}}=\frac{R_2}{R_1+R_2}
 $$
-
 Allgemein lässt sich für den Spannungsteiler festhalten, dass sich die Spannungen wie die zugehörigen Widerstände verhalten.  
 
 Vervollständigen Sie auf Grundlage der Zusammenhänge für den Spannungsteiler und der Kennlinie aus drittens den nachfolgenden Merksatz:
 
-Je größer die Beleuchtungsstärke, desto  _ _ _ _ _ _ _ wird der Widerstand *R<sub>2</sub>* des Fotowiderstands.  Die Spannung *U<sub>1</sub>* wird dadurch _ _ _ _ _ _ _ und die Spannung *U<sub>2</sub>*, die am GPIO-Pin 17 anliegt, _ _ _ _ _ _ _ . 
+Je größer die Beleuchtungsstärke, desto  _ _ _ _ _ _ _ _ wird der Widerstand *R<sub>2</sub>* des Fotowiderstands.  Die Spannung *U<sub>1</sub>* wird dadurch _ _ _ _ _ _ _ _und die Spannung *U<sub>2</sub>*, die am GPIO-Pin 17 anliegt, _ _ _ _ _ _ _ _ . 
 
 Was hat das nun mit dem Zustand des GPIO-Pins 17 zu tun, also damit, ob uns eine 0 oder eine 1 angezeigt wird? 
 
@@ -289,60 +299,46 @@ Welche Spannung liegt am GPIO-Pin 17 an? Berechnen Sie.
 
 
 
+&nbsp;
 
 
-   &nbsp;
+&nbsp;
 
 
+&nbsp;
 
 
-
-   &nbsp;
-
-
-
-
-
-   &nbsp;
+&nbsp;
 
 Welchen Zustand besitzt der GPIO-Pin 17 in diesem Fall? Begründen Sie.
 
 
-
-____
-
-
-
-_____
+&nbsp;
+------
 
 
+&nbsp;
+------
 
-____
+
+&nbsp;
+------
 
 
+&nbsp;
 
 **abgedunkelter Fall:**
 
 Welche Spannung liegt am GPIO-Pin 17 an? Berechnen Sie. 
 
 
-
-
-
- 
-
+&nbsp;
 
 
 &nbsp;
 
 
-
-
-
 &nbsp;
-
-
-
 
 
 &nbsp;
@@ -350,20 +346,21 @@ Welche Spannung liegt am GPIO-Pin 17 an? Berechnen Sie.
 Welchen Zustand besitzt der GPIO-Pin 17 in diesem Fall? Begründen Sie.
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
+&nbsp;
 
-<span style="color:#5882FA; font-size: 12pt ">5. </span>Wir haben also aus einem Fotowiderstand und einem zweiten Widerstand einen einfachen Sensor gebaut, mit dem wir nach der Digitalisierung zwischen hell und dunkel unterscheiden können. Damit wir eine Lichtautomatik haben, fehlt uns noch eine Beleuchtung, die abhängig von unserem Sensor ein- bzw. ausgeschaltet wird. Dafür ergänzen wir unsere Schaltung um eine weiße LED (Polung beachten) mit Vorwiderstand, die wir an den GPIO-Pin 27 anschließen.
+<span style="color:#5882FA; font-size: 12pt ">5. </span>Wir haben also aus einem Fotowiderstand und einem zweiten Widerstand einen einfachen Sensor gebaut, mit dem wir nach der Digitalisierung zwischen hell und dunkel unterscheiden können. Damit wir eine Lichtautomatik haben, fehlt uns noch eine Beleuchtung, die abhängig von unserem Sensor ein- bzw. ausgeschaltet wird. Dafür ergänzen wir unsere Schaltung um eine weiße LED (Polung beachten) mit Vorwiderstand, die wir an den GPIO-Pin 27 anschließen.
 
 ![](images/course/ldr_led_breadboard.PNG)
 
@@ -422,7 +419,6 @@ Noch präziser wüsste die Person am Boden Bescheid, wenn die Leiter extrem viel
 Was hat das aber jetzt mit unserem digitalen Thermometer zu tun? Im Beispiel unserer Lichtautomatik haben wir gesehen, dass wir mittels der GPIO-Pins eine Digitalisierung (0 und 1) vornehmen können. Für ein Thermometer wäre so eine Form der Digitalisierung jedoch nicht wirklich zufriedenstellend. Wir könnten ja nur zwei Werte unterscheiden (warm und kalt). Wir brauchen also etwas mit der Leiter Vergleichbares, das uns eine fein gestufte Digitalisierung ermöglicht, sodass wir Temperaturwerte ermitteln können.
 
 
-
 ### Die Analog-Digital-Wandlung (AD-Wandlung)
 
 ![](images/course/analog_digital_signal.PNG)
@@ -444,16 +440,19 @@ Betrachten wir zuerst seine Kennlinie.
 <span style="color:#5882FA; font-size: 12pt">Aufgabe 2: </span> Formulieren Sie auf Grundlage der Abbildung einen Merksatz, wie sich der ohmsche Widerstand des NTC-Widerstands in Abhängigkeit von der Temperatur verhält.
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
 
 
-
+&nbsp;
 ------
+
+
+&nbsp;
 
 <span style="color:#5882FA; font-size: 12pt">Aufgabe 3: </span>Ergänzen Sie die nachfolgende Schaltung so, dass sich die am Anschlusspin des AD-Wandlers anliegende elektrische Spannung *U<sub>2</sub>* erhöht, wenn die Temperatur steigt (Tipp: Spannungsteiler).
 
@@ -522,13 +521,15 @@ Mit der entworfenen Schaltung haben wir nun die Grundlage für unser Thermometer
 - Notieren Sie den angezeigten Wert (ungefähr) bei Zimmertemperatur. Was passiert, wenn der NTC-Widerstand zwischen den Handflächen auf Handtemperatur gebracht wird? Notieren Sie Ihre Beobachtungen.
 
 
+&nbsp;
+------
 
-____
+
+&nbsp;
+-------
 
 
-
-____
-
+&nbsp;
 
    - Danach unterbrechen wir unsere Dauerschleife und damit unser Programm wieder  mit ```Strg + c```.
 
@@ -565,7 +566,7 @@ $$
 
    - Ergänzen Sie das Programm thermometer.py entsprechend. Dazu wechseln wir mit ```cd MeineProgramme``` in das Programmverzeichnis und öffnen mit ```ìdle thermometer.py``` unsere Programmdatei. 
 
-     <span style="color:crimson">Achtung: Beim Programmieren entspricht ein Punkt einem Komma ( also 6.114 &#8793;  6,114)! </span>
+     <span style="color:crimson">Achtung: Beim Programmieren entspricht ein Punkt einem Komma ( also 6.114 &#8793;  6,114)! </span>
 
      ```python
      import Adafruit_ADS1x15 # Wir importieren die Bibliothek für den AD-Wandler.
@@ -584,13 +585,17 @@ $$
 
    - Notieren Sie den ungefähren Spannungswert bei Zimmertemperatur. Was passiert, wenn der NTC-Widerstand zwischen den Handflächen auf Handtemperatur gebracht wird? Notieren Sie Ihre Beobachtungen.
 
-___
+
+&nbsp;
+------
 
 
+&nbsp;
 
 <span style="color:#5882FA; font-size: 12pt ">5. </span>Auf unserem Weg zu einem digitalen Thermometer fehlt uns noch etwas. Der Raspberry Pi gibt uns bisher nur digitalisierte Spannungswerte aus. Wir müssen uns also noch darum kümmern, dass wir diese Spannungswerte in Temperaturen umrechnen können. Diesen Schritt nennt man Kalibrierung.
 
 Bei der Kalibrierung müssen wir unsere digitalisierten Spannungswerte mit den zugehörigen Temperaturwerten verknüpfen. Wir erhalten so Wertepaare aus einem Spannungs- und einem Temperaturwert. Auf Grundlage dieser Wertepaare kann der Raspberry Pi dann aus den digitalisierten Spannungswerten die zugehörige Temperatur berechnen.
+
 
 Führen wir also die Kalibrierung durch:
 
@@ -606,42 +611,31 @@ Führen wir also die Kalibrierung durch:
 - Zeichnen Sie die Wertepaare in ein Diagramm ein und verbinden Sie die Messpunkte sinnvoll zu einer Kurve (nachfolgende Lücke).
 
 
+&nbsp;
 
 
+&nbsp;
 
 
+&nbsp;
 
 
+&nbsp;
 
 
+&nbsp;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+&nbsp;
 
 - Lesen Sie aus dem Diagramm den ungefähr erwarteten digitalisierten Spannungswert für eine Temperatur von 35 °C ab und notieren Sie diesen.
 
 
-
+&nbsp;
 -----
 
 
-
-
+&nbsp;
 
 <span style="color:#5882FA; font-size: 12pt; ">6. </span>Die ermittelten Kalibrationswerte können wir nun nutzen, um mit der digitalisierten Messspannung des AD-Wandlers Temperaturwerte zu berechnen. Dabei gehen wir ähnlich vor wie beim sinnvollen Verbinden der Messwerte von Hand im Diagramm (vergleiche Aufgabe zuvor). 
 
@@ -681,7 +675,7 @@ Ergänzen wir also die Berechnung der Temperatur:
 
 - Das Programm beenden wir wieder mit ```Strg + c```.
 
-<span style="color:#5882FA; font-size: 12pt">Aufgabe 4: </span>Das im Beispiel der Lichtautomatik kennengelernte Grundprinzip der digitalen Messwerterfassung lässt sich auch auf unser digitales Thermometer übertragen.
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 4: </span>Das im Beispiel der Lichtautomatik kennengelernte Grundprinzip der digitalen Messwerterfassung lässt sich auch auf unser digitales Thermometer übertragen.
 
 Ergänzen Sie die fehlenden Begriffe für unser Beispiel des digitalen Thermometers.
 
