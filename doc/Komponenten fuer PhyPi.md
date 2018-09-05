@@ -56,7 +56,7 @@ Die Sortimente 1., 2. und 3. reichen für bis zu 10 PhyPi-Schülersets. Das LED-
 |      | Komponente                                | mögliche Bezugsquelle                 | Link                                                         | Preis in € |
 | ---- | ----------------------------------------- | ------------------------------------- | ------------------------------------------------------------ | ---------: |
 | 1.   | PT100 Widerstand-Digital-Wandler MAX31865 | [Eckstein](https://eckstein-shop.de/) | [Adafruit PT100 RTD Temperature Sensor Amplifier - MAX31865](https://eckstein-shop.de/Adafruit-PT100-RTD-Temperature-Sensor-Amplifier-MAX31865) |      17,79 |
-| 2.   | AD-Wandler MCP3008                        | [reichelt](https://www.reichelt.de/)  | [MCP 3208-CI/P](12-bit A/D Converter mit SPI, 8-Kanal / DIL-16) |       1,99 |
+| 2.   | AD-Wandler MCP3208                        | [reichelt](https://www.reichelt.de/)  | [MCP 3208-CI/P](https://www.reichelt.de/12-bit-a-d-converter-mit-spi-8-kanal-dil-16-mcp-3208-ci-p-p90079.html?PROVID=2788&gclid=EAIaIQobChMIpNStlO-j3QIVw4jVCh2DJQgTEAYYASABEgIGdPD_BwE&&r=1) |       1,99 |
 | 3.   | Wägezellen-Messverstärker HX711           | [Eckstein](https://eckstein-shop.de/) | [SparkFun Load Cell Amplifier - HX711 for Weight Measurements](https://eckstein-shop.de/SparkFun-Load-Cell-Amplifier-HX711-for-Weight-Measurements) |       9,95 |
 
 ## 6. Komponenten für Projekte
