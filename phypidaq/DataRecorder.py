@@ -16,9 +16,9 @@ class DataRecorder(object):
     '''
 
     if 'CSVseparator' in ConfDict:
-      sep = ConfDict['CSVseparator']
+      self.sep = ConfDict['CSVseparator']
     else:
-      sep = ','
+      self.sep = ','
     self.dT = ConfDict['Interval'] 
     self.NChan = ConfDict['NChannels']
     self.ChanLim = ConfDict['ChanLimits']
@@ -38,7 +38,7 @@ class DataRecorder(object):
     else:
       fext = 'dat'
     datetime=time.strftime('%y%m%d-%H%M', time.localtime())
-    self.f = open(fnam[0] + '_' + datetime + '.' + fext, 'w')
+    self.f = open(fnam + '_' + datetime + '.' + fext, 'w')
 
     # write header:
     print('# PhyPiDAQ Data recorder ', datetime,
