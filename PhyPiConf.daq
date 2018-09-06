@@ -41,4 +41,5 @@ ChanCalib:
 
 # name of output file
 DataFile:   null                  # file name for output file 
-#DataFile:   testfile             # file name for output file 
+#DataFile:   testfile.csv         # file name for output file 
+#CSVseparator: ';'

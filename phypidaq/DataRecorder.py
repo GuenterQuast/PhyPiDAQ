@@ -7,7 +7,7 @@ class DataRecorder(object):
   ''' store data to fle
   '''
 
-  def __init__(self, Fname, ConfDict, sep = ','):
+  def __init__(self, Fname, ConfDict):
     '''Args:  
 
          Fname: file name
@@ -15,7 +15,10 @@ class DataRecorder(object):
          delim: field separator
     '''
 
-    self.sep = sep
+    if 'CSVseparator' in ConfDict:
+      sep = ConfDict['CSVseparator']
+    else:
+      sep = ','
     self.dT = ConfDict['Interval'] 
     self.NChan = ConfDict['NChannels']
     self.ChanLim = ConfDict['ChanLimits']
@@ -28,8 +31,14 @@ class DataRecorder(object):
     for i, c in enumerate(ChanNams):
       self.ChanTags.append( c + ':' + ChanLabels[i])
 
+    fname = Fname.split('.')
+    fnam = fname[0]
+    if len(fname) > 1:
+      fext = fname[1]
+    else:
+      fext = 'dat'
     datetime=time.strftime('%y%m%d-%H%M', time.localtime())
-    self.f = open(Fname + '_' + datetime+'.dat', 'w')
+    self.f = open(fnam[0] + '_' + datetime + '.' + fext, 'w')
 
     # write header:
     print('# PhyPiDAQ Data recorder ', datetime,
