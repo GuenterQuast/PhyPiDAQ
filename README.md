@@ -1,4 +1,5 @@
-# PhyPiDAQ
+bg
+ema# PhyPiDAQ
 
 Data Acquisition and analysis for Physics education with Raspberry Pi
 
@@ -76,10 +77,12 @@ A typical, commented example is shown here:
     #  - c0 + c1  # chan0
     #  - c1          # chan1
     #  - null        # chan2 : no formula
-    
+
     # name of output file
-    DataFile:   null                  # file name for output file 
-    #DataFile:   testfile             # file name for output file 
+    #DataFile:   testfile.csv     # file name for output file 
+    DataFile:   null              #      use null if no output wanted
+    #CSVseparator: ';'            # field separator for output file, defaults to ','
+    
 
 The device configuration file for the analog-to-digital converter **ADS1115**
 specifies the active channels and their ranges:
