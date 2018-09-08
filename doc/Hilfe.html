@@ -6,11 +6,24 @@
 <title>Hilfe</title>
 </head>
 <body>
-
-<h1>Beschreibung von PhyPi DAQ</h1>
-<p>Diese Software dient zur Aufzeichnung von Daten verschiedener Sensoren ...
-
-</p>
-
+<h1>PhyPiDAQ</h1>
+<h2>Datenerfassung und Analyse für die Physikausbildung mit Raspberry Pi</h2>
+<p>Dieser Code in der Programmmiersprache <em>pyhton3</em> bietet einige grundlegende Funktionen zur Datenerfassung und -visualisierung wie Datenlogger, Balkendiagramm, XY- oder Oszilloskopanzeige und Datenaufzeichnung auf Festplatte.</p>
+<p>Neben den GPIO Ein- und Ausgängen des Raspberry Pi werden die Analog-Digital-Wandler ADS1115 und MCP3008 sowie USB-Oszilloskope (PicoScope der Firma Picotech) als Eingabegeräte für analoge Daten sowie eine Reihe von digitalen Sensoren mit Protokollen wie I²C oder SPI unterstützt.</p>
+<p>Diese grafische Benutzeroberfläche hilft bei der Verwaltung der Konfigurationsoptionen und kann zum Starten der Datenerfassung verwendet werden.
+Die Konfigurationen und erzeugte Datendateien werden in einem dedizierten Unterverzeichnis in <code>$HOME/PhyPi</code> abgelegt. Die jeweiligen Dateinamen werden von einem benutzerdefinierten Tag und dem aktuellen Datum und der Uhrzeit abgeleitet.</p>
+<h2>Bedienungshinweise</h2>
+<p>Im Hauptreiter <strong>Control</strong> wird zunächst die Haupt-Konfigurationsdatei vom Typ <em>.daq</em> festgelegt - voreingestellt ist
+<em>$HOME/PhyPi/phypi.daq</em>. In dieser Datei wird mindestens eine weitere Konfigurationsdatei angegeben, die die Konfiguration für den verwendeten Sensor oder AD-Wandler enthält (im Folgenden als
+'Gerät' bezeichnet). 
+Weiter können in diesem Reiter das Arbeitsverzeichnis (voreingestellt
+<em>$HOME/PhyPi/</em>) sowie ein Tag für das Messprojekt angegeben werden.
+Über den Knopf <code>Start</code> wir das Skript <code>run_phypi.py</code> gestartet, das
+die Datenaufnahme steuert. </p>
+<p>Im Reiter <strong>Configuration</strong> wird der Inhalt der Konfigurationsdateien angezeigt und kann - nach Freischalten über 
+den Knopf <code>EditMode</code> - editiert und abgespeichert werden. Als Dateiename für die Hauptkonfiguration wird der im Reiter <em>Control</em> als <code>Tag</code> eingestellte Name verwendet; die Namen
+für die Dateien mit der Geräte-Konfiguration sind  die Hauptkonfiguration angegebenen Dateinamen inklusive eventuell angegebener Dateipfade. </p>
+<p>Der Reiter <strong>Help/Hilfe</strong> gib Hinweise zur Benutzung in englischer 
+oder deutscher Sprache.</p>
 </body>
 </html>

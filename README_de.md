@@ -1,6 +1,6 @@
 # PhyPiDAQ
 
-Datenerfassung und Analyse für die Physikausbildung mit Raspberry P
+## Datenerfassung und Analyse für die Physikausbildung mit Raspberry Pi
 
 Dieser Code in der Programmmiersprache *pyhton3* bietet einige grundlegende Funktionen zur Datenerfassung und -visualisierung wie Datenlogger, Balkendiagramm, XY- oder Oszilloskopanzeige und Datenaufzeichnung auf Festplatte.
 
