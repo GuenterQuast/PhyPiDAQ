@@ -18,19 +18,20 @@
 
 Die Sortimente 1., 2. und 3. reichen für bis zu 10 PhyPi-Schülersets. Das LED-Sortiment (4.) reicht für bis zu 5 PhyPi-Schülersets.
 
-|      | Komponente                                          | mögliche Bezugsquelle                 | Link                                                         | Preis in € |
-| ---- | --------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------ | ---------: |
-| 1.   | Widerstandssortiment 20 &Omega; - 1 M&Omega;        | [Eckstein](https://eckstein-shop.de/) | [600x Metallschicht Metallfilm Widerstände 0,25W (20 bis1M) 30 Sorten](https://eckstein-shop.de/600x-Metallschicht-Metallfilm-Widerstaende-025W-20-bis1M-30-Sorten) |       2,95 |
-| 2.   | ELKO Kondensatoren Sortiment 0,22 µF - 470 µF       | [Eckstein](https://eckstein-shop.de/) | [120x ELKO Kondensatoren 0.22uF-470uF ,12 Verschiedene jeder 10 Stück](https://eckstein-shop.de/120x-ELKO-Kondensatoren-022uF-470uF-12-Verschiedene-jeder-10-Stueck) |       1,95 |
-| 3.   | Keramikkondensatoren Sortiment 20 pF - 1 µF         | [Eckstein](https://eckstein-shop.de/) | [180x Multilayer Ceramic Capacitors (Keramik Kondensator) 20pF bis 1uF 50V 18 Sortierment](https://eckstein-shop.de/180x-Multilayer-Ceramic-Capacitors-Keramik-Kondensator-20pF-bis-1uF-50V-18-Sortierment) |       2,77 |
-| 4.   | LED-Sortiment (rot, gelb, grün, blau)               | [Eckstein](https://eckstein-shop.de/) | [SparkFun LED - Assorted (20 pack)](https://eckstein-shop.de/SparkFun-LED-Assorted-20-pack) |       2,95 |
-| 5.   | NTC 3950 *R<sub>25</sub> =*10k&Omega; (wasserdicht) | [roboter bausatz shop]()              | [Thermistor NTC 3950 10K 1% wasserdicht](https://www.roboter-bausatz.de/2523/thermistor-ntc-3950-10k-1-wasserdicht) |       1,08 |
-| 6.   | Drehpotentiometer 100 &Omega;                       | [reichelt](https://www.reichelt.de/)  | [PO6M-LIN 100](https://www.reichelt.de/drehpotentiometer-mono-100-ohm-linear-6-mm-po6m-lin-100-p88194.html) |       2,40 |
-| 7.   | Drehpotentiometer 10 k&Omega;                       | [reichelt](https://www.reichelt.de/)  | [PO6M-LIN 10K](https://www.reichelt.de/drehpotentiometer-mono-10-kohm-linear-6-mm-po6m-lin-10k-p88207.html?&trstct=vrt_pdn) |       1,60 |
-| 8.   | LED 5 mm wamweiß                                    | [reichelt](https://www.reichelt.de/)  | [LED 5-18000 WW](https://www.reichelt.de/led-5-mm-bedrahtet-warmweiss-18000-mcd-15-led-5-18000-ww-p163992.html?PROVID=2788&gclid=EAIaIQobChMInrfRjMuj3QIVE_lRCh28TA9IEAQYAiABEgJY_PD_BwE&&r=1) |       0,25 |
-| 9.   | AD-Wandler ADS1115 (Adafruit)                       | [reichelt](https://www.reichelt.de/)  | [DEBO AMP 16BIT](https://www.reichelt.de/entwicklerboards-verstaerker-platine-16-bit-debo-amp-16bit-p235500.html?r=1) |      15,60 |
-| 10.  | Kraftsensor TAL220B (Wägezelle, Biegebalken 5 kg)   | [Eckstein](https://eckstein-shop.de/) | [SparkFun Load Cell - 5kg, Straight Bar (TAL220B)](https://eckstein-shop.de/SparkFun-Load-Cell-5kg-Straight-Bar-TAL220B) |      13,03 |
-| 11.  | Instrumentenverstärker AD 623 ANZ                   | [reichelt](https://www.reichelt.de/)  | [AD 623 ANZ](https://www.reichelt.de/instrumentenverstaerker-100-khz-dil-8-ad-623-anz-p185350.html?r=1) |       6,35 |
+|      | Komponente                                          | mögliche Bezugsquelle                           | Link                                                         | Preis in € |
+| ---- | --------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------ | ---------: |
+| 1.   | Widerstandssortiment 20 &Omega; - 1 M&Omega;        | [Eckstein](https://eckstein-shop.de/)           | [600x Metallschicht Metallfilm Widerstände 0,25W (20 bis1M) 30 Sorten](https://eckstein-shop.de/600x-Metallschicht-Metallfilm-Widerstaende-025W-20-bis1M-30-Sorten) |       2,95 |
+| 2.   | ELKO Kondensatoren Sortiment 0,22 µF - 470 µF       | [Eckstein](https://eckstein-shop.de/)           | [120x ELKO Kondensatoren 0.22uF-470uF ,12 Verschiedene jeder 10 Stück](https://eckstein-shop.de/120x-ELKO-Kondensatoren-022uF-470uF-12-Verschiedene-jeder-10-Stueck) |       1,95 |
+| 3.   | Keramikkondensatoren Sortiment 20 pF - 1 µF         | [Eckstein](https://eckstein-shop.de/)           | [180x Multilayer Ceramic Capacitors (Keramik Kondensator) 20pF bis 1uF 50V 18 Sortierment](https://eckstein-shop.de/180x-Multilayer-Ceramic-Capacitors-Keramik-Kondensator-20pF-bis-1uF-50V-18-Sortierment) |       2,77 |
+| 4.   | LED-Sortiment (rot, gelb, grün, blau)               | [Eckstein](https://eckstein-shop.de/)           | [SparkFun LED - Assorted (20 pack)](https://eckstein-shop.de/SparkFun-LED-Assorted-20-pack) |       2,95 |
+| 5.   | NTC 3950 *R<sub>25</sub> =*10k&Omega; (wasserdicht) | [roboter bausatz shop]()                        | [Thermistor NTC 3950 10K 1% wasserdicht](https://www.roboter-bausatz.de/2523/thermistor-ntc-3950-10k-1-wasserdicht) |       1,08 |
+| 6.   | Drehpotentiometer 100 &Omega;                       | [reichelt](https://www.reichelt.de/)            | [PO6M-LIN 100](https://www.reichelt.de/drehpotentiometer-mono-100-ohm-linear-6-mm-po6m-lin-100-p88194.html) |       2,40 |
+| 7.   | Drehpotentiometer 10 k&Omega;                       | [reichelt](https://www.reichelt.de/)            | [PO6M-LIN 10K](https://www.reichelt.de/drehpotentiometer-mono-10-kohm-linear-6-mm-po6m-lin-10k-p88207.html?&trstct=vrt_pdn) |       1,60 |
+| 8.   | LED 5 mm wamweiß                                    | [reichelt](https://www.reichelt.de/)            | [LED 5-18000 WW](https://www.reichelt.de/led-5-mm-bedrahtet-warmweiss-18000-mcd-15-led-5-18000-ww-p163992.html?PROVID=2788&gclid=EAIaIQobChMInrfRjMuj3QIVE_lRCh28TA9IEAQYAiABEgJY_PD_BwE&&r=1) |       0,25 |
+| 9.   | AD-Wandler ADS1115 (Adafruit)                       | [reichelt](https://www.reichelt.de/)            | [DEBO AMP 16BIT](https://www.reichelt.de/entwicklerboards-verstaerker-platine-16-bit-debo-amp-16bit-p235500.html?r=1) |      15,60 |
+| 10.  | Kraftsensor TAL220B (Wägezelle, Biegebalken 5 kg)   | [Eckstein](https://eckstein-shop.de/)           | [SparkFun Load Cell - 5kg, Straight Bar (TAL220B)](https://eckstein-shop.de/SparkFun-Load-Cell-5kg-Straight-Bar-TAL220B) |      13,03 |
+| 11.  | Ringschraube M4 für Kraftsensor (ähnl. DIN 580)     | [EDELSTAH.NIRO](https://www.edelstahl-niro.de/) | [Ring-Schraube 4mm (A4-Edelstahl)](https://www.edelstahl-niro.de/ring-schraube-edelstahl-p-3062.html?gclid=EAIaIQobChMInNOOlP2r3QIVjeR3Ch3ZdQ5mEAQYASABEgJsvPD_BwE) |       1,79 |
+| 12.  | Instrumentenverstärker AD 623 ANZ                   | [reichelt](https://www.reichelt.de/)            | [AD 623 ANZ](https://www.reichelt.de/instrumentenverstaerker-100-khz-dil-8-ad-623-anz-p185350.html?r=1) |       6,35 |
 
 ## 3. Weitere Sensoren
 
@@ -44,6 +45,7 @@ Die Sortimente 1., 2. und 3. reichen für bis zu 10 PhyPi-Schülersets. Das LED-
 | 6.   | Luftdrucksensor BMP280                                       | [Eckstein](https://eckstein-shop.de/) | [Adafruit BMP280 I2C or SPI Barometric Pressure & Altitude Sensor](https://eckstein-shop.de/Adafruit-BMP280-I2C-or-SPI-Barometric-Pressure-Altitude-Sensor) |      11,84 |
 | 7.   | Alternative für sehr kleine Kräfte: Kraftsensor TAL221 (Wägezelle, Biegebalken 100 g) | [Eckstein](https://eckstein-shop.de/) | [SparkFun Mini Load Cell - 100g, Straight Bar (TAL221)](https://eckstein-shop.de/SparkFun-Mini-Load-Cell-100g-Straight-Bar-TAL221) |      10,65 |
 | 8.   | Kraftsensor TAL221 (Wägezelle, Biegebalken 500 g)            | [Eckstein](https://eckstein-shop.de/) | [SparkFun Mini Load Cell - 500g, Straight Bar (TAL221)](https://eckstein-shop.de/SparkFun-Mini-Load-Cell-500g-Straight-Bar-TAL221) |      11,84 |
+| 9.   | Schiebepotentiometer (10k&Omega;, linear) für Wegmessung     | [reichelt](https://www.reichelt.de/)  | [RS60N12-LIN10K](https://www.reichelt.de/schiebepotentiometer-stereo-10-kohm-linear-rs60n12-lin10k-p73870.html) |       4,99 |
 
 ## 4. Pico-Scope (Oszilloskop)
 
