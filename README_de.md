@@ -10,7 +10,7 @@ Das Paket bietet eine Abstraktionsschicht für Messgeräte und Sensoren, die an 
 
 
  *Abbildung1*:  Darstellung der Zeitabhängigkeit von zwei an einen ADC angeschlossene Signalquellen
- 
+
 ![Figure 1](doc/Kondensator.png)
 
 
@@ -18,7 +18,7 @@ Das Paket bietet eine Abstraktionsschicht für Messgeräte und Sensoren, die an 
 ## Schnellstart
 
 Nach der Installation - siehe unten - steht eine Reihe von einheitlichen Klassen für die Datenerfassung, Visualisierung und Aufzeichnung aus dem Unterverzeichnis
-`./phypidaq` zur Verfügung. Jedes unterstützte Gerät benötigt eine spezifische Konfiguration, die aus Konfigurationsdateien im Unterverzeichnis `./config` gelesen wird. Die Gesamtkonfiguration wird in Konfigurtionsdateien vom typ `.daq`
+`./phypidaq/` zur Verfügung. Jedes unterstützte Gerät benötigt eine spezifische Konfiguration, die aus Konfigurationsdateien im Unterverzeichnis `./config/` gelesen wird. Die Gesamtkonfiguration wird in Konfigurtionsdateien vom typ `.daq`
 angegeben, die spezifizieren , welche Geräte und Anzeigemodule verwendet werden sollen, welche Ausleserate, Kalibrierungen oder analytische Formeln für aufgezeichnete Daten gelten sollen, oder auch Bereiche und Achsenbeschriftungen der grafischen Ausgabe.
 
 Die grafische Benutzeroberfläche `phypi.py` hilft bei der Verwaltung der Konfigurationsoptionen und kann zum Starten der Datenerfassung verwendet werden.
@@ -30,7 +30,7 @@ Die Datenerfassung kann auch über die Kommandozeile gestartet werden:
 
 Wenn keine Konfigurationsdatei angegeben ist, wird der Standardwert `PhyPiConf.daq` verwendet.
 
-Das Unterverzeichnis `./examples` enthält eine Reihe einfacher Python-Skripte, die die Verwendung der bertreitgestellten Datenerfassungs- und Anzeigemodule mit minimalem Code veranschaulichen.
+Das Unterverzeichnis `./examples/` enthält eine Reihe einfacher Python-Skripte, die die Verwendung der bertreitgestellten Datenerfassungs- und Anzeigemodule mit minimalem Code veranschaulichen.
 
 ## Konfiguration
 
@@ -39,97 +39,101 @@ Mit dem Skript `run_phypi.py` können sehr allgemeine Messaufgaben ausgeführt w
 
 Ein typisches, kommentiertes Beispiel sieht wie folgt aus:
 
-**file PhyPiConf.daq**
+**Datei PhyPiConf.daq**
 
-    # Configuration Options for PhyPiDAQ
-    
-    # device configuration files
-    DeviceFile: config/ADS1115Config.yaml
-    #DeviceFile: config/MCP3008Config.yaml
-    #DeviceFile: config/PSConfig.yaml
-    #DeviceFile: config/MAX31865Config.yaml
-    #DeviceFile: config/GPIOCount.yaml
-    
-    ## an example for multiple devices
-    #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
-    
-    DisplayModule: DataLogger
-    # DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
-    Interval: 0.1                     # logging interval
-    XYmode:     false                 # enable/disable XY-display
-    
-    # channel-specific information
-    ChanLabels: [(V), (V) ]          # names and/or units for channels 
-    ChanColors: [darkblue, sienna]    # channel colours in display
-    
-    # eventually overwrite Channel Limits obtained from device config 
-    ##ChanLimits: 
-    ## - [0., 1.]   # chan 0
-    ## - [0., 1.]   # chan 1
-    ## - [0., 1.]   # chan 2
-    
-    #ChanCalib:
-    #  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ] 
-    #  - 1.                       # chan0: simple calibration factor
-    #  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
-    #  - null                     # chan2: no calbration
-    
-    # apply formulae to calibrated channel values
-    #ChanFormula:
-    #  - c0 + c1  # chan0
-    #  - c1          # chan1
-    #  - null        # chan2 : no formula
+```yaml
+# Konfigurations-Optionen fuer PhyPiDAQ
 
-    # name of output file
-    #DataFile:   testfile.csv     # file name for output file 
-    DataFile:   null              #      use null if no output wanted
-    #CSVseparator: ';'            # field separator for output file, defaults to ','
-    
+# Konfigurationsdateien für Geraete
+DeviceFile: config/ADS1115Config.yaml
+#DeviceFile: config/MCP3008Config.yaml
+#DeviceFile: config/PSConfig.yaml
+#DeviceFile: config/MAX31865Config.yaml
+#DeviceFile: config/GPIOCount.yaml
+## ein Beispeil für mehrere Geraete
+#DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
+
+DisplayModule: DataLogger    # zeigt Messgroessen gegen die Zeit an
+# DisplayModule: DataGraphs  # text, Balkendiagramm, zeitlicher Verlauf und xy-Darstellung
+Interval: 0.1                     # Datennahme-Intervall in Sekungen
+XYmode:     false                 # XY-Darstellung ein/aus 
+
+# Angaben fuer jeden Kanal
+ChanLabels: [(V), (V) ]           # Namen und/oder Einheiten fuer jeden Kanal 
+ChanColors: [darkblue, sienna]    # Farbzuordnung in der Anzeige
+
+# ggf. werden hier die Informationen aus der Gerate-Konfiguration ueberschrieben 
+##ChanLimits: 
+## - [0., 1.]   # chan 0
+## - [0., 1.]   # chan 1
+## - [0., 1.]   # chan 2
+
+# ggf. Kalibration der Rohmessungen
+#ChanCalib:
+#  - null    oder  - <Faktor> or  - [ [ <wahre Werte> ], [ <Rohwerte> ] ] 
+#  - 1.                       # chan0: ein enfacher Faktor fuer Kanal 0
+#  - [ [0.,1.], [0., 1.] ]    # chan1: Interpolation [wahr]([roh] )
+#  - null                     # chan2: Keine Kalbration
+
+# Formel auf Werte anwenden
+#ChanFormula:
+#  - c0 + c1     # chan0 = Summe von Kanal 0 und 1
+#  - c1          # chan1 : = Kanal 1 (Keine Aenderung)
+#  - null        # chan2 : Keine Formel
+
+# Name der Ausgabedatei im CSV-Format
+#DataFile:   testfile.csv     # Dateiname
+DataFile:   null              #   null falls keine Ausgebe gewuenscht
+#CSVseparator: ';'            # Feld-Trenner auf ';' setzen, Vorgabe ist ','
+
+```
 
 The device configuration file for the analog-to-digital converter **ADS1115**
 specifies the active channels and their ranges:
 
 **file ADS1115Config.yaml**
 
-    # example of a configuration file for ADC ADS1115
-    
-    DAQModule: ADS1115Config    # phypidaq module to be loaded
-    
-    ADCChannels: [0, 3]         # active ADC-Channels
-                            # possible values: 0, 1, 2, 3
-                            # when using differential mode:
-                                #    -  0 = ADCChannel 0 
-                                #            minus ADCChannel 1
-                                #    -  1 = ADCChannel 0 
-                                #            minus ADCChannel 3
-                                #    -  2 = ADCChannel 1 
-                                #            minus ADCChannel 3
-                                #    -  3 = ADCChannel 2 
-                                #            minus ADCChannel 3
-    
-    DifModeChan: [true, true] # enable differential mode for Channels
-    
-    Gain: [2/3, 2/3]          # programmable gain of ADC-Channel
-                              #   possible values for Gain:
-                              #     - 2/3 = +/-6.144V
-                              #     -   1 = +/-4.096V
-                              #     -   2 = +/-2.048V
-                              #     -   4 = +/-1.024V
-                              #     -   8 = +/-0.512V
-                              #     -  16 = +/-0.256V
-    sampleRate: 860           # programmable Sample Rate of ADS1115
-                              #    possible values for SampleRate: 
-                              #    8, 16, 32, 64, 128, 250, 475, 860
+```yaml
+# Beispiel einer Konfiguration fuer den Analog-Digital-Wandler ADS1115
 
-Beispiele für andere Geräte wie das Picotech USB-Oszilloskop  PicoScope, den Analog-Digital-Wandler MCP3008 oder für Geschwindigkeitsmessungen über die GPIO - Pins,
-sind im Konfigurationsverzeichnis `./config` enthalten:  `PSConfig.yaml`, `MCP3008Config.yaml` bzw. `GPIOcount.yaml`.
+DAQModule: ADS1115Config    # relevantes phypidaq-Modul 
+
+ADCChannels: [0, 3]         # aktive ADC-Kanaele
+                        # moegliche Werte: 0, 1, 2, 3
+                        #  in differentiellem Modus:
+                            #    -  0 = ADCChannel 0 
+                            #            minus ADCChannel 1
+                            #    -  1 = ADCChannel 0 
+                            #            minus ADCChannel 3
+                            #    -  2 = ADCChannel 1 
+                            #            minus ADCChannel 3
+                            #    -  3 = ADCChannel 2 
+                            #            minus ADCChannel 3
+
+DifModeChan: [true, true] # differentiellen Modus einschalten  
+
+Gain: [2/3, 2/3]          # programmierbarer Verstaerkungsfaktor des ADC-Kanals
+                          #   moegliche Werte:
+                          #     - 2/3 = +/-6.144V
+                          #     -   1 = +/-4.096V
+                          #     -   2 = +/-2.048V
+                          #     -   4 = +/-1.024V
+                          #     -   8 = +/-0.512V
+                          #     -  16 = +/-0.256V
+sampleRate: 860           # programmierbare Datenrage des ADS1115
+                          #    moegliche Werte: 
+                          #    8, 16, 32, 64, 128, 250, 475, 860
+                          
+```
+
+Beispiele für andere Geräte wie das Picotech USB-Oszilloskop  PicoScope, den Analog-Digital-Wandler MCP3008 oder für Geschwindigkeitsmessungen über die GPIO - Pins, sind im Konfigurationsverzeichnis `./config/` enthalten:  `PSConfig.yaml`, `MCP3008Config.yaml` bzw. `GPIOcount.yaml`.
 
 
 ## Installation
 
 Dieses Paket basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte bereitstellen:
 
-```
+```html
 - die Adafruit Pyhon MCP3008 Bibliothek, 
     <https://github.com/adafruit/Adafruit_Python_MCP3008>
 - die Adafruit Python ADX1x15 Bibliothek
@@ -142,13 +146,11 @@ Dieses Paket basiert auf Code aus anderen Paketen, die die Treiber für die unte
     <https://www.picotech.com/downloads>
 ```
 
-Zur Vereinfachung der Installation werden Installationsdateien für benötigte externe Pakete im PIP-Wheel-Format im Unterverzeichnis *./whl* bereitgestellt .
+Zur Vereinfachung der Installation werden Installationsdateien für benötigte externe Pakete im *pip*-Wheel-Format im Unterverzeichnis *./whl*/ bereitgestellt .
 
 Die Visualisierungsmodule hängen von *matplotlib.pyplot* , *Tkinter* und *pyQt5* ab, die ebenfalls installiert sein müssen.
 
-Nach dem Einrichten Ihres Raspberry Pi mit dem aktuellen Debian-Release *stretch*
-sollten die folgenden Schritte durchgeführt werden, um alle erforderlichen Pakete  
-zu aktualisieren und zu installieren:
+Nach dem Einrichten Ihres Raspberry Pi mit dem aktuellen Debian-Release *stretch* sollten die folgenden Schritte in einem Konsolenfenster auf der Kommandozeile durchgeführt werden, um alle erforderlichen Pakete zu installieren:
 
 
 ```bash
@@ -177,3 +179,4 @@ sudo pip3 install *.whl
 ## Empfohlene Sensoren und Devices
 
 ## Beschreibung der Beispiele
+
