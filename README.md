@@ -2,6 +2,12 @@
 
 Data Acquisition and analysis for Physics education with Raspberry Pi
 
+This is the **english** Version of the documentation.
+
+For German readers:  
+Die **deutsche Version** dieses Dokuments findet sich unter dem Link [README_de.md](README_de.md).
+
+
 This *python3*  code provides some basic functionality for data acquisition and visualisation like data logger, bar-chart, XY- or oscilloscope display and data recording on disk.  
 
 In addition to the GPIO inputs/outputs of the Raspberry Pi, the analog-to-digital converters ADS1115 and MCP3008 and PicoScope USB-oscilloscopes are supported as input devices for analog data, as well as a number of digital sensors using protocols like I²C or SPI.
