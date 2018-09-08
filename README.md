@@ -1,5 +1,4 @@
-bg
-ema# PhyPiDAQ
+# PhyPiDAQ
 
 Data Acquisition and analysis for Physics education with Raspberry Pi
 
@@ -126,19 +125,23 @@ Examples for other devices like the PicoTech USB-scope PicoScope, the analog-to-
 This package relies on code from other packages providing the drivers for the supported devices:
 
 ```html
-- Adafruit Pyhon MCP3008 library, <https://github.com/adafruit/Adafruit_Python_MCP3008>
-- Adafruit Python ADX1x15 library, <https://github.com/adafruit/Adafruit_Python_ADS1x15>
-- http://github.com/GuenterQuast/picoDAQ
+- the Adafruit Pyhon MCP3008 library
+     <https://github.com/adafruit/Adafruit_Python_MCP3008>
+- the Adafruit Python ADX1x15 library
+     <https://github.com/adafruit/Adafruit_Python_ADS1x15>
+- components from the picoDAQ project  
+     <https://github.com/GuenterQuast/picoDAQ>
 - the  *python* bindings of the *pico-python* project by Colin O'Flynn  
-   <https://github.com/colinoflynn/pico-python> and
-- the low-level drivers contained in the Pico Technology Software Development Kit <https://www.picotech.com/downloads>
+     <https://github.com/colinoflynn/pico-python> and
+- the low-level drivers contained in the Pico Technology Software Development Kit 
+    <https://www.picotech.com/downloads>
 ```
 
-For conveniencs, installation files for external packages in pip wheel format are provided in subrirectory *.whl*.
+For convenience, installation files for external packages in pip wheel format are provided in sub-directory *./whl*.
 
 The visualization modules depend on *matplotlib.pyplot*, *Tkinter* and *pyQt5*, which must also be installed.
 
-After setting up your Raspberry Pi with the actual stable debian release *stretch*, the following steps should be taken to update and install all necessary packages:
+After setting up your Raspberry Pi with the actual stable Debian release *stretch*, the following steps should be taken to update and install all necessary packages:
 
 ```bash
 sudo apt-get update
