@@ -162,9 +162,11 @@ frqSG: 0.
 
 ```
 
-Examples for other devices like the analog-to-digital converter MCP3008 or for
-rate measurements via the GPIO pins of the Raspberry Pi are also contained in the
-configuration directory, `MCP3008Config.yaml and `GPIOcount.yaml`, respectively.
+Examples for other devices like the analog-to-digital converter MCP3008, for
+rate measurements via the GPIO pins of the Raspberry Pi or temperature
+measurements with PT100-Sensors and the resistance-to-digital converter
+MAX31865 are also contained in the configuration directory, see files
+`MCP3008Config.yaml`, `GPIOcount.yaml` or `MAX31865Config.yaml`, respectively.
 
 ## Installation
 

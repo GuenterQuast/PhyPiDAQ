@@ -135,9 +135,9 @@ sampleRate: 860           # programmierbare Datenrage des ADS1115
 Das **USB-Oszilloskop** PicoScope kann ebenfalls als Datenlogger
 eingesetzt werden. In diesem Fall wird über eine Anzahl von Messungen
 mit sehr hoher Ausleserate gemittelt. Wählt man z.B. ein Messintervall
-von 20 ms, so wird 50 Hz- Rauschen effizient herausgemittelt. 
+von 20 ms, so wird 50 Hz- Rauschen effizient herausgemittelt.
 
-** Inhalt der Gerätekfiguration `PSconfig.yaml`**
+** Inhalt der Gerätekonfiguration `PSconfig.yaml`**
 
 ```yaml
 # Konfiguration für PicoScope als Datenlogger
@@ -163,8 +163,9 @@ frqSG: 0.    # aus
   
 ```
 
-Beispiele für andere Geräte wie den Analog-Digital-Wandler MCP3008 oder für Ratenmessungen über die GPIO - Pins des Raspberry Pi sind im Konfigurationsverzeichnis `./config/` enthalten:
-`MCP3008Config.yaml` bzw. `GPIOcount.yaml`.
+Beispiele für andere Geräte, wie den Analog-Digital-Wandler MCP3008, für Ratenmessungen über die GPIO - Pins des Raspberry Pi oder Temperaturmessungen
+mit PT100-Sensoren am MAX31865 'Resistance to Digital-Converter' sind im Konfigurationsverzeichnis `./config/` enthalten, siehe
+`MCP3008Config.yaml` bzw. `GPIOcount.yaml` oder `MAX31865Config.yaml`.
 
 
 ## Installation
