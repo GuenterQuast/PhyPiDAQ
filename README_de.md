@@ -34,12 +34,16 @@ Das Unterverzeichnis `./examples/` enthält eine Reihe einfacher Python-Skripte,
 
 ## Konfiguration
 
+Mit dem Skript `run_phypi.py` können sehr allgemeine Messaufgaben ausgeführt werden, ohne eigenen Code schreiben zu müssen. Die Konfigurationsoptionen für Eingabegeräte und deren Kanäle sowie für die Anzeige- und Datenspeichermodule werden in einer globalen Konfigurationsdatei vom Typ `.daq` angegeben, die Verweise auf Gerätekonfigurationsdateien vom Typ `.yaml` enthält.
 
-Mit dem Skript `run_phypi.py` können sehr allgemeine Messaufgaben ausgeführt werden, ohne eigenen Code schreiben zu müssen. Die Konfigurationsoptionen für Eingabegeräte und deren Kanäle sowie für die Anzeige- und Datenspeichermodule werden in einer globalen Konfigurationsdatei vom Typ `.daq` (in *yaml*-Markup-Sprache) angegeben, die Verweise auf Gerätekonfigurationsdateien vom Typ `.yaml` enthält.
+Generell entspricht die in den Konfigurationsdateien verwendete Syntax
+der Markup-Sprache *yaml*. Insbesondere kennzeichnet Text nach einem
+`#` -Zeichen erklärende Kommentare oder enthält alternative, auskommentierte Konfigurationsoptionen, die durch Löschen des
+`#` -Zeichens aktiviert werden können.
 
-Ein typisches, kommentiertes Beispiel sieht wie folgt aus:
+Typische (ausführlich kommentierte) Beispiele sehen wie folgt aus:
 
-**Datei PhyPiConf.daq**
+**Inhalt der Hauptkonfigurationsdatei PhyPiConf.daq**
 
 ```yaml
 # Konfigurations-Optionen fuer PhyPiDAQ
@@ -88,10 +92,12 @@ DataFile:   null              #   null falls keine Ausgebe gewuenscht
 
 ```
 
-The device configuration file for the analog-to-digital converter **ADS1115**
-specifies the active channels and their ranges:
+Die Gerätekonfiguration für den sehr flexible einsetzbaren
+Analog-Digital-Wandler **ADS1115** mit 16 Bit Auflösung und
+Ausleseraten bis zu 860 Hz gibt die aktiven Kanäle und deren
+Wertebereiche an.
 
-**file ADS1115Config.yaml**
+**Inhalt der Konfigurationsdatei ADS1115Config.yaml**
 
 ```yaml
 # Beispiel einer Konfiguration fuer den Analog-Digital-Wandler ADS1115
@@ -112,7 +118,7 @@ ADCChannels: [0, 3]         # aktive ADC-Kanaele
 
 DifModeChan: [true, true] # differentiellen Modus einschalten  
 
-Gain: [2/3, 2/3]          # programmierbarer Verstaerkungsfaktor des ADC-Kanals
+Gain: [2/3, 2/3]          # programmierbarer Verstaerkungsfaktor
                           #   moegliche Werte:
                           #     - 2/3 = +/-6.144V
                           #     -   1 = +/-4.096V
@@ -123,10 +129,42 @@ Gain: [2/3, 2/3]          # programmierbarer Verstaerkungsfaktor des ADC-Kanals
 sampleRate: 860           # programmierbare Datenrage des ADS1115
                           #    moegliche Werte: 
                           #    8, 16, 32, 64, 128, 250, 475, 860
-                          
+   
 ```
 
-Beispiele für andere Geräte wie das Picotech USB-Oszilloskop  PicoScope, den Analog-Digital-Wandler MCP3008 oder für Geschwindigkeitsmessungen über die GPIO - Pins, sind im Konfigurationsverzeichnis `./config/` enthalten:  `PSConfig.yaml`, `MCP3008Config.yaml` bzw. `GPIOcount.yaml`.
+Das **USB-Oszilloskop** PicoScope kann ebenfalls als Datenlogger
+eingesetzt werden. In diesem Fall wird über eine Anzahl von Messungen
+mit sehr hoher Ausleserate gemittelt. Wählt man z.B. ein Messintervall
+von 20 ms, so wird 50 Hz- Rauschen effizient herausgemittelt. 
+
+** Inhalt der Gerätekfiguration `PSconfig.yaml`**
+
+```yaml
+# Konfiguration für PicoScope als Datenlogger
+
+DAQModule: PSConfig  # relevantes phypidaq-Modul 
+
+PSmodel: 2000a       # PicoScope Modell (PS2000a ist die Vorgabe) 
+
+# Konfiguration der Kanäle 
+picoChannels: [A, B]   #  Kanal A und B 
+ChanRanges: [2., 2.]   # Wertebereich
+ChanOffsets: [-1.95, -1.95] # analoger Offset, wir vor Anzeige addiert
+ChanModes: [DC, DC]   # Kanal-Kopplung (DC oder AC)
+sampleTime: 2.0E-02   # Dauer der Datenaufnahme
+Nsamples: 100         # Zahl der Messungen
+
+# trigger
+trgActive: false  # Aufnahme ohne Oszilloskop-Trigger
+trgChan: A
+
+# Interner Signalgenerator 
+frqSG: 0.    # aus 
+  
+```
+
+Beispiele für andere Geräte wie den Analog-Digital-Wandler MCP3008 oder für Ratenmessungen über die GPIO - Pins des Raspberry Pi sind im Konfigurationsverzeichnis `./config/` enthalten:
+`MCP3008Config.yaml` bzw. `GPIOcount.yaml`.
 
 
 ## Installation

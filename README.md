@@ -94,37 +94,77 @@ specifies the active channels and their ranges:
 
 **file ADS1115Config.yaml**
 
-    # example of a configuration file for ADC ADS1115
-    
-    DAQModule: ADS1115Config    # phypidaq module to be loaded
-    
-    ADCChannels: [0, 3]         # active ADC-Channels
-                            # possible values: 0, 1, 2, 3
-                            # when using differential mode:
-                                #    -  0 = ADCChannel 0 
-                                #            minus ADCChannel 1
-                                #    -  1 = ADCChannel 0 
-                                #            minus ADCChannel 3
-                                #    -  2 = ADCChannel 1 
-                                #            minus ADCChannel 3
-                                #    -  3 = ADCChannel 2 
-                                #            minus ADCChannel 3
-    
-    DifModeChan: [true, true] # enable differential mode for Channels
-    
-    Gain: [2/3, 2/3]          # programmable gain of ADC-Channel
-                              #   possible values for Gain:
-                              #     - 2/3 = +/-6.144V
-                              #     -   1 = +/-4.096V
-                              #     -   2 = +/-2.048V
-                              #     -   4 = +/-1.024V
-                              #     -   8 = +/-0.512V
-                              #     -  16 = +/-0.256V
-    sampleRate: 860           # programmable Sample Rate of ADS1115
-                              #    possible values for SampleRate: 
-                              #    8, 16, 32, 64, 128, 250, 475, 860
+```yaml
+# example of a configuration file for ADC ADS1115
 
-Examples for other devices like the PicoTech USB-scope PicoScope, the analog-to-digital converter MCP3008 or for rate measurements via the GPIO pins are contained in the configuration directory, `PSConfig.yaml`, `MCP3008Config.yaml and `GPIOcount.yaml`, respectively.
+DAQModule: ADS1115Config    # phypidaq module to be loaded
+
+ADCChannels: [0, 3]         # active ADC-Channels
+                        # possible values: 0, 1, 2, 3
+                        # when using differential mode:
+                        #    -  0 = ADCChannel 0 
+                        #            minus ADCChannel 1
+                        #    -  1 = ADCChannel 0 
+                        #            minus ADCChannel 3
+                        #    -  2 = ADCChannel 1 
+                        #            minus ADCChannel 3
+                        #    -  3 = ADCChannel 2 
+                        #            minus ADCChannel 3
+
+DifModeChan: [true, true] # enable differential mode for Channels
+
+Gain: [2/3, 2/3]          # programmable gain of ADC-Channel
+                          #   possible values for Gain:
+                          #     - 2/3 = +/-6.144V
+                          #     -   1 = +/-4.096V
+                          #     -   2 = +/-2.048V
+                          #     -   4 = +/-1.024V
+                          #     -   8 = +/-0.512V
+                          #     -  16 = +/-0.256V
+sampleRate: 860           # programmable Sample Rate of ADS1115
+                          #    possible values for SampleRate: 
+                          #    8, 16, 32, 64, 128, 250, 475, 860
+```
+
+The **USB-oscilloscpe** PicoScope can also be used as data logger.
+In this case the average of a large number of measurements at
+high rate is take. Choosing a measurement time of 20 ms very
+effectively eliminates 50 Hz noise. 
+
+** file PSconfig.yaml**
+
+```yaml
+# example of a configuration file for PicoScope 2000 Series
+
+DAQModule: PSConfig
+
+PSmodel: 2000a
+
+# channel configuration 
+picoChannels: [A, B]
+ChanRanges: [2., 2.]
+ChanOffsets: [-1.95, -1.95]
+ChanModes: [DC, DC]
+sampleTime: 2.0E-02
+Nsamples: 100
+
+# oscilloscope trigger
+trgActive: false  # true to activate
+trgChan: A
+#trgThr: 0.1
+#pretrig: 0.05
+#trgTyp: Rising
+#trgTO: 1000  # time-out
+
+# internal signal generator 
+# frqSG: 100.E+3 # put 0. do disable
+frqSG: 0.
+
+```
+
+Examples for other devices like the analog-to-digital converter MCP3008 or for
+rate measurements via the GPIO pins of the Raspberry Pi are also contained in the
+configuration directory, `MCP3008Config.yaml and `GPIOcount.yaml`, respectively.
 
 ## Installation
 
