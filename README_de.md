@@ -9,16 +9,14 @@ Neben den GPIO Ein- und Ausgängen des Raspberry Pi werden die Analog-Digital-Wa
 Das Paket bietet eine Abstraktionsschicht für Messgeräte und Sensoren, die an einen Raspberry Pi angeschlossen sind. Eigene Klassen für jedes Gerät bieten eine einfache, einheitliche Schnittstelle, die nur die Methoden `init(<config_dictionary>)`, `acquireData(buffer)`und `close()` enthalten. Einfache Beispiele mit minimalem Code veranschaulichen die Verwendung. Die grafische Benutzeroberfläche `phypi.py` und das Skript `run_phypi.py` bieten eine konfigurierbare Umgebung für komplexere Messprojekte.
 
 
- *Abbildung1*:  Darstellung der Zeitabhängigkeit von zwei an einen ADC angeschlossene Signalquellen
-
-![Figure 1](doc/Kondensator.png)
-
+ *Abb. 1*:  Darstellung der Zeitabhängigkeit von zwei Signalquellen an einem ADC  
+ ![Figure 1](doc/Kondensator.png)
 
 
 ## Schnellstart
 
 Nach der Installation - siehe unten - steht eine Reihe von einheitlichen Klassen für die Datenerfassung, Visualisierung und Aufzeichnung aus dem Unterverzeichnis
-`./phypidaq/` zur Verfügung. Jedes unterstützte Gerät benötigt eine spezifische Konfiguration, die aus Konfigurationsdateien im Unterverzeichnis `./config/` gelesen wird. Die Gesamtkonfiguration wird in Konfigurtionsdateien vom typ `.daq`
+`./phypidaq/` zur Verfügung. Jedes unterstützte Gerät benötigt eine spezifische Konfiguration, die aus Konfigurationsdateien im Unterverzeichnis `./config/` gelesen wird. Die Gesamtkonfiguration wird in Konfigurationsdateien vom typ `.daq`
 angegeben, die spezifizieren , welche Geräte und Anzeigemodule verwendet werden sollen, welche Ausleserate, Kalibrierungen oder analytische Formeln für aufgezeichnete Daten gelten sollen, oder auch Bereiche und Achsenbeschriftungen der grafischen Ausgabe.
 
 Die grafische Benutzeroberfläche `phypi.py` hilft bei der Verwaltung der Konfigurationsoptionen und kann zum Starten der Datenerfassung verwendet werden.
@@ -30,7 +28,7 @@ Die Datenerfassung kann auch über die Kommandozeile gestartet werden:
 
 Wenn keine Konfigurationsdatei angegeben ist, wird der Standardwert `PhyPiConf.daq` verwendet.
 
-Das Unterverzeichnis `./examples/` enthält eine Reihe einfacher Python-Skripte, die die Verwendung der bertreitgestellten Datenerfassungs- und Anzeigemodule mit minimalem Code veranschaulichen.
+Das Unterverzeichnis `./examples/` enthält eine Reihe einfacher Python-Skripte, die die Verwendung der bereitgestellten Datenerfassungs- und Anzeigemodule mit minimalem Code veranschaulichen.
 
 ## Konfiguration
 
@@ -57,14 +55,14 @@ DeviceFile: config/ADS1115Config.yaml
 ## ein Beispeil für mehrere Geraete
 #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
 
-DisplayModule: DataLogger    # zeigt Messgroessen gegen die Zeit an
+DisplayModule: DataLogger     # zeitlicher Verlauf der Messgroessen an
 # DisplayModule: DataGraphs  # text, Balkendiagramm, zeitlicher Verlauf und xy-Darstellung
-Interval: 0.1                     # Datennahme-Intervall in Sekungen
-XYmode:     false                 # XY-Darstellung ein/aus 
+Interval: 0.1                    # Datennahme-Intervall in Sekunden
+XYmode:     false              # XY-Darstellung ein/aus 
 
 # Angaben fuer jeden Kanal
 ChanLabels: [(V), (V) ]           # Namen und/oder Einheiten fuer jeden Kanal 
-ChanColors: [darkblue, sienna]    # Farbzuordnung in der Anzeige
+ChanColors: [darkblue, sienna]   # Farbzuordnung in der Anzeige
 
 # ggf. werden hier die Informationen aus der Gerate-Konfiguration ueberschrieben 
 ##ChanLimits: 
@@ -135,7 +133,7 @@ sampleRate: 860           # programmierbare Datenrage des ADS1115
 Das **USB-Oszilloskop** PicoScope kann ebenfalls als Datenlogger
 eingesetzt werden. In diesem Fall wird über eine Anzahl von Messungen
 mit sehr hoher Ausleserate gemittelt. Wählt man z.B. ein Messintervall
-von 20 ms, so wird 50 Hz- Rauschen effizient herausgemittelt.
+von 20 ms, so wird 50 Hz- Rauschen effizient heraus gemittelt.
 
 ** Inhalt der Gerätekonfiguration `PSconfig.yaml`**
 
@@ -187,7 +185,7 @@ Dieses Paket basiert auf Code aus anderen Paketen, die die Treiber für die unte
 
 Zur Vereinfachung der Installation werden Installationsdateien für benötigte externe Pakete im *pip*-Wheel-Format im Unterverzeichnis *./whl*/ bereitgestellt .
 
-Die Visualisierungsmodule hängen von *matplotlib.pyplot* , *Tkinter* und *pyQt5* ab, die ebenfalls installiert sein müssen.
+Die Module zur Visualisierung hängen von *matplotlib.pyplot* , *Tkinter* und *pyQt5* ab, die ebenfalls installiert sein müssen.
 
 Nach dem Einrichten Ihres Raspberry Pi mit dem aktuellen Debian-Release *stretch* sollten die folgenden Schritte in einem Konsolenfenster auf der Kommandozeile durchgeführt werden, um alle erforderlichen Pakete zu installieren:
 
@@ -215,7 +213,7 @@ git clone https://GuenterQuast/PhyPiDAQ
 cd PhyPicDAQ/whl
 sudo pip3 install *.whl
 ```
-## Empfohlene Sensoren und Devices
+## Empfohlene Sensoren und Geräte
 
 ## Beschreibung der Beispiele
 

@@ -14,10 +14,8 @@ In addition to the GPIO inputs/outputs of the Raspberry Pi, the analog-to-digita
 
 The package provides an abstraction layer for measurement devices and sensors connected to a Raspberry Pi.  Dedicated classes for each device provide a simple, unified interface, containing only the methods `init(<config_dictionary>)`, `acquireData(buffer)` and `close()`. Simple examples with minimalist code illustrate the usage. The graphical user interface `phypi.py` and the script `run_phypi.py` provide a configurable environment for more complex measurements.
 
- *Figure 1*:  Visualisation of  the time  dependence of two signals connected to an ADC
-
+*Fig. 1*:  Visualisation of  the time  dependence of two signals connected to an ADC
 ![Figure 1](doc/Kondensator.png)
-
 
 
 ## Quick-start guide
@@ -37,8 +35,7 @@ The sub-directory `./examples` contains a number of simple *python* scripts illu
 
 ## Configuration
 
-The script run_phypi.py allows users to perform very general measurement tasks without the need to write custom code. The options for configuration of input devices and their channels as well as for the display and data storage modules are specified in a global configuration file of type `.daq` (in yaml markup
-language), which contains references to device configuration files of type `.yaml`.
+The script ``run_phypi.py` allows users to perform very general measurement tasks without the need to write custom code. The options for configuration of input devices and their channels as well as for the display and data storage modules are specified in a global configuration file of type `.daq` (in `yaml` markup language), which contains references to device configuration files of type `.yaml`.
 
 A typical, commented example is shown here:
 
@@ -90,7 +87,7 @@ A typical, commented example is shown here:
     
 
 The device configuration file for the analog-to-digital converter **ADS1115**
-specifies the active channels and their ranges:
+specifies the active channels, their ranges and single or differential operation modes.
 
 **file ADS1115Config.yaml**
 
@@ -164,7 +161,7 @@ frqSG: 0.
 
 Examples for other devices like the analog-to-digital converter MCP3008, for
 rate measurements via the GPIO pins of the Raspberry Pi or temperature
-measurements with PT100-Sensors and the resistance-to-digital converter
+measurements with PT100 sensors and the resistance-to-digital converter
 MAX31865 are also contained in the configuration directory, see files
 `MCP3008Config.yaml`, `GPIOcount.yaml` or `MAX31865Config.yaml`, respectively.
 
