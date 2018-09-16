@@ -33,11 +33,14 @@ If no configuration file is given, the default `PhyPiConf.daq` is used.
 
 The sub-directory `./examples` contains a number of simple *python* scripts illustrating the usage of data acquisition and display modules with minimalist code.
 
-## Configuration
+
+## Configuration files for PhyPiDAQ
 
 The script ``run_phypi.py` allows users to perform very general measurement tasks without the need to write custom code. The options for configuration of input devices and their channels as well as for the display and data storage modules are specified in a global configuration file of type `.daq` (in `yaml` markup language), which contains references to device configuration files of type `.yaml`.
 
-A typical, commented example is shown here:
+### Main configuration file
+
+A typical, commented example of the main configuration file is shown here:
 
 **file PhyPiConf.daq**
 
@@ -79,12 +82,17 @@ A typical, commented example is shown here:
     #  - c0 + c1  # chan0
     #  - c1          # chan1
     #  - null        # chan2 : no formula
-
+    
     # name of output file
     #DataFile:   testfile.csv     # file name for output file 
     DataFile:   null              #      use null if no output wanted
     #CSVseparator: ';'            # field separator for output file, defaults to ','
-    
+
+
+
+## Device configuration files
+
+Typical, commented examples of device configurations are shown below. 
 
 The device configuration file for the analog-to-digital converter **ADS1115**
 specifies the active channels, their ranges and single or differential operation modes.
@@ -128,7 +136,7 @@ In this case the average of a large number of measurements at
 high rate is take. Choosing a measurement time of 20 ms very
 effectively eliminates 50 Hz noise. 
 
-** file PSconfig.yaml**
+**file PSconfig.yaml**
 
 ```yaml
 # example of a configuration file for PicoScope 2000 Series
@@ -165,7 +173,9 @@ measurements with PT100 sensors and the resistance-to-digital converter
 MAX31865 are also contained in the configuration directory, see files
 `MCP3008Config.yaml`, `GPIOcount.yaml` or `MAX31865Config.yaml`, respectively.
 
-## Installation
+
+
+## Installation of PhyPiDAQ on a Raspberry Pi
 
 This package relies on code from other packages providing the drivers for the supported devices:
 
@@ -211,6 +221,71 @@ git clone https://GuenterQuast/PhyPiDAQ
 cd PhyPicDAQ/whl
 sudo pip3 install *.whl
 ```
-## Recommended Sensors and Devices
 
-## Description of the examples
+
+
+## Overview of files contained in PhyPiDAQ 
+
+### Programs 
+
+- `run_phypi.py`  
+    run data acquisition and display modules as specified in configuration files
+- `phypi.py`  
+    graphical user interface to edit configuration files and start the script `run_phypi.py`
+
+### Modules
+
+- `phypidaq/__init__.py`  
+   initialisation for package *phypidaq*
+- `phypidaq/_version_info.py`  
+    version info for package *phypidaq*
+- `phypidaq/ADS1115Config.py`  
+    class for handling of analog-to-digital converter ADS1115
+- `phypidaq/MCP3008Config.py`   
+    class for handling of analog-to-digital converter MCP3008
+- `phypidaq/GPIOCount.py`   
+    class reading rates from GPIO pins
+- `phypidaq/MAX31865Config.py`  
+    class handling MAX31865 resistance-to-digital converter
+- `phypidaq/PSConfig.py`  
+    class handling PicoScope USB oscilloscopes
+- `phypidaq/mpTkDisplay.py`  
+    background-process handling data visialation
+- `phypidaq/DataLogger.py`  
+-   class for display of data histories and xy diagrams
+- `phypidaq/DataGraphs.py`  
+    general display module for data as bar graphs, history plots and xy-graphs
+- `phypidaq/DataRecorder.py`  
+    store data in CSV format
+
+### Configuration files 
+
+- `PhyPiConf.daq`  
+     main configuration file, depends on device configurations in sub-directory *config/*
+- `config/ADS1115.yaml`
+- `config/GPIOCount.yaml`
+- `config/MCP3008.yaml`
+- `config/PSConfig.yaml`
+
+### Examples 
+
+- `examples/runOsci.py`  
+    run an oscilloscope display, configuration as specified in *.yaml* file
+- `example/PSCosci.yaml`  
+    configuration file for PicoScope USB oscilloscope, used by *runOsci.py*
+
+- `examples/poissonLED.py`  
+    generate a random signal following Poisson statistics on a GPIO pin
+- `examples/FreqGen.py`  
+    generate a fixed frequency signal on a GPIO pin
+
+
+### Documentation
+
+- doc/Kurs_digitale_Messtechnik.md  (.pdf)`    
+    German only: Introcuctory course to measuring with the Raspberry Pi
+- doc/Einrichten_des_Raspberry_Pi.md   
+    German only: setting up the Raspberry Pi for this project
+- doc/Komponenten fuer PhyPi.md  
+    recommended components for this project
+

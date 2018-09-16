@@ -30,7 +30,8 @@ Wenn keine Konfigurationsdatei angegeben ist, wird der Standardwert `PhyPiConf.d
 
 Das Unterverzeichnis `./examples/` enthält eine Reihe einfacher Python-Skripte, die die Verwendung der bereitgestellten Datenerfassungs- und Anzeigemodule mit minimalem Code veranschaulichen.
 
-## Konfiguration
+
+## Konfigurationsdateien für PhyPiDAQ
 
 Mit dem Skript `run_phypi.py` können sehr allgemeine Messaufgaben ausgeführt werden, ohne eigenen Code schreiben zu müssen. Die Konfigurationsoptionen für Eingabegeräte und deren Kanäle sowie für die Anzeige- und Datenspeichermodule werden in einer globalen Konfigurationsdatei vom Typ `.daq` angegeben, die Verweise auf Gerätekonfigurationsdateien vom Typ `.yaml` enthält.
 
@@ -39,7 +40,9 @@ der Markup-Sprache *yaml*. Insbesondere kennzeichnet Text nach einem
 `#` -Zeichen erklärende Kommentare oder enthält alternative, auskommentierte Konfigurationsoptionen, die durch Löschen des
 `#` -Zeichens aktiviert werden können.
 
-Typische (ausführlich kommentierte) Beispiele sehen wie folgt aus:
+### Hautpkonfiguration 
+
+Ein typisches, ausführlich kommentiertes Beispiel für die Hauptkkonfigurationsdatei sieht wie folgt aus:
 
 **Inhalt der Hauptkonfigurationsdatei PhyPiConf.daq**
 
@@ -90,10 +93,11 @@ DataFile:   null              #   null falls keine Ausgebe gewuenscht
 
 ```
 
-Die Gerätekonfiguration für den sehr flexible einsetzbaren
-Analog-Digital-Wandler **ADS1115** mit 16 Bit Auflösung und
-Ausleseraten bis zu 860 Hz gibt die aktiven Kanäle und deren
-Wertebereiche an.
+
+
+### Gerätekonfigurationen 
+
+Die Gerätekonfiguration für den sehr flexible einsetzbaren Analog-Digital-Wandler **ADS1115** mit 16 Bit Auflösung und Ausleseraten bis zu 860 Hz gibt die aktiven Kanäle und deren Wertebereiche an.
 
 **Inhalt der Konfigurationsdatei ADS1115Config.yaml**
 
@@ -166,7 +170,8 @@ mit PT100-Sensoren am MAX31865 'Resistance to Digital-Converter' sind im Konfigu
 `MCP3008Config.yaml` bzw. `GPIOcount.yaml` oder `MAX31865Config.yaml`.
 
 
-## Installation
+
+## Installation von PhyPiDAQ auf dem Raspberry Pi
 
 Dieses Paket basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte bereitstellen:
 
@@ -213,7 +218,71 @@ git clone https://GuenterQuast/PhyPiDAQ
 cd PhyPicDAQ/whl
 sudo pip3 install *.whl
 ```
-## Empfohlene Sensoren und Geräte
 
-## Beschreibung der Beispiele
+
+
+## Übersicht über Dateien im Paket PhyPiDAQ 
+
+### Programme 
+
+- `run_phypi.py`  
+    Datennahme und Anzeige wie in Konfigurationsdateien angegeben
+- `phypi.py`  
+    graphische Oberfläche zum Editieren der Konfiguration und Starten des Skripts `run_phypi.py`
+
+### Module
+
+- `phypidaq/__init__.py`  
+   Initialisierug für das Paket *phypidaq*
+- `phypidaq/_version_info.py`  
+    Versionsinformation für das Paket *phypidaq*
+- `phypidaq/ADS1115Config.py`  
+    Klasse zur Handhabung des analog-digital Wandlers ADS1115
+- `phypidaq/MCP3008Config.py`  
+    Klasse zur Handhabung des analog-digital Wandlers MCP3008
+- `phypidaq/GPIOCount.py`   
+    Klasse zur Ratenmessung an GPIO-Pins
+- `phypidaq/MAX31865Config.py`  
+    Klasse zur Handhabung des Widerstand-nach-digial Wandlers MAX31865
+- `phypidaq/PSConfig.py`  
+    Klasse für PicoScope USB-Oszilloskope
+- `phypidaq/mpTkDisplay.py`  
+    Hintergrund-Prozess zur Datenvisualisierung
+- `phypidaq/DataLogger.py`  
+-   Klasse zur Anzeige von Datenverlauf und xy-Diagrammen
+- `phypidaq/DataGraphs.py`  
+    allgemeine Klasse zur Anzeige von Balkendiagrammen, Datenverläufen und xy-Diagrammen
+- `phypidaq/DataRecorder.py`  
+    Speichern von Daten im CSV-Format
+
+### Konfigurationsdateien
+
+- `PhyPiConf.daq`  
+     Haputkonfigurationsdatei, hängt von Dateien im Unterverzeichnis *config/* ab
+- `config/ADS1115.yaml`
+- `config/GPIOCount.yaml`
+- `config/MCP3008.yaml`
+- `config/PSConfig.yaml`
+
+### Beispiele
+
+- `examples/runOsci.py`  
+    Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben
+- `example/PSCosci.yaml`  
+     Konfigurationsdatei für PicoScope USB-Oszilloskop, verwendet von *runOsci.py*
+
+- `examples/poissonLED.py`  
+    erzeugt ein zufälliges Signal an GOPI-Pin gemäß Poisson-Prozess 
+- `examples/FreqGen.py`  
+    erzeugt Signal fester Frequenz an GPIO-Pin
+
+
+### Documentation
+
+- doc/Kurs_digitale_Messtechnik.md  (.pdf)`  
+    Einführungskurs für Schüler zum Messen mit dem Raspberry Pi
+- doc/Einrichten_des_Raspberry_Pi.md   
+    Aufsetzen des Raspberry Pi für dieses Projekt
+- doc/Komponenten fuer PhyPi.md  
+    empfohlene Komponenten für dieses Projekt
 
