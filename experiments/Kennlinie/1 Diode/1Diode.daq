@@ -1,0 +1,60 @@
+# Configuration Options for PhyPiDAQ 
+
+# device configuration files 
+DeviceFile: config/ADS1115Config.yaml  
+#DeviceFile: config/MCP3008Config.yaml  
+#DeviceFile: config/PSConfig.yaml         
+#DeviceFile: config/MAX31865Config.yaml 
+#DeviceFile: config/GPIOCount.yaml
+
+## an example for multiple devices
+#DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+
+DisplayModule: DataLogger
+# DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+Interval: 0.05                     # logging interval         
+XYmode:     true                 # enable/disable XY-display
+
+
+# channel-specific information
+ChanLabels: [(V), (mA) ]          # names and/or units for channels 
+ChanColors: [darkblue, red]    # channel colours in display
+
+# eventually overwrite Channel Limits obtained from device config 
+ChanLimits: 
+ - [0., 5]   # chan 0
+ - [0., 20]   # chan 1
+
+
+ChanCalib:
+##  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ] 
+  - 1.      # chan0
+  - 1.      # chan1
+                     
+
+# apply formulae to calibrated channel values
+ChanFormula:
+  - c0  # chan0
+  - (c0-c1)*10          # chan1
+
+
+# name of output file
+
+DataFile:   Kennlinie.csv             # file name for output file 
+CSVseparator: ';'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+# Configuration Options for PhyPiDAQ 
+
+# device configuration files 
+#DeviceFile: config/ADS1115Config.yaml  
+#DeviceFile: config/MCP3008Config.yaml  
+#DeviceFile: config/PSConfig.yaml         
+DeviceFile: config/MAX31865Config.yaml 
+#DeviceFile: config/GPIOCount.yaml
+
+## an example for multiple devices
+#DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+
+#DisplayModule: DataLogger
+DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+Interval: 0.1                     # logging interval         
+XYmode:     false                 # enable/disable XY-display
+
+
+# channel-specific information
+ChanLabels: [(°C)]          # names and/or units for channels 
+ChanColors: [darkblue]    # channel colours in display
+
+# eventually overwrite Channel Limits obtained from device config 
+#ChanLimits: 
+# - [-300., 100.]   # chan 0
+# - [0., 4]   # chan 1
+## - [0., 1.]   # chan 2
+
+#ChanCalib:
+##  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ] 
+#  - null    # chan0
+#  - null   # chan1
+#  - null    # chan2 
+
+# apply formulae to calibrated channel values
+#ChanFormula:
+#  - c0  # chan0
+#  - (c0-c1)/220*1000          # chan1
+#  - null        # chan2 : no formula
+
+# name of output file
+
+DataFile:   Temperatur.csv             # file name for output file 
+CSVseparator: ';'
+
+
+
+
+
+
+
+
+
+
+
+
+
