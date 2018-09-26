@@ -2,29 +2,28 @@
 
 ## Datenerfassung und Analyse für die Physikausbildung mit Raspberry Pi
 
-Dieser Code in der Programmmiersprache *pyhton3* bietet einige grundlegende Funktionen zur Datenerfassung und -visualisierung wie Datenlogger, Balkendiagramm, XY- oder Oszilloskopanzeige und Datenaufzeichnung auf Festplatte.
+Dieser Code in der Programmmiersprache *python3* bietet einige grundlegende Funktionen zur Datenerfassung und -visualisierung wie Datenlogger, Balkendiagramm, XY- oder Oszilloskopanzeige und Datenaufzeichnung auf Festplatte.
 
 Neben den GPIO Ein- und Ausgängen des Raspberry Pi werden die Analog-Digital-Wandler ADS1115 und MCP3008 sowie USB-Oszilloskope (PicoScope der Firma picotech) als Eingabegeräte für analoge Daten sowie eine Reihe von digitalen Sensoren mit Protokollen wie I²C oder SPI unterstützt.
 
 Das Paket bietet eine Abstraktionsschicht für Messgeräte und Sensoren, die an einen Raspberry Pi angeschlossen sind. Eigene Klassen für jedes Gerät bieten eine einfache, einheitliche Schnittstelle, die nur die Methoden `init(<config_dictionary>)`, `acquireData(buffer)`und `close()` enthalten. Einfache Beispiele mit minimalem Code veranschaulichen die Verwendung. Die grafische Benutzeroberfläche `phypi.py` und das Skript `run_phypi.py` bieten eine konfigurierbare Umgebung für komplexere Messprojekte.
 
-
- *Abb. 1*:  Darstellung der Zeitabhängigkeit von zwei Signalquellen an einem ADC  
+ *Abb. 1*:  Darstellung der Zeitabhängigkeit von zwei Signalquellen an einem AD-Wandler  
  ![Figure 1](doc/Kondensator.png)
 
 
 ## Schnellstart
 
 Nach der Installation - siehe unten - steht eine Reihe von einheitlichen Klassen für die Datenerfassung, Visualisierung und Aufzeichnung aus dem Unterverzeichnis
-`./phypidaq/` zur Verfügung. Jedes unterstützte Gerät benötigt eine spezifische Konfiguration, die aus Konfigurationsdateien im Unterverzeichnis `./config/` gelesen wird. Die Gesamtkonfiguration wird in Konfigurationsdateien vom typ `.daq`
-angegeben, die spezifizieren , welche Geräte und Anzeigemodule verwendet werden sollen, welche Ausleserate, Kalibrierungen oder analytische Formeln für aufgezeichnete Daten gelten sollen, oder auch Bereiche und Achsenbeschriftungen der grafischen Ausgabe.
+`./phypidaq/` zur Verfügung. Jedes unterstützte Gerät benötigt eine spezifische Konfiguration, die aus Konfigurationsdateien im Unterverzeichnis `./config/` gelesen wird. Die Gesamtkonfiguration wird in Konfigurationsdateien vom Typ `.daq`
+angegeben, die spezifizieren, welche Geräte und Anzeigemodule verwendet werden sollen, welche Ausleserate, Kalibrierungen oder analytische Formeln für aufgezeichnete Daten gelten sollen, oder auch Bereiche und Achsenbeschriftungen der grafischen Ausgabe.
 
 Die grafische Benutzeroberfläche `phypi.py` hilft bei der Verwaltung der Konfigurationsoptionen und kann zum Starten der Datenerfassung verwendet werden.
 In diesem Fall werden Konfigurationen und erzeugte Datendateien in einem dedizierten Unterverzeichnis in `$HOME/PhyPi` abgelegt. Der Name des Unterverzeichnisses wird von einem benutzerdefinierten Tag und dem aktuellen Datum und der Uhrzeit abgeleitet.
 
 Die Datenerfassung kann auch über die Kommandozeile gestartet werden:
 
-   run_phypi.py <config_file_name\>.daq
+`run_phypi.py <config_file_name\>.daq`
 
 Wenn keine Konfigurationsdatei angegeben ist, wird der Standardwert `PhyPiConf.daq` verwendet.
 
@@ -35,16 +34,13 @@ Das Unterverzeichnis `./examples/` enthält eine Reihe einfacher Python-Skripte,
 
 Mit dem Skript `run_phypi.py` können sehr allgemeine Messaufgaben ausgeführt werden, ohne eigenen Code schreiben zu müssen. Die Konfigurationsoptionen für Eingabegeräte und deren Kanäle sowie für die Anzeige- und Datenspeichermodule werden in einer globalen Konfigurationsdatei vom Typ `.daq` angegeben, die Verweise auf Gerätekonfigurationsdateien vom Typ `.yaml` enthält.
 
-Generell entspricht die in den Konfigurationsdateien verwendete Syntax
-der Markup-Sprache *yaml*. Insbesondere kennzeichnet Text nach einem
-`#` -Zeichen erklärende Kommentare oder enthält alternative, auskommentierte Konfigurationsoptionen, die durch Löschen des
-`#` -Zeichens aktiviert werden können.
+Generell entspricht die in den Konfigurationsdateien verwendete Syntax der Markup-Sprache *yaml*. Insbesondere kennzeichnet Text nach einem`#` -Zeichen erklärende Kommentare oder enthält alternative, auskommentierte Konfigurationsoptionen, die durch Löschen des `#` -Zeichens aktiviert werden können.
 
-### Hautpkonfiguration 
+### Hauptkonfiguration 
 
-Ein typisches, ausführlich kommentiertes Beispiel für die Hauptkkonfigurationsdatei sieht wie folgt aus:
+Ein typisches, ausführlich kommentiertes Beispiel für die Hauptkonfigurationsdatei sieht wie folgt aus:
 
-**Inhalt der Hauptkonfigurationsdatei PhyPiConf.daq**
+**Inhalt der Hauptkonfigurationsdatei `PhyPiConf.daq`**
 
 ```yaml
 # Konfigurations-Optionen fuer PhyPiDAQ
@@ -55,7 +51,7 @@ DeviceFile: config/ADS1115Config.yaml
 #DeviceFile: config/PSConfig.yaml
 #DeviceFile: config/MAX31865Config.yaml
 #DeviceFile: config/GPIOCount.yaml
-## ein Beispeil für mehrere Geraete
+## ein Beispiel für mehrere Geraete
 #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
 
 DisplayModule: DataLogger     # zeitlicher Verlauf der Messgroessen an
@@ -67,7 +63,7 @@ XYmode:     false              # XY-Darstellung ein/aus
 ChanLabels: [(V), (V) ]           # Namen und/oder Einheiten fuer jeden Kanal 
 ChanColors: [darkblue, sienna]   # Farbzuordnung in der Anzeige
 
-# ggf. werden hier die Informationen aus der Gerate-Konfiguration ueberschrieben 
+# ggf. werden hier die Informationen aus der Geraete-Konfiguration ueberschrieben 
 ##ChanLimits: 
 ## - [0., 1.]   # chan 0
 ## - [0., 1.]   # chan 1
@@ -76,9 +72,9 @@ ChanColors: [darkblue, sienna]   # Farbzuordnung in der Anzeige
 # ggf. Kalibration der Rohmessungen
 #ChanCalib:
 #  - null    oder  - <Faktor> or  - [ [ <wahre Werte> ], [ <Rohwerte> ] ] 
-#  - 1.                       # chan0: ein enfacher Faktor fuer Kanal 0
+#  - 1.                       # chan0: ein einfacher Faktor fuer Kanal 0
 #  - [ [0.,1.], [0., 1.] ]    # chan1: Interpolation [wahr]([roh] )
-#  - null                     # chan2: Keine Kalbration
+#  - null                     # chan2: Keine Kalibration
 
 # Formel auf Werte anwenden
 #ChanFormula:
@@ -97,9 +93,9 @@ DataFile:   null              #   null falls keine Ausgebe gewuenscht
 
 ### Gerätekonfigurationen 
 
-Die Gerätekonfiguration für den sehr flexible einsetzbaren Analog-Digital-Wandler **ADS1115** mit 16 Bit Auflösung und Ausleseraten bis zu 860 Hz gibt die aktiven Kanäle und deren Wertebereiche an.
+Die Gerätekonfiguration für den sehr flexibel einsetzbaren Analog-Digital-Wandler **ADS1115** mit 16 Bit Auflösung und Ausleseraten bis zu 860 Hz gibt die aktiven Kanäle und deren Wertebereiche an.
 
-**Inhalt der Konfigurationsdatei ADS1115Config.yaml**
+**Inhalt der Konfigurationsdatei `ADS1115Config.yaml`**
 
 ```yaml
 # Beispiel einer Konfiguration fuer den Analog-Digital-Wandler ADS1115
@@ -128,18 +124,15 @@ Gain: [2/3, 2/3]          # programmierbarer Verstaerkungsfaktor
                           #     -   4 = +/-1.024V
                           #     -   8 = +/-0.512V
                           #     -  16 = +/-0.256V
-sampleRate: 860           # programmierbare Datenrage des ADS1115
+sampleRate: 860           # programmierbare Datenrate des ADS1115
                           #    moegliche Werte: 
                           #    8, 16, 32, 64, 128, 250, 475, 860
    
 ```
 
-Das **USB-Oszilloskop** PicoScope kann ebenfalls als Datenlogger
-eingesetzt werden. In diesem Fall wird über eine Anzahl von Messungen
-mit sehr hoher Ausleserate gemittelt. Wählt man z.B. ein Messintervall
-von 20 ms, so wird 50 Hz- Rauschen effizient heraus gemittelt.
+Das **USB-Oszilloskop** PicoScope kann ebenfalls als Datenlogger eingesetzt werden. In diesem Fall wird über eine Anzahl von Messungen mit sehr hoher Ausleserate gemittelt. Wählt man z.B. ein Messintervall von 20 ms, so wird 50 Hz- Rauschen effizient herausgemittelt.
 
-** Inhalt der Gerätekonfiguration `PSconfig.yaml`**
+**Inhalt der Gerätekonfiguration `PSconfig.yaml`**
 
 ```yaml
 # Konfiguration für PicoScope als Datenlogger
@@ -175,18 +168,16 @@ mit PT100-Sensoren am MAX31865 'Resistance to Digital-Converter' sind im Konfigu
 
 Dieses Paket basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte bereitstellen:
 
-```html
-- die Adafruit Pyhon MCP3008 Bibliothek, 
+- die Adafruit Python MCP3008 Bibliothek, 
     <https://github.com/adafruit/Adafruit_Python_MCP3008>
 - die Adafruit Python ADX1x15 Bibliothek
     <https://github.com/adafruit/Adafruit_Python_ADS1x15>
 - Komponenten des picoDAQ-Projekts
     <https://github.com/GuenterQuast/picoDAQ>
-- das  *python* Interface für die PicoScope Treiber des *pico-python*-Projeks   
-    von Colin O'Flynn, <https://github.com/colinoflynn/pico-python> und
+- das  *python* Interface für die PicoScope Treiber des *pico-python*-Projekts   
+    von Colin O'Flynn, <https://github.com/colinoflynn/pico-python>
 - die C-Treiber aus dem Pico Technology Software Development Kit
     <https://www.picotech.com/downloads>
-```
 
 Zur Vereinfachung der Installation werden Installationsdateien für benötigte externe Pakete im *pip*-Wheel-Format im Unterverzeichnis *./whl*/ bereitgestellt .
 
@@ -233,23 +224,23 @@ sudo pip3 install *.whl
 ### Module
 
 - `phypidaq/__init__.py`  
-   Initialisierug für das Paket *phypidaq*
+   Initialisierung für das Paket *phypidaq*
 - `phypidaq/_version_info.py`  
     Versionsinformation für das Paket *phypidaq*
 - `phypidaq/ADS1115Config.py`  
-    Klasse zur Handhabung des analog-digital Wandlers ADS1115
+    Klasse zur Handhabung des Analog-Digital-Wandlers ADS1115
 - `phypidaq/MCP3008Config.py`  
-    Klasse zur Handhabung des analog-digital Wandlers MCP3008
+    Klasse zur Handhabung des Analog-Digital-Wandlers MCP3008
 - `phypidaq/GPIOCount.py`   
     Klasse zur Ratenmessung an GPIO-Pins
 - `phypidaq/MAX31865Config.py`  
-    Klasse zur Handhabung des Widerstand-nach-digial Wandlers MAX31865
+    Klasse zur Handhabung des Widerstand-nach-digial-Wandlers MAX31865
 - `phypidaq/PSConfig.py`  
     Klasse für PicoScope USB-Oszilloskope
 - `phypidaq/mpTkDisplay.py`  
     Hintergrund-Prozess zur Datenvisualisierung
 - `phypidaq/DataLogger.py`  
--   Klasse zur Anzeige von Datenverlauf und xy-Diagrammen
+- Klasse zur Anzeige von Datenverlauf und xy-Diagrammen
 - `phypidaq/DataGraphs.py`  
     allgemeine Klasse zur Anzeige von Balkendiagrammen, Datenverläufen und xy-Diagrammen
 - `phypidaq/DataRecorder.py`  
@@ -272,17 +263,17 @@ sudo pip3 install *.whl
      Konfigurationsdatei für PicoScope USB-Oszilloskop, verwendet von *runOsci.py*
 
 - `examples/poissonLED.py`  
-    erzeugt ein zufälliges Signal an GOPI-Pin gemäß Poisson-Prozess 
+    erzeugt ein zufälliges Signal an GPIO-Pin gemäß Poisson-Prozess 
 - `examples/FreqGen.py`  
     erzeugt Signal fester Frequenz an GPIO-Pin
 
 
-### Documentation
+### Dokumentation
 
-- doc/Kurs_digitale_Messtechnik.md  (.pdf)`  
+- `doc/Kurs_digitale_Messtechnik.md  (.pdf)`  
     Einführungskurs für Schüler zum Messen mit dem Raspberry Pi
-- doc/Einrichten_des_Raspberry_Pi.md   
+- `doc/Einrichten_des_Raspberry_Pi.md`   
     Aufsetzen des Raspberry Pi für dieses Projekt
-- doc/Komponenten fuer PhyPi.md  
+- `doc/Komponenten_fuer_PhyPi.md`  
     empfohlene Komponenten für dieses Projekt
 

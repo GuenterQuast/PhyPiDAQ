@@ -2,7 +2,7 @@
 
 Data Acquisition and analysis for Physics education with Raspberry Pi
 
-This is the **english** Version of the documentation.
+This is the **english** version of the documentation.
 
 For German readers:  
 Die **deutsche Version** dieses Dokuments findet sich unter dem Link [README_de.md](README_de.md).
@@ -92,10 +92,7 @@ A typical, commented example of the main configuration file is shown here:
 
 ## Device configuration files
 
-Typical, commented examples of device configurations are shown below. 
-
-The device configuration file for the analog-to-digital converter **ADS1115**
-specifies the active channels, their ranges and single or differential operation modes.
+Typical, commented examples of device configurations are shown below. The device configuration file for the analog-to-digital converter **ADS1115** specifies the active channels, their ranges and single or differential operation modes.
 
 **file ADS1115Config.yaml**
 
@@ -131,10 +128,7 @@ sampleRate: 860           # programmable Sample Rate of ADS1115
                           #    8, 16, 32, 64, 128, 250, 475, 860
 ```
 
-The **USB-oscilloscpe** PicoScope can also be used as data logger.
-In this case the average of a large number of measurements at
-high rate is take. Choosing a measurement time of 20 ms very
-effectively eliminates 50 Hz noise. 
+The **USB-oscilloscope** PicoScope can also be used as data logger. In this case the average of a large number of measurements at high rate is taken. Choosing a measurement time of 20 ms very effectively eliminates 50 Hz noise. 
 
 **file PSconfig.yaml**
 
@@ -167,11 +161,7 @@ frqSG: 0.
 
 ```
 
-Examples for other devices like the analog-to-digital converter MCP3008, for
-rate measurements via the GPIO pins of the Raspberry Pi or temperature
-measurements with PT100 sensors and the resistance-to-digital converter
-MAX31865 are also contained in the configuration directory, see files
-`MCP3008Config.yaml`, `GPIOcount.yaml` or `MAX31865Config.yaml`, respectively.
+Examples of other devices like the analog-to-digital converter MCP3008, of rate measurements via the GPIO pins of the Raspberry Pi or temperature measurements with PT100 sensors and the resistance-to-digital converter MAX31865 are also contained in the configuration directory, see files `MCP3008Config.yaml`, `GPIOcount.yaml` or `MAX31865Config.yaml`, respectively.
 
 
 
@@ -179,7 +169,6 @@ MAX31865 are also contained in the configuration directory, see files
 
 This package relies on code from other packages providing the drivers for the supported devices:
 
-```html
 - the Adafruit Pyhon MCP3008 library
      <https://github.com/adafruit/Adafruit_Python_MCP3008>
 - the Adafruit Python ADX1x15 library
@@ -187,10 +176,9 @@ This package relies on code from other packages providing the drivers for the su
 - components from the picoDAQ project  
      <https://github.com/GuenterQuast/picoDAQ>
 - the  *python* bindings of the *pico-python* project by Colin O'Flynn  
-     <https://github.com/colinoflynn/pico-python> and
+     <https://github.com/colinoflynn/pico-python>
 - the low-level drivers contained in the Pico Technology Software Development Kit 
     <https://www.picotech.com/downloads>
-```
 
 For convenience, installation files for external packages in pip wheel format are provided in sub-directory *./whl*.
 
@@ -282,10 +270,10 @@ sudo pip3 install *.whl
 
 ### Documentation
 
-- doc/Kurs_digitale_Messtechnik.md  (.pdf)`    
-    German only: Introcuctory course to measuring with the Raspberry Pi
-- doc/Einrichten_des_Raspberry_Pi.md   
+- `doc/Kurs_digitale_Messtechnik.md  (.pdf)`    
+    German only: Introductory course to measuring with the Raspberry Pi
+- `doc/Einrichten_des_Raspberry_Pi.md`   
     German only: setting up the Raspberry Pi for this project
-- doc/Komponenten fuer PhyPi.md  
+- `doc/Komponenten_fuer_PhyPi.md`  
     recommended components for this project
 
