@@ -14,17 +14,17 @@ Die Kennlinien können entweder einzeln aufgenommen werden oder bis zu drei Diod
 
 1 Diode:
 
-![Kondensator2_Steckplatine](Images\Kennlinie_Steckplatine.jpg)
+![Kondensator2_Steckplatine](Images/Kennlinie_Steckplatine.jpg)
 
 
 
 2 Dioden:
 
-![Kennlinie_Steckplatine2](Images\Kennlinie2_Steckplatine.jpg)
+![Kennlinie_Steckplatine2](Images/Kennlinie2_Steckplatine.jpg)
 
 3 Dioden
 
-![Kondensator3_Steckplatine](Images\Kennlinie3_Steckplatine.png)
+![Kondensator3_Steckplatine](Images/Kennlinie3_Steckplatine.png)
 
 Beim Anschließen von Dioden ist zu beachten, dass die Einbaurichtung von Bedeutung ist. In diesem Versuch müssen die Dioden in der sogenannten "Durchlassrichtung" angeschlossen werden. Dabei wird die Anode der Diode an den Pluspol angeschlossen. Die Anode ist an den Dioden durch den längeren Verbindungsdraht zu erkennen. Wird die Diode verkehrtherum angeschlossen, in "Sperrichtung," so fließt bei den hier verwendeten Spannungen kein Strom. 
 **Dioden nicht ohne Vorwiderstand anschließen**
@@ -35,7 +35,7 @@ Die Strom-Spannung-Kennlinie eines elektrischen Bauteils beschreibt schlicht den
 
 Da wir eine Kurve in Abhängigkeit der angelegten Spannung benötigen, brauchen wir eine regelbare Spannungsquelle. In unserem Aufbau übernimmt dies das Potentiometer.
 Der Eingang A0 ist zwischen Potentiometer und Widerstand angeschlossen, er liefert uns daher direkt die angelegte Spannung.
-Die Stromstärke ist nicht direkt messbar. Wir können aber die Spannung über einem bekannten Widerstand bestimmen und daraus von PhyPi die Stromstärke errechnen lassen. Betrachten wir dafür exemplarisch die Schaltung mit einer Diode. Die Spannung über den Widerstand können wir ermitteln, in dem wir das Potential auf beiden Seiten des Widerstands bestimmen und die Differenz bilden. Das Potential vor dem Widerstand wird mit A0 gemessen, A1 liefert das Potential danach. Der Widerstand hat den bekannten Wert 100\Omega. Damit ist der Strom I=(U_0 - U_1)/100\Omega$.  Mit dieser Formel können wir mit der Kanal-Formel-Funktion in der Config direkt in PhyPi die gemessenen Spannungen verarbeiten. Mit dem x-y-Modus von PhyPi werden die Messungen direkt in der gewünschten Diagrammform aufgetragen. Die Erläuterungen der Config-Datei finden sie im Anschluss.
+Die Stromstärke ist nicht direkt messbar. Wir können aber die Spannung über einem bekannten Widerstand bestimmen und daraus von PhyPi die Stromstärke errechnen lassen. Betrachten wir dafür exemplarisch die Schaltung mit einer Diode. Die Spannung über den Widerstand können wir ermitteln, in dem wir das Potential auf beiden Seiten des Widerstands bestimmen und die Differenz bilden. Das Potential vor dem Widerstand wird mit A0 gemessen, A1 liefert das Potential danach. Der Widerstand hat den bekannten Wert $100\Omega$. Damit ist der Strom $I=(U_0 - U_1)/100\Omega$.  Mit dieser Formel können wir mit der Kanal-Formel-Funktion in der Config direkt in PhyPi die gemessenen Spannungen verarbeiten. Mit dem x-y-Modus von PhyPi werden die Messungen direkt in der gewünschten Diagrammform aufgetragen. Die Erläuterungen der Config-Datei finden sie im Anschluss.
 
 **Versuchsdurchführung:**
 
@@ -105,8 +105,6 @@ DataFile:   Kennlinie             # file name for output file
 
 
 
-## 
-
 ### Aufgaben
 
 1. Zeichnen sie die Kennlinie von mindestens drei verschiedenen Dioden auf.
@@ -123,23 +121,26 @@ DataFile:   Kennlinie             # file name for output file
 
 Noch zu erledigen
 
-![Kennlinie](Images\Kennlinie.png)
+![Kennlinie](Images/Kennlinie.png)
 
 ### Schaltpläne
 
 1 Diode:
 
-![Kennlinie_Schaltplan](Images\Kennlinie_Schaltplan.jpg)
+![Kennlinie_Schaltplan](Images/Kennlinie_Schaltplan.jpg)
 
 
 
 2 Dioden:
 
-![Kennlinie_Schaltplan2](Images\Kennlinie2_Schaltplan.jpg)
+![Kennlinie_Schaltplan2](Images/Kennlinie2_Schaltplan.jpg)
 
 3 Dioden:
 
-![Kennlinie3_Schaltplan](Images\Kennlinie3_Schaltplan.png)
-$$
-
-$$
+![Kennlinie3_Schaltplan](Images/Kennlinie3_Schaltplan.png)​				
+​					
+​				
+​				
+​						
+​				
+​			

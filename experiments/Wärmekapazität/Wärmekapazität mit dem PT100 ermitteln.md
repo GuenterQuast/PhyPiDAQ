@@ -29,7 +29,7 @@ Der Anschluss des MAX31865 erfolgt an folgende Pins:
 * SDI an MOSI (GPIO10)
 * CLK an SCLK (GPIO11)
 
-![PT100_Steckplatine](Images\PT100_Steckplatine.png)
+![PT100_Steckplatine](Images/PT100_Steckplatine.png)
 
 
 
@@ -85,4 +85,4 @@ Noch zu erledigen
 
 
 
-![PT100_Schaltplan](Images\PT100_Schaltplan.png)
+![PT100_Schaltplan](Images/PT100_Schaltplan.png)

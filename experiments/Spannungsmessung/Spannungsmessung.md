@@ -182,9 +182,9 @@ Die Beispielschaltung verwendet drei $220\Omega$-Widerstände. Prinzipiell könn
 
 Es werden drei Widerstände in Reihe geschaltet und ein Drehpotentiometer vorgeschaltet, um die Spannung zu regulieren. An drei verschiedenen Stellen werden Spannungsmessungen vorgenommen.
 
-![Spannung_Steckplatine](Images\Spannung_Steckplatine.png)
+![Spannung_Steckplatine](Images/Spannung_Steckplatine.png)
 
-![Spannung_Schaltplan](Images\Spannung_Schaltplan.png)
+![Spannung_Schaltplan](Images/Spannung_Schaltplan.png)
 
 
 
@@ -282,5 +282,5 @@ sampleRate: 860             # programmable Sample Rate of ADS1115
 
 Noch zu erledigen.
 
-![Beispiel](Images\Beispiel.png))
+![Beispiel](Images/Beispiel.png)
 

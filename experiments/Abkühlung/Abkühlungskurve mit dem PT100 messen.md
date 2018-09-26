@@ -8,7 +8,7 @@ In diesem Dokument erfahren sie, wie sie mit dem PT100 eine Abkühlungskurve auf
 * MAX31865 Temperatursensor-Verstärker
 * Ein Behälter mit heißem Wasser
 
-Der PT100 ist ein temperaturabhängiger Widerstand aus Platin mit einem nominellen Widerstand von $100\Omega$ bei 0°C. Auf Grund des niedrigen Widerstandswertes ist es notwendig das Spannungssignal des PT100 über den dafür konzipierten Verstärker MAX31865 auszulesen. Der MAX31865 ist gleichzeitig auch noch ein Analog-Digital-Wandler, so dass keine weiteren Teile notwendig sind.
+Der PT100 ist ein temperaturabhängiger Widerstand aus Platin mit einem nominellen Widerstand von $100\Omega​$ bei 0°C. Auf Grund des niedrigen Widerstandswertes ist es notwendig das Spannungssignal des PT100 über den dafür konzipierten Verstärker MAX31865 auszulesen. Der MAX31865 ist gleichzeitig auch noch ein Analog-Digital-Wandler, so dass keine weiteren Teile notwendig sind.
 Der PT100 kommt in Varianten mit zwei, drei oder vier Kabeln. Das dritte und vierte Kabel dienen jeweils dazu die Widerstände der Kabel im Sensor auszugleichen - besonders interessant, wenn sehr lange Kabel verwendet werden. In unserem Koffer ist die einfache Variante mit zwei Kabeln beigelegt, da diese für das Aufzeichnen von Temperaturkurven im Schulbereich vollkommen ausreichend ist. Zu beachten ist, dass, je nach verwendeter Anzahl Kabel, unterschiedliche Verlötungen auf dem MAX31865 nötig sind, ein fliegender Wechsel zwischen verschiedenen PT100 ist also nicht möglich.
 
 **Versuchsaufbau:**
@@ -24,7 +24,7 @@ Der Anschluss des MAX31865 erfolgt an folgende Pins:
 * SDI an MOSI (GPIO10)
 * CLK an SCLK (GPIO11)
 
-![PT100_Steckplatine](Images\PT100_Steckplatine.png)
+![PT100_Steckplatine](Images/PT100_Steckplatine.png)
 
 
 
@@ -57,10 +57,8 @@ R0: 100.          # value resistor PT100 at 0°C
 ## Aufgaben
 
 1. Nehmen sie die aktuelle Umgebungstemperatur im Versuchsbereich auf.
-
 2. Führen sie den Versuch wie beschrieben durch. Abhängig vom verwendeten Behälter und den äußeren Umständen wird die Abkühlung viel Zeit in Anspruch nehmen, es ist sinnvoll den Versuch einfach "nebenher" laufen zu lassen, während man sich mit etwas anderem beschäftigt.
-
-3. Exportieren sie die gewonnenen Daten in Excel und stellen sie die Daten als in t-$\alttheta$-Diagramm dar.
+3. Exportieren sie die gewonnenen Daten in Excel und stellen sie die Daten als in $t$- $\vartheta$ -Diagramm dar.
 
 4. Schätzen sie mit Hilfe von Excel eine Gleichung für die Abkühlungskurve ab. Überlegen sie dafür, welche Faktoren alles eine Rolle spielen könnten.
 
@@ -74,4 +72,4 @@ Noch zu erledigen.
 
 ### Schaltplan
 
-![PT100_Schaltplan](Images\PT100_Schaltplan.png)
+![PT100_Schaltplan](Images/PT100_Schaltplan.png)

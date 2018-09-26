@@ -14,11 +14,11 @@ Die Lade- und Entladezeit ist proportional zum Widerstand und zur Kapazit채t, f�
 
 **Versuchsaufbau:**
 
-![Kondensator2_Steckplatine](Images\Kondensator2_Steckplatine.png)
+![Kondensator2_Steckplatine](Images/Kondensator2_Steckplatine.png)
 
 Bet채tigen von Schalter S1 l채d den Kondensator auf, bet채tigen von Schalter S2 entl채d den Kondensator. Wird kein Schalter gedr체ckt beh채lt der Kondensator seinen aktuellen Ladezustand bei. Alternativ kann statt zweier Schalter auch durch Umstecken eines Kabels umgeschaltet werden:
 
-![Kennlinie_Steckplatine2](Images\Kondensator3_Steckplatine.png)
+![Kennlinie_Steckplatine2](Images/Kondensator3_Steckplatine.png)
 
 
 
@@ -105,8 +105,8 @@ Noch zu erledigen.
 
 ![Graphen](Images/Ladung_Entladung.png)
 
-![Ladekurvenfit](Images\Ladekurvenfit.png)
+![Ladekurvenfit](Images/Ladekurvenfit.png)
 
 ### Schaltplan
 
-![Kondensator_Schaltplan](Images\Kondensator2_Schaltplan.png)
+![Kondensator_Schaltplan](Images/Kondensator2_Schaltplan.png)
