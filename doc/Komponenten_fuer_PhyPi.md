@@ -14,6 +14,8 @@
 | 8.   | 5,1V/2,5A Universal-Netzteil micro-USB        | [Eckstein](https://eckstein-shop.de/) | [5,1V/2,5A Universal Netzteil micro USB](https://eckstein-shop.de/51V-25A-Universal-Netzteil-micro-USB-Raspberry-Pi-3-Ladegeraet-Power-Adapter-Schwarz) |       8,95 |
 | 9.   | Breadboard-Leitungen (Drahtbrücken)           | [Eckstein](https://eckstein-shop.de/) | [65 Pcs Breadboard Steckbrücken Drahtbrücken flexibel jumper wires Kabel](https://eckstein-shop.de/65-Pcs-Breadboard-Steckbruecken-Drahtbruecken-flexibel-jumper-wires-Kabel) |       2,95 |
 
+<div style="page-break-after: always;"></div>
+
 ## 2. Grundausstattung Komponenten (Einführungskurs)
 
 Die Sortimente 1., 2. und 3. reichen für bis zu 10 PhyPi-Schülersets. Das LED-Sortiment (4.) reicht für bis zu 5 PhyPi-Schülersets.
@@ -33,6 +35,8 @@ Die Sortimente 1., 2. und 3. reichen für bis zu 10 PhyPi-Schülersets. Das LED-
 | 11.  | Ringschraube M4 für Kraftsensor (ähnl. DIN 580)     | [EDELSTAH.NIRO](https://www.edelstahl-niro.de/) | [Ring-Schraube 4mm (A4-Edelstahl)](https://www.edelstahl-niro.de/ring-schraube-edelstahl-p-3062.html?gclid=EAIaIQobChMInNOOlP2r3QIVjeR3Ch3ZdQ5mEAQYASABEgJsvPD_BwE) |       1,79 |
 | 12.  | Instrumentenverstärker AD 623 ANZ                   | [reichelt](https://www.reichelt.de/)            | [AD 623 ANZ](https://www.reichelt.de/instrumentenverstaerker-100-khz-dil-8-ad-623-anz-p185350.html?r=1) |       6,35 |
 
+<div style="page-break-after: always;"></div>
+
 ## 3. Weitere Sensoren
 
 |      | Komponente                                                   | mögliche Bezugsquelle                 | Link                                                         | Preis in € |
@@ -47,11 +51,14 @@ Die Sortimente 1., 2. und 3. reichen für bis zu 10 PhyPi-Schülersets. Das LED-
 | 8.   | Kraftsensor TAL221 (Wägezelle, Biegebalken 500 g)            | [Eckstein](https://eckstein-shop.de/) | [SparkFun Mini Load Cell - 500g, Straight Bar (TAL221)](https://eckstein-shop.de/SparkFun-Mini-Load-Cell-500g-Straight-Bar-TAL221) |      11,84 |
 | 9.   | Schiebepotentiometer (10k&Omega;, linear) für Wegmessung     | [reichelt](https://www.reichelt.de/)  | [RS60N12-LIN10K](https://www.reichelt.de/schiebepotentiometer-stereo-10-kohm-linear-rs60n12-lin10k-p73870.html) |       4,99 |
 
+
 ## 4. Pico-Scope (Oszilloskop)
 
 |      | Komponente                      | mögliche Bezugsquelle                | Link                                                    | Preis in € |
 | ---- | ------------------------------- | ------------------------------------ | ------------------------------------------------------- | ---------: |
 | 1.   | PicoScope 2200A USB-Oszilloskop | [Meilhaus ](https://www.meilhaus.de) | [PS 2204A](https://www.meilhaus.de/picoscope-2204a.htm) |      95,00 |
+
+<div style="page-break-after: always;"></div>
 
 ## 5. Sonstige Chips zur Sensorauswertung
 
