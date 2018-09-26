@@ -2,7 +2,7 @@
 
 Data Acquisition and analysis for Physics education with Raspberry Pi
 
-This is the **english** version of the documentation.
+This is the **English** version of the documentation.
 
 For German readers:  
 Die **deutsche Version** dieses Dokuments findet sich unter dem Link [README_de.md](README_de.md).
