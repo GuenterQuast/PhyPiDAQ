@@ -270,10 +270,10 @@ sudo pip3 install *.whl
 
 ### Documentation
 
-- `doc/Kurs_digitale_Messtechnik.md  (.pdf)`    
+- `doc/Kurs_digitale_Messtechnik.md (.pdf)`    
     German only: Introductory course to measuring with the Raspberry Pi
-- `doc/Einrichten_des_Raspberry_Pi.md`   
+- `doc/Einrichten_des_Raspberry_Pi.md (.pdf)`   
     German only: setting up the Raspberry Pi for this project
-- `doc/Komponenten_fuer_PhyPi.md`  
+- `doc/Komponenten_fuer_PhyPi.md (.pdf)`  
     recommended components for this project
 

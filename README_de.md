@@ -272,8 +272,8 @@ sudo pip3 install *.whl
 
 - `doc/Kurs_digitale_Messtechnik.md  (.pdf)`  
     Einführungskurs für Schüler zum Messen mit dem Raspberry Pi
-- `doc/Einrichten_des_Raspberry_Pi.md`   
+- `doc/Einrichten_des_Raspberry_Pi.md (.pdf)`   
     Aufsetzen des Raspberry Pi für dieses Projekt
-- `doc/Komponenten_fuer_PhyPi.md`  
+- `doc/Komponenten_fuer_PhyPi.md (.pdf)`   
     empfohlene Komponenten für dieses Projekt
 
