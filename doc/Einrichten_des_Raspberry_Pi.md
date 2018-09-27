@@ -15,7 +15,9 @@ Für die Inbetriebnahme des Raspberry Pi ist es notwendig, das zugehörige **Bet
 2. Da das heruntergeladene Betriebssystem für den Raspberry als komprimierte ZIP-Datei vorliegt, muss diese vor dem Beschreiben der Micro-SD-Karte entpackt werden. Da es aufgrund der Dateigröße mit verschiedenen Programmen zum Entpacken von ZIP-Dateien zu Problemen kommen kann, wird empfohlen, diesen Schritt mit dem Programm **7Zip** durchzuführen. Sollte das genannte Programm  auf Ihrem PC nicht installiert sein, können Sie dieses über diesen [Link](https://www.7-zip.org/download.html) herunterladen und darauffolgend installieren.
 
    - **Entpacken** Sie die **ZIP-Datei** in ein Verzeichnis Ihrer Wahl. ![](images/commissioning/7Zip.png)
+
 <div style="page-break-after: always;"></div>
+
 3. Um eine **startfähige Micro-SD-Karte** für den Raspberry zu erhalten, muss diese jetzt noch mit dem entpackten **Image des Betriebssystems** beschrieben werden:
 
    - **Laden** Sie den [Win32-Disk-Imager](https://sourceforge.net/projects/win32diskimager/) (alternativ [Etcher](https://etcher.io/) für andere Betriebssysteme als Windows) herunter und **installieren** Sie das Programm.
