@@ -628,6 +628,14 @@ Führen wir also die Kalibrierung durch:
 
 &nbsp;
 
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
 - Lesen Sie aus dem Diagramm den ungefähr erwarteten digitalisierten Spannungswert für eine Temperatur von 35 °C ab und notieren Sie diesen.
 
 
@@ -680,3 +688,182 @@ Ergänzen wir also die Berechnung der Temperatur:
 Ergänzen Sie die fehlenden Begriffe für unser Beispiel des digitalen Thermometers.
 
 ![](images/course/measuring_chain_NTC.PNG)
+
+# 7. Wir bauen einen digitalen Kraftsensor
+
+Wir alle kennen digitale Waagen aus der Küche oder aus dem Bad. Wie funktioniert aber eine solche Waage und wie können wir Komponenenten aus einer handelsüblichen Küchenwaage nutzen, um einen digitalen Kraftsensor für Physikexperimente zu bauen?
+
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 1: </span> Geben Sie die physikalische Größe an, die bei einer Waage gemessen wird.
+
+
+&nbsp;
+------
+
+Nachfolgend ist eine handelsübliche günstige Küchenwaage von innen zu sehen. Der längliche Aluminiumstab ist das Herzstück der Waage, eine sogenannte Wägezelle.
+![](images/course/load_cell.PNG)
+
+Wie funktioniert aber eine solche Wägezelle und wie können wir uns daraus einen digitalen Kraftsensor bauen?
+
+Die Wägezelle besteht aus einem Federkörper (Doppelbiegebalken), dem Aluminiumstab mit den zwei überlappenden Bohrungen. Dieser verformt sich abhängig von der Größe der eingeleiteten Kraft, vergleichbar mit einer Schraubenfeder (z.B. in einem Federkraftmesser), die sich abhängig von der an ihr ziehenden Kraft verlängert bzw. verkürzt.
+
+![](images/course/sketch_load_cell.PNG)
+
+Nachfolgend ist eine Prinzipskizze einer solchen Wägezelle dargestellt, in der die durch die eingeleitetete Kraft hervorgerufene Verformung stark übertrieben dargestellt ist. Wie bei den vorherigen Sensoren brauchen wir ein auswertbares elektrisches Signal, mit dessen Hilfe wir auf die Größe der eingeleiteten Kraft schließen können. Dazu müssen wir die kraftabhängige Verformung des Federkörpers elektrisch auswerten können. In einer solchen Wägezelle kommen sogenannte Dehnungsmessstreifen zum Einsatz, die aus einem gewundenen Widerstandsdraht mit zwei Anschlüssen bestehen und auf einer Trägerfolie aufgebracht sind. Vier dieser Dehnungsmessstreifen sind so auf dem Federkörper aufgeklebt, dass diese sich Krafteinwirkung gemeinsam mit dem Federkörper verformen.
+
+![](images/course/principle_sketch_load_cell.PNG)
+
+
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 2: </span> Streichen Sie unter Berücksichtigung der Prinzipskizze die falschen Aussagen durch.
+
+Bei Krafteinwirkung werden die Dehnungsmessstreifen ***R<sub>1</sub>*** und ***R<sub>4</sub>*** *gedehnt / gestaucht*. Der Widerstandsdraht der Dehnungsmessstreifen wird also *länger und dünner / kürzer und dicker*. Die Länge des Drahtes ***L*** *vergrößert / verkleinert* sich also, während sich der Durchmesser ***D*** und damit die Querschnittsfläche ***A*** des Drahtes *vergrößert / verkleinert*.
+
+Bei Krafteinwirkung werden die Dehnungsmessstreifen ***R<sub>2</sub>*** und ***R<sub>3</sub>*** *gedehnt / gestaucht*. Der Widerstandsdraht der Dehnungsmessstreifen wird also *länger und dünner / kürzer und dicker*. Die Länge des Drahtes ***L*** *vergrößert / verkleinert* sich also, während sich der Durchmesser ***D*** und damit die Querschnittsfläche ***A*** des Drahtes *vergrößert / verkleinert*.
+
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 3: </span> 
+
+Für den unbelasteten Dehnungsmessstreifen ergibt sich mit dem spezifischen Widerstand des Drahtes ***&rho;*** für den Widerstand ***R***:
+$$
+R=\rho\cdot\frac{L}{A}=\rho\cdot\frac{4 \cdot L}{D^2 \cdot \pi}
+$$
+Ergänzen Sie das folgende Schema mit Hilfe der Gleichung oben. Setzen Sie dazu folgende Begriffe passend ein: *gedehnt, gestaucht, größer, kleiner*
+
+![](images/course/dms_behavior.PNG)
+
+### Schaltungsentwurf
+
+Unser digitaler Kraftsensor folgt dem gleichen Grundprinzip der digitalen Messwerterfassung wie die Lichtautomatik oder das digitale Thermometer. 
+
+![](images/course/measuring_chain_force.PNG)
+
+Zur Erinnerung: Unser Ziel ist es ja, Kräfte digital messen zu können. Durch die Dehnungsmessstreifen auf dem Federkörper der Wägezelle sind wir in der Lage, die durch die Krafteinwirkung verursachte Dehnung in eine Widerstandsänderung zu wandeln. Damit wir diese Widerstandsänderung digitalisieren können, müssen wir diese noch in ein weiterverarbeitbares elektrisches Signal wandeln, das wir mit unserem AD-Wandler digitalisieren können.
+
+**Problem:** Die Widerstandsänderung der Dehnungmessstreifen ist sehr klein. Mit einem Spannungsteiler wie beim digitalen Thermometer erhalten wir kein auswertbares Spannungssignal.
+
+**Lösungsansatz:** Wir brauchen eine Schaltung, die empfindlich auf kleine Widerstandänderungen reagiert und diese in eine auswertbare Spannung wandelt. In der Messtechnik kommt dabei eine Brückenschaltung (Wheatstonesche Messbrücke) zum Einsatz.
+
+Dazu benutzt man zwei parallele Spannungsteiler aus insgesamt vier Widerständen, die zusammen eine Brückenschaltung bilden.
+
+![](images/course/wheatstone_bridge.PNG)
+
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 4: </span> Berechnen Sie die Spannungsverhältnisse für die beiden Spannungsteiler für den Fall, dass die Wägezelle unbelastet ist und alle vier Widerstände *R<sub>1</sub>* = *R<sub>2</sub>* = *R<sub>3</sub>* = *R<sub>4</sub>* = *R* = 1000 &Omega; groß sind. Zur Erinnerung: Die Spannungen in einem Spannungsteiler verhalten sich immer wie die zugehörigen Widerstände. Damit ergeben sich für die Verhältnisse folgende Gleichungen.
+$$
+\frac{U_1}{U_2}=\frac{R_1}{R_{2}}
+$$
+bzw.
+$$
+\frac{U_3}{U_4}=\frac{R_3}{R_{4}}
+$$
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 5: </span> Notieren Sie: Was ergibt sich damit für die Spannungen *U<sub>1</sub>* , *U<sub>2</sub>* , *U<sub>3</sub>*  und *U<sub>4</sub>*, wenn die Gesamtspannung *U<sub>0</sub>* = 5 V beträgt?
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 6: </span> Aus den Teilspannungen können wir nun mit Hilfe der Maschenregel (2. Kirchhoff'sches Gesetz), die für uns relevante Messspannung *U<sub>M</sub>* berechnen. Dazu schauen wir uns die Masche aus *U<sub>2</sub>* , *U<sub>4</sub>*  und *U<sub>M</sub>* an (grüner Pfeil in der Abbildung der Schaltung).
+
+Zur Erinnerung hier noch einmal die Maschenregel:  
+Die Summe aller Teilspannungen längs einer geschlossenen Masche ist gleich null.
+
+Stellen Sie mit Hilfe der Maschenregel die Gleichung für die Messspannung *U<sub>M</sub>* in Abhängigkeit von *U<sub>2</sub>* und *U<sub>4</sub>* auf.
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 7: </span> Notieren Sie: Was gilt für die Messspannung *U<sub>M</sub>* mit den Ergebnissen für die Spannungen *U<sub>2</sub>* und *U<sub>4</sub>* aus Aufgabe 5? 
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 8: </span> Denken wir noch einmal zurück an die Dehnungsmessstreifen auf der Wägezelle. Wirkt eine Kraft auf die Wägezelle, so werden die Dehnungsmessstreifen *R<sub>1</sub>* und *R<sub>4</sub>* gedehnt und ihr ohmscher Widerstand erhöht sich. Die Dehnungsmessstreifen *R<sub>2</sub>* und *R<sub>3</sub>* werden hingegen gestaucht und ihr ohmscher Widerstand verringert sich.
+
+Beschreiben Sie, wie sich die Spannungen *U<sub>1</sub>* , *U<sub>2</sub>* , *U<sub>3</sub>*  und *U<sub>4</sub>* verändern, wenn eine Kraft auf die Wägezelle wirkt. Notieren Sie die Gleichungen, mit deren Hilfe Sie zu den Ergebnissen gekommen sind.
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 9: </span> Beschreiben Sie: Wie verändert sich mit den Ergebnissen aus Aufgabe 8 (belastete Wägezelle) die Messspannung *U<sub>M</sub>* gegenüber Aufgabe 7 (unbelastete Wägezelle)?
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+
+&nbsp;
+
+Unsere Erkenntnis aus den Aufgaben zuvor ist also, dass man mit Hilfe einer Brückenschaltung (Wheatstonesche Messbrücke) kleine Widerstandänderungen detektieren und in ein weiterverarbeitbares Spannungssignal wandeln kann. Ergänzen wir nun also unser Schema zum Grundprinzip der digitalen Messwerterfassung.
+
+![](images/course/measuring_chain_force_2.PNG)
+
+Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierung an. Damit wir für die weiteren Schritte auf unsere Messergebnisse zugreifen können, nutzen wir das das Programm `phypi.py`. Hier haben wir die Möglichkeiten uns die digitalisierten Messwerte grafisch anzeigen zu lassen und können diese zur Auswertung abspeichern. Im Hintergrund laufen dabei die selben Schritte ab, wie wir sie beim digitalen Thermomter in unseren eigenen Programmen durchgeführt haben.
+
+### Realisierung des digitalen Kraftsensors
+
+**Material:**
+
+- Kraftsensor, Wägezelle TAL220B
+- AD-Wandler ADS1115
+- Breadboard mit Spannungsversorgung und Netzteil
+- Breadboard-Leitungen in verschiedenen Farben
+- Raspberry Pi
+- Flachbandkabel
+- Instrumentenverstärker AD 623 ANZ
+- 2 x 10 k&Omega; Widerstand
+
+...
