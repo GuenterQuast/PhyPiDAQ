@@ -5,7 +5,7 @@ Data Acquisition and analysis for Physics education with Raspberry Pi
 This is the **English** version of the documentation.
 
 For German readers:  
-Die **deutsche Version** dieses Dokuments findet sich unter dem Link [README_de.md](README_de.md).
+Die **deutsche Version** dieses Dokuments findet sich unter dem Link [README_de.md](README_de.md) bzw. [README_de.pdf](README_de.pdf) .
 
 
 This *python3*  code provides some basic functionality for data acquisition and visualisation like data logger, bar-chart, XY- or oscilloscope display and data recording on disk.  
@@ -164,7 +164,7 @@ frqSG: 0.
 
 Examples of other devices like the analog-to-digital converter MCP3008, of rate measurements via the GPIO pins of the Raspberry Pi or temperature measurements with PT100 sensors and the resistance-to-digital converter MAX31865 are also contained in the configuration directory, see files `MCP3008Config.yaml`, `GPIOcount.yaml` or `MAX31865Config.yaml`, respectively.
 
-
+<div style="page-break-after: always;"></div>
 
 ## Installation of PhyPiDAQ on a Raspberry Pi
 

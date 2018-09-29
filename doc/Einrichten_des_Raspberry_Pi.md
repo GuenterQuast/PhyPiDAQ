@@ -183,7 +183,7 @@ Da bei einer Verbindung des Anzeigegeräts über **VNC** mit dem Raspberry Pi di
 ![](images/commissioning/reboot.png)  
 
 ## 5. Installation PhyPiDAQ
-Die Installation von **PhyPiDAQ** erfolgt über die **Kommandozeile** (siehe 4.). Dazu folgen Sie bitte der Anleitung in der **README_de.md (.pdf)** unter dem Punkt ***Installation von PhyPiDAQ auf dem Raspberry Pi***.
+Die Installation von **PhyPiDAQ** erfolgt über die **Kommandozeile** (siehe 4.). Dazu folgen Sie bitte der Anleitung in der [README_de.md](../README_de.md) bzw. [README_de.pdf](../README_de.pdf) unter dem Punkt ***Installation von PhyPiDAQ auf dem Raspberry Pi***.
 
 <div style="page-break-after: always;"></div>
 
