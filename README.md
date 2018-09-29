@@ -71,11 +71,12 @@ A typical, commented example of the main configuration file is shown here:
     ## - [0., 1.]   # chan 1
     ## - [0., 1.]   # chan 2
     
+    # calibration of channel values
+    #  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
     #ChanCalib:
-    #  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ] 
     #  - 1.                       # chan0: simple calibration factor
     #  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
-    #  - null                     # chan2: no calbration
+    #  - null                     # chan2: no calibration
     
     # apply formulae to calibrated channel values
     #ChanFormula:
@@ -206,7 +207,7 @@ sudo usermod -a -G tty pi
 mkdir git
 cd git
 git clone https://GuenterQuast/PhyPiDAQ
-cd PhyPicDAQ/whl
+cd PhyPiDAQ/whl
 sudo pip3 install *.whl
 ```
 
