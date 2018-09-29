@@ -162,7 +162,7 @@ Beispiele für andere Geräte, wie den Analog-Digital-Wandler MCP3008, für Rate
 mit PT100-Sensoren am MAX31865 'Resistance to Digital-Converter' sind im Konfigurationsverzeichnis `./config/` enthalten, siehe
 `MCP3008Config.yaml` bzw. `GPIOcount.yaml` oder `MAX31865Config.yaml`.
 
-
+<div style="page-break-after: always;"></div>
 
 ## Installation von PhyPiDAQ auf dem Raspberry Pi
 
@@ -210,7 +210,7 @@ cd PhyPiDAQ/whl
 sudo pip3 install *.whl
 ```
 
-
+<div style="page-break-after: always;"></div>
 
 ## Übersicht über Dateien im Paket PhyPiDAQ 
 
