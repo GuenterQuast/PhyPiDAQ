@@ -180,7 +180,7 @@ def setup():
     if 'DAQModule' in DEVconfDicts[i]:
       DEVNames.append(DEVconfDicts[i]['DAQModule'])
     elif 'DAQModule' in PhyPiConfDict:
-      DEVNames.append(PhyPiConfDict['DAQModule'][i])
+      DEVNames.append(PhyPiConfDict['DAQModule'])
     else:  # try to derive from name of Device Config File
       cdir, cfnam = os.path.split(DeviceFiles[i])
       DEVNames.append(cfnam.split('.')[0])
