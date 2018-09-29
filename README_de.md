@@ -206,7 +206,7 @@ sudo usermod -a -G tty pi
 mkdir git
 cd git
 git clone https://GuenterQuast/PhyPiDAQ
-cd PhyPicDAQ/whl
+cd PhyPiDAQ/whl
 sudo pip3 install *.whl
 ```
 
