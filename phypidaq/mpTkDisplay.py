@@ -81,21 +81,21 @@ def mpTkDisplay(Q, conf,
     # print('*==* yieldEvt_fromQ: received END event')          
     sys.exit()
 
-  def cmdResume():
+  def cmdResume(_event=None):
     cmdQ.put('R')
     buttonP.config(text='Pause', fg='blue', state=Tk.NORMAL)
     buttonR.config(state=Tk.DISABLED)
 
-  def cmdPause():
+  def cmdPause(_event=None):
     cmdQ.put('P')
     buttonP.config(text='paused', fg='grey', state=Tk.DISABLED)
     buttonR.config(state=Tk.NORMAL)
     
 
-  def cmdEnd():
+  def cmdEnd(_event=None):
     cmdQ.put('E')
 
-  def cmdSave():
+  def cmdSave(_event=None):
     cmdPause()
     try:
       filename = asksaveasfilename(initialdir='.', initialfile='DGraphs.png', 
@@ -131,6 +131,7 @@ def mpTkDisplay(Q, conf,
 
   buttonE = Tk.Button(frame, text='End', fg='red', command=cmdEnd)
   buttonE.grid(row=0, column=8)
+  root.bind('E', cmdEnd)
 
   blank = Tk.Label(frame, width=7, text="")
   blank.grid(row=0, column=7)
@@ -140,13 +141,16 @@ def mpTkDisplay(Q, conf,
 
   buttonSv = Tk.Button(frame,width=8,text='save',fg='purple', command=cmdSave)
   buttonSv.grid(row=0, column=4)
+  root.bind('S', cmdSave)
 
   buttonP = Tk.Button(frame,width=8,text='Pause',fg='blue', command=cmdPause)
   buttonP.grid(row=0, column=3)
+  root.bind('P', cmdPause)
 
   buttonR = Tk.Button(frame,width=8,text='Resume',fg='blue', command=cmdResume)
   buttonR.grid(row=0, column=2)
   buttonR.config(state=Tk.DISABLED)
+  root.bind('R', cmdResume)
 
   LblStatus = Tk.Label(frame, width=13, text="")
   LblStatus.grid(row=0, column=0)
