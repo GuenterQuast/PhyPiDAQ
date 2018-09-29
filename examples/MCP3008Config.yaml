@@ -1,5 +1,7 @@
 # example of a configuration file for ADC MCP3008
 
+DAQModule: MCP3008Config
+
 ADCChannels:   [0, 1, 2, 3]   # active Channels (0 - 7)
 
 DifModeChan:  [false, false, false, false ] # differential mode for channels 0/1, 2/3, 4/5 or 6/7

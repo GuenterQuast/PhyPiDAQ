@@ -22,9 +22,9 @@ ChanColors: [darkblue, darkred]         # channel colours in display
 # ChanColors: [darkblue, sienna, red, green]      # only one channel
 
 # overwrite Channel Limits of Device 
-#ChanLimits: 
- #- [-0.03, 3.3]
- #- [-0.03, 3.3]
+ChanLimits: 
+ - [0.0, 30.]
+ - [0.0, 60.]
 
 DataFile:   null                  # file name for output file 
 #DataFile:   testfile             # file name for output file 

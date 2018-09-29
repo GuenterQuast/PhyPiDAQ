@@ -1,4 +1,7 @@
 # example of a configuration file for PicoScope 2000 Series
+
+DAQModule: PSConfig
+
 PSmodel: 2000a
 
 # channel configuration 
