@@ -1,6 +1,6 @@
 # PhyPiDAQ
 
-Data Acquisition and analysis for Physics education with Raspberry Pi
+#### Data Acquisition and analysis for Physics education with Raspberry Pi
 
 This is the **English** version of the documentation.
 
