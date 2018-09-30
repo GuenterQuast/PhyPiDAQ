@@ -54,13 +54,13 @@ DeviceFile: config/ADS1115Config.yaml
 ## ein Beispiel für mehrere Geraete
 #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
 
-DisplayModule: DataLogger     # zeitlicher Verlauf der Messgroessen an
-# DisplayModule: DataGraphs  # text, Balkendiagramm, zeitlicher Verlauf und xy-Darstellung
-Interval: 0.1                    # Datennahme-Intervall in Sekunden
-XYmode:     false              # XY-Darstellung ein/aus 
+DisplayModule: DataLogger     # zeitlicher Verlauf der Messgroessen
+# DisplayModule: DataGraphs   # text, Balkendiagramm, zeitlicher Verlauf und xy-Darstellung
+Interval: 0.1                 # Datennahme-Intervall in Sekunden
+XYmode:     false             # XY-Darstellung ein/aus 
 
 # Angaben fuer jeden Kanal
-ChanLabels: [(V), (V) ]           # Namen und/oder Einheiten fuer jeden Kanal 
+ChanLabels: [(V), (V) ]          # Namen und/oder Einheiten fuer jeden Kanal 
 ChanColors: [darkblue, sienna]   # Farbzuordnung in der Anzeige
 
 # ggf. werden hier die Informationen aus der Geraete-Konfiguration ueberschrieben 
