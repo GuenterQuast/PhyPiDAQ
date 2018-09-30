@@ -44,50 +44,52 @@ A typical, commented example of the main configuration file is shown here:
 
 **file PhyPiConf.daq**
 
-    # Configuration Options for PhyPiDAQ
-    
-    # device configuration files
-    DeviceFile: config/ADS1115Config.yaml
-    #DeviceFile: config/MCP3008Config.yaml
-    #DeviceFile: config/PSConfig.yaml
-    #DeviceFile: config/MAX31865Config.yaml
-    #DeviceFile: config/GPIOCount.yaml
-    
-    ## an example for multiple devices
-    #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
-    
-    DisplayModule: DataLogger
-    # DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
-    Interval: 0.1                     # logging interval
-    XYmode:     false                 # enable/disable XY-display
-    
-    # channel-specific information
-    ChanLabels: [(V), (V) ]          # names and/or units for channels 
-    ChanColors: [darkblue, sienna]    # channel colours in display
-    
-    # eventually overwrite Channel Limits obtained from device config 
-    ##ChanLimits: 
-    ## - [0., 1.]   # chan 0
-    ## - [0., 1.]   # chan 1
-    ## - [0., 1.]   # chan 2
-    
-    # calibration of channel values
-    #  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
-    #ChanCalib:
-    #  - 1.                       # chan0: simple calibration factor
-    #  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
-    #  - null                     # chan2: no calibration
-    
-    # apply formulae to calibrated channel values
-    #ChanFormula:
-    #  - c0 + c1  # chan0
-    #  - c1          # chan1
-    #  - null        # chan2 : no formula
-    
-    # name of output file
-    #DataFile:   testfile.csv     # file name for output file 
-    DataFile:   null              #      use null if no output wanted
-    #CSVseparator: ';'            # field separator for output file, defaults to ','
+```yaml
+# Configuration Options for PhyPiDAQ
+
+# device configuration files
+DeviceFile: config/ADS1115Config.yaml
+#DeviceFile: config/MCP3008Config.yaml
+#DeviceFile: config/PSConfig.yaml
+#DeviceFile: config/MAX31865Config.yaml
+#DeviceFile: config/GPIOCount.yaml
+
+## an example for multiple devices
+#DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
+
+DisplayModule: DataLogger
+# DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+Interval: 0.1                     # logging interval
+XYmode:     false                 # enable/disable XY-display
+
+# channel-specific information
+ChanLabels: [(V), (V) ]          # names and/or units for channels 
+ChanColors: [darkblue, sienna]    # channel colours in display
+
+# eventually overwrite Channel Limits obtained from device config 
+##ChanLimits: 
+## - [0., 1.]   # chan 0
+## - [0., 1.]   # chan 1
+## - [0., 1.]   # chan 2
+
+# calibration of channel values
+#  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
+#ChanCalib:
+#  - 1.                       # chan0: simple calibration factor
+#  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
+#  - null                     # chan2: no calibration
+
+# apply formulae to calibrated channel values
+#ChanFormula:
+#  - c0 + c1  # chan0
+#  - c1          # chan1
+#  - null        # chan2 : no formula
+
+# name of output file
+#DataFile:   testfile.csv     # file name for output file 
+DataFile:   null              #      use null if no output wanted
+#CSVseparator: ';'            # field separator for output file, defaults to ','
+```
 
 
 
