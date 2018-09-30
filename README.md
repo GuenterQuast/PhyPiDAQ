@@ -181,7 +181,8 @@ This package relies on code from other packages providing the drivers for the su
 - the low-level drivers contained in the Pico Technology Software Development Kit 
     <https://www.picotech.com/downloads>
 
-For convenience, installation files for external packages in pip wheel format are provided in sub-directory *./whl*.
+For convenience, installation files for external packages and for modules of this package 
+in pip wheel format are provided in sub-directory *./whl*. 
 
 The visualization modules depend on *matplotlib.pyplot*, *Tkinter* and *pyQt5*, which must also be installed.
 

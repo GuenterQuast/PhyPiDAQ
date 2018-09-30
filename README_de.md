@@ -179,7 +179,9 @@ Dieses Paket basiert auf Code aus anderen Paketen, die die Treiber für die unte
 - die C-Treiber aus dem Pico Technology Software Development Kit
     <https://www.picotech.com/downloads>
 
-Zur Vereinfachung der Installation werden Installationsdateien für benötigte externe Pakete im *pip*-Wheel-Format im Unterverzeichnis *./whl*/ bereitgestellt .
+Zur Vereinfachung der Installation werden Installationsdateien
+für benötigte externe Pakete und für die Module dieses Pakets  
+im *pip*-Wheel-Format im Unterverzeichnis *./whl*/ bereitgestellt .
 
 Die Module zur Visualisierung hängen von *matplotlib.pyplot* , *Tkinter* und *pyQt5* ab, die ebenfalls installiert sein müssen.
 
