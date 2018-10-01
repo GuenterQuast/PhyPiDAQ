@@ -272,7 +272,7 @@ sudo pip3 install *.whl
 
 ### Dokumentation
 
-- `doc/Kurs_digitale_Messtechnik.md  (.pdf)`  
+- `doc/Kurs_digitale_Messwerterfassung_mit_PhyPiDAQ.md  (.pdf)`  
     Einführungskurs für Schüler zum Messen mit dem Raspberry Pi
 - `doc/Einrichten_des_Raspberry_Pi.md (.pdf)`   
     Aufsetzen des Raspberry Pi für dieses Projekt
