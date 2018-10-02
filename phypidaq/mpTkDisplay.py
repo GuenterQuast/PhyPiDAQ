@@ -83,7 +83,7 @@ def mpTkDisplay(Q, conf,
 
   def cmdResume(_event=None):
     cmdQ.put('R')
-    buttonP.config(text='Pause', fg='blue', state=Tk.NORMAL)
+    buttonP.config(text='Pause', underline=0, fg='blue', state=Tk.NORMAL)
     buttonR.config(state=Tk.DISABLED)
 
   def cmdPause(_event=None):
@@ -129,7 +129,7 @@ def mpTkDisplay(Q, conf,
   frame.grid(row=0, column=8)
   frame.pack(padx=5, side=Tk.BOTTOM)
 
-  buttonE = Tk.Button(frame, text='End', fg='red', command=cmdEnd)
+  buttonE = Tk.Button(frame, text='End', underline=0, fg='red', command=cmdEnd)
   buttonE.grid(row=0, column=8)
   root.bind('E', cmdEnd)
 
@@ -139,15 +139,18 @@ def mpTkDisplay(Q, conf,
   clock = Tk.Label(frame)
   clock.grid(row=0, column=5)
 
-  buttonSv = Tk.Button(frame,width=8,text='save',fg='purple', command=cmdSave)
+  buttonSv = Tk.Button(frame, width=8, text='save', underline=0, fg='purple',
+                   command=cmdSave)
   buttonSv.grid(row=0, column=4)
   root.bind('S', cmdSave)
 
-  buttonP = Tk.Button(frame,width=8,text='Pause',fg='blue', command=cmdPause)
+  buttonP = Tk.Button(frame, width=8, text='Pause', underline=0,  fg='blue',
+                   command=cmdPause)
   buttonP.grid(row=0, column=3)
   root.bind('P', cmdPause)
 
-  buttonR = Tk.Button(frame,width=8,text='Resume',fg='blue', command=cmdResume)
+  buttonR = Tk.Button(frame, width=8, text='Resume', underline=0, fg='blue',
+                    command=cmdResume)
   buttonR.grid(row=0, column=2)
   buttonR.config(state=Tk.DISABLED)
   root.bind('R', cmdResume)
