@@ -5,7 +5,7 @@
      this script reads data samples from PicoScope and 
      displays data as effective voltage, history display and xy plot
 
-     Usage: ./runPicoScope_demo.py [Interval <PhyPiConf_file>.yaml]
+     Usage: ./run_phypi.py [<PhyPiConf_file>.daq] [Interval]
 '''
 
 from __future__ import print_function, division, unicode_literals

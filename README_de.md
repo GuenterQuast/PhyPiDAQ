@@ -259,11 +259,12 @@ sudo pip3 install *.whl
 
 ### Beispiele
 
+- `examples/read_analog.py`
+    sehr minimalistisches Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
 - `examples/runOsci.py`  
     Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben
 - `example/PSCosci.yaml`  
      Konfigurationsdatei für PicoScope USB-Oszilloskop, verwendet von *runOsci.py*
-
 - `examples/poissonLED.py`  
     erzeugt ein zufälliges Signal an GPIO-Pin gemäß Poisson-Prozess 
 - `examples/FreqGen.py`  

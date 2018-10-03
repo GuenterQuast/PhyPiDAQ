@@ -261,11 +261,12 @@ sudo pip3 install *.whl
 
 ### Examples 
 
+- `examples/read_analog.py`
+    very minimalist example to read one channel from an analog-to-ditigal converter
 - `examples/runOsci.py`  
     run an oscilloscope display, configuration as specified in *.yaml* file
 - `example/PSCosci.yaml`  
     configuration file for PicoScope USB oscilloscope, used by *runOsci.py*
-
 - `examples/poissonLED.py`  
     generate a random signal following Poisson statistics on a GPIO pin
 - `examples/FreqGen.py`  
