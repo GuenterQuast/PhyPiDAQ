@@ -3,10 +3,8 @@
 
 '''read_analog.py
      this script illustrates the general usage of package phypidaq
-     writes data read from an analog channel
-
+     pirints data read from an analog channel
 '''
-
 import time, numpy as np
 
 # import module controlling readout device
