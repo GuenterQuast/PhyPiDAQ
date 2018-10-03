@@ -527,7 +527,8 @@ class Ui_PhyPiWindow(object):
         fDev = open(confdir + '/' + DevFile, 'w')
         print(DevConfs[i], file = fDev )
         fDev.close()
-        return 0
+
+      return 0
 
     def saveDefaultConfig(self):
       self.saveConfig(self.ConfDir)
