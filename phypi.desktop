@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=PhyPi
+Comment=PhyPi Configuration
+Icon=/home/pi/git/PhyPiDAQ/images/PhiPi_icon.xpm
+Exec=git/PhyPiDAQ/phypi.py
+Terminal=True
+
