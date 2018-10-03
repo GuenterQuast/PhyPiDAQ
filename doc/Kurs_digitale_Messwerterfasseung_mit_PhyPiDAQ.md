@@ -7,25 +7,24 @@
 
 <center><span style="color:#5882FA; font-size: 40pt"> Einführungskurs <br>zur digitalen Messwerterfassung <br> mit dem Raspberry Pi <br> und PhyPiDAQ  </span></center>
 
+
+| Übersicht über wichtige Komponenten                |                                                              |
+| -------------------------------------------------- | :----------------------------------------------------------: |
+| AD-Wandler ADS1115                                 |           ![](images/course/component_ads1115.png)           |
+| Bananenbuchse mit angeschlossener Breadboarleitung |         ![](images/course/component_banana_jack.png)         |
+| Fotowiderstand (LDR Typ5516)                       |             ![](images/course/component_ldr.png)             |
+| Instrumentenverstärker AD623                       |  ![](images/course/component_instrumentation_amplifier.png)  |
+| Keramikkondensator 0,1 µF                          |       ![](images/course/component_capacitor_0,1µF.png)       |
+| Elektrolytkondensator 10 µF                        |       ![](images/course/component_capacitor_10µF.png)        |
+| Kraftsensor, Wägezelle TAL220B                     |        ![](images/course/component_force_sensor.png)         |
+| NTC-Widerstand *R<sub>25</sub>* = 10 k&Omega;      |             ![](images/course/component_ntc.png)             |
+| Potentiometer 10 k&Omega;                          |        ![](images/course/component_potentiometer.png)        |
+| Spannungsversorgung                                |        ![](images/course/component_power_supply.png)         |
+| Widerstand (Bsp. 10 k&Omega;)                      | Farbcode: <span style="color:SaddleBrown">braun</span>, schwarz, schwarz, <span style="color:red">rot</span>, <span style="color:SaddleBrown">braun</span> ![](images/course/component_resistor_10kOhm.png) |
+
 <div style="page-break-after: always;"></div>
 
-# 1. Übersicht Komponenten
-Hier entsteht noch eine Übersichtsseite mit Bildern aller relevanten Komponenten:  
-**Widerstand**  
-**Fotowiderstand LDR**  
-**NTC-Widerstand**  
-**Potentiometer**  
-**Raspberry Pi**  
-**Breadboard**  
-**Breadboard Leitungen**  
-**Flachbandkabel**  
-**Schraubzwinge**  
-**Kraftsensor, Wägezelle TAL220B**  
-**Gewichte**  
-
-<div style="page-break-after: always;"></div>
-
-# 2. Digitale Messtechnik
+# 1. Digitale Messtechnik
 
 Digitale Messtechnik begegnet uns im Alltag überall. Die digitale Temperaturanzeige am Gefrierschrank, eine Pulsuhr beim Sport, eine digitale Küchenwaage oder die Einparkhilfe beim Auto...unsere Welt wäre eine andere ohne digitale Messtechnik!
 
@@ -38,7 +37,7 @@ Digitale Messtechnik begegnet uns im Alltag überall. Die digitale Temperaturanz
 |2.|                               |                                |
 |3.|                               |                                |
 
-# 3. Das Breadboard und die LED
+# 2. Das Breadboard und die LED
 
 ### Einführung 
 In den nächsten Stunden befassen wir uns damit, wie man digitale Messwerte erfassen und verarbeiten kann. Wir nutzen dabei ein Breadboard, auf dem wir die Schaltungen stecken sowie LEDs als Leuchtmittel. Zunächst schauen wir uns an, wie diese einzusetzen sind.
@@ -84,7 +83,7 @@ In der nachfolgenden Abbildung sind die elektrisch verbundenen Steckkontakte dur
 
 &nbsp;
 
-# 4. Was bedeutet digitales Messen?  
+# 3. Was bedeutet digitales Messen?  
 
 Bevor wir richtig loslegen können, müssen wir uns zuerst damit befassen, wie der Raspberry Pi mit seiner Umwelt kommuniziert. Der Raspberry Pi verfügt über **GPIO**-Pins (**g**eneral **p**urpose **i**nput/**o**utput). Über diese kann er mit seiner Umgebung kommunizieren. Die GPIO-Pins sind durchnummeriert und über das bunte, mehrfarbige Flachbandkabel mit dem Breadboard verbunden. Es gibt zum einen Pins zur Spannungsversorgung mit 5V und 3,3V sowie GND (0V) und klassische GPIO-Pins, die zur Kommunikation dienen. Jeder Pin kann die digitalen **Zustände 1 (true = wahr) oder 0 (false = falsch)** annehmen und sowohl als **Eingang (input)** als auch als **Ausgang (output)** des Raspberry Pi verwendet werden. 
 
@@ -225,7 +224,7 @@ Digitales Messen bedeutet, dass Messwerte in Stufen erfasst werden. Ein digitale
 
 <div style="page-break-after: always;"></div>
 
-# 5. Lichtautomatik (Hell-Dunkel-Sensor)
+# 4. Lichtautomatik (Hell-Dunkel-Sensor)
 Nun wissen wir, wie der Zustand eines GPIO-Pins festgelegt ist und können das nutzen, um unseren ersten eigenen digitalen Sensor zu bauen.  
 Jeder kennt bei neueren Autos die Lichtautomatik, die das Licht automatisch anschaltet, wenn es draußen dunkel wird oder wenn man in einen Tunnel fährt. Die Beleuchtung von Zugängen zu Häusern oder die Beleuchtung von Wegen ist ebenfalls häufig mit einer Lichtautomatik ausgestattet. Um zu verstehen, wie so etwas funktionieren kann, bauen wir nun unsere eigene Lichtautomatik. 
 
@@ -233,12 +232,12 @@ Jeder kennt bei neueren Autos die Lichtautomatik, die das Licht automatisch ansc
 
 **Material:**
 
- + 10 k&Omega; Widerstand
+ + 10 k&Omega; Widerstand (Farbcode: braun, schwarz, schwarz, rot, braun)
+ + 220 &Omega; Vorwiderstand für LED (Farbcode: rot, rot, schwarz, schwarz, braun)
  + Fotowiderstand (LDR Typ5516)
  + weiße LED
  + Breadboard mit Spannungsversorgung und Netzteil
  + Breadboard-Leitungen in verschiedenen Farben
- + Voltmeter
  + Raspberry Pi
  + Flachbandkabel
 
@@ -383,7 +382,7 @@ Welchen Zustand besitzt der GPIO-Pin 17 in diesem Fall? Begründen Sie.
 
 &nbsp;
 
-<span style="color:#5882FA; font-size: 12pt ">5. </span>Wir haben also aus einem Fotowiderstand und einem zweiten Widerstand einen einfachen Sensor gebaut, mit dem wir nach der Digitalisierung zwischen hell und dunkel unterscheiden können. Damit wir eine Lichtautomatik haben, fehlt uns noch eine Beleuchtung, die abhängig von unserem Sensor ein- bzw. ausgeschaltet wird. Dafür ergänzen wir unsere Schaltung um eine weiße LED (Polung beachten) mit Vorwiderstand, die wir an den GPIO-Pin 27 anschließen.
+<span style="color:#5882FA; font-size: 12pt ">5. </span>Wir haben also aus einem Fotowiderstand und einem zweiten Widerstand einen einfachen Sensor gebaut, mit dem wir nach der Digitalisierung zwischen hell und dunkel unterscheiden können. Damit wir eine Lichtautomatik haben, fehlt uns noch eine Beleuchtung, die abhängig von unserem Sensor ein- bzw. ausgeschaltet wird. Dafür ergänzen wir unsere Schaltung um eine weiße LED (Polung beachten) mit Vorwiderstand (220 &Omega;) , die wir an den GPIO-Pin 27 anschließen.
 
 ![](images/course/ldr_led_breadboard.PNG)
 
@@ -429,7 +428,7 @@ beleuchtungsabhängiger Widerstand, Beleuchtungsstärke, GPIO-Pin, LED-Ein / LED
 
 <div style="page-break-after: always;"></div>
 
-# 6. Wir bauen ein digitales Thermometer
+# 5. Wir bauen ein digitales Thermometer
 
 ![](images/course/tree_adc.png)
 
@@ -495,8 +494,8 @@ Mit der entworfenen Schaltung haben wir nun die Grundlage für unser Thermometer
 
 **Material:**
 
-- 10 k&Omega; Widerstand
-- NTC-Widerstand (**N**egative **T**emperature **C**oefficient) 
+- 10 k&Omega; Widerstand (Farbcode: braun, schwarz, schwarz, rot, braun)
+- NTC-Widerstand (**N**egative **T**emperature **C**oefficient) *R<sub>25</sub>* = 10 k&Omega;
 - AD-Wandler ADS1115
 - Breadboard mit Spannungsversorgung und Netzteil
 - Breadboard-Leitungen in verschiedenen Farben
@@ -726,7 +725,7 @@ Ergänzen Sie die fehlenden Begriffe für unser Beispiel des digitalen Thermomet
 
 <div style="page-break-after: always;"></div>
 
-# 7. Wir bauen einen digitalen Kraftsensor
+# 6. Wir bauen einen digitalen Kraftsensor
 
 Wir alle kennen digitale Waagen aus der Küche oder aus dem Bad. Wie funktioniert aber eine solche Waage und wie können wir Komponenenten aus einer handelsüblichen Küchenwaage nutzen, um einen digitalen Kraftsensor für Physikexperimente zu bauen?
 
@@ -749,13 +748,17 @@ Nachfolgend ist eine Prinzipskizze einer solchen Wägezelle dargestellt, in der 
 
 ![](images/course/principle_sketch_load_cell.PNG)
 
-<div style="page-break-after: always;"></div>
+Die folgende Abbildung zeigt zwei benachbarte, auf einer Wägezelle aufgeklebte Dehnungsmessstreifen. Man kann den gewundenen Widerstandsdraht (Messgitter) jeweils gut an den dicht beieinander liegenden waagerechten Linien erkennen.
+
+![](images/course/image_dms.PNG)
 
 <span style="color:#5882FA; font-size: 12pt">Aufgabe 2: </span> Streichen Sie unter Berücksichtigung der Prinzipskizze die falschen Aussagen durch.
 
 Bei Krafteinwirkung werden die Dehnungsmessstreifen ***R<sub>1</sub>*** und ***R<sub>4</sub>*** *gedehnt / gestaucht*. Der Widerstandsdraht der Dehnungsmessstreifen wird also *länger und dünner / kürzer und dicker*. Die Länge des Drahtes ***L*** *vergrößert / verkleinert* sich also, während sich der Durchmesser ***D*** und damit die Querschnittsfläche ***A*** des Drahtes *vergrößert / verkleinert*.
 
 Bei Krafteinwirkung werden die Dehnungsmessstreifen ***R<sub>2</sub>*** und ***R<sub>3</sub>*** *gedehnt / gestaucht*. Der Widerstandsdraht der Dehnungsmessstreifen wird also *länger und dünner / kürzer und dicker*. Die Länge des Drahtes ***L*** *vergrößert / verkleinert* sich also, während sich der Durchmesser ***D*** und damit die Querschnittsfläche ***A*** des Drahtes *vergrößert / verkleinert*.
+
+<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt">Aufgabe 3: </span> 
 
@@ -906,8 +909,9 @@ Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierun
 - Raspberry Pi
 - Flachbandkabel
 - Instrumentenverstärker AD 623 ANZ
-- 2 x 10 k&Omega; Widerstand
-- 10 k&Omega; Potentiometer
+- 2 x 10 k&Omega; Widerstand (Farbcode: braun, schwarz, schwarz, rot, braun)
+- 200 &Omega; Widerstand (Farbcode: rot, schwarz, schwarz, schwarz, braun)
+- 10 x Massestück 50 g
 
 **Durchführung:**
 
@@ -931,13 +935,13 @@ Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierun
 | A0                            | grüne Leitung der Wägezelle       |
 | A1                            | weiße Signalleitung der Wägezelle |
 
-<span style="color:#5882FA; font-size: 12pt ">2. </span> Befestigen Sie die Wägezelle mit einer Schraubzwinge so an der Tischplatte, dass der Teil der Wägezelle mit den Anschlussleitungen in Richtung Tisch zeigt und der auf der Stirnseite abgebildete Pfeil nach unten zeigt.
+<span style="color:#5882FA; font-size: 12pt ">2. </span> Befestigen Sie die Wägezelle an einem Stativ so, dass der auf der Stirnseite abgebildete Pfeil nach unten zeigt. Das folgende Bild zeigt einen möglichen Aufbau (hier bereits mit Massestücken belastet). 
 
-![](images/course/mounting_force_sensor.png)
+![](images/course/tripod_force_sensor.png)
 
 <div style="page-break-after: always;"></div>
 
-<span style="color:#5882FA; font-size: 12pt ">3. </span>Wenn wir die Schaltung aufgebaut haben und die Wägezelle an der Tischplatte angebracht haben, können wir unseren digitalen Kraftsensor das erste mal testen. Dazu starten wir im Verzeichnis PhyPiDAQ das Porgramm phypi.py und es öffnet sich eine grafische Bedienoberfläche (Doppelklick auf das Programm und danach auf Ausführen klicken).
+<span style="color:#5882FA; font-size: 12pt ">3. </span>Wenn wir die Schaltung aufgebaut haben und die Wägezelle am Stativ angebracht haben, können wir unseren digitalen Kraftsensor das erste mal testen. Dazu starten wir im Verzeichnis PhyPiDAQ das Porgramm phypi.py und es öffnet sich eine grafische Bedienoberfläche (Doppelklick auf das Programm und danach auf Ausführen klicken).
 
 ![](images/course/start_phypi.PNG)
 
@@ -1053,6 +1057,10 @@ DataFile:   null                  # file name for output file
 Die nachfolgende Abbildung zeigt beispielhaft eine solche Messung.
 
 ![](images/course/test_force_sensor.PNG)
+
+<span style="color:#5882FA; font-size: 12pt ">9. </span> **Problem:** Die sehr kleine Messspannung bringt mehrere Nachteile mit sich: Zum einen sind solch kleine Spannungen sehr störanfällige Signale. Kleine Störspannungen wirken sich bereits massiv auf das Messergebnis aus. Zum anderen können wir die Messspannung nur schlecht auflösen (wir können nur wenige der Digitalisierungstufen des AD-Wandlers nutzen).
+
+**Lösungsansatz:** Wir verstärken die analoge Messspannung *U<sub>M</sub>*, bevor wir diese digitalisieren. Dadurch beeinflussen Störungen die Messspannung wesentlich weniger, wenn diese nach der Verstärkung auftreten. Für die Digitalisierung mit dem AD-Wandler ist für uns entscheidend, dass wir die Digitalisierungstufen des AD-Wandlers möglichst gut ausnutzen, damit wir unsere Messspannung möglichst gut auflösen. Deshalb wählen wir eine Verstärkung, die so groß ist, dass wir den Messbereich des AD-Wandlers gut ausnutzen. Dafür benutzen wir einen sogenannten Instrumentenverstärker, der es uns ermöglicht an diesem einen Verstärkungsfaktor für unsere Messsannung einzustellen. Die Einstellung erfolgt durch einen Widerstand, der an den Instrumentenverstärker angeschlossen wird. In unserem Fall wählen wir einen Verstärkungsfaktor von 500, indem wir an den Instrumentenverstärker einen Widerstand von 200 &Omega; anschließen. Die Messspannung wird also 500 Mal größer als ohne Verstärkung.
 
 **Es folgen noch:**
 
