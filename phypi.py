@@ -508,7 +508,7 @@ class Ui_PhyPiWindow(object):
       fullDAQfile = confdir + '/' + RunTag + '.daq'
       retval = self.MB_Question('Question', 
        'saving Config to file ' + fullDAQfile)       
-      if retval == QMessageBox.Cancel: return
+      if retval == QMessageBox.Cancel: return 1
       fDAQ = open(fullDAQfile, 'w')
       print(DAQconf, file = fDAQ )
       self.DAQfile = DAQfile
@@ -527,6 +527,7 @@ class Ui_PhyPiWindow(object):
         fDev = open(confdir + '/' + DevFile, 'w')
         print(DevConfs[i], file = fDev )
         fDev.close()
+        return 0
 
     def saveDefaultConfig(self):
       self.saveConfig(self.ConfDir)
@@ -542,7 +543,7 @@ class Ui_PhyPiWindow(object):
       if not os.path.exists(self.path_to_WD): 
         os.makedirs(self.path_to_WD)
 
-      self.saveConfig(self.path_to_WD)
+      if self.saveConfig(self.path_to_WD): return
       print("   - files for this run stored in directory " + self.path_to_WD) 
 
     # close GUI window and start runCosmo 
