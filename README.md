@@ -214,6 +214,33 @@ cd PhyPiDAQ/whl
 sudo pip3 install *.whl
 ```
 
+### Educational remarks
+
+*PhyPiDAQ* is meant to be an educational tool to introduce students to the concepts of digital data acquisition, visualisation and analysis. Confronting students with the full contents of this package is therefore not appropriate. Instead, it is recommended to create a working directory and copy examples from there to the student's working directory. This is achieved via the following commands:
+
+```bash
+cd ~
+# create PhyPiDAQ working directory ...
+mkdir PhyPiDAQ
+cd PhyPiDAQ
+
+# ... and make examples and config files available 
+cp -a ~/git/PhyPiDAQ/examples .
+cp -a ~/git/PhyPiDAQ/config .
+
+# provide icon to graphical user interface
+cp ~/git/phypi.desktop ~/Desktop
+```
+
+ You might also consider moving the *PhyPiDAQ* package to system space, e.g. `/usr/local`:
+
+```bash
+sudo mv ~/git/PhyPiDAQ /usr/local/
+```
+
+Please note that the paths in the example above must be adjusted in this case, e.g. ´~/git/` -> /usr/local/.
+The paths in *~/Desktop/phipi.desktop* must also be changed appropriately. This is most easily achieved by
+right-clicking the icon and use the dialog "Properties". 
 
 
 ## Overview of files contained in PhyPiDAQ 
@@ -221,7 +248,7 @@ sudo pip3 install *.whl
 ### Programs 
 
 - `run_phypi.py`  
-    run data acquisition and display modules as specified in configuration files
+    run data acquisition and display modules as specified in configuration files (default `PhyPiConf.daq` and *.yaml* files ins subdirectory *config/*)
 - `phypi.py`  
     graphical user interface to edit configuration files and start the script `run_phypi.py`
 
@@ -264,9 +291,7 @@ sudo pip3 install *.whl
 - `examples/read_analog.py`
     very minimalist example to read one channel from an analog-to-ditigal converter
 - `examples/runOsci.py`  
-    run an oscilloscope display, configuration as specified in *.yaml* file
-- `example/PSCosci.yaml`  
-    configuration file for PicoScope USB oscilloscope, used by *runOsci.py*
+    run an oscilloscope display, configuration as specified in *.yaml* file (default is `PSOsci.yaml`)
 - `examples/poissonLED.py`  
     generate a random signal following Poisson statistics on a GPIO pin
 - `examples/FreqGen.py`  

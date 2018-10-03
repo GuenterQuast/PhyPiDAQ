@@ -214,12 +214,43 @@ sudo pip3 install *.whl
 
 <div style="page-break-after: always;"></div>
 
+### Didaktische Anmerkungen
+
+Schüler oder Studierende zu Beginn mit dem vollen Umfang des Pakets *PhyPiDAQ* zu konfrontieren, ist aus didaktischer Sicht wenig angebracht. Stattdessen wird empfohlen, ein Arbeitsverzeichnis zu erstellen und
+benötigte Beispiele von dort in ein eigenes Arbeitsverzeichnis zu kopieren. Dies wird durch folgende Befehle erreicht:
+
+
+```bash
+cd ~
+# Arbeitsverzeichnis erzeugen, z.B. PhyPiDAQ ...
+mkdir PhyPiDAQ
+cd PhyPiDAQ
+
+# ... und Beispiele und Konfigurationsdateien kopieren 
+cp -a ~/git/PhyPiDAQ/examples .
+cp -a ~/git/PhyPiDAQ/config .
+
+# klickbares Symbol auf dem Desktop zum Zugang zu phypi
+cp ~/git/phypi.desktop ~/Desktop
+```
+
+Um versehentliches Überschreiben von Dateien im Paket *PhyPiDAQ* zu vermeiden, sollte eine Verschiebung in den Systembereich in Erwägung gezogen werden, z. B. nach 
+`/usr/loca/`:
+
+```bash
+sudo mv ~/git/PhyPiDAQ /usr/local/
+```
+
+Die Pfade in *~/Desktop/phipi.desktop* müssen dann ebenfalls entsprechend angepasst werden. Dies wird am einfachsten durch Klicken mit der rechten Maustaste auf das *phipi*-Symbol erreicht. Im sich dann öffnenden Menu den Dialog "Eigenschaften" wählen und alle Pfade von  *~/git/*  ->  */usr/local/* ändern.
+
+
+
 ## Übersicht über Dateien im Paket PhyPiDAQ 
 
 ### Programme 
 
 - `run_phypi.py`  
-    Datennahme und Anzeige wie in Konfigurationsdateien angegeben
+    Datennahme und Anzeige wie in Konfigurationsdateien angegeben (Vorgabe `PhyPiConf.daq` und *.yaml*-Dateien im Verzeichnis *config/*)
 - `phypi.py`  
     graphische Oberfläche zum Editieren der Konfiguration und Starten des Skripts `run_phypi.py`
 
@@ -262,9 +293,7 @@ sudo pip3 install *.whl
 - `examples/read_analog.py`
     sehr minimalistisches Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
 - `examples/runOsci.py`  
-    Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben
-- `example/PSCosci.yaml`  
-     Konfigurationsdatei für PicoScope USB-Oszilloskop, verwendet von *runOsci.py*
+    Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben (Vorgabe `PSOsci.yaml`)
 - `examples/poissonLED.py`  
     erzeugt ein zufälliges Signal an GPIO-Pin gemäß Poisson-Prozess 
 - `examples/FreqGen.py`  
