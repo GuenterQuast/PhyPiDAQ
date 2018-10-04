@@ -229,7 +229,7 @@ cp -a ~/git/PhyPiDAQ/examples .
 cp -a ~/git/PhyPiDAQ/config .
 
 # provide icon to graphical user interface
-cp ~/git/phypi.desktop ~/Desktop
+cp ~/git/PhyPiDAQ/phypi.desktop ~/Desktop
 ```
 
  You might also consider moving the *PhyPiDAQ* package to system space, e.g. `/usr/local`:
