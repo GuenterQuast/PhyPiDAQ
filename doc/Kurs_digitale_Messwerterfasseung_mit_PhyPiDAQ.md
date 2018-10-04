@@ -145,6 +145,8 @@ Wenn der Raspberry Pi gestartet ist, können wir uns vom Laptop (oder einem ande
 
   ![](images/course/command_line.png)
 
+- Mit dem Befehl ```cd PhyPi```  und bestätigen mit **Enter** wechseln wir in das Verzeichnis PhyPi.
+
 - Durch eingeben des Befehls ```mkdir MeineProgramme``` und bestätigen mit **Enter** erzeugen wir ein neues Verzeichnis "Meine Programme", in dem wir unsere Programme speichern.
 
 - Mit dem Befehl ```cd MeineProgramme```  und bestätigen mit **Enter** wechseln wir dann in dieses Verzeichnis.
@@ -911,6 +913,8 @@ Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierun
 - Instrumentenverstärker AD 623 ANZ
 - 2 x 10 k&Omega; Widerstand (Farbcode: braun, schwarz, schwarz, rot, braun)
 - 200 &Omega; Widerstand (Farbcode: rot, schwarz, schwarz, schwarz, braun)
+- Keramikkondensator 0,1 µF
+- Elektrolytkondensator 10 µF
 - 10 x Massestück 50 g
 
 **Durchführung:**
@@ -941,11 +945,7 @@ Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierun
 
 <div style="page-break-after: always;"></div>
 
-<span style="color:#5882FA; font-size: 12pt ">3. </span>Wenn wir die Schaltung aufgebaut haben und die Wägezelle am Stativ angebracht haben, können wir unseren digitalen Kraftsensor das erste mal testen. Dazu starten wir im Verzeichnis PhyPiDAQ das Porgramm phypi.py und es öffnet sich eine grafische Bedienoberfläche (Doppelklick auf das Programm und danach auf Ausführen klicken).
-
-![](images/course/start_phypi.PNG)
-
-<div style="page-break-after: always;"></div>
+<span style="color:#5882FA; font-size: 12pt ">3. </span>Wenn wir die Schaltung aufgebaut haben und die Wägezelle am Stativ angebracht haben, können wir unseren digitalen Kraftsensor das erste mal testen. Dazu starten wir das Programm PhyPi auf dem Desktop des Raspberry Pi mit einem Doppelklick.
 
 <span style="color:#5882FA; font-size: 12pt ">4. </span> Jetzt können wir uns die mit Hilfe des AD-Wandlers die digitalisierte Messspannung *U<sub>M</sub>* anzeigen lassen. Dafür müssen wir zuerst noch den AD-Wandler passend konfigurieren. Dazu gehen wir über den Reiter Configuration auf die Device Config des ADS1115 und aktivieren den Edit Mode oben rechts.
 
@@ -990,12 +990,13 @@ sampleRate: 860             # programmable Sample Rate of ADS1115
                               # possible values for SampleRate: 
                               # 8, 16, 32, 64, 128, 250, 475, 860
 ```
-<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt ">6. </span> In der PhyPi Config können wir noch Einstellungen für die grafische Ausgabe, das Messintervall und weitere Einstellungen für die Ausgabe der Messwerte angeben. Hier passen wir noch den dargestellten Wertebereich für die grafische Darstellung an, damit wir nur den für uns interessanten Wertebereich angezeigt bekommen.
 
 1. Dazu löschen wir die beiden `##` vor `ChanLimits:` in Zeile 25, um die Einstellung des dargestellten Werteberichs zu aktivieren.
 2. Da unsere Messspannung *U<sub>M</sub>* sehr klein und bei einer einwirkenden Kraft von oben positiv ist, lassen wir uns einen Bereich von - 1 mV bis 5 mV anzeigen. Dazu entfernen wir die beiden `##` in Zeile und passen die Werte in der eckigen Klammer entsprechend an `- [-0.001, 0.005]`.
+
+<div style="page-break-after: always;"></div>
 
 ```yaml
 # Configuration Options for PhyPiDAQ 
@@ -1045,12 +1046,11 @@ DataFile:   null                  # file name for output file
 #DataFile:   testfile.csv         # file name for output file 
 #CSVseparator: ';'
 ```
+<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt ">7. </span> Über den Reiter Control, anschließendes Klicken auf StartRun und Bestätigen mit OK können wir nun PhyPiDAQ starten und uns die digitalisierte Messspannung über der Zeit anzeigen lassen.
 
 ![](images/course/startrun_phypi.PNG)
-
-<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt ">8. </span> Jetzt können wir durch Belasten und Entlasten der Wägezelle mit den Fingern testen, ob wir eine digitalisierte Messspannung angezeigt bekommen und ob sich diese wie erwartet verändert. 
 
@@ -1058,12 +1058,146 @@ Die nachfolgende Abbildung zeigt beispielhaft eine solche Messung.
 
 ![](images/course/test_force_sensor.PNG)
 
-<span style="color:#5882FA; font-size: 12pt ">9. </span> **Problem:** Die sehr kleine Messspannung bringt mehrere Nachteile mit sich: Zum einen sind solch kleine Spannungen sehr störanfällige Signale. Kleine Störspannungen wirken sich bereits massiv auf das Messergebnis aus. Zum anderen können wir die Messspannung nur schlecht auflösen (wir können nur wenige der Digitalisierungstufen des AD-Wandlers nutzen).
+<div style="page-break-after: always;"></div>
 
-**Lösungsansatz:** Wir verstärken die analoge Messspannung *U<sub>M</sub>*, bevor wir diese digitalisieren. Dadurch beeinflussen Störungen die Messspannung wesentlich weniger, wenn diese nach der Verstärkung auftreten. Für die Digitalisierung mit dem AD-Wandler ist für uns entscheidend, dass wir die Digitalisierungstufen des AD-Wandlers möglichst gut ausnutzen, damit wir unsere Messspannung möglichst gut auflösen. Deshalb wählen wir eine Verstärkung, die so groß ist, dass wir den Messbereich des AD-Wandlers gut ausnutzen. Dafür benutzen wir einen sogenannten Instrumentenverstärker, der es uns ermöglicht an diesem einen Verstärkungsfaktor für unsere Messsannung einzustellen. Die Einstellung erfolgt durch einen Widerstand, der an den Instrumentenverstärker angeschlossen wird. In unserem Fall wählen wir einen Verstärkungsfaktor von 500, indem wir an den Instrumentenverstärker einen Widerstand von 200 &Omega; anschließen. Die Messspannung wird also 500 Mal größer als ohne Verstärkung.
+<span style="color:#5882FA; font-size: 12pt ">9. </span> **Problem:** Die sehr kleine Messspannung bringt mehrere Nachteile mit sich: Zum einen sind solch kleine Spannungsignale sehr störanfällig. Bereits kleine Störspannungen wirken sich massiv auf das Messergebnis aus. Zum anderen können wir die Messspannung nur schlecht auflösen (wir können nur wenige der Digitalisierungstufen des AD-Wandlers nutzen).
 
-**Es folgen noch:**
+**Lösungsansatz:** Wir verstärken die analoge Messspannung *U<sub>M</sub>*, bevor wir diese digitalisieren. Dadurch beeinflussen Störungen die Messspannung wesentlich weniger, wenn diese nach der Verstärkung auftreten. Für die Digitalisierung mit dem AD-Wandler ist für uns entscheidend, dass wir die Digitalisierungstufen des AD-Wandlers gut ausnutzen, damit wir unsere Messspannung möglichst gut auflösen. Deshalb wählen wir eine Verstärkung, die so groß ist, dass wir den Messbereich des AD-Wandlers gut ausnutzen.
 
-- **Verstärkung der Messspannung mit einem Instrumentenverstärker**
-- **Kalibrierung des digitalen Kraftsensors**
+<span style="color:#5882FA; font-size: 12pt ">10. </span> **Der Instrumentenverstärker**: Für die Verstärkung verwenden wir einen sogenannten Instrumentenverstärker, der es uns ermöglicht unsere Messspannung mit einem einstellbaren Verstärkungsfaktor zu verstärkern. Die Einstellung erfolgt durch einen Widerstand, der an den Instrumentenverstärker angeschlossen wird. In unserem Fall wählen wir einen Verstärkungsfaktor von 500, indem wir an den Instrumentenverstärker einen Widerstand von 200 &Omega; anschließen. Die Messspannung wird also 500 Mal größer als ohne Verstärkung. Der Instrumentenverstärker AD623 ist ein elektronisches Bauelement mit insgesamt acht Pins (Anschlüssen). In der nachfolgenden Abbildung ist die Pinbelegung für den Instrumentenverstärker AD623 dargestellt. Das Gehäuse des Instrumentenverstärkers hat an einer Seite eine Einkerbung. Die Pins sind so nummeriert, dass von oben gesehen der Pin links dieser Einkerbung die Nummer 1 und der Pin rechts von der Einkerbung die Nummer 8 bekommt. Die anderen Pins sind dann entsprechend durchnummeriert. Beim Einbau des Instrumentenverstärkers in eine Schaltung muss unbedingt darauf geachtet werden, dass die Pins des Instrumentenverstärkers korrekt angeschlossen werden.
+
+![](images/course/instrumentation_amplifier.PNG)
+
+Aus der Tabelle kann entnommen werden, welche Funktionen die einzelnen Pins des Instrumentenverstärkers haben und wie dieses angeschlossen werden müssen.
+
+| Pin (Anschluss) | Beschreibung                                                 |
+| :-------------: | ------------------------------------------------------------ |
+|        1        | - R<sub>G</sub>: Anschluss für den Widerstand zur Einstellung des Verstärkungsfaktors. |
+|        2        | - IN: Negativer Anschluss des Messsignals (grüne Leitung des Kraftsensors). |
+|        3        | + IN: Positiver Anschluss des Messsignals (weiße Leitung des Kraftsensors). |
+|        4        | -V<sub>s</sub>: Negative Versorgungsspannung 0 V.            |
+|        5        | REF: Über diesen Eingang kann eine Referenzspannung zum Messsignal addiert werden. |
+|        6        | OUTPUT: Verstärkte Messspannung als Ausgangssignal.          |
+|        7        | +V<sub>s</sub>: Positive Versorgungspannung 5 V.             |
+|        8        | + R<sub>G</sub>: Anschluss für den Widerstand zur Einstellung des Verstärkungsfaktors. |
+
+<span style="color:#5882FA; font-size: 12pt ">11. </span> Bauen Sie die nachfolgende Schaltung auf dem Breadboard auf. Achten Sie während des Aufbaus darauf, dass die Spannungversorgung des Breadboards ausgeschaltet ist (grüne LED leuchtet nicht). Da die Schaltung komplizierter ist, sollte auf jeden Fall sehr gründlich kontrolliert werden, ob alle Bauelemente richtig angeschlossen sind, bevor die Spannungsversorgung des Breadboards eingeschaltet wird. Der AD-Wandler ADS-1115 und die Wägezelle sind im nachfolgenden Schaltplan nicht dargestellt. Die Anschlussbelegung dieser Komponenten kann den Tabellen unter dem Schaltplan entnommen werden.
+
+![](images/course/circuit_instrumentation_amplifier.PNG)
+
+| Anschlüsse Wägezelle      | Anschlüsse Breadboard / GPIO-Pin         |
+| ------------------------- | ---------------------------------------- |
+| rote Anschlussleitung     | 5 V                                      |
+| schwarze Anschlussleitung | 0 V                                      |
+| grüne Anschlussleitung    | +IN Instrumentenverstärker AD623 (Pin 3) |
+| weiße Anschlussleitung    | -IN Instrumentenverstärker AD623 (Pin 2) |
+
+| Anschlüsse AD-Wandler ADS1115 | Anschlüsse Breadboard / GPIO-Pin                     |
+| ----------------------------- | ---------------------------------------------------- |
+| VDD                           | 5 V                                                  |
+| GND                           | 0 V                                                  |
+| SDL                           | GPIO-Pin SCL                                         |
+| SDA                           | GPIO-Pin SDA                                         |
+| A0                            | OUTPUT Instrumentenverstärker AD623 (Pin 6)          |
+| A1                            | 2,5 V (zwischen *R<sub>1</sub>* und *R<sub>2</sub>*) |
+
+![](images/course/breadboard_instrumentation_amplifier.PNG)
+
+**Zusatzinformation zur Schaltung für Interessierte:**  
+Die beiden Kondensatoren *C<sub>1</sub>* und *C<sub>2</sub>* sind dazu da, Störsignale in unserer Schaltung zu unterdrücken. Mit dem Spannungsteiler aus den Widerständen *R<sub>1</sub>* und *R<sub>2</sub>* halbieren wir die Versorgungsspannung von 5 V, sodass wir zwischen den beiden Widerständen eine Spannung von 2,5 V abgreifen können. Diese addieren wir über den Pin 5 des Instrumentenverstärkers zur verstärkten Messspannung. Dieser Schritt ist notwendig, da wir sonst sehr kleine Messspannungen und negative Messspannungen nicht verstärken könnten. Da wir diesen Offset von 2,5 V in unserem digitalisierten Wert der Messspannung nicht mehr haben möchten, ziehen wir die Spannung von 2,5 V im AD-Wandler wieder ab, indem wir die Spannung von 2,5 V zwischen den Widerständen des Spannungsteilers abgreifen und am Eingang A1 des AD-Wandlers anschließen. Durch die Konfiguration des AD-Wandlers sorgen wir dann dafür, dass dieser die Spannungs-differenz zwischen den Eingängen A0 und A1 digitalisiert und unsere digitalisierte Messspannung wieder um den Offset von 2,5 V bereinigt ist.
+
+<span style="color:#5882FA; font-size: 12pt ">12. </span> Jetzt können wir unsere Schaltung testen und schauen, ob diese wie erwartet funtioniert und uns die verstärkte und digitalisierte Messspannug anzeigen lassen.
+
+1. Dazu starten wir wieder das Programm PhyPi auf dem Desktop und wechseln über den Reiter **Configuration** und **PhyPi Config** in die Konfiguration des Messdatenerfassungssystems PhyPi.
+
+2. Hier nehmen wir eine Änderung vor: Wir wählen eine andere Darstellung unserer Messwerte. Dazu deaktivieren wir zuerst das Display-Modul DataLogger in Zeile 14, indem wir diese Zeile mit Hilfe eines `#` auskommentieren (`#DisplayModule: DataLogger`). Stattdessen aktivieren wir das Display-Modul DataGraphs in Zeile 15, indem wir den `#` entfernen (`DisplayModule: DataGraphs`). Nun bekommen wir außer dem zeitlichen Verlauf unserer digitalisierten Messspannung auch deren aktuellen Wert in Textform und ein Balkendiagramm angezeigt.
+
+```yaml
+# Configuration Options for PhyPiDAQ 
+
+# device configuration files 
+DeviceFile: config/ADS1115Config.yaml  
+#DeviceFile: config/MCP3008Config.yaml  
+#DeviceFile: config/PSConfig.yaml         
+#DeviceFile: config/MAX31865Config.yaml 
+#DeviceFile: config/GPIOCount.yaml
+
+## an example for multiple devices
+#DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+
+# DisplayModule: DataLogger
+DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+Interval: 0.1                     # logging interval         
+XYmode:     false                 # enable/disable XY-display
+
+
+# channel-specific information
+ChanLabels: [(V), (V) ]          # names and/or units for channels 
+ChanColors: [darkblue, sienna]    # channel colours in display
+
+# eventually overwrite Channel Limits obtained from device config 
+##ChanLimits: 
+## - [0., 1.]   # chan 0
+## - [0., 1.]   # chan 1
+## - [0., 1.]   # chan 2
+
+# calibration of channel values
+#  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
+#ChanCalib: 
+#  - 1.                          # chan0: simple calibration factor
+#  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
+#  - null                      # chan2: no calibration
+
+# apply formulae to calibrated channel values
+#ChanFormula:
+#  - c0 + c1  # chan0
+#  - c1          # chan1
+#  - null        # chan2 : no formula
+
+# name of output file
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile.csv         # file name for output file 
+#CSVseparator: ';'
+
+```
+
+3. Außerdem müssen wir noch den AD-Wandler ADS1115 passend konfigurieren: Dazu wechseln wir über den Reiter **Device Config** in die Konfigurationsdatei des ADS1115.
+4. Hier passen wir die Konfiguration für unsere Messung an:  Zum einen müssen wir den AD-Wandler so konfigurieren, dass dieser uns die Spannungsdifferenz zwischen den Anschlüssen A0 und A1, also unsere verstärkte Messspannung digitalisiert. Dazu ändern wir Zeile 5 in `ADCChannels:[0] ` und Zeile 16 in `DifModeChan: [true]`. Zum anderen passen wir die interne Verstärkung und damit den Messbereich des AD-Wandlers so an, dass wir den Messbereich möglichst gut ausnutzen. Dazu ändern wir Zeile 17 in `Gain:[2]`, sodass unsere Messspannung noch mal um den Faktor zwei verstärkt wird und wir Spannungen in einem Bereich von +2,048 V und -2,048 V digitalisieren können.
+
+```yaml
+# example of a configuration file for ADC ADS1115
+
+DAQModule: ADS1115Config  
+
+ADCChannels: [0]         # active ADC-Channels
+                            # possible values: 0, 1, 2, 3
+                              # when using differential mode:
+                                #  -  0 = ADCChannel 0 
+                                #          minus ADCChannel 1
+                                #  -  1 = ADCChannel 0 
+                                #          minus ADCChannel 3
+                                #  -  2 = ADCChannel 1 
+                                #          minus ADCChannel 3
+                                #  -  3 = ADCChannel 2 
+                                #          minus ADCChannel 3
+DifModeChan: [true]   # enable differential mode for Channels
+Gain: [2]                # programmable gain of ADC-Channel
+                              # possible values for Gain:
+                              #  - 2/3 = +/-6.144V
+                              #  -   1 = +/-4.096V
+                              #  -   2 = +/-2.048V  
+                              #  -   4 = +/-1.024V
+                              #  -   8 = +/-0.512V
+                              #  -  16 = +/-0.256V
+sampleRate: 860             # programmable Sample Rate of ADS1115
+                              # possible values for SampleRate: 
+                              # 8, 16, 32, 64, 128, 250, 475, 860
+```
+
+5. Nun können wir unseren Test starten: Dazu wechseln wir zu **Control** und starten die Messung mit **StartRun**. Mit den Fingern können wir nun den Kraftsensor belasten und entlasten und testen, ob sich das Messsignal wie gewünscht verändert. 
+
+<span style="color:#5882FA; font-size: 12pt ">12. </span>  Nach der Digitalisierung haben wir nun eine digitalisierte Messspannung, aber keinen digitalisierten Wert einer Kraft. Um wirklich Kräfte zu messen, müssen wir unseren digitalen Kraftsensor also noch kalibrieren. Dazu nehmen wir für die Gewichtskraft verschiedener bekannter Massen die digitalisierte Messspannung auf.
+
+1. Dazu starten wir wieder das Programm PhyPi und nutzen die Konfiguration unserer eben durchgeführten Messung.
 
