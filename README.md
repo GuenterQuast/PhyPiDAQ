@@ -209,7 +209,7 @@ sudo usermod -a -G tty pi
 # get PhyPiDAQ code and dependencies
 mkdir git
 cd git
-git clone https://GuenterQuast/PhyPiDAQ
+git clone https://github.com/GuenterQuast/PhyPiDAQ
 cd PhyPiDAQ/whl
 sudo pip3 install *.whl
 ```
