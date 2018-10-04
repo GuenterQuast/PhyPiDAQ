@@ -635,7 +635,7 @@ Führen wir also die Kalibrierung durch:
 
 - Dazu nehmen wir im Bereich zwischen 20 °C und 50 °C in Intervallen von ca. 10 °C die zugehörigen digitalisierten Spannungswerte auf:
 
-  Die benötigten Wassertemperaturen erhalten wir durch entsprechendes Mischen von Wasser aus dem Wasserkocher und dem Wasserhahn. Die Temperatur messen wir mit dem Flüssigkeitsthermometer. Füllen die nachfolgende Tabelle aus.
+  Die benötigten Wassertemperaturen erhalten wir durch entsprechendes Mischen von Wasser aus dem Wasserkocher und dem Wasserhahn. Die Temperatur messen wir mit dem Flüssigkeitsthermometer. Füllen Sie die nachfolgende Tabelle aus.
 
   |                      | 1.   | 2.   | 3.   | 4.   |
   | -------------------- | ---- | ---- | ---- | ---- |
@@ -915,7 +915,8 @@ Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierun
 - 200 &Omega; Widerstand (Farbcode: rot, schwarz, schwarz, schwarz, braun)
 - Keramikkondensator 0,1 µF
 - Elektrolytkondensator 10 µF
-- 10 x Massestück 50 g
+- 5 x Massestück 100 g
+- Schraubenfeder *D* = 10 N/m
 
 **Durchführung:**
 
@@ -1195,9 +1196,121 @@ sampleRate: 860             # programmable Sample Rate of ADS1115
                               # 8, 16, 32, 64, 128, 250, 475, 860
 ```
 
-5. Nun können wir unseren Test starten: Dazu wechseln wir zu **Control** und starten die Messung mit **StartRun**. Mit den Fingern können wir nun den Kraftsensor belasten und entlasten und testen, ob sich das Messsignal wie gewünscht verändert. 
+5. Nun können wir unseren Test starten: Dazu wechseln wir zu **Control** und starten die Messung mit **StartRun**. Mit den Fingern können wir nun sanft von oben oder unten auf den Kraftsensor drücken und testen, ob sich das Messsignal wie gewünscht verändert. Das Bild unten zeigt beispielhaft einen erfolgreichen Test.
 
-<span style="color:#5882FA; font-size: 12pt ">12. </span>  Nach der Digitalisierung haben wir nun eine digitalisierte Messspannung, aber keinen digitalisierten Wert einer Kraft. Um wirklich Kräfte zu messen, müssen wir unseren digitalen Kraftsensor also noch kalibrieren. Dazu nehmen wir für die Gewichtskraft verschiedener bekannter Massen die digitalisierte Messspannung auf.
+   ![](images/course/test_instrumentation_amplifier.PNG)
 
-1. Dazu starten wir wieder das Programm PhyPi und nutzen die Konfiguration unserer eben durchgeführten Messung.
+<span style="color:#5882FA; font-size: 12pt ">13. </span>  Nach der Digitalisierung haben wir nun eine digitalisierte Messspannung, aber keinen digitalisierten Wert der auf den Kraftsensor wirkenden Kraft. Um wirklich Kräfte zu messen, müssen wir unseren digitalen Kraftsensor also noch kalibrieren. Dazu nehmen wir für die Gewichtskraft verschiedener bekannter Massen die digitalisierte Messspannung auf. Die resultierenden Messwerte tragen wir in die nachfolgende Tabelle ein.
 
+Füllen Sie die nachfolgende Tabelle aus. Wiegen Sie dafür zunächst die benötigten Massestücke mit einer Laborwaage ab und tragen Sie das Messergebnis in die Tabelle ein. Berechnen Sie die zugehörige Gewichtskraft *F<sub>G</sub>* aus der gemessenen Masse *m* und der Gravitationsfeldstärke *g* = 9,81 m/s<sup>2</sup>.
+$$
+F_G=m\cdot g
+$$
+Um die Messspannung *U<sub>M</sub>*  zu ermitteln, führen Sie die Schritte 1. bis 11. für jede zu messende Masse aus.
+
+|                                   | 0 g  | 100 g | 200 g | 300 g | 400 g |
+| --------------------------------- | ---- | ----- | ----- | ----- | ----- |
+| gemessene Masse  *m* in g         |      |       |       |       |       |
+| Gewichtskraft *F* in N            |      |       |       |       |       |
+| Messspannung *U<sub>M</sub>* in V |      |       |       |       |       |
+
+1. Wir starten wieder das Programm **PhyPi** und nutzen die Konfiguration unserer eben durchgeführten Messung. Dazu klicken wir in der Zeile **DAQ config** auf das Ordnersymbol. 
+
+   ![](images/course/load_config.PNG)
+
+2. Wir öffnen links oben **Persönliche Ordner** und wechseln dann in das Verzeichnis **PhyPi**. Im neuesten phypi-Ordner liegt die Konfiguration unseres Tests bzw. unserer letzten Messung. Mit einem Doppelklick auf die **.daq-Datei** laden wir diese Konfiguration in PhyPi.
+
+3. Damit uns bei der Kalibrierung nur ein sinnvoller Wertebereich angezeigt wird, gehen wir über den Reiter **Configuration** wieder auf die **PhyPi Config** und aktivieren in Zeile 25 durch Entfernen der beiden `##` vor `ChanLimits` die Anzeigebereichseinstellung. Jetzt können wir durch Entfernen der beiden `## ` in der nachfolgenden Zeile einen Wertebereich für die Anzeige vorgeben `- [-0.5, 2.]   # chan 0`.
+
+4. Damit wir nicht nur Daten angezeigt bekommen, sondern diese auch zur Auswertung gespeichert werden, müssen wir in Zeile 44 unter `DataFile: ` einen Dateinamen `kalibrierung_<hier verwendete Masse eintragen>.csv` anstatt `null` angeben. Unsere Messdaten werden dann im PhyPi-Verzeichnis im neuesten Ordner abgelegt.
+
+5. Nun hängen wir das entsprechende Massestück an den Kraftsensor und achten darauf, dass dieses nicht pendelt, wenn wir die Messung beginnen.
+
+6. Wir klicken auf den Reiter **Control** und starten die Messung mit **StartRun**.
+
+7. Nach etwas mehr als 10 Sekunden beenden wir die Messung über **End**.
+
+8. Jetzt können wir unsere aufgenommenen Messwerte für die Kalibrierung auswerten. Damit wir die Daten nachher zuordnen können, benennen wir den jeweils neuesten Ordner im Verzeichnis PhyPi in kalibrierung_&lt; jeweilige Masse &gt; um.
+
+9. Nun lesen wir die Daten in das Tabellenkalkulationsprogramm **LibreOffice Calc** (ähnlich Excel) ein. Zunächst öffnen wir das Programm: Dazu klicken wir auf dem Startbildschirm links oben auf die **Himbeere**, dann auf **Büro** und auf **LibreOffice Calc**.
+
+10. Wir öffnen unsere Messdaten aus dem eben umbenannten Ordner und lesen diese in LibreOffice Calc ein.
+
+11. Nun können wir für unsere Kalibrierung den Mittelwert aus 100 Messwerten für die Messspannung *U<sub>M</sub>* berechnen und in unsere Tabelle oben übernehmen.  
+    Berechnung eines Mittelwerts mit LibreOffice Calc:
+
+    - Wir klicken auf eine beliebige leere Zelle in der Tabelle.
+
+    - Wir berechnen mit `= AVERAGE(A4:A103)` den Mittelwert aus den Zellen A4 bis A103.
+
+    - Den errechneten Mittelwert für die Messspannung *U<sub>M</sub>* tragen wir nun in die Tabelle oben ein.  
+
+
+<span style="color:#5882FA; font-size: 12pt ">14. </span> Nun können wir die Kalibrierung abschließen, indem wir PhyPi starten und als Basis für die Konfiguration die .daq-Datei unserer letzten Messung im PhyPi-Verzeichnis öffnen. Wir wechseln wieder in die PhyPi Config und können nun unsere Kalibrierung vornehmen:
+
+1. Durch Entfernen der beiden `##` in Zeile 32 aktivieren wir die Kalibrierungsfunktion `ChanCalib:`.
+2. In Zeile 32 fügen wir unsere Werte für die Gewichtskraft *F<sub>G</sub>* und die zugehörige Messspannung *U<sub>M</sub>* ein, mit deren Hilfe PhyPi dann eine Funktion für die gemessene Kraft in Abhängigkeit von der Messspannung *U<sub>M</sub>* berechnet. Mit dieser Funktion kann dann für jeden beliebigen Zwischenwert ein zugehöriger Kraftwert berechnet werden.
+3. Damit wir den passenden Wertebereich angezeigt bekommen, passen wir in Zeile 26 den Anzeigebereich entsprechend an `-[0., 5.]`.
+4. Da unser angezeigter Messwert nun keine Spannung mehr ist, passen wir in Zeile 21 die angezeigte Einheit entsprechend an `ChanLabels:[N]`.
+
+```yaml
+# Configuration Options for PhyPiDAQ 
+
+# device configuration files 
+DeviceFile: config/ADS1115Config.yaml  
+#DeviceFile: config/MCP3008Config.yaml  
+#DeviceFile: config/PSConfig.yaml         
+#DeviceFile: config/MAX31865Config.yaml 
+#DeviceFile: config/GPIOCount.yaml
+
+## an example for multiple devices
+#DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+
+# DisplayModule: DataLogger
+DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+Interval: 0.1                     # logging interval         
+XYmode:     false                 # enable/disable XY-display
+
+
+# channel-specific information
+ChanLabels: [(N)]          # names and/or units for channels 
+ChanColors: [darkblue, sienna]    # channel colours in display
+
+# eventually overwrite Channel Limits obtained from device config 
+ChanLimits: 
+ - [0., 5.]   # chan 0
+## - [0., 1.]   # chan 1
+## - [0., 1.]   # chan 2
+
+# calibration of channel values
+#  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
+ChanCalib:
+- [[FG0, FG100, FG200, FG300, FG400, FG500], [UM0, UM100, UM200, UM300, UM400]]
+#  - 1.                          # chan0: simple calibration factor
+#  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
+#  - null                      # chan2: no calibration
+
+# apply formulae to calibrated channel values
+#ChanFormula:
+#  - c0 + c1  # chan0
+#  - c1          # chan1
+#  - null        # chan2 : no formula
+
+# name of output file
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile.csv         # file name for output file 
+#CSVseparator: ';'
+
+```
+
+<span style="color:#5882FA; font-size: 12pt ">15. </span> Jetzt können wir unseren digitalen Kraftsensor abschließend in einem Physikexperiment testen. Dazu lassen wir uns den Kraftverlauf im Aufhängepunkt eines Federpendels anzeigen:
+
+1. Wir hängen die Schraubenfeder mit einer angehängten Masse von *m* = 300 g an unserem Kraftsensor ein und versetzen das System in Schwingung.
+
+2. Nun können wir die Messung wie gewohnt starten. 
+
+Nachfolgend ist beispielhaft der zeitliche Kraftverlauf im Aufhängepunkt eines Federpendels dargestellt. 
+![](../examples/spring_pendulum_Federpendel/spring_pendulum_Federpendel.png)  
+Auf eine quantitative Auswertung verzichten wir an dieser Stelle. Trotzdem können wir einige grundsätzliche Beobachtungen festhalten.  
+Die Kraft im Aufhängepunkt ist am oberen Umkehrpunkt des Federpendels am kleinsten und am unteren Umkehrpunkt am größten. Das Messsignal schwingt um einen Gleichgewichtszustand. Dieser Gleichgewichtszustand enspricht der Gewichtskraft von Feder und angehängter Masse.

@@ -1,4 +1,4 @@
-# Komponenten für PhyPi (Stand: 03.10.2018)
+# Komponenten für PhyPi (Stand: 05.10.2018)
 
 ## 1. Grundausstattung Raspberry Pi
 
@@ -29,7 +29,7 @@
 | 7.   | LED 5 mm wamweiß                                    |                   1                   | [reichelt](https://www.reichelt.de/)                 | [LED 5-18000 WW](https://www.reichelt.de/led-5-mm-bedrahtet-warmweiss-18000-mcd-15-led-5-18000-ww-p163992.html?PROVID=2788&gclid=EAIaIQobChMInrfRjMuj3QIVE_lRCh28TA9IEAQYAiABEgJY_PD_BwE&&r=1) |       0,25 |
 | 8.   | AD-Wandler ADS1115 (Adafruit)                       |                   1                   | [reichelt](https://www.reichelt.de/)                 | [DEBO AMP 16BIT](https://www.reichelt.de/entwicklerboards-verstaerker-platine-16-bit-debo-amp-16bit-p235500.html?r=1) |      15,60 |
 | 9.   | Instrumentenverstärker AD 623 ANZ                   |                   1                   | [reichelt](https://www.reichelt.de/)                 | [AD 623 ANZ](https://www.reichelt.de/instrumentenverstaerker-100-khz-dil-8-ad-623-anz-p185350.html?r=1) |       6,35 |
-| 10.  | Massestücke 50 g (Hakengewichte) *                  |                   1                   | [Christiani](https://www.christiani-shop.de/schule/) | [Hakengewicht 50 g, blank, Satz von 10 Stück (Art. Nr.: 86779)](https://www.christiani-shop.de/schule/schulstufen/hakengewicht-50-g-blank-satz-von-10-stueck.html) |      24,95 |
+| 10.  | Massestücke 100 g (Hakengewichte) *                 |                   2                   | [Christiani](https://www.christiani-shop.de/schule/) | [Hakengewicht 100 g, blank, Satz von 10 Stück (Art. Nr.: 86785)](https://www.christiani-shop.de/schule/schulstufen/hakengewicht-100-g-blank-satz-von-10-stueck.html) |      30,90 |
 | 11.  | Schraubenfeder 10 N/m *                             |                   1                   | [LEYBOLD]()                                          | [Schraubenfeder 10 N/m (Art. Nr.: 352 07)](https://www.leybold-shop.de/catalog/product/view/id/15662/s/schraubenfeder-10-n-m-35207/category/1547/) |       4,05 |
 
 *Nur notwendig, wenn diese in der Physiksammlung nicht vorhanden sind.
