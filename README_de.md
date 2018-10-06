@@ -194,6 +194,7 @@ sudo apt-get upgrade
 sudo apt-get install python3-scipy
 sudo apt-get install python3-matplotlib
 sudo apt-get install python3-pyqt5
+sudo apt-get install libatlas-base-dev # needed by latest verion of numpy
 
 sudo pip3 install pyyaml
 
