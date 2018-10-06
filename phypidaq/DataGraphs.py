@@ -171,7 +171,9 @@ class DataGraphs(object):
     for i in range(self.NChan):
       iax = self.Chan2Axes[i]
    # intitialize with graph outside range
-      g,= self.axes[iax].plot(self.Ti, np.zeros(self.Npoints), 
+#      g,= self.axes[iax].plot(self.Ti, np.zeros(self.Npoints), 
+#      g,= self.axes[iax].plot(self.Ti, self.ChanLim[0][i] *1.1* np.ones(self.Npoints), 
+      g,= self.axes[iax].plot(self.Ti, -1.1* np.ones(self.Npoints), 
                               color=self.ChanColors[i])
       self.graphs += (g,)
 
