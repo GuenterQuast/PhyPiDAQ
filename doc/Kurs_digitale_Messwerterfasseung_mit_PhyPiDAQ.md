@@ -7,25 +7,24 @@
 
 <center><span style="color:#5882FA; font-size: 40pt"> Einführungskurs <br>zur digitalen Messwerterfassung <br> mit dem Raspberry Pi <br> und PhyPiDAQ  </span></center>
 
+
+| Übersicht über wichtige Komponenten                |                                                              |
+| -------------------------------------------------- | :----------------------------------------------------------: |
+| AD-Wandler ADS1115                                 |           ![](images/course/component_ads1115.png)           |
+| Bananenbuchse mit angeschlossener Breadboarleitung |         ![](images/course/component_banana_jack.png)         |
+| Fotowiderstand (LDR Typ5516)                       |             ![](images/course/component_ldr.png)             |
+| Instrumentenverstärker AD623                       |  ![](images/course/component_instrumentation_amplifier.png)  |
+| Keramikkondensator 0,1 µF                          |       ![](images/course/component_capacitor_0,1µF.png)       |
+| Elektrolytkondensator 10 µF                        |       ![](images/course/component_capacitor_10µF.png)        |
+| Kraftsensor, Wägezelle TAL220B                     |        ![](images/course/component_force_sensor.png)         |
+| NTC-Widerstand *R<sub>25</sub>* = 10 k&Omega;      |             ![](images/course/component_ntc.png)             |
+| Potentiometer 10 k&Omega;                          |        ![](images/course/component_potentiometer.png)        |
+| Spannungsversorgung                                |        ![](images/course/component_power_supply.png)         |
+| Widerstand (Bsp. 10 k&Omega;)                      | Farbcode: <span style="color:SaddleBrown">braun</span>, schwarz, schwarz, <span style="color:red">rot</span>, <span style="color:SaddleBrown">braun</span> ![](images/course/component_resistor_10kOhm.png) |
+
 <div style="page-break-after: always;"></div>
 
-# 1. Übersicht Komponenten
-Hier entsteht noch eine Übersichtsseite mit Bildern aller relevanten Komponenten:  
-**Widerstand**  
-**Fotowiderstand LDR**  
-**NTC-Widerstand**  
-**Potentiometer**  
-**Raspberry Pi**  
-**Breadboard**  
-**Breadboard Leitungen**  
-**Flachbandkabel**  
-**Schraubzwinge**  
-**Kraftsensor, Wägezelle TAL220B**  
-**Gewichte**  
-
-<div style="page-break-after: always;"></div>
-
-# 2. Digitale Messtechnik
+# 1. Digitale Messtechnik
 
 Digitale Messtechnik begegnet uns im Alltag überall. Die digitale Temperaturanzeige am Gefrierschrank, eine Pulsuhr beim Sport, eine digitale Küchenwaage oder die Einparkhilfe beim Auto...unsere Welt wäre eine andere ohne digitale Messtechnik!
 
@@ -38,7 +37,7 @@ Digitale Messtechnik begegnet uns im Alltag überall. Die digitale Temperaturanz
 |2.|                               |                                |
 |3.|                               |                                |
 
-# 3. Das Breadboard und die LED
+# 2. Das Breadboard und die LED
 
 ### Einführung 
 In den nächsten Stunden befassen wir uns damit, wie man digitale Messwerte erfassen und verarbeiten kann. Wir nutzen dabei ein Breadboard, auf dem wir die Schaltungen stecken sowie LEDs als Leuchtmittel. Zunächst schauen wir uns an, wie diese einzusetzen sind.
@@ -84,7 +83,7 @@ In der nachfolgenden Abbildung sind die elektrisch verbundenen Steckkontakte dur
 
 &nbsp;
 
-# 4. Was bedeutet digitales Messen?  
+# 3. Was bedeutet digitales Messen?  
 
 Bevor wir richtig loslegen können, müssen wir uns zuerst damit befassen, wie der Raspberry Pi mit seiner Umwelt kommuniziert. Der Raspberry Pi verfügt über **GPIO**-Pins (**g**eneral **p**urpose **i**nput/**o**utput). Über diese kann er mit seiner Umgebung kommunizieren. Die GPIO-Pins sind durchnummeriert und über das bunte, mehrfarbige Flachbandkabel mit dem Breadboard verbunden. Es gibt zum einen Pins zur Spannungsversorgung mit 5V und 3,3V sowie GND (0V) und klassische GPIO-Pins, die zur Kommunikation dienen. Jeder Pin kann die digitalen **Zustände 1 (true = wahr) oder 0 (false = falsch)** annehmen und sowohl als **Eingang (input)** als auch als **Ausgang (output)** des Raspberry Pi verwendet werden. 
 
@@ -145,6 +144,8 @@ Wenn der Raspberry Pi gestartet ist, können wir uns vom Laptop (oder einem ande
 - Dazu öffnen wir als erstes die Kommandozeile, über die wir direkt über Befehle mit dem Raspberry Pi kommunizieren können.
 
   ![](images/course/command_line.png)
+
+- Mit dem Befehl ```cd PhyPi```  und bestätigen mit **Enter** wechseln wir in das Verzeichnis PhyPi.
 
 - Durch eingeben des Befehls ```mkdir MeineProgramme``` und bestätigen mit **Enter** erzeugen wir ein neues Verzeichnis "Meine Programme", in dem wir unsere Programme speichern.
 
@@ -225,7 +226,7 @@ Digitales Messen bedeutet, dass Messwerte in Stufen erfasst werden. Ein digitale
 
 <div style="page-break-after: always;"></div>
 
-# 5. Lichtautomatik (Hell-Dunkel-Sensor)
+# 4. Lichtautomatik (Hell-Dunkel-Sensor)
 Nun wissen wir, wie der Zustand eines GPIO-Pins festgelegt ist und können das nutzen, um unseren ersten eigenen digitalen Sensor zu bauen.  
 Jeder kennt bei neueren Autos die Lichtautomatik, die das Licht automatisch anschaltet, wenn es draußen dunkel wird oder wenn man in einen Tunnel fährt. Die Beleuchtung von Zugängen zu Häusern oder die Beleuchtung von Wegen ist ebenfalls häufig mit einer Lichtautomatik ausgestattet. Um zu verstehen, wie so etwas funktionieren kann, bauen wir nun unsere eigene Lichtautomatik. 
 
@@ -233,12 +234,12 @@ Jeder kennt bei neueren Autos die Lichtautomatik, die das Licht automatisch ansc
 
 **Material:**
 
- + 10 k&Omega; Widerstand
+ + 10 k&Omega; Widerstand (Farbcode: braun, schwarz, schwarz, rot, braun)
+ + 220 &Omega; Vorwiderstand für LED (Farbcode: rot, rot, schwarz, schwarz, braun)
  + Fotowiderstand (LDR Typ5516)
  + weiße LED
  + Breadboard mit Spannungsversorgung und Netzteil
  + Breadboard-Leitungen in verschiedenen Farben
- + Voltmeter
  + Raspberry Pi
  + Flachbandkabel
 
@@ -383,7 +384,7 @@ Welchen Zustand besitzt der GPIO-Pin 17 in diesem Fall? Begründen Sie.
 
 &nbsp;
 
-<span style="color:#5882FA; font-size: 12pt ">5. </span>Wir haben also aus einem Fotowiderstand und einem zweiten Widerstand einen einfachen Sensor gebaut, mit dem wir nach der Digitalisierung zwischen hell und dunkel unterscheiden können. Damit wir eine Lichtautomatik haben, fehlt uns noch eine Beleuchtung, die abhängig von unserem Sensor ein- bzw. ausgeschaltet wird. Dafür ergänzen wir unsere Schaltung um eine weiße LED (Polung beachten) mit Vorwiderstand, die wir an den GPIO-Pin 27 anschließen.
+<span style="color:#5882FA; font-size: 12pt ">5. </span>Wir haben also aus einem Fotowiderstand und einem zweiten Widerstand einen einfachen Sensor gebaut, mit dem wir nach der Digitalisierung zwischen hell und dunkel unterscheiden können. Damit wir eine Lichtautomatik haben, fehlt uns noch eine Beleuchtung, die abhängig von unserem Sensor ein- bzw. ausgeschaltet wird. Dafür ergänzen wir unsere Schaltung um eine weiße LED (Polung beachten) mit Vorwiderstand (220 &Omega;) , die wir an den GPIO-Pin 27 anschließen.
 
 ![](images/course/ldr_led_breadboard.PNG)
 
@@ -429,7 +430,7 @@ beleuchtungsabhängiger Widerstand, Beleuchtungsstärke, GPIO-Pin, LED-Ein / LED
 
 <div style="page-break-after: always;"></div>
 
-# 6. Wir bauen ein digitales Thermometer
+# 5. Wir bauen ein digitales Thermometer
 
 ![](images/course/tree_adc.png)
 
@@ -495,8 +496,8 @@ Mit der entworfenen Schaltung haben wir nun die Grundlage für unser Thermometer
 
 **Material:**
 
-- 10 k&Omega; Widerstand
-- NTC-Widerstand (**N**egative **T**emperature **C**oefficient) 
+- 10 k&Omega; Widerstand (Farbcode: braun, schwarz, schwarz, rot, braun)
+- NTC-Widerstand (**N**egative **T**emperature **C**oefficient) *R<sub>25</sub>* = 10 k&Omega;
 - AD-Wandler ADS1115
 - Breadboard mit Spannungsversorgung und Netzteil
 - Breadboard-Leitungen in verschiedenen Farben
@@ -634,7 +635,7 @@ Führen wir also die Kalibrierung durch:
 
 - Dazu nehmen wir im Bereich zwischen 20 °C und 50 °C in Intervallen von ca. 10 °C die zugehörigen digitalisierten Spannungswerte auf:
 
-  Die benötigten Wassertemperaturen erhalten wir durch entsprechendes Mischen von Wasser aus dem Wasserkocher und dem Wasserhahn. Die Temperatur messen wir mit dem Flüssigkeitsthermometer. Füllen die nachfolgende Tabelle aus.
+  Die benötigten Wassertemperaturen erhalten wir durch entsprechendes Mischen von Wasser aus dem Wasserkocher und dem Wasserhahn. Die Temperatur messen wir mit dem Flüssigkeitsthermometer. Füllen Sie die nachfolgende Tabelle aus.
 
   |                      | 1.   | 2.   | 3.   | 4.   |
   | -------------------- | ---- | ---- | ---- | ---- |
@@ -726,7 +727,7 @@ Ergänzen Sie die fehlenden Begriffe für unser Beispiel des digitalen Thermomet
 
 <div style="page-break-after: always;"></div>
 
-# 7. Wir bauen einen digitalen Kraftsensor
+# 6. Wir bauen einen digitalen Kraftsensor
 
 Wir alle kennen digitale Waagen aus der Küche oder aus dem Bad. Wie funktioniert aber eine solche Waage und wie können wir Komponenenten aus einer handelsüblichen Küchenwaage nutzen, um einen digitalen Kraftsensor für Physikexperimente zu bauen?
 
@@ -749,13 +750,17 @@ Nachfolgend ist eine Prinzipskizze einer solchen Wägezelle dargestellt, in der 
 
 ![](images/course/principle_sketch_load_cell.PNG)
 
-<div style="page-break-after: always;"></div>
+Die folgende Abbildung zeigt zwei benachbarte, auf einer Wägezelle aufgeklebte Dehnungsmessstreifen. Man kann den gewundenen Widerstandsdraht (Messgitter) jeweils gut an den dicht beieinander liegenden waagerechten Linien erkennen.
+
+![](images/course/image_dms.PNG)
 
 <span style="color:#5882FA; font-size: 12pt">Aufgabe 2: </span> Streichen Sie unter Berücksichtigung der Prinzipskizze die falschen Aussagen durch.
 
 Bei Krafteinwirkung werden die Dehnungsmessstreifen ***R<sub>1</sub>*** und ***R<sub>4</sub>*** *gedehnt / gestaucht*. Der Widerstandsdraht der Dehnungsmessstreifen wird also *länger und dünner / kürzer und dicker*. Die Länge des Drahtes ***L*** *vergrößert / verkleinert* sich also, während sich der Durchmesser ***D*** und damit die Querschnittsfläche ***A*** des Drahtes *vergrößert / verkleinert*.
 
 Bei Krafteinwirkung werden die Dehnungsmessstreifen ***R<sub>2</sub>*** und ***R<sub>3</sub>*** *gedehnt / gestaucht*. Der Widerstandsdraht der Dehnungsmessstreifen wird also *länger und dünner / kürzer und dicker*. Die Länge des Drahtes ***L*** *vergrößert / verkleinert* sich also, während sich der Durchmesser ***D*** und damit die Querschnittsfläche ***A*** des Drahtes *vergrößert / verkleinert*.
+
+<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt">Aufgabe 3: </span> 
 
@@ -906,8 +911,12 @@ Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierun
 - Raspberry Pi
 - Flachbandkabel
 - Instrumentenverstärker AD 623 ANZ
-- 2 x 10 k&Omega; Widerstand
-- 10 k&Omega; Potentiometer
+- 2 x 10 k&Omega; Widerstand (Farbcode: braun, schwarz, schwarz, rot, braun)
+- 200 &Omega; Widerstand (Farbcode: rot, schwarz, schwarz, schwarz, braun)
+- Keramikkondensator 0,1 µF
+- Elektrolytkondensator 10 µF
+- 5 x Massestück 100 g
+- Schraubenfeder *D* = 10 N/m
 
 **Durchführung:**
 
@@ -931,17 +940,13 @@ Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierun
 | A0                            | grüne Leitung der Wägezelle       |
 | A1                            | weiße Signalleitung der Wägezelle |
 
-<span style="color:#5882FA; font-size: 12pt ">2. </span> Befestigen Sie die Wägezelle mit einer Schraubzwinge so an der Tischplatte, dass der Teil der Wägezelle mit den Anschlussleitungen in Richtung Tisch zeigt und der auf der Stirnseite abgebildete Pfeil nach unten zeigt.
+<span style="color:#5882FA; font-size: 12pt ">2. </span> Befestigen Sie die Wägezelle an einem Stativ so, dass der auf der Stirnseite abgebildete Pfeil nach unten zeigt. Das folgende Bild zeigt einen möglichen Aufbau (hier bereits mit Massestücken belastet). 
 
-![](images/course/mounting_force_sensor.png)
-
-<div style="page-break-after: always;"></div>
-
-<span style="color:#5882FA; font-size: 12pt ">3. </span>Wenn wir die Schaltung aufgebaut haben und die Wägezelle an der Tischplatte angebracht haben, können wir unseren digitalen Kraftsensor das erste mal testen. Dazu starten wir im Verzeichnis PhyPiDAQ das Porgramm phypi.py und es öffnet sich eine grafische Bedienoberfläche (Doppelklick auf das Programm und danach auf Ausführen klicken).
-
-![](images/course/start_phypi.PNG)
+![](images/course/tripod_force_sensor.png)
 
 <div style="page-break-after: always;"></div>
+
+<span style="color:#5882FA; font-size: 12pt ">3. </span>Wenn wir die Schaltung aufgebaut haben und die Wägezelle am Stativ angebracht haben, können wir unseren digitalen Kraftsensor das erste mal testen. Dazu starten wir das Programm PhyPi auf dem Desktop des Raspberry Pi mit einem Doppelklick.
 
 <span style="color:#5882FA; font-size: 12pt ">4. </span> Jetzt können wir uns die mit Hilfe des AD-Wandlers die digitalisierte Messspannung *U<sub>M</sub>* anzeigen lassen. Dafür müssen wir zuerst noch den AD-Wandler passend konfigurieren. Dazu gehen wir über den Reiter Configuration auf die Device Config des ADS1115 und aktivieren den Edit Mode oben rechts.
 
@@ -986,12 +991,13 @@ sampleRate: 860             # programmable Sample Rate of ADS1115
                               # possible values for SampleRate: 
                               # 8, 16, 32, 64, 128, 250, 475, 860
 ```
-<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt ">6. </span> In der PhyPi Config können wir noch Einstellungen für die grafische Ausgabe, das Messintervall und weitere Einstellungen für die Ausgabe der Messwerte angeben. Hier passen wir noch den dargestellten Wertebereich für die grafische Darstellung an, damit wir nur den für uns interessanten Wertebereich angezeigt bekommen.
 
 1. Dazu löschen wir die beiden `##` vor `ChanLimits:` in Zeile 25, um die Einstellung des dargestellten Werteberichs zu aktivieren.
 2. Da unsere Messspannung *U<sub>M</sub>* sehr klein und bei einer einwirkenden Kraft von oben positiv ist, lassen wir uns einen Bereich von - 1 mV bis 5 mV anzeigen. Dazu entfernen wir die beiden `##` in Zeile und passen die Werte in der eckigen Klammer entsprechend an `- [-0.001, 0.005]`.
+
+<div style="page-break-after: always;"></div>
 
 ```yaml
 # Configuration Options for PhyPiDAQ 
@@ -1041,12 +1047,11 @@ DataFile:   null                  # file name for output file
 #DataFile:   testfile.csv         # file name for output file 
 #CSVseparator: ';'
 ```
+<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt ">7. </span> Über den Reiter Control, anschließendes Klicken auf StartRun und Bestätigen mit OK können wir nun PhyPiDAQ starten und uns die digitalisierte Messspannung über der Zeit anzeigen lassen.
 
 ![](images/course/startrun_phypi.PNG)
-
-<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt ">8. </span> Jetzt können wir durch Belasten und Entlasten der Wägezelle mit den Fingern testen, ob wir eine digitalisierte Messspannung angezeigt bekommen und ob sich diese wie erwartet verändert. 
 
@@ -1054,8 +1059,258 @@ Die nachfolgende Abbildung zeigt beispielhaft eine solche Messung.
 
 ![](images/course/test_force_sensor.PNG)
 
-**Es folgen noch:**
+<div style="page-break-after: always;"></div>
 
-- **Verstärkung der Messspannung mit einem Instrumentenverstärker**
-- **Kalibrierung des digitalen Kraftsensors**
+<span style="color:#5882FA; font-size: 12pt ">9. </span> **Problem:** Die sehr kleine Messspannung bringt mehrere Nachteile mit sich: Zum einen sind solch kleine Spannungsignale sehr störanfällig. Bereits kleine Störspannungen wirken sich massiv auf das Messergebnis aus. Zum anderen können wir die Messspannung nur schlecht auflösen (wir können nur wenige der Digitalisierungstufen des AD-Wandlers nutzen).
 
+**Lösungsansatz:** Wir verstärken die analoge Messspannung *U<sub>M</sub>*, bevor wir diese digitalisieren. Dadurch beeinflussen Störungen die Messspannung wesentlich weniger, wenn diese nach der Verstärkung auftreten. Für die Digitalisierung mit dem AD-Wandler ist für uns entscheidend, dass wir die Digitalisierungstufen des AD-Wandlers gut ausnutzen, damit wir unsere Messspannung möglichst gut auflösen. Deshalb wählen wir eine Verstärkung, die so groß ist, dass wir den Messbereich des AD-Wandlers gut ausnutzen.
+
+<span style="color:#5882FA; font-size: 12pt ">10. </span> **Der Instrumentenverstärker**: Für die Verstärkung verwenden wir einen sogenannten Instrumentenverstärker, der es uns ermöglicht unsere Messspannung mit einem einstellbaren Verstärkungsfaktor zu verstärkern. Die Einstellung erfolgt durch einen Widerstand, der an den Instrumentenverstärker angeschlossen wird. In unserem Fall wählen wir einen Verstärkungsfaktor von 500, indem wir an den Instrumentenverstärker einen Widerstand von 200 &Omega; anschließen. Die Messspannung wird also 500 Mal größer als ohne Verstärkung. Der Instrumentenverstärker AD623 ist ein elektronisches Bauelement mit insgesamt acht Pins (Anschlüssen). In der nachfolgenden Abbildung ist die Pinbelegung für den Instrumentenverstärker AD623 dargestellt. Das Gehäuse des Instrumentenverstärkers hat an einer Seite eine Einkerbung. Die Pins sind so nummeriert, dass von oben gesehen der Pin links dieser Einkerbung die Nummer 1 und der Pin rechts von der Einkerbung die Nummer 8 bekommt. Die anderen Pins sind dann entsprechend durchnummeriert. Beim Einbau des Instrumentenverstärkers in eine Schaltung muss unbedingt darauf geachtet werden, dass die Pins des Instrumentenverstärkers korrekt angeschlossen werden.
+
+![](images/course/instrumentation_amplifier.PNG)
+
+Aus der Tabelle kann entnommen werden, welche Funktionen die einzelnen Pins des Instrumentenverstärkers haben und wie dieses angeschlossen werden müssen.
+
+| Pin (Anschluss) | Beschreibung                                                 |
+| :-------------: | ------------------------------------------------------------ |
+|        1        | - R<sub>G</sub>: Anschluss für den Widerstand zur Einstellung des Verstärkungsfaktors. |
+|        2        | - IN: Negativer Anschluss des Messsignals (grüne Leitung des Kraftsensors). |
+|        3        | + IN: Positiver Anschluss des Messsignals (weiße Leitung des Kraftsensors). |
+|        4        | -V<sub>s</sub>: Negative Versorgungsspannung 0 V.            |
+|        5        | REF: Über diesen Eingang kann eine Referenzspannung zum Messsignal addiert werden. |
+|        6        | OUTPUT: Verstärkte Messspannung als Ausgangssignal.          |
+|        7        | +V<sub>s</sub>: Positive Versorgungspannung 5 V.             |
+|        8        | + R<sub>G</sub>: Anschluss für den Widerstand zur Einstellung des Verstärkungsfaktors. |
+
+<span style="color:#5882FA; font-size: 12pt ">11. </span> Bauen Sie die nachfolgende Schaltung auf dem Breadboard auf. Achten Sie während des Aufbaus darauf, dass die Spannungversorgung des Breadboards ausgeschaltet ist (grüne LED leuchtet nicht). Da die Schaltung komplizierter ist, sollte auf jeden Fall sehr gründlich kontrolliert werden, ob alle Bauelemente richtig angeschlossen sind, bevor die Spannungsversorgung des Breadboards eingeschaltet wird. Der AD-Wandler ADS-1115 und die Wägezelle sind im nachfolgenden Schaltplan nicht dargestellt. Die Anschlussbelegung dieser Komponenten kann den Tabellen unter dem Schaltplan entnommen werden.
+
+![](images/course/circuit_instrumentation_amplifier.PNG)
+
+| Anschlüsse Wägezelle      | Anschlüsse Breadboard / GPIO-Pin         |
+| ------------------------- | ---------------------------------------- |
+| rote Anschlussleitung     | 5 V                                      |
+| schwarze Anschlussleitung | 0 V                                      |
+| grüne Anschlussleitung    | +IN Instrumentenverstärker AD623 (Pin 3) |
+| weiße Anschlussleitung    | -IN Instrumentenverstärker AD623 (Pin 2) |
+
+| Anschlüsse AD-Wandler ADS1115 | Anschlüsse Breadboard / GPIO-Pin                     |
+| ----------------------------- | ---------------------------------------------------- |
+| VDD                           | 5 V                                                  |
+| GND                           | 0 V                                                  |
+| SDL                           | GPIO-Pin SCL                                         |
+| SDA                           | GPIO-Pin SDA                                         |
+| A0                            | OUTPUT Instrumentenverstärker AD623 (Pin 6)          |
+| A1                            | 2,5 V (zwischen *R<sub>1</sub>* und *R<sub>2</sub>*) |
+
+![](images/course/breadboard_instrumentation_amplifier.PNG)
+
+**Zusatzinformation zur Schaltung für Interessierte:**  
+Die beiden Kondensatoren *C<sub>1</sub>* und *C<sub>2</sub>* sind dazu da, Störsignale in unserer Schaltung zu unterdrücken. Mit dem Spannungsteiler aus den Widerständen *R<sub>1</sub>* und *R<sub>2</sub>* halbieren wir die Versorgungsspannung von 5 V, sodass wir zwischen den beiden Widerständen eine Spannung von 2,5 V abgreifen können. Diese addieren wir über den Pin 5 des Instrumentenverstärkers zur verstärkten Messspannung. Dieser Schritt ist notwendig, da wir sonst sehr kleine Messspannungen und negative Messspannungen nicht verstärken könnten. Da wir diesen Offset von 2,5 V in unserem digitalisierten Wert der Messspannung nicht mehr haben möchten, ziehen wir die Spannung von 2,5 V im AD-Wandler wieder ab, indem wir die Spannung von 2,5 V zwischen den Widerständen des Spannungsteilers abgreifen und am Eingang A1 des AD-Wandlers anschließen. Durch die Konfiguration des AD-Wandlers sorgen wir dann dafür, dass dieser die Spannungs-differenz zwischen den Eingängen A0 und A1 digitalisiert und unsere digitalisierte Messspannung wieder um den Offset von 2,5 V bereinigt ist.
+
+<span style="color:#5882FA; font-size: 12pt ">12. </span> Jetzt können wir unsere Schaltung testen und schauen, ob diese wie erwartet funtioniert und uns die verstärkte und digitalisierte Messspannug anzeigen lassen.
+
+1. Dazu starten wir wieder das Programm PhyPi auf dem Desktop und wechseln über den Reiter **Configuration** und **PhyPi Config** in die Konfiguration des Messdatenerfassungssystems PhyPi.
+
+2. Hier nehmen wir eine Änderung vor: Wir wählen eine andere Darstellung unserer Messwerte. Dazu deaktivieren wir zuerst das Display-Modul DataLogger in Zeile 14, indem wir diese Zeile mit Hilfe eines `#` auskommentieren (`#DisplayModule: DataLogger`). Stattdessen aktivieren wir das Display-Modul DataGraphs in Zeile 15, indem wir den `#` entfernen (`DisplayModule: DataGraphs`). Nun bekommen wir außer dem zeitlichen Verlauf unserer digitalisierten Messspannung auch deren aktuellen Wert in Textform und ein Balkendiagramm angezeigt.
+
+```yaml
+# Configuration Options for PhyPiDAQ 
+
+# device configuration files 
+DeviceFile: config/ADS1115Config.yaml  
+#DeviceFile: config/MCP3008Config.yaml  
+#DeviceFile: config/PSConfig.yaml         
+#DeviceFile: config/MAX31865Config.yaml 
+#DeviceFile: config/GPIOCount.yaml
+
+## an example for multiple devices
+#DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+
+# DisplayModule: DataLogger
+DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+Interval: 0.1                     # logging interval         
+XYmode:     false                 # enable/disable XY-display
+
+
+# channel-specific information
+ChanLabels: [(V), (V) ]          # names and/or units for channels 
+ChanColors: [darkblue, sienna]    # channel colours in display
+
+# eventually overwrite Channel Limits obtained from device config 
+##ChanLimits: 
+## - [0., 1.]   # chan 0
+## - [0., 1.]   # chan 1
+## - [0., 1.]   # chan 2
+
+# calibration of channel values
+#  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
+#ChanCalib: 
+#  - 1.                          # chan0: simple calibration factor
+#  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
+#  - null                      # chan2: no calibration
+
+# apply formulae to calibrated channel values
+#ChanFormula:
+#  - c0 + c1  # chan0
+#  - c1          # chan1
+#  - null        # chan2 : no formula
+
+# name of output file
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile.csv         # file name for output file 
+#CSVseparator: ';'
+
+```
+
+3. Außerdem müssen wir noch den AD-Wandler ADS1115 passend konfigurieren: Dazu wechseln wir über den Reiter **Device Config** in die Konfigurationsdatei des ADS1115.
+4. Hier passen wir die Konfiguration für unsere Messung an:  Zum einen müssen wir den AD-Wandler so konfigurieren, dass dieser uns die Spannungsdifferenz zwischen den Anschlüssen A0 und A1, also unsere verstärkte Messspannung digitalisiert. Dazu ändern wir Zeile 5 in `ADCChannels:[0] ` und Zeile 16 in `DifModeChan: [true]`. Zum anderen passen wir die interne Verstärkung und damit den Messbereich des AD-Wandlers so an, dass wir den Messbereich möglichst gut ausnutzen. Dazu ändern wir Zeile 17 in `Gain:[2]`, sodass unsere Messspannung noch mal um den Faktor zwei verstärkt wird und wir Spannungen in einem Bereich von +2,048 V und -2,048 V digitalisieren können.
+
+```yaml
+# example of a configuration file for ADC ADS1115
+
+DAQModule: ADS1115Config  
+
+ADCChannels: [0]         # active ADC-Channels
+                            # possible values: 0, 1, 2, 3
+                              # when using differential mode:
+                                #  -  0 = ADCChannel 0 
+                                #          minus ADCChannel 1
+                                #  -  1 = ADCChannel 0 
+                                #          minus ADCChannel 3
+                                #  -  2 = ADCChannel 1 
+                                #          minus ADCChannel 3
+                                #  -  3 = ADCChannel 2 
+                                #          minus ADCChannel 3
+DifModeChan: [true]   # enable differential mode for Channels
+Gain: [2]                # programmable gain of ADC-Channel
+                              # possible values for Gain:
+                              #  - 2/3 = +/-6.144V
+                              #  -   1 = +/-4.096V
+                              #  -   2 = +/-2.048V  
+                              #  -   4 = +/-1.024V
+                              #  -   8 = +/-0.512V
+                              #  -  16 = +/-0.256V
+sampleRate: 860             # programmable Sample Rate of ADS1115
+                              # possible values for SampleRate: 
+                              # 8, 16, 32, 64, 128, 250, 475, 860
+```
+
+5. Nun können wir unseren Test starten: Dazu wechseln wir zu **Control** und starten die Messung mit **StartRun**. Mit den Fingern können wir nun sanft von oben oder unten auf den Kraftsensor drücken und testen, ob sich das Messsignal wie gewünscht verändert. Das Bild unten zeigt beispielhaft einen erfolgreichen Test.
+
+   ![](images/course/test_instrumentation_amplifier.PNG)
+
+<span style="color:#5882FA; font-size: 12pt ">13. </span>  Nach der Digitalisierung haben wir nun eine digitalisierte Messspannung, aber keinen digitalisierten Wert der auf den Kraftsensor wirkenden Kraft. Um wirklich Kräfte zu messen, müssen wir unseren digitalen Kraftsensor also noch kalibrieren. Dazu nehmen wir für die Gewichtskraft verschiedener bekannter Massen die digitalisierte Messspannung auf. Die resultierenden Messwerte tragen wir in die nachfolgende Tabelle ein.
+
+Füllen Sie die nachfolgende Tabelle aus. Wiegen Sie dafür zunächst die benötigten Massestücke mit einer Laborwaage ab und tragen Sie das Messergebnis in die Tabelle ein. Berechnen Sie die zugehörige Gewichtskraft *F<sub>G</sub>* aus der gemessenen Masse *m* und der Gravitationsfeldstärke *g* = 9,81 m/s<sup>2</sup>.
+$$
+F_G=m\cdot g
+$$
+Um die Messspannung *U<sub>M</sub>*  zu ermitteln, führen Sie die Schritte 1. bis 11. für jede zu messende Masse aus.
+
+|                                   | 0 g  | 100 g | 200 g | 300 g | 400 g |
+| --------------------------------- | ---- | ----- | ----- | ----- | ----- |
+| gemessene Masse  *m* in g         |      |       |       |       |       |
+| Gewichtskraft *F* in N            |      |       |       |       |       |
+| Messspannung *U<sub>M</sub>* in V |      |       |       |       |       |
+
+1. Wir starten wieder das Programm **PhyPi** und nutzen die Konfiguration unserer eben durchgeführten Messung. Dazu klicken wir in der Zeile **DAQ config** auf das Ordnersymbol. 
+
+   ![](images/course/load_config.PNG)
+
+2. Wir öffnen links oben **Persönliche Ordner** und wechseln dann in das Verzeichnis **PhyPi**. Im neuesten phypi-Ordner liegt die Konfiguration unseres Tests bzw. unserer letzten Messung. Mit einem Doppelklick auf die **.daq-Datei** laden wir diese Konfiguration in PhyPi.
+
+3. Damit uns bei der Kalibrierung nur ein sinnvoller Wertebereich angezeigt wird, gehen wir über den Reiter **Configuration** wieder auf die **PhyPi Config** und aktivieren in Zeile 25 durch Entfernen der beiden `##` vor `ChanLimits` die Anzeigebereichseinstellung. Jetzt können wir durch Entfernen der beiden `## ` in der nachfolgenden Zeile einen Wertebereich für die Anzeige vorgeben `- [-0.5, 2.]   # chan 0`.
+
+4. Damit wir nicht nur Daten angezeigt bekommen, sondern diese auch zur Auswertung gespeichert werden, müssen wir in Zeile 44 unter `DataFile: ` einen Dateinamen `kalibrierung_<hier verwendete Masse eintragen>.csv` anstatt `null` angeben. Unsere Messdaten werden dann im PhyPi-Verzeichnis im neuesten Ordner abgelegt.
+
+5. Nun hängen wir das entsprechende Massestück an den Kraftsensor und achten darauf, dass dieses nicht pendelt, wenn wir die Messung beginnen.
+
+6. Wir klicken auf den Reiter **Control** und starten die Messung mit **StartRun**.
+
+7. Nach etwas mehr als 10 Sekunden beenden wir die Messung über **End**.
+
+8. Jetzt können wir unsere aufgenommenen Messwerte für die Kalibrierung auswerten. Damit wir die Daten nachher zuordnen können, benennen wir den jeweils neuesten Ordner im Verzeichnis PhyPi in kalibrierung_&lt; jeweilige Masse &gt; um.
+
+9. Nun lesen wir die Daten in das Tabellenkalkulationsprogramm **LibreOffice Calc** (ähnlich Excel) ein. Zunächst öffnen wir das Programm: Dazu klicken wir auf dem Startbildschirm links oben auf die **Himbeere**, dann auf **Büro** und auf **LibreOffice Calc**.
+
+10. Wir öffnen unsere Messdaten aus dem eben umbenannten Ordner und lesen diese in LibreOffice Calc ein.
+
+11. Nun können wir für unsere Kalibrierung den Mittelwert aus 100 Messwerten für die Messspannung *U<sub>M</sub>* berechnen und in unsere Tabelle oben übernehmen.  
+    Berechnung eines Mittelwerts mit LibreOffice Calc:
+
+    - Wir klicken auf eine beliebige leere Zelle in der Tabelle.
+
+    - Wir berechnen mit `= AVERAGE(A4:A103)` den Mittelwert aus den Zellen A4 bis A103.
+
+    - Den errechneten Mittelwert für die Messspannung *U<sub>M</sub>* tragen wir nun in die Tabelle oben ein.  
+
+
+<span style="color:#5882FA; font-size: 12pt ">14. </span> Nun können wir die Kalibrierung abschließen, indem wir PhyPi starten und als Basis für die Konfiguration die .daq-Datei unserer letzten Messung im PhyPi-Verzeichnis öffnen. Wir wechseln wieder in die PhyPi Config und können nun unsere Kalibrierung vornehmen:
+
+1. Durch Entfernen der beiden `##` in Zeile 32 aktivieren wir die Kalibrierungsfunktion `ChanCalib:`.
+2. In Zeile 32 fügen wir unsere Werte für die Gewichtskraft *F<sub>G</sub>* und die zugehörige Messspannung *U<sub>M</sub>* ein, mit deren Hilfe PhyPi dann eine Funktion für die gemessene Kraft in Abhängigkeit von der Messspannung *U<sub>M</sub>* berechnet. Mit dieser Funktion kann dann für jeden beliebigen Zwischenwert ein zugehöriger Kraftwert berechnet werden.
+3. Damit wir den passenden Wertebereich angezeigt bekommen, passen wir in Zeile 26 den Anzeigebereich entsprechend an `-[0., 5.]`.
+4. Da unser angezeigter Messwert nun keine Spannung mehr ist, passen wir in Zeile 21 die angezeigte Einheit entsprechend an `ChanLabels:[N]`.
+
+```yaml
+# Configuration Options for PhyPiDAQ 
+
+# device configuration files 
+DeviceFile: config/ADS1115Config.yaml  
+#DeviceFile: config/MCP3008Config.yaml  
+#DeviceFile: config/PSConfig.yaml         
+#DeviceFile: config/MAX31865Config.yaml 
+#DeviceFile: config/GPIOCount.yaml
+
+## an example for multiple devices
+#DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+
+# DisplayModule: DataLogger
+DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+Interval: 0.1                     # logging interval         
+XYmode:     false                 # enable/disable XY-display
+
+
+# channel-specific information
+ChanLabels: [(N)]          # names and/or units for channels 
+ChanColors: [darkblue, sienna]    # channel colours in display
+
+# eventually overwrite Channel Limits obtained from device config 
+ChanLimits: 
+ - [0., 5.]   # chan 0
+## - [0., 1.]   # chan 1
+## - [0., 1.]   # chan 2
+
+# calibration of channel values
+#  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
+ChanCalib:
+- [[FG0, FG100, FG200, FG300, FG400, FG500], [UM0, UM100, UM200, UM300, UM400]]
+#  - 1.                          # chan0: simple calibration factor
+#  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
+#  - null                      # chan2: no calibration
+
+# apply formulae to calibrated channel values
+#ChanFormula:
+#  - c0 + c1  # chan0
+#  - c1          # chan1
+#  - null        # chan2 : no formula
+
+# name of output file
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile.csv         # file name for output file 
+#CSVseparator: ';'
+
+```
+
+<span style="color:#5882FA; font-size: 12pt ">15. </span> Jetzt können wir unseren digitalen Kraftsensor abschließend in einem Physikexperiment testen. Dazu lassen wir uns den Kraftverlauf im Aufhängepunkt eines Federpendels anzeigen:
+
+1. Wir hängen die Schraubenfeder mit einer angehängten Masse von *m* = 300 g an unserem Kraftsensor ein und versetzen das System in Schwingung.
+
+2. Nun können wir die Messung wie gewohnt starten. 
+
+Nachfolgend ist beispielhaft der zeitliche Kraftverlauf im Aufhängepunkt eines Federpendels dargestellt. 
+![](../examples/spring_pendulum_Federpendel/spring_pendulum_Federpendel.png)  
+Auf eine quantitative Auswertung verzichten wir an dieser Stelle. Trotzdem können wir einige grundsätzliche Beobachtungen festhalten.  
+Die Kraft im Aufhängepunkt ist am oberen Umkehrpunkt des Federpendels am kleinsten und am unteren Umkehrpunkt am größten. Das Messsignal schwingt um einen Gleichgewichtszustand. Dieser Gleichgewichtszustand enspricht der Gewichtskraft von Feder und angehängter Masse.

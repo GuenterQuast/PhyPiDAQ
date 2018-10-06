@@ -209,7 +209,7 @@ sudo usermod -a -G tty pi
 # get PhyPiDAQ code and dependencies
 mkdir git
 cd git
-git clone https://GuenterQuast/PhyPiDAQ
+git clone https://github.com/GuenterQuast/PhyPiDAQ
 cd PhyPiDAQ/whl
 sudo pip3 install *.whl
 ```
@@ -229,7 +229,7 @@ cp -a ~/git/PhyPiDAQ/examples .
 cp -a ~/git/PhyPiDAQ/config .
 
 # provide icon to graphical user interface
-cp ~/git/phypi.desktop ~/Desktop
+cp ~/git/PhyPiDAQ/phypi.desktop ~/Desktop
 ```
 
  You might also consider moving the *PhyPiDAQ* package to system space, e.g. `/usr/local`:
