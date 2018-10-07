@@ -8,19 +8,19 @@
 <center><span style="color:#5882FA; font-size: 40pt"> Einführungskurs <br>zur digitalen Messwerterfassung <br> mit dem Raspberry Pi <br> und PhyPiDAQ  </span></center>
 
 
-| Übersicht über wichtige Komponenten                |                                                              |
-| -------------------------------------------------- | :----------------------------------------------------------: |
-| AD-Wandler ADS1115                                 |           ![](images/course/component_ads1115.png)           |
-| Bananenbuchse mit angeschlossener Breadboarleitung |         ![](images/course/component_banana_jack.png)         |
-| Fotowiderstand (LDR Typ5516)                       |             ![](images/course/component_ldr.png)             |
-| Instrumentenverstärker AD623                       |  ![](images/course/component_instrumentation_amplifier.png)  |
-| Keramikkondensator 0,1 µF                          |       ![](images/course/component_capacitor_0,1µF.png)       |
-| Elektrolytkondensator 10 µF                        |       ![](images/course/component_capacitor_10µF.png)        |
-| Kraftsensor, Wägezelle TAL220B                     |        ![](images/course/component_force_sensor.png)         |
-| NTC-Widerstand *R<sub>25</sub>* = 10 k&Omega;      |             ![](images/course/component_ntc.png)             |
-| Potentiometer 10 k&Omega;                          |        ![](images/course/component_potentiometer.png)        |
-| Spannungsversorgung                                |        ![](images/course/component_power_supply.png)         |
-| Widerstand (Bsp. 10 k&Omega;)                      | Farbcode: <span style="color:SaddleBrown">braun</span>, schwarz, schwarz, <span style="color:red">rot</span>, <span style="color:SaddleBrown">braun</span> ![](images/course/component_resistor_10kOhm.png) |
+| Übersicht über wichtige Komponenten                 |                                                              |
+| --------------------------------------------------- | :----------------------------------------------------------: |
+| AD-Wandler ADS1115                                  |           ![](images/course/component_ads1115.png)           |
+| Bananenbuchse mit angeschlossener Breadboardleitung |         ![](images/course/component_banana_jack.png)         |
+| Fotowiderstand (LDR Typ5516)                        |             ![](images/course/component_ldr.png)             |
+| Instrumentenverstärker AD623                        |  ![](images/course/component_instrumentation_amplifier.png)  |
+| Keramikkondensator 0,1 µF                           |       ![](images/course/component_capacitor_0,1µF.png)       |
+| Elektrolytkondensator 10 µF                         |       ![](images/course/component_capacitor_10µF.png)        |
+| Kraftsensor, Wägezelle TAL220B                      |        ![](images/course/component_force_sensor.png)         |
+| NTC-Widerstand *R<sub>25</sub>* = 10 k&Omega;       |             ![](images/course/component_ntc.png)             |
+| Potentiometer 10 k&Omega;                           |        ![](images/course/component_potentiometer.png)        |
+| Spannungsversorgung                                 |        ![](images/course/component_power_supply.png)         |
+| Widerstand (Bsp. 10 k&Omega;)                       | Farbcode: <span style="color:SaddleBrown">braun</span>, schwarz, schwarz, <span style="color:red">rot</span>, <span style="color:SaddleBrown">braun</span> ![](images/course/component_resistor_10kOhm.png) |
 
 <div style="page-break-after: always;"></div>
 
@@ -245,7 +245,7 @@ Jeder kennt bei neueren Autos die Lichtautomatik, die das Licht automatisch ansc
 
 **Durchführung:**
 
-<span style="color:#5882FA; font-size: 12pt ">1. </span>Stecken die abgebildete Schaltung gemäß des nachfolgenden Schaltplans und der Abbildung des Schaltungsaufbaus auf dem Breadboard und schließen Sie Spannungsversorgung und Netzteil an.  
+<span style="color:#5882FA; font-size: 12pt ">1. </span>Stecken Sie die abgebildete Schaltung gemäß des nachfolgenden Schaltplans und der Abbildung des Schaltungsaufbaus auf dem Breadboard und schließen Sie Spannungsversorgung und Netzteil an.  
 
 ![](images/course/ldr_digital_circuit.PNG)
 
@@ -729,7 +729,7 @@ Ergänzen Sie die fehlenden Begriffe für unser Beispiel des digitalen Thermomet
 
 # 6. Wir bauen einen digitalen Kraftsensor
 
-Wir alle kennen digitale Waagen aus der Küche oder aus dem Bad. Wie funktioniert aber eine solche Waage und wie können wir Komponenenten aus einer handelsüblichen Küchenwaage nutzen, um einen digitalen Kraftsensor für Physikexperimente zu bauen?
+Wir alle kennen digitale Waagen aus der Küche oder aus dem Bad. Wie funktioniert aber eine solche Waage und wie können wir Komponenten aus einer handelsüblichen Küchenwaage nutzen, um einen digitalen Kraftsensor für Physikexperimente zu bauen?
 
 <span style="color:#5882FA; font-size: 12pt">Aufgabe 1: </span> Geben Sie die physikalische Größe an, die bei einer Waage gemessen wird.
 
@@ -746,7 +746,7 @@ Die Wägezelle besteht aus einem Federkörper (Doppelbiegebalken), dem Aluminium
 
 ![](images/course/sketch_load_cell.PNG)
 
-Nachfolgend ist eine Prinzipskizze einer solchen Wägezelle dargestellt, in der die durch die eingeleitetete Kraft hervorgerufene Verformung stark übertrieben dargestellt ist. Wie bei den vorherigen Sensoren brauchen wir ein auswertbares elektrisches Signal, mit dessen Hilfe wir auf die Größe der eingeleiteten Kraft schließen können. Dazu müssen wir die kraftabhängige Verformung des Federkörpers elektrisch auswerten können. In einer solchen Wägezelle kommen sogenannte Dehnungsmessstreifen zum Einsatz, die aus einem gewundenen Widerstandsdraht mit zwei Anschlüssen bestehen und auf einer Trägerfolie aufgebracht sind. Vier dieser Dehnungsmessstreifen sind so auf dem Federkörper aufgeklebt, dass diese sich Krafteinwirkung gemeinsam mit dem Federkörper verformen.
+Nachfolgend ist eine Prinzipskizze einer solchen Wägezelle dargestellt, in der die durch die eingeleitete Kraft hervorgerufene Verformung stark übertrieben dargestellt ist. Wie bei den vorherigen Sensoren brauchen wir ein auswertbares elektrisches Signal, mit dessen Hilfe wir auf die Größe der eingeleiteten Kraft schließen können. Dazu müssen wir die kraftabhängige Verformung des Federkörpers elektrisch auswerten können. In einer solchen Wägezelle kommen sogenannte Dehnungsmessstreifen zum Einsatz, die aus einem gewundenen Widerstandsdraht mit zwei Anschlüssen bestehen und auf einer Trägerfolie aufgebracht sind. Vier dieser Dehnungsmessstreifen sind so auf dem Federkörper aufgeklebt, dass diese sich Krafteinwirkung gemeinsam mit dem Federkörper verformen.
 
 ![](images/course/principle_sketch_load_cell.PNG)
 
@@ -782,7 +782,7 @@ Unser digitaler Kraftsensor folgt dem gleichen Grundprinzip der digitalen Messwe
 
 Zur Erinnerung: Unser Ziel ist es ja, Kräfte digital messen zu können. Durch die Dehnungsmessstreifen auf dem Federkörper der Wägezelle sind wir in der Lage, die durch die Krafteinwirkung verursachte Dehnung in eine Widerstandsänderung zu wandeln. Damit wir diese Widerstandsänderung digitalisieren können, müssen wir diese noch in ein weiterverarbeitbares elektrisches Signal wandeln, das wir mit unserem AD-Wandler digitalisieren können.
 
-**Problem:** Die Widerstandsänderung der Dehnungmessstreifen ist sehr klein. Mit einem Spannungsteiler wie beim digitalen Thermometer erhalten wir kein auswertbares Spannungssignal.
+**Problem:** Die Widerstandsänderung der Dehnungsmessstreifen ist sehr klein. Mit einem Spannungsteiler wie beim digitalen Thermometer erhalten wir kein auswertbares Spannungssignal.
 
 **Lösungsansatz:** Wir brauchen eine Schaltung, die empfindlich auf kleine Widerstandänderungen reagiert und diese in eine auswertbare Spannung wandelt. In der Messtechnik kommt dabei eine Brückenschaltung (Wheatstonesche Messbrücke) zum Einsatz.
 
@@ -790,7 +790,7 @@ Dazu benutzt man zwei parallele Spannungsteiler aus insgesamt vier Widerständen
 
 ![](images/course/wheatstone_bridge.PNG)
 
-<span style="color:#5882FA; font-size: 12pt">Aufgabe 4: </span> Berechnen Sie die Spannungsverhältnisse für die beiden Spannungsteiler für den Fall, dass die Wägezelle unbelastet ist und alle vier Widerstände *R<sub>1</sub>* = *R<sub>2</sub>* = *R<sub>3</sub>* = *R<sub>4</sub>* = *R* = 1000 &Omega; groß sind. Zur Erinnerung: Die Spannungen in einem Spannungsteiler verhalten sich immer wie die zugehörigen Widerstände. Damit ergeben sich für die Verhältnisse folgende Gleichungen.
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 4: </span> Berechnen Sie die Spannungsverhältnisse für die beiden Spannungsteiler für den Fall, dass die Wägezelle unbelastet ist und alle vier Widerstände *R<sub>1</sub>* = *R<sub>2</sub>* = *R<sub>3</sub>* = *R<sub>4</sub>* = *R* = 1000 &Omega; groß sind. Zur Erinnerung: Die Spannungen in einem Spannungsteiler verhalten sich immer wie die zugehörigen Widerstände. Damit ergeben sich für die Verhältnisse folgende Gleichungen:
 $$
 \frac{U_1}{U_2}=\frac{R_1}{R_{2}}
 $$
@@ -829,7 +829,7 @@ $$
 
 &nbsp;
 
-<span style="color:#5882FA; font-size: 12pt">Aufgabe 6: </span> Aus den Teilspannungen können wir nun mit Hilfe der Maschenregel (2. Kirchhoff'sches Gesetz), die für uns relevante Messspannung *U<sub>M</sub>* berechnen. Dazu schauen wir uns die Masche aus *U<sub>2</sub>* , *U<sub>4</sub>*  und *U<sub>M</sub>* an (grüner Pfeil in der Abbildung der Schaltung).
+<span style="color:#5882FA; font-size: 12pt">Aufgabe 6: </span> Aus den Teilspannungen können wir nun mit Hilfe der Maschenregel (2. Kirchhoffsches Gesetz), die für uns relevante Messspannung *U<sub>M</sub>* berechnen. Dazu schauen wir uns die Masche aus *U<sub>2</sub>* , *U<sub>4</sub>*  und *U<sub>M</sub>* an (grüner Pfeil in der Abbildung der Schaltung).
 
 Zur Erinnerung hier noch einmal die Maschenregel:  
 Die Summe aller Teilspannungen längs einer geschlossenen Masche ist gleich null.
@@ -896,7 +896,7 @@ Unsere Erkenntnis aus den Aufgaben zuvor ist also, dass man mit Hilfe einer Brü
 
 ![](images/course/measuring_chain_force_2.PNG)
 
-Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierung an. Damit wir für die weiteren Schritte auf unsere Messergebnisse zugreifen können, nutzen wir das das Programm `phypi.py`. Hier haben wir die Möglichkeiten uns die digitalisierten Messwerte grafisch anzeigen zu lassen und können diese zur Auswertung abspeichern. Im Hintergrund laufen dabei die selben Schritte ab, wie wir sie beim digitalen Thermomter in unseren eigenen Programmen durchgeführt haben.
+Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierung an. Damit wir für die weiteren Schritte auf unsere Messergebnisse zugreifen können, nutzen wir das das Programm `phypi.py`. Hier haben wir die Möglichkeiten uns die digitalisierten Messwerte grafisch anzeigen zu lassen und können diese zur Auswertung abspeichern. Im Hintergrund laufen dabei dieselben Schritte ab, wie wir sie beim digitalen Thermometer in unseren eigenen Programmen durchgeführt haben.
 
 <div style="page-break-after: always;"></div>
 
@@ -940,7 +940,7 @@ Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierun
 | A0                            | grüne Leitung der Wägezelle       |
 | A1                            | weiße Signalleitung der Wägezelle |
 
-<span style="color:#5882FA; font-size: 12pt ">2. </span> Befestigen Sie die Wägezelle an einem Stativ so, dass der auf der Stirnseite abgebildete Pfeil nach unten zeigt. Das folgende Bild zeigt einen möglichen Aufbau (hier bereits mit Massestücken belastet). 
+<span style="color:#5882FA; font-size: 12pt ">2. </span> Befestigen Sie die Wägezelle an einem Stativ so, dass der auf der Stirnseite abgebildete Pfeil nach unten zeigt. Wir benutzen eine Wägezelle, die in Waagen bis 500 g eingesetzt wird. Diese hat im Gegensatz zur Wägezelle aus der 5 kg - Küchenwaage nicht nur zwei Bohrungen, sondern einen länglichen Schlitz zwischen den Bohrungen, sodass ebenfalls oben und unten Biegebalken entstehen. Diese Konstruktion ist nur notwendig, um eine höhere Empfindlichkeit zu ermöglichen, funktioniert aber genauso wie bei der Wägezelle oben. Das folgende Bild zeigt einen möglichen Aufbau (hier bereits mit Massestücken belastet). 
 
 ![](images/course/tripod_force_sensor.png)
 
@@ -1061,13 +1061,15 @@ Die nachfolgende Abbildung zeigt beispielhaft eine solche Messung.
 
 <div style="page-break-after: always;"></div>
 
-<span style="color:#5882FA; font-size: 12pt ">9. </span> **Problem:** Die sehr kleine Messspannung bringt mehrere Nachteile mit sich: Zum einen sind solch kleine Spannungsignale sehr störanfällig. Bereits kleine Störspannungen wirken sich massiv auf das Messergebnis aus. Zum anderen können wir die Messspannung nur schlecht auflösen (wir können nur wenige der Digitalisierungstufen des AD-Wandlers nutzen).
+<span style="color:#5882FA; font-size: 12pt ">9. </span> **Problem:** Die sehr kleine Messspannung bringt mehrere Nachteile mit sich: Zum einen sind solch kleine Spannungssignale sehr störanfällig. Bereits kleine Störspannungen wirken sich massiv auf das Messergebnis aus. Zum anderen können wir die Messspannung nur schlecht auflösen (wir können nur wenige der Digitalisierungsstufen des AD-Wandlers nutzen).
 
-**Lösungsansatz:** Wir verstärken die analoge Messspannung *U<sub>M</sub>*, bevor wir diese digitalisieren. Dadurch beeinflussen Störungen die Messspannung wesentlich weniger, wenn diese nach der Verstärkung auftreten. Für die Digitalisierung mit dem AD-Wandler ist für uns entscheidend, dass wir die Digitalisierungstufen des AD-Wandlers gut ausnutzen, damit wir unsere Messspannung möglichst gut auflösen. Deshalb wählen wir eine Verstärkung, die so groß ist, dass wir den Messbereich des AD-Wandlers gut ausnutzen.
+**Lösungsansatz:** Wir verstärken die analoge Messspannung *U<sub>M</sub>*, bevor wir diese digitalisieren. Dadurch beeinflussen Störungen die Messspannung wesentlich weniger, wenn diese nach der Verstärkung auftreten. Für die Digitalisierung mit dem AD-Wandler ist für uns entscheidend, dass wir die Digitalisierungsstufen des AD-Wandlers gut ausnutzen, damit wir unsere Messspannung möglichst gut auflösen. Deshalb wählen wir eine Verstärkung, die so groß ist, dass wir den Messbereich des AD-Wandlers gut ausnutzen.
 
-<span style="color:#5882FA; font-size: 12pt ">10. </span> **Der Instrumentenverstärker**: Für die Verstärkung verwenden wir einen sogenannten Instrumentenverstärker, der es uns ermöglicht unsere Messspannung mit einem einstellbaren Verstärkungsfaktor zu verstärkern. Die Einstellung erfolgt durch einen Widerstand, der an den Instrumentenverstärker angeschlossen wird. In unserem Fall wählen wir einen Verstärkungsfaktor von 500, indem wir an den Instrumentenverstärker einen Widerstand von 200 &Omega; anschließen. Die Messspannung wird also 500 Mal größer als ohne Verstärkung. Der Instrumentenverstärker AD623 ist ein elektronisches Bauelement mit insgesamt acht Pins (Anschlüssen). In der nachfolgenden Abbildung ist die Pinbelegung für den Instrumentenverstärker AD623 dargestellt. Das Gehäuse des Instrumentenverstärkers hat an einer Seite eine Einkerbung. Die Pins sind so nummeriert, dass von oben gesehen der Pin links dieser Einkerbung die Nummer 1 und der Pin rechts von der Einkerbung die Nummer 8 bekommt. Die anderen Pins sind dann entsprechend durchnummeriert. Beim Einbau des Instrumentenverstärkers in eine Schaltung muss unbedingt darauf geachtet werden, dass die Pins des Instrumentenverstärkers korrekt angeschlossen werden.
+<span style="color:#5882FA; font-size: 12pt ">10. </span> **Der Instrumentenverstärker**: Für die Verstärkung verwenden wir einen sogenannten Instrumentenverstärker, der es uns ermöglicht unsere Messspannung mit einem einstellbaren Verstärkungsfaktor zu verstärken. Die Einstellung erfolgt durch einen Widerstand, der an den Instrumentenverstärker angeschlossen wird. In unserem Fall wählen wir einen Verstärkungsfaktor von 500, indem wir an den Instrumentenverstärker einen Widerstand von 200 &Omega; anschließen. Die Messspannung wird also 500 Mal größer als ohne Verstärkung. Der Instrumentenverstärker AD623 ist ein elektronisches Bauelement mit insgesamt acht Pins (Anschlüssen). In der nachfolgenden Abbildung ist die Pinbelegung für den Instrumentenverstärker AD623 dargestellt. Das Gehäuse des Instrumentenverstärkers hat an einer Seite eine Einkerbung. Die Pins sind so nummeriert, dass von oben gesehen der Pin links dieser Einkerbung die Nummer 1 und der Pin rechts von der Einkerbung die Nummer 8 bekommt. Die anderen Pins sind dann entsprechend durchnummeriert. Beim Einbau des Instrumentenverstärkers in eine Schaltung muss unbedingt darauf geachtet werden, dass die Pins des Instrumentenverstärkers korrekt angeschlossen werden.
 
 ![](images/course/instrumentation_amplifier.PNG)
+
+<div style="page-break-after: always;"></div>
 
 Aus der Tabelle kann entnommen werden, welche Funktionen die einzelnen Pins des Instrumentenverstärkers haben und wie dieses angeschlossen werden müssen.
 
@@ -1082,7 +1084,7 @@ Aus der Tabelle kann entnommen werden, welche Funktionen die einzelnen Pins des 
 |        7        | +V<sub>s</sub>: Positive Versorgungspannung 5 V.             |
 |        8        | + R<sub>G</sub>: Anschluss für den Widerstand zur Einstellung des Verstärkungsfaktors. |
 
-<span style="color:#5882FA; font-size: 12pt ">11. </span> Bauen Sie die nachfolgende Schaltung auf dem Breadboard auf. Achten Sie während des Aufbaus darauf, dass die Spannungversorgung des Breadboards ausgeschaltet ist (grüne LED leuchtet nicht). Da die Schaltung komplizierter ist, sollte auf jeden Fall sehr gründlich kontrolliert werden, ob alle Bauelemente richtig angeschlossen sind, bevor die Spannungsversorgung des Breadboards eingeschaltet wird. Der AD-Wandler ADS-1115 und die Wägezelle sind im nachfolgenden Schaltplan nicht dargestellt. Die Anschlussbelegung dieser Komponenten kann den Tabellen unter dem Schaltplan entnommen werden.
+<span style="color:#5882FA; font-size: 12pt ">11. </span> Bauen Sie die nachfolgende Schaltung auf dem Breadboard auf. Achten Sie während des Aufbaus darauf, dass die Spannungsversorgung des Breadboards ausgeschaltet ist (grüne LED leuchtet nicht). Da die Schaltung komplizierter ist, sollte auf jeden Fall sehr gründlich kontrolliert werden, ob alle Bauelemente richtig angeschlossen sind, bevor die Spannungsversorgung des Breadboards eingeschaltet wird. Der AD-Wandler ADS-1115 und die Wägezelle sind im nachfolgenden Schaltplan nicht dargestellt. Die Anschlussbelegung dieser Komponenten kann den Tabellen unter dem Schaltplan entnommen werden.
 
 ![](images/course/circuit_instrumentation_amplifier.PNG)
 
@@ -1107,7 +1109,7 @@ Aus der Tabelle kann entnommen werden, welche Funktionen die einzelnen Pins des 
 **Zusatzinformation zur Schaltung für Interessierte:**  
 Die beiden Kondensatoren *C<sub>1</sub>* und *C<sub>2</sub>* sind dazu da, Störsignale in unserer Schaltung zu unterdrücken. Mit dem Spannungsteiler aus den Widerständen *R<sub>1</sub>* und *R<sub>2</sub>* halbieren wir die Versorgungsspannung von 5 V, sodass wir zwischen den beiden Widerständen eine Spannung von 2,5 V abgreifen können. Diese addieren wir über den Pin 5 des Instrumentenverstärkers zur verstärkten Messspannung. Dieser Schritt ist notwendig, da wir sonst sehr kleine Messspannungen und negative Messspannungen nicht verstärken könnten. Da wir diesen Offset von 2,5 V in unserem digitalisierten Wert der Messspannung nicht mehr haben möchten, ziehen wir die Spannung von 2,5 V im AD-Wandler wieder ab, indem wir die Spannung von 2,5 V zwischen den Widerständen des Spannungsteilers abgreifen und am Eingang A1 des AD-Wandlers anschließen. Durch die Konfiguration des AD-Wandlers sorgen wir dann dafür, dass dieser die Spannungs-differenz zwischen den Eingängen A0 und A1 digitalisiert und unsere digitalisierte Messspannung wieder um den Offset von 2,5 V bereinigt ist.
 
-<span style="color:#5882FA; font-size: 12pt ">12. </span> Jetzt können wir unsere Schaltung testen und schauen, ob diese wie erwartet funtioniert und uns die verstärkte und digitalisierte Messspannug anzeigen lassen.
+<span style="color:#5882FA; font-size: 12pt ">12. </span> Jetzt können wir unsere Schaltung testen und schauen, ob diese wie erwartet funktioniert und uns die verstärkte und digitalisierte Messspannung anzeigen lassen.
 
 1. Dazu starten wir wieder das Programm PhyPi auf dem Desktop und wechseln über den Reiter **Configuration** und **PhyPi Config** in die Konfiguration des Messdatenerfassungssystems PhyPi.
 
@@ -1200,7 +1202,13 @@ sampleRate: 860             # programmable Sample Rate of ADS1115
 
    ![](images/course/test_instrumentation_amplifier.PNG)
 
-<span style="color:#5882FA; font-size: 12pt ">13. </span>  Nach der Digitalisierung haben wir nun eine digitalisierte Messspannung, aber keinen digitalisierten Wert der auf den Kraftsensor wirkenden Kraft. Um wirklich Kräfte zu messen, müssen wir unseren digitalen Kraftsensor also noch kalibrieren. Dazu nehmen wir für die Gewichtskraft verschiedener bekannter Massen die digitalisierte Messspannung auf. Die resultierenden Messwerte tragen wir in die nachfolgende Tabelle ein.
+<div style="page-break-after: always;"></div>
+
+6. Wir können nun unser Schema zum Grundprinzip der digitalen Messwerterfassung um die Verstärkung der Messspannung durch den Instrumentenverstärker und die Analog-Digital-Wandlung ergänzen.
+
+   ![](images/course/measuring_chain_force_3.PNG)
+
+<span style="color:#5882FA; font-size: 12pt ">13. </span>  Nach der Digitalisierung haben wir nun eine digitalisierte Messspannung, aber keinen digitalisierten Wert der auf den Kraftsensor wirkenden Kraft. Uns fehlt also noch die Umrechnung und Weiterverabeitung unserer digitalisierten Messspannung. Um wirklich Kräfte zu messen, müssen wir unseren digitalen Kraftsensor also noch kalibrieren. Dazu nehmen wir für die Gewichtskraft verschiedener bekannter Massen die digitalisierte Messspannung auf.
 
 Füllen Sie die nachfolgende Tabelle aus. Wiegen Sie dafür zunächst die benötigten Massestücke mit einer Laborwaage ab und tragen Sie das Messergebnis in die Tabelle ein. Berechnen Sie die zugehörige Gewichtskraft *F<sub>G</sub>* aus der gemessenen Masse *m* und der Gravitationsfeldstärke *g* = 9,81 m/s<sup>2</sup>.
 $$
@@ -1286,7 +1294,7 @@ ChanLimits:
 # calibration of channel values
 #  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
 ChanCalib:
-- [[FG0, FG100, FG200, FG300, FG400, FG500], [UM0, UM100, UM200, UM300, UM400]]
+- [[FG0, FG100, FG200, FG300, FG400], [UM0, UM100, UM200, UM300, UM400]]
 #  - 1.                          # chan0: simple calibration factor
 #  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
 #  - null                      # chan2: no calibration
@@ -1303,6 +1311,9 @@ DataFile:   null                  # file name for output file
 #CSVseparator: ';'
 
 ```
+5. Mit der Kalibrierung können wir unser Schema zum Grundprinzip der digitalen Messwerterfassung um den letzten Schritt, die Umrechnung der digitalisierten Messpannung in eine Kraft, ergänzen.
+
+   ![](images/course/measuring_chain_force_4.PNG)
 
 <span style="color:#5882FA; font-size: 12pt ">15. </span> Jetzt können wir unseren digitalen Kraftsensor abschließend in einem Physikexperiment testen. Dazu lassen wir uns den Kraftverlauf im Aufhängepunkt eines Federpendels anzeigen:
 
@@ -1313,4 +1324,4 @@ DataFile:   null                  # file name for output file
 Nachfolgend ist beispielhaft der zeitliche Kraftverlauf im Aufhängepunkt eines Federpendels dargestellt. 
 ![](../examples/spring_pendulum_Federpendel/spring_pendulum_Federpendel.png)  
 Auf eine quantitative Auswertung verzichten wir an dieser Stelle. Trotzdem können wir einige grundsätzliche Beobachtungen festhalten.  
-Die Kraft im Aufhängepunkt ist am oberen Umkehrpunkt des Federpendels am kleinsten und am unteren Umkehrpunkt am größten. Das Messsignal schwingt um einen Gleichgewichtszustand. Dieser Gleichgewichtszustand enspricht der Gewichtskraft von Feder und angehängter Masse.
+Die Kraft im Aufhängepunkt ist am oberen Umkehrpunkt des Federpendels am kleinsten und am unteren Umkehrpunkt am größten. Das Messsignal schwingt um einen Gleichgewichtszustand. Dieser Gleichgewichtszustand entspricht der Gewichtskraft von Feder und angehängter Masse.
