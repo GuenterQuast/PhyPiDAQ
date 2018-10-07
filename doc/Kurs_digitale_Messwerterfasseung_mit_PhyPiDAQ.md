@@ -1009,7 +1009,7 @@ DeviceFile: config/ADS1115Config.yaml
 #DeviceFile: config/MAX31865Config.yaml 
 #DeviceFile: config/GPIOCount.yaml
 
-## an example for multiple devices
+## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
 
 
@@ -1125,7 +1125,7 @@ DeviceFile: config/ADS1115Config.yaml
 #DeviceFile: config/MAX31865Config.yaml 
 #DeviceFile: config/GPIOCount.yaml
 
-## an example for multiple devices
+## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
 
 
@@ -1271,7 +1271,7 @@ DeviceFile: config/ADS1115Config.yaml
 #DeviceFile: config/MAX31865Config.yaml 
 #DeviceFile: config/GPIOCount.yaml
 
-## an example for multiple devices
+## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
 
 
