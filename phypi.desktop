@@ -3,7 +3,7 @@ Type=Application
 Encoding=UTF-8
 Name=PhyPi
 Comment=PhyPi Configuration
-Icon=/home/pi/git/PhyPiDAQ/images/PhiPi_icon.xpm
+Icon=/home/pi/git/PhyPiDAQ/images/PhiPi_icon.png
 Exec=git/PhyPiDAQ/phypi.py
 Terminal=true
 
