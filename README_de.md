@@ -45,13 +45,13 @@ Ein typisches, ausführlich kommentiertes Beispiel für die Hauptkonfigurationsd
 ```yaml
 # Konfigurations-Optionen fuer PhyPiDAQ
 
-# Konfigurationsdateien für Geraete
+# Konfigurationsdateien fuer Geraete
 DeviceFile: config/ADS1115Config.yaml
 #DeviceFile: config/MCP3008Config.yaml
 #DeviceFile: config/PSConfig.yaml
 #DeviceFile: config/MAX31865Config.yaml
 #DeviceFile: config/GPIOCount.yaml
-## ein Beispiel für mehrere Geraete
+## ein Beispiel fuer mehrere Geraete
 #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
 
 DisplayModule: DataLogger     # zeitlicher Verlauf der Messgroessen
