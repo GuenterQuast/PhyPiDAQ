@@ -8,7 +8,7 @@
 
 major = 0
 minor = 9
-revision = 0
+revision = 1
 
 def _get_version_tuple():
   '''

@@ -17,11 +17,11 @@
 # Import version info
 from ._version_info import *
 # and set version 
-_version_suffix = ''  # for suffixes such as 'rc' or 'beta' or 'alpha'
+_version_suffix = 'rc0'  # for suffixes such as 'rc' or 'beta' or 'alpha'
 __version__ = _version_info._get_version_string()
 __version__ += _version_suffix
 
 # Import components to be callabel at package level
 __all__ = [ "mpTkDisplay", "DataLogger", "DataRecorder", "DataGraphs",
                   "PSConfig", "MCP3008Config", "ADS1115Config", "HX711Config", 
-                  "MAX31865Config", "GPIOCount" ]
+                  "MAX31865Config", "GPIOCount", "DS18B20Config" ]
