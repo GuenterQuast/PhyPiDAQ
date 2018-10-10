@@ -51,6 +51,7 @@ DeviceFile: config/ADS1115Config.yaml
 #DeviceFile: config/PSConfig.yaml
 #DeviceFile: config/MAX31865Config.yaml
 #DeviceFile: config/GPIOCount.yaml
+#DeviceFile: config/DS18B20Config.yaml
 ## ein Beispiel fuer mehrere Geraete
 #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
 
@@ -158,9 +159,7 @@ frqSG: 0.    # aus
   
 ```
 
-Beispiele für andere Geräte, wie den Analog-Digital-Wandler MCP3008, für Ratenmessungen über die GPIO - Pins des Raspberry Pi oder Temperaturmessungen
-mit PT100-Sensoren am MAX31865 'Resistance to Digital-Converter' sind im Konfigurationsverzeichnis `./config/` enthalten, siehe
-`MCP3008Config.yaml` bzw. `GPIOcount.yaml` oder `MAX31865Config.yaml`.
+Beispiele für andere Geräte, wie den Analog-Digital-Wandler MCP3008, für Ratenmessungen über die GPIO - Pins des Raspberry Pi oder Temperaturmessungen mit dem digitalen 1-Wire Thermometer DS18B20 oder  PT100-Sensoren am MAX31865 'Resistance to Digital-Converter' sind im Konfigurationsverzeichnis `./config/` enthalten, siehe `MCP3008Config.yaml` , `GPIOcount.yaml`, `DS18B20Config.yaml` oder `MAX31865Config.yaml`.
 
 <div style="page-break-after: always;"></div>
 
