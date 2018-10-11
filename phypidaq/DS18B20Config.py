@@ -18,7 +18,6 @@ class DS18B20Config(object):
 
 # -- unit configuration DS18B20
     if "Unit" in confdict:
-      self.unit = confdict["Unit"]
       if confdict["Unit"] == "DEGREES_F":
           self.unit = W1ThermSensor.DEGREES_F
           self.ChanLims = [[14., 230.]]
@@ -39,7 +38,7 @@ class DS18B20Config(object):
       self.DS18B20 = W1ThermSensor()
     except:
       print("DS18B20Config: Error initialising device - exit")
-      #sys.exit(1)
+      sys.exit(1)
 
  # provide configuration parameters
     self.ChanNams = ['DS18B20']
