@@ -52,6 +52,7 @@ DeviceFile: config/ADS1115Config.yaml
 #DeviceFile: config/MAX31865Config.yaml
 #DeviceFile: config/GPIOCount.yaml
 #DeviceFile: config/DS18B20Config.yaml
+#DeviceFile: config/MAX31855Config.yaml
 ## ein Beispiel fuer mehrere Geraete
 #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
 
@@ -159,7 +160,7 @@ frqSG: 0.    # aus
   
 ```
 
-Beispiele für andere Geräte, wie den Analog-Digital-Wandler MCP3008, für Ratenmessungen über die GPIO - Pins des Raspberry Pi oder Temperaturmessungen mit dem digitalen 1-Wire Thermometer DS18B20 oder  PT100-Sensoren am MAX31865 'Resistance to Digital-Converter' sind im Konfigurationsverzeichnis `./config/` enthalten, siehe `MCP3008Config.yaml` , `GPIOcount.yaml`, `DS18B20Config.yaml` oder `MAX31865Config.yaml`.
+Beispiele für andere Geräte, wie den Analog-Digital-Wandler MCP3008, für Ratenmessungen über die GPIO - Pins des Raspberry Pi oder Temperaturmessungen mit dem digitalen 1-Wire Thermometer DS18B20,  PT100-Sensoren am MAX31865 'Resistance-to-Digital Converter' oder mit Thermoelementen (Typ K) am MAX31855 'Thermocouple-to-Digital Converter' sind im Konfigurationsverzeichnis `./config/` enthalten, siehe `MCP3008Config.yaml` , `GPIOcount.yaml`, `DS18B20Config.yaml` , `MAX31865Config.yaml` oder`MAX31855Config.yaml`.
 
 <div style="page-break-after: always;"></div>
 
@@ -167,15 +168,25 @@ Beispiele für andere Geräte, wie den Analog-Digital-Wandler MCP3008, für Rate
 
 Dieses Paket basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte bereitstellen:
 
-- die Adafruit Python MCP3008 Bibliothek, 
+- die Adafruit Python MCP3008 Bibliothek  
     <https://github.com/adafruit/Adafruit_Python_MCP3008>
-- die Adafruit Python ADX1x15 Bibliothek
+
+- die Adafruit Python ADX1x15 Bibliothek  
     <https://github.com/adafruit/Adafruit_Python_ADS1x15>
-- Komponenten des picoDAQ-Projekts
+
+- die Adafruit Python MAX31855 Bibliothek  
+    <https://github.com/adafruit/Adafruit_Python_MAX31855>
+
+- die w1thermsensor Bibliothek von Timo Furrer  
+    <https://github.com/timofurrer/w1thermsensor>
+
+- Komponenten des picoDAQ-Projekts  
     <https://github.com/GuenterQuast/picoDAQ>
+
 - das  *python* Interface für die PicoScope Treiber des *pico-python*-Projekts   
     von Colin O'Flynn, <https://github.com/colinoflynn/pico-python>
-- die C-Treiber aus dem Pico Technology Software Development Kit
+
+- die C-Treiber aus dem Pico Technology Software Development Kit  
     <https://www.picotech.com/downloads>
 
 Zur Vereinfachung der Installation werden Installationsdateien
@@ -212,8 +223,6 @@ cd PhyPiDAQ/whl
 sudo pip3 install *.whl
 ```
 
-<div style="page-break-after: always;"></div>
-
 ### Didaktische Anmerkungen
 
 Schüler oder Studierende zu Beginn mit dem vollen Umfang des Pakets *PhyPiDAQ* zu konfrontieren, ist aus didaktischer Sicht wenig angebracht. Stattdessen wird empfohlen, ein Arbeitsverzeichnis zu erstellen und
@@ -243,7 +252,7 @@ sudo mv ~/git/PhyPiDAQ /usr/local/
 
 Die Pfade in *~/Desktop/phipi.desktop* müssen dann ebenfalls entsprechend angepasst werden. Dies wird am einfachsten durch Klicken mit der rechten Maustaste auf das *phipi*-Symbol erreicht. Im sich dann öffnenden Menu den Dialog "Eigenschaften" wählen und alle Pfade von  *~/git/*  ->  */usr/local/* ändern.
 
-
+<div style="page-break-after: always;"></div>
 
 ## Übersicht über Dateien im Paket PhyPiDAQ 
 
@@ -258,39 +267,62 @@ Die Pfade in *~/Desktop/phipi.desktop* müssen dann ebenfalls entsprechend angep
 
 - `phypidaq/__init__.py`  
    Initialisierung für das Paket *phypidaq*
+
 - `phypidaq/_version_info.py`  
     Versionsinformation für das Paket *phypidaq*
+
 - `phypidaq/ADS1115Config.py`  
     Klasse zur Handhabung des Analog-Digital-Wandlers ADS1115
+
+- `phypidaq/DS18B20Config.py`  
+    Klasse zur Handhabung des digitalen Thermometers DS18B20
+
 - `phypidaq/MCP3008Config.py`  
     Klasse zur Handhabung des Analog-Digital-Wandlers MCP3008
+
 - `phypidaq/GPIOCount.py`   
     Klasse zur Ratenmessung an GPIO-Pins
+
+- `phypidaq/MAX31855Config.py`
+
+    Klasse zur Handhabung des Thermolement-nach-digital-Wandlers MAX31855
+
 - `phypidaq/MAX31865Config.py`  
     Klasse zur Handhabung des Widerstand-nach-digial-Wandlers MAX31865
+
 - `phypidaq/PSConfig.py`  
     Klasse für PicoScope USB-Oszilloskope
+
 - `phypidaq/mpTkDisplay.py`  
     Hintergrund-Prozess zur Datenvisualisierung
+
 - `phypidaq/DataLogger.py`  
+
 - Klasse zur Anzeige von Datenverlauf und xy-Diagrammen
+
 - `phypidaq/DataGraphs.py`  
     allgemeine Klasse zur Anzeige von Balkendiagrammen, Datenverläufen und xy-Diagrammen
+
 - `phypidaq/DataRecorder.py`  
     Speichern von Daten im CSV-Format
+
+<div style="page-break-after: always;"></div>
 
 ### Konfigurationsdateien
 
 - `PhyPiConf.daq`  
      Haputkonfigurationsdatei, hängt von Dateien im Unterverzeichnis *config/* ab
-- `config/ADS1115.yaml`
+- `config/ADS1115Config.yaml`
+- `config/DS18B20Config.yaml`
 - `config/GPIOCount.yaml`
-- `config/MCP3008.yaml`
+- `config/MAX31855Config.yaml`
+- `config/MAX31865Config.yaml`
+- `config/MCP3008Config.yaml`
 - `config/PSConfig.yaml`
 
 ### Beispiele
 
-- `examples/read_analog.py`
+- `examples/read_analog.py`  
     sehr minimalistisches Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
 - `examples/runOsci.py`  
     Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben (Vorgabe `PSOsci.yaml`)

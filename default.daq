@@ -7,6 +7,7 @@ DeviceFile: config/ADS1115Config.yaml
 #DeviceFile: config/MAX31865Config.yaml 
 #DeviceFile: config/GPIOCount.yaml
 #DeviceFile: config/DS18B20Config.yaml
+#DeviceFile: config/MAX31855Config.yaml 
 
 ## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  

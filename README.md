@@ -54,6 +54,7 @@ DeviceFile: config/ADS1115Config.yaml
 #DeviceFile: config/MAX31865Config.yaml
 #DeviceFile: config/GPIOCount.yaml
 #DeviceFile: config/DS18B20Config.yaml
+#DeviceFile: config/MAX31855Config.yaml
 
 ## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
@@ -165,7 +166,7 @@ frqSG: 0.
 
 ```
 
-Examples of other devices like the analog-to-digital converter MCP3008, of rate measurements via the GPIO pins of the Raspberry Pi or temperature measurements with the 1-wire digital thermometer DS18B20 or   PT100 sensors and the resistance-to-digital converter MAX31865 are also contained in the configuration directory, see files `MCP3008Config.yaml`, `GPIOcount.yaml`, `DS18B20Config.yaml` or `MAX31865Config.yaml`, respectively.
+Examples of other devices like the analog-to-digital converter MCP3008, of rate measurements via the GPIO pins of the Raspberry Pi or temperature measurements with the 1-wire digital thermometer DS18B20,   PT100 sensors and the resistance-to-digital converter MAX31865 or thermocouples and the thermocouple-to-digital converter MAX31855 are also contained in the configuration directory, see files `MCP3008Config.yaml`, `GPIOcount.yaml`, `DS18B20Config.yaml` , `MAX31865Config.yaml` or `MAX31855Config.yaml`, respectively.
 
 <div style="page-break-after: always;"></div>
 
@@ -173,15 +174,19 @@ Examples of other devices like the analog-to-digital converter MCP3008, of rate 
 
 This package relies on code from other packages providing the drivers for the supported devices:
 
-- the Adafruit Pyhon MCP3008 library
+- the Adafruit Pyhon MCP3008 library  
      <https://github.com/adafruit/Adafruit_Python_MCP3008>
-- the Adafruit Python ADX1x15 library
+- the Adafruit Python ADX1x15 library  
      <https://github.com/adafruit/Adafruit_Python_ADS1x15>
+- the Adafruit Python MAX31855 library  
+     <https://github.com/adafruit/Adafruit_Python_MAX31855>
+- the w1thermsensor library by Timo Furrer  
+     <https://github.com/timofurrer/w1thermsensor>
 - components from the picoDAQ project  
      <https://github.com/GuenterQuast/picoDAQ>
 - the  *python* bindings of the *pico-python* project by Colin O'Flynn  
      <https://github.com/colinoflynn/pico-python>
-- the low-level drivers contained in the Pico Technology Software Development Kit 
+- the low-level drivers contained in the Pico Technology Software Development Kit   
     <https://www.picotech.com/downloads>
 
 For convenience, installation files for external packages and for modules of this package 
@@ -258,24 +263,42 @@ right-clicking the icon and use the dialog "Properties".
 
 - `phypidaq/__init__.py`  
    initialisation for package *phypidaq*
+
 - `phypidaq/_version_info.py`  
     version info for package *phypidaq*
+
 - `phypidaq/ADS1115Config.py`  
     class for handling of analog-to-digital converter ADS1115
+
+- `phypidaq/DS18B20Config.py`  
+    class for handling of digital thermometer DS18B20
+
 - `phypidaq/MCP3008Config.py`   
     class for handling of analog-to-digital converter MCP3008
+
 - `phypidaq/GPIOCount.py`   
-    class reading rates from GPIO pins
+    class for reading rates from GPIO pins
+
+- `phypidaq/MAX31855Config.py`
+
+    class for handling MAX31855 thermocouple-to-digital converter
+
 - `phypidaq/MAX31865Config.py`  
-    class handling MAX31865 resistance-to-digital converter
+    class for handling MAX31865 resistance-to-digital converter
+
 - `phypidaq/PSConfig.py`  
-    class handling PicoScope USB oscilloscopes
+    class for handling PicoScope USB oscilloscopes
+
 - `phypidaq/mpTkDisplay.py`  
-    background-process handling data visialation
+    background-process handling data visualisation
+
 - `phypidaq/DataLogger.py`  
--   class for display of data histories and xy diagrams
+
+- class for display of data histories and xy diagrams
+
 - `phypidaq/DataGraphs.py`  
     general display module for data as bar graphs, history plots and xy-graphs
+
 - `phypidaq/DataRecorder.py`  
     store data in CSV format
 
@@ -283,14 +306,17 @@ right-clicking the icon and use the dialog "Properties".
 
 - `PhyPiConf.daq`  
      main configuration file, depends on device configurations in sub-directory *config/*
-- `config/ADS1115.yaml`
+- `config/ADS1115Config.yaml`
+- `config/DS18B20Config.yaml`
 - `config/GPIOCount.yaml`
-- `config/MCP3008.yaml`
+- `config/MAX31855Config.yaml`
+- `config/MAX31865Config.yaml`
+- `config/MCP3008Config.yaml`
 - `config/PSConfig.yaml`
 
 ### Examples 
 
-- `examples/read_analog.py`
+- `examples/read_analog.py`  
     very minimalist example to read one channel from an analog-to-ditigal converter
 - `examples/runOsci.py`  
     run an oscilloscope display, configuration as specified in *.yaml* file (default is `PSOsci.yaml`)
@@ -299,6 +325,7 @@ right-clicking the icon and use the dialog "Properties".
 - `examples/FreqGen.py`  
     generate a fixed frequency signal on a GPIO pin
 
+<div style="page-break-after: always;"></div>
 
 ### Documentation
 
