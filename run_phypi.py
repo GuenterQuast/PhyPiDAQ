@@ -12,14 +12,15 @@ from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
 
 import sys, os, time, yaml, numpy as np, threading, multiprocessing as mp
-from scipy import interpolate 
 
 # display module
 from phypidaq.mpTkDisplay import mpTkDisplay
 # more imports from phypidaq depend on configuration options
 
+from phypidaq.helpers import generateCalibrationFunction, stop_processes
 
 # ----- helper functions --------------------
+
 def kbdInput(cmdQ):
   ''' 
     read keyboard input, run as backround-thread to aviod blocking
@@ -34,59 +35,6 @@ def kbdInput(cmdQ):
     kbdtxt = get_input(20*' ' + 'type -> P(ause), R(esume), E(nd) or s(ave) + <ret> ')
     cmdQ.put(kbdtxt)
     kbdtxt = ''
-
-def generateCalibrationFunction(calibd):
-  '''
-   interpolate calibration table t= true, r = raw values ; 
-   if only one number for trueVals given, then this is 
-   interpreted as a simple calibration factor
- 
-   Args: 
-     calibd:   calibration data
-         either a single number as calibration factor: fc
-         or a list or two arrays: [ [true values], [raw values] ]    
-   Returns: interpolation function
-  ''' 
-  try:
-    iter(calibd)
-    # if no error, input is an array
-    r = calibd[1]
-    t = calibd[0]
-  except:
-   # input is only one number
-    r = [0., 1.]
-    t = [0., calibd]    
-  # check input
-  if len(t) != len(r):
-    print('!!! generateCalibrationFunction: lengths of input arrays not equal - exiting') 
-    exit(1)
-  # perform spline fit of appropriate order k
-  return interpolate.UnivariateSpline(r, t, k = min(3, len(t)-1) )
-
-def apply_calibs():
-  global sig
-  for i in range(NChannels):
-    if CalibFuncts[i] is not None:
-      sig[i] = CalibFuncts[i](sig[i])
-
-def apply_formulae():
-  global sig
-  for i in range(NChannels):
-    exec('c'+str(i) + '=sig['+str(i)+']')
-  for ic in range(NChannels):
-    if Formulae[i]:
-      sig[ic] = eval(Formulae[ic])
-
-def stop_processes(proclst):
-  '''
-    Close all running processes at end of run
-  '''
-  for p in proclst: # stop all sub-processes
-    if p.is_alive():
-      print('    terminating ' + p.name)
-      if p.is_alive(): p.terminate()
-      time.sleep(1.)
-
 def setup():
 # set up data source, display module and options
 
@@ -234,6 +182,19 @@ def setup():
   print ('\nPhyPiDAQ Configuration:')
   print (yaml.dump(PhyPiConfDict) )
 
+def apply_calibs():
+  global sig
+  for i in range(NChannels):
+    if CalibFuncts[i] is not None:
+      sig[i] = CalibFuncts[i](sig[i])
+
+def apply_formulae():
+  global sig
+  for i in range(NChannels):
+    exec('c'+str(i) + '=sig['+str(i)+']')
+  for ic in range(NChannels):
+    if Formulae[i]:
+      sig[ic] = eval(Formulae[ic])
 
 if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
