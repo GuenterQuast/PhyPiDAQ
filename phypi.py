@@ -433,7 +433,7 @@ class Ui_PhyPiWindow(object):
  
     def selectConfigFile(self):
       path2File = QtWidgets.QFileDialog.getOpenFileName(None,
-         'PhyPi config', './', 'DAQ(*.daq)')
+         'PhyPi config', self.ConfDir, 'DAQ(*.daq)')
       FileName = str(path2File[0]).strip()
       if FileName is not '' :
         # print('selected File ' + str(FileName) )
@@ -441,7 +441,7 @@ class Ui_PhyPiWindow(object):
 
     def selectDeviceFile0(self):
       path2File = QtWidgets.QFileDialog.getOpenFileName(None,
-          'Device config', './', 'yaml(*.yaml)')
+          'Device config', self.ConfDir, 'yaml(*.yaml)')
       FileName = str(path2File[0]).strip()
       if FileName is not '' :
         # print('selected File ' + str(FileName) )
@@ -449,7 +449,7 @@ class Ui_PhyPiWindow(object):
 
     def selectDeviceFile1(self):
       path2File = QtWidgets.QFileDialog.getOpenFileName(None,
-          'Device config', './', 'yaml(*.yaml)')
+          'Device config', self.ConfDir, 'yaml(*.yaml)')
       FileName = str(path2File[0]).strip()
       if FileName is not '' :
         # print('selected File ' + str(FileName) )
@@ -457,7 +457,7 @@ class Ui_PhyPiWindow(object):
 
     def selectDeviceFile2(self):
       path2File = QtWidgets.QFileDialog.getOpenFileName(None,
-          'Device config', './', 'yaml(*.yaml)')
+          'Device config', self.ConfDir, 'yaml(*.yaml)')
       FileName = str(path2File[0]).strip()
       if FileName is not '' :
         # print('selected File ' + str(FileName) )
