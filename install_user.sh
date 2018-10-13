@@ -3,8 +3,7 @@
 # script to initially copy files to user direcotry ~/PhyPi/
 #
 
-USERDIR="testPhyPi"  # user directory
-
+USERDIR="PhyPi"  # user directory
 
 # -----------------------------------------
 
