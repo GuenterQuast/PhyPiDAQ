@@ -578,8 +578,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - -
   if len(sys.argv)==2:
     DAQconfFile = os.path.abspath(sys.argv[1]) # with full path to file
     print (DAQconfFile)
-  elif os.path.exists(homedir + '/PhyPi/phypi.daq'): 
-    DAQconfFile = homedir + '/PhyPi/phypi.daq'
+  elif os.path.exists(homedir + '/PhyPi/PhyPiConf.daq'): 
+    DAQconfFile = homedir + '/PhyPi/PhyPiConf.daq'
   else:
     DAQconfFile = 'default.daq'
 
