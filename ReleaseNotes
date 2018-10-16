@@ -1,2 +1,3 @@
 v0.9.0 initial release
-v0.9.1 added digital temperature sensor DS18B20
+v0.9.1 added digital temperature sensor DS18B20, support for PS2204A,
+       user install script, documentation 
