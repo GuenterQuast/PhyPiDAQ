@@ -2,11 +2,13 @@
 
 DAQModule: PSConfig         
 
-PSmodel: 2000a
+#PSmodel: '2000'
+PSmodel: '2000a'
+
 # channel configuration 
 picoChannels: [A, B]
 ChanRanges: [2., 2.]
-ChanOffsets: [-1.95, -1.95]
+ChanOffsets: [-1.95, -1.95] # not for PS model 2204A
 ChanModes: [DC, DC]
 sampleTime: 2.0E-02
 Nsamples: 100
@@ -14,10 +16,10 @@ Nsamples: 100
 # trigger
 trgActive: false  # true to activate
 trgChan: A
-#trgThr: 0.1
+#trgThr: 0.0
 #pretrig: 0.05
 #trgTyp: Rising
-#trgTO: 1000  # time-out
+trgTO: 4  # set short time-out for PS model 2204A
 
 # signal generator 
 # frqSG: 100.E+3 # put 0. do disable
