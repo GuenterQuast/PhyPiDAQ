@@ -2,8 +2,8 @@
 
 DAQModule: PSConfig         
 
-#PSmodel: '2000'
-PSmodel: '2000a'
+#PSmodel: '2000' # PS model 220xA
+PSmodel: '2000a' # PS model 2x0xB
 
 # channel configuration 
 picoChannels: [A, B]
@@ -11,7 +11,7 @@ ChanRanges: [2., 2.]
 ChanOffsets: [-1.95, -1.95] # not for PS model 2204A
 ChanModes: [DC, DC]
 sampleTime: 2.0E-02
-Nsamples: 100
+Nsamples: 200
 
 # trigger
 trgActive: false  # true to activate
