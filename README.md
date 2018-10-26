@@ -202,16 +202,9 @@ sudo apt-get upgrade
 sudo apt-get install python3-scipy
 sudo apt-get install python3-matplotlib
 sudo apt-get install python3-pyqt5
-sudo apt-get install libatlas-base-dev # needed by latest verion of numpy
+sudo apt-get install libatlas-base-dev # needed by latest version of numpy
 
 sudo pip3 install pyyaml
-
-# PicoTech base drivers for picoScope USB devices
-#   see https://www.picotech.com/support/topic14649.html
-# after inclusion of the picotech raspbian repository:  
-sudo apt-get install libps2000a
-# allow access of user pi to usb port
-sudo usermod -a -G tty pi
 
 # get PhyPiDAQ code and dependencies
 mkdir git
@@ -220,26 +213,45 @@ git clone https://github.com/GuenterQuast/PhyPiDAQ
 cd PhyPiDAQ/whl
 sudo pip3 install *.whl
 ```
+<div style="page-break-after: always;"></div>
+
+To install the PicoTech base drivers for PicoScope USB devices the picotech raspbian repository has to be included:
+
+1. Open file /etc/apt/sources.list by `sudo nano /etc/apt/sources.list`.   ![open_etc_apt_sources_list](./images/open_etc_apt_sources_list.png)
+2. Use arrow keys to navigate to the next free line and add entry `deb http://labs.picotech.com/raspbian/ picoscope main` to  /etc/apt/sources.list.   ![](./images/add_entry_picotech.png)
+3. Save file /etc/apt/sources.list by `Ctrl + O` and `Enter`.
+4. Close /etc/apt/sources.list by `Ctrl + X`.
+
+<div style="page-break-after: always;"></div>
+
+After including the PicoTech repository the following steps should be taken.
+
+```bash
+sudo apt-get update
+wget -O - http://labs.picotech.com/debian/dists/picoscope/Release.gpg.key | sudo apt-key add -
+sudo apt-get install libps2000
+sudo apt-get install libps2000a
+
+# allow access of user pi to usb port
+sudo usermod -a -G tty pi
+```
+
+**Reboot your Raspberry Pi after the installation!**
 
 ### Educational remarks
 
 *PhyPiDAQ* is meant to be an educational tool to introduce students to the concepts of digital data acquisition, visualisation and analysis. Confronting students with the full contents of this package is therefore not appropriate. Instead, it is recommended to create a working directory and copy examples from there to the student's working directory. This is achieved via the following commands:
 
 ```bash
-cd ~
-# create PhyPiDAQ working directory ...
-mkdir PhyPiDAQ
-cd PhyPiDAQ
-
-# ... and make examples and config files available 
-cp -a ~/git/PhyPiDAQ/examples .
-cp -a ~/git/PhyPiDAQ/config .
+# create PhyPi working directory and make examples and config files available
+cd ~/git/PhyPiDAQ
+./install_user.sh
 
 # provide icon to graphical user interface
 cp ~/git/PhyPiDAQ/phypi.desktop ~/Desktop
 ```
 
- You might also consider moving the *PhyPiDAQ* package to system space, e.g. `/usr/local`:
+ You might also consider moving the *PhyPiDAQ* package to system space, e.g. /usr/local:
 
 ```bash
 sudo mv ~/git/PhyPiDAQ /usr/local/
@@ -279,8 +291,7 @@ right-clicking the icon and use the dialog "Properties".
 - `phypidaq/GPIOCount.py`   
     class for reading rates from GPIO pins
 
-- `phypidaq/MAX31855Config.py`
-
+- `phypidaq/MAX31855Config.py`  
     class for handling MAX31855 thermocouple-to-digital converter
 
 - `phypidaq/MAX31865Config.py`  
@@ -293,8 +304,7 @@ right-clicking the icon and use the dialog "Properties".
     background-process handling data visualisation
 
 - `phypidaq/DataLogger.py`  
-
-- class for display of data histories and xy diagrams
+    class for display of data histories and xy diagrams
 
 - `phypidaq/DataGraphs.py`  
     general display module for data as bar graphs, history plots and xy-graphs

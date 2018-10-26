@@ -14,7 +14,7 @@ Für die Inbetriebnahme des Raspberry Pi ist es notwendig, das zugehörige **Bet
 
 2. Da das heruntergeladene Betriebssystem für den Raspberry als komprimierte ZIP-Datei vorliegt, muss diese vor dem Beschreiben der Micro-SD-Karte entpackt werden. Da es aufgrund der Dateigröße mit verschiedenen Programmen zum Entpacken von ZIP-Dateien zu Problemen kommen kann, wird empfohlen, diesen Schritt mit dem Programm **7Zip** durchzuführen. Sollte das genannte Programm  auf Ihrem PC nicht installiert sein, können Sie dieses über diesen [Link](https://www.7-zip.org/download.html) herunterladen und darauffolgend installieren.
 
-   - **Entpacken** Sie die **ZIP-Datei** in ein Verzeichnis Ihrer Wahl. ![](images/commissioning/7Zip.png)
+   - **Entpacken** Sie mit **Rechtsklick** auf den soeben heruntergeladenen Ordner und Auswahl des Unterpunktes **Dateien entpacken...** unter **7Zip** die **ZIP-Datei** in ein Verzeichnis Ihrer Wahl. ![](images/commissioning/7Zip.png)  
 
 <div style="page-break-after: always;"></div>
 
@@ -75,33 +75,52 @@ Bestätigen Sie die erfolgreiche Aktualisierung mit **OK**.
 
  11. Für die Kommunikation des Raspberry Pi mit verschiedenen **Sensoren** sind noch Schnittstellen zu aktivieren. Hierzu rufen Sie über den Reiter **Einstellungen** die **Raspberry Pi Konfiguration** auf.  
 ![](images/commissioning/raspi_config.png)  
- 12. Aktivieren Sie unter **Schnittstellen SPI** und **I2C** und bestätigen die Konfiguration mit **OK**.  
+ 12. Aktivieren Sie unter **Schnittstellen SPI**, **I2C** und **Eindraht-Bus** und bestätigen Sie die Konfiguration mit **OK**.  
 ![](images/commissioning/activating_spi_i2c.png)  
 
 <div style="page-break-after: always;"></div>
 
-## 3. Fernzugriff (VNC) einrichten
+13. **Ändern** Sie unter **System** den **Hostnamen** des Raspberry Pi bspw. in Raspi oder phypy plus eine fortlaufende Nummer (Raspi1,...).  
+![](images/commissioning/change_hostname.png)
+
+## 3. Installation von PhyPiDAQ
+Die Installation von **PhyPiDAQ** erfolgt über die **Kommandozeile** (siehe 4.). Dazu folgen Sie bitte der Anleitung in der [README_de.md](../README_de.md) bzw. [README_de.pdf](../README_de.pdf) unter dem Punkt ***Installation von PhyPiDAQ auf dem Raspberry Pi***.
+
+## 4. Nutzung des Tabellenkalkulationsprogramms LibreOffice Calc
+Wenn die mit PhyPi erfassten Messwerte auf dem Raspberry Pi ausgwertet werden sollen, steht mit LibreOffice Calc ein Tabellenkalkulationsprogramm (sehr ähnlich wie Excel) zur Verfügung. Damit die Messdaten fehlerfrei eingelesen werden, sollte in diesem Porgramm eine Änderung vorgenommen werden.
+1. **Öffnen** Sie das Prorgamm  **LibreOffice Calc** über das **Himbeerensysmbol** und den Reiter **Büro**.
+2. Öffnen Sie über Sie über das Menü **Extras** den Unterpunkt **Optionen...**.
+3. Wählen Sie im Menü **Spracheinstellungen** den Punkt **Sprachen** und ändern Sie das **Gebietsschema** in **Englisch (Großbritanien)**.
+4. Bestätigen Sie die Änderung mit **OK** und schließen Sie LibreOffice Calc.
+
+<div style="page-break-after: always;"></div>
+
+## 5. Installation des Programms Mathematica
+Der Raspberry Pi bietet die Möglichkeit, das Programm Mathematica kostenlos zu nutzen. Sollten Sie das vorhaben, müssen die Wolfram-Language und Mathematica nachinstalliert werden.
+1. Öffnen Sie oben links die **Kommandozeile**.   
+   ![](images/commissioning/command_line.png)
+2. Installieren Sie durch Eingabe des Befehls `sudo apt-get update && sudo apt-get install wolfram-engine` und Bestätigen mit **Enter** die entsprechende Software.
+<div style="page-break-after: always;"></div>
+
+## 6. Fernzugriff (VNC) einrichten
 Es besteht die Möglichkeit, bequem von anderen Geräten wie einem Laptop, Tablet oder Smartphone auf den Raspberry Pi aus der Ferne zuzugreifen. So ist es nicht notwendig, für jeden Raspberry Pi einen Bildschirm, eine Tastatur und eine Maus bereitzustellen und das System kann mit einer Powerbank als Spannungsversorgung auch mobil eingesetzt werden.  
 ![](images/commissioning/wlan_router_TL-WR903AC.png)  
 Damit ein Fernzugriff auf den Raspberry Pi erfolgen kann ist es notwendig, dass dieser sich in einem gemeinsamen WLAN mit dem entsprechenden Laptop etc. befindet. Hier bietet es sich an, einen kleinen, tragbaren WLAN-Router, wie den [tragbaren AC750-WLAN-Router TL-WR902AC](https://www.tp-link.com/de/products/details/TL-WR902AC.html) von tp-link zu verwenden. Dieser kann unabhängig vom Schulnetz betrieben werden und ist durch eine Spannungsversorgung über eine Powerbank mobil einsetzbar. Außerdem ist er sehr handlich und kann bei Bedarf mit dem LAN oder WLAN der Schule verbunden werden, um den Schülern den Zugang zum Internet zu ermöglichen. Um den Fernzugriff auf den Raspberry Pi zu ermöglichen, sind einige Konfigurationsschritte erforderlich, die im Folgenden aufgeführt sind.
 
-### 3.1 Raspberry Pi für VNC konfigurieren 
+### 6.1 Raspberry Pi für VNC konfigurieren 
 
  1. Rufen Sie über den Reiter **Einstellungen** die **Raspberry Pi Konfiguration** auf. 
 ![](images/commissioning/raspi_config.png)   
 
- 2. **Ändern** Sie den **Hostnamen** des Raspberry Pi bspw. in Raspi plus eine fortlaufende Nummer (Raspi1,...).  
-![](images/commissioning/change_hostname.png)
-
- 3. **Aktivieren** Sie unter **Schnittstellen** den **VNC**-Server des Raspberry Pi, über den später der Fernzugriff erfolgt und bestätigen Sie die Änderungen mit **OK**.  
+ 2. **Aktivieren** Sie unter **Schnittstellen** den **VNC**-Server des Raspberry Pi, über den später der Fernzugriff erfolgt und bestätigen Sie die Änderungen mit **OK**.  
     ![](images/commissioning/activating_vnc.png)
 
 <div style="page-break-after: always;"></div>
 
- 4. Die **erfolgreiche Aktivierung** des VNC-Servers lässt sich oben rechts auf dem Bildschirm durch das neu erschienene **VNC-Sysmbol** erkennen.  
+ 3. Die **erfolgreiche Aktivierung** des VNC-Servers lässt sich oben rechts auf dem Bildschirm durch das neu erschienene **VNC-Sysmbol** erkennen.  
     ![](images/commissioning/vnc_activated.png)
 
-### 3.2 Mobilen WLAN-Router konfigurieren
+### 6.2 Mobilen WLAN-Router konfigurieren
 Grundsätzlich kann der Fernzugriff über jedes LAN oder WLAN erfolgen. Für die sichere und reproduzierbare Verbindung des Raspberry Pi mit dem jeweiligen Anzeigegerät ist es sinnvoll, jedem Raspberry Pi eine feste IP-Adresse zuzuweisen. Da die IP-Adressen in einem Netzwerk im Normalfall dynamisch vergeben werden und somit nach jedem Neustart variieren können, ist es notwendig, Vorkehrungen in der Konfiguration des WLAN-Routers vorzunehmen. Die Beschreibung der Konfiguration erfolgt am Beispiel des empfohlenen tragbaren WLAN-Routers TL-WR902AC.
 
  1. Verbinden Sie den **WLAN-Router** mit der **Spannungsversorgung** und starten Sie ihn damit.
@@ -129,7 +148,7 @@ Ab dem nächsten Neustart des Routers wird dem Raspberry Pi nun die reservierte 
 
 9. Reservieren Sie in gleicher Weise **feste IP-Adressen** für **alle weiteren Raspberry Pi**, die verwendet werden sollen und loggen Sie sich anschließend aus.  
 
-### 3.3 VNC-Viewer auf dem Anzeigegerät  einrichten
+### 6.3 VNC-Viewer auf dem Anzeigegerät  einrichten
 Um den Fernzugriff auf den Raspberry Pi vom jeweiligen Anzeigegerät zu ermöglichen, ist ein VNC-Viewer auf diesem notwendig. Im Folgenden wird die Installation und Einrichtung des VNC-Viewers **REALVNC** gezeigt, der für alle gängigen Betriebssysteme verfügbar ist.  
 ![](images/commissioning/download_vnc_viewer.PNG)
 
@@ -155,7 +174,7 @@ Auf diese Weise lassen sich über die festgelegten IP-Adressen für jeden Raspbe
 
 <div style="page-break-after: always;"></div>
 
-## 4. Bildschirmauflösung an das Anzeigegerät anpassen
+## 7. Bildschirmauflösung an das Anzeigegerät anpassen
 Da bei einer Verbindung des Anzeigegeräts über **VNC** mit dem Raspberry Pi die **Bildschirmauflösung nicht automatisch angepasst** wird, muss diese so festgelegt werden, dass **angenehm** gearbeitet werden kann.
 
  1. Öffnen Sie oben links die **Kommandozeile**.   
@@ -182,24 +201,21 @@ Da bei einer Verbindung des Anzeigegeräts über **VNC** mit dem Raspberry Pi di
 7. Anschließend muss der Raspberry Pi über **Ja** neu gestartet werden, um die vorgenommene Änderung wirksam zu machen.  
 ![](images/commissioning/reboot.png)  
 
-## 5. Installation PhyPiDAQ
-Die Installation von **PhyPiDAQ** erfolgt über die **Kommandozeile** (siehe 4.). Dazu folgen Sie bitte der Anleitung in der [README_de.md](../README_de.md) bzw. [README_de.pdf](../README_de.pdf) unter dem Punkt ***Installation von PhyPiDAQ auf dem Raspberry Pi***.
 
-<div style="page-break-after: always;"></div>
-
-## 6. Systemabbild als Backup und für die Installation mehrerer Raspberry Pi mit identischer Konfiguration
+## 8. Systemabbild als Backup und für die Installation mehrerer Raspberry Pi mit identischer Konfiguration
 Um nicht für jeden einzurichtenden Raspberry Pi alle Konfigurationsschritte durchführen zu müssen und eine Sicherung des konfigurierten Zustandes vorzunehmen, ist es sinnvoll, ein Systemabbild (Image) zu erzeugen und zu sichern. Da die meisten Lehrer und Schulen mit Windows Computern arbeiten, wird das Vorgehen anhand dieses Betriebssystems erläutert.
 
  1. Stecken Sie die **Micro-SD-Karte**, von der das Systemabbild erzeugt werden soll, in den vorgesehen **Steckplatz** Ihres Computers oder in einen entsprechenden USB-Adapter. 
  2. **Führen** Sie den **Win32-Disk-Imager** aus und legen Sie eine **Image-Datei** an. Wählen Sie unter **Datenträger** die **Micro-SD-Karte** aus und starten sie das Erzeugen des Systemabbilds über **Lesen**.  
 ![](images/commissioning/win32_disk_manager_reading.PNG)  
 
-<div style="page-break-after: always;"></div>
-
  3. Das Erzeugen des Systemabbilds nimmt einige Minuten in Anspruch. Bestätigen Sie das erfolgreiche Erzeugen des Systemabbilds mit **OK**. Sie können nun Micro-SD-Karten mit diesem Systemabbild beschreiben und sich so eine bestimmte Konfiguration eines Raspberry Pi klonen bzw. einen Raspberry Pi auf diesen Zustand zurücksetzen.  
 ![](images/commissioning/win32_disk_manager_reading_successful.PNG)  
 
-## 7. Systemabbild auf Micro-SD-Karte schreiben
+<div style="page-break-after: always;"></div>
+
+## 9. Systemabbild auf Micro-SD-Karte schreiben
+
 Nachfolgend wird beschrieben, wie Sie ein gesichertes **Systemabbild (Image)** auf eine Micro-SD-Karte **schreiben** können. Dies ist auch dann  sinnvoll, wenn Sie weitere Raspberry Pi mit **identischer Grundkonfiguration** verwenden wollen. Hier bietet es sich an, ein zuvor erstelltes **Systemabbild** (siehe 6.) eines einzelnen Raspberry Pi auf eine entsprechende Anzahl an **Micro-SD-Karten** zu **klonen**, um sich den Aufwand des mehrmaligen Konfigurierens zu ersparen. 
 
  1. Starten Sie den **Win32-Disk-Imager**. Wählen Sie das zuvor gesicherte **Systemabbild** unter **Image-Datei** und die zu beschreibende **Micro-SD-Karte** unter **Datenträger** aus. Starten Sie daraufhin den Schreibvorgang über **Schreiben**.
