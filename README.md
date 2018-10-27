@@ -217,8 +217,10 @@ sudo pip3 install *.whl
 
 To install the PicoTech base drivers for PicoScope USB devices the picotech raspbian repository has to be included:
 
-1. Open file /etc/apt/sources.list by `sudo nano /etc/apt/sources.list`.   ![open_etc_apt_sources_list](./images/open_etc_apt_sources_list.png)
-2. Use arrow keys to navigate to the next free line and add entry `deb http://labs.picotech.com/raspbian/ picoscope main` to  /etc/apt/sources.list.   ![](./images/add_entry_picotech.png)
+1. Open file /etc/apt/sources.list by `sudo nano /etc/apt/sources.list`.   
+    ![](./images/open_etc_apt_sources_list.png)
+2. Use arrow keys to navigate to the next free line and add entry `deb http://labs.picotech.com/raspbian/ picoscope main` to  /etc/apt/sources.list.  
+    ![](./images/add_entry_picotech.png)
 3. Save file /etc/apt/sources.list by `Ctrl + O` and `Enter`.
 4. Close /etc/apt/sources.list by `Ctrl + X`.
 

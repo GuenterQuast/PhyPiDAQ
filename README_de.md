@@ -210,8 +210,10 @@ sudo pip3 install *.whl
 
 Um die PicoTech-Treiber für PicoScope USB-Geräte zu installieren, muss das picotech-raspbian-Repository hinzugefügt werden:
 
-1. Öffnen Sie die  Datei /etc/apt/sources.list über die Kommandozeile mit `sudo nano /etc/apt/sources.list`.   ![open_etc_apt_sources_list](./images/open_etc_apt_sources_list.png)
-2. Navigieren Sie mit den Pfeiltasten in die nächste frei Zeile und ergänzen Sie den Eintrag `deb http://labs.picotech.com/raspbian/ picoscope main` in der Datei  /etc/apt/sources.list.   ![](./images/add_entry_picotech.png)
+1. Öffnen Sie die  Datei /etc/apt/sources.list über die Kommandozeile mit `sudo nano /etc/apt/sources.list`.  
+    ![](./images/open_etc_apt_sources_list.png)
+2. Navigieren Sie mit den Pfeiltasten in die nächste frei Zeile und ergänzen Sie den Eintrag `deb http://labs.picotech.com/raspbian/ picoscope main` in der Datei  /etc/apt/sources.list.  
+    ![](./images/add_entry_picotech.png)
 3. Speichern Sie die Datei /etc/apt/sources.list mit `Strg + O` und `Enter`.
 4. Schließen Sie die Datei /etc/apt/sources.list mit `Strg + X`.
 
