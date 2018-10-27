@@ -382,24 +382,36 @@
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QPushButton" name="pB_acceptDAQconfig">
+       <widget class="QPushButton" name="pB_reloadConfig">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
-          <x>601</x>
+          <x>590</x>
           <y>420</y>
-          <width>88</width>
-          <height>30</height>
+          <width>81</width>
+          <height>21</height>
          </rect>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;accept and reload all dependencies&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>  accept</string>
+         <string>reload</string>
         </property>
         <property name="icon">
          <iconset>
           <normaloff>images/ok.png</normaloff>images/ok.png</iconset>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
         </property>
        </widget>
       </widget>
@@ -530,8 +542,8 @@
      <widget class="QRadioButton" name="rB_EditMode">
       <property name="geometry">
        <rect>
-        <x>600</x>
-        <y>7</y>
+        <x>596</x>
+        <y>15</y>
         <width>91</width>
         <height>30</height>
        </rect>
