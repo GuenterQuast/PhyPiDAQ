@@ -72,7 +72,8 @@ def setup():
   # define default config dictionary
     PhyPiConfDict={}
     PhyPiConfDict['DeviceFile'] = 'ADS1115Config.yaml'
-    PhyPiConfDict['ChanLabels'] = ['(V)', '(V)']  
+    PhyPiConfDict['ChanUnits'] = ['V', 'V']  
+    PhyPiConfDict['ChanLabels'] = ['', '']  
     PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
 
 # set default options:
