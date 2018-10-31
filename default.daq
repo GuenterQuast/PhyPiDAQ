@@ -20,8 +20,9 @@ XYmode:     false                 # enable/disable XY-display
 
 
 # channel-specific information
-ChanLabels: [(V), (V) ]          # names and/or units for channels 
-ChanColors: [darkblue, sienna]    # channel colours in display
+ChanLabels: [Spannung , Spannung ] # names for channels 
+ChanUnits: [V, V]                  # units for channels 
+ChanColors: [darkblue, sienna]     # channel colours in display
 
 # eventually overwrite Channel Limits obtained from device config 
 ##ChanLimits: 
@@ -32,9 +33,9 @@ ChanColors: [darkblue, sienna]    # channel colours in display
 # calibration of channel values
 #  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
 #ChanCalib: 
-#  - 1.                          # chan0: simple calibration factor
+#  - 1.                       # chan0: simple calibration factor
 #  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
-#  - null                      # chan2: no calibration
+#  - null                     # chan2: no calibration
 
 # apply formulae to calibrated channel values
 #ChanFormula:

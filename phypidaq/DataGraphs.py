@@ -37,6 +37,11 @@ class DataGraphs(object):
     else:
       self.ChanLabels = [''] * self.NChan
 
+    if 'ChanUnits' in ConfDict:
+      self.ChanUnits = ConfDict['ChanUnits']
+    else:
+      self.ChanUnits = [''] * self.NChan
+
     if 'XYmode' in ConfDict:
       self.XYmode = ConfDict['XYmode']
     else:
@@ -44,7 +49,7 @@ class DataGraphs(object):
     if self.NChan < 2: 
       self.XYmode = False
 
-# assign Chanels to Axes
+# assign Channels to Axes
     self.NAxes = min(2, len(self.ChanLabels))
     if 'Chan2Axes' in ConfDict:
       self.Chan2Axes = ConfDict['Chan2Axes']
@@ -57,7 +62,8 @@ class DataGraphs(object):
     except:
       self.NAxes = 1
       self.Cidx1 = self.Cidx0
-    self.AxisLabels = [self.ChanLabels[self.Cidx0], self.ChanLabels[self.Cidx1] ]
+    self.AxisLabels = [self.ChanLabels[self.Cidx0] + ' ('+self.ChanUnits[self.Cidx0]+')', 
+                       self.ChanLabels[self.Cidx1] + ' ('+self.ChanUnits[self.Cidx1]+')']
 
 # config data needed throughout the class
     self.Npoints = 120  # number of points for history
@@ -214,7 +220,7 @@ class DataGraphs(object):
     # update text display
           endl = ''
           if i%2: endl = '\n'
-          txt += '  %s:   %.3g' % (self.ChanNams[i], self.Vhist[i,k]) + endl 
+          txt += '  %s:   %.3g (%s)'% (self.ChanNams[i], self.Vhist[i,k], self.ChanUnits[i]) + endl 
     # update bar chart
           self.bgraphs[i].set_height(dat[i])
           self.animtxt.set_text(txt)

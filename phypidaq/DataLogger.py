@@ -37,6 +37,11 @@ class DataLogger(object):
     else:
       self.ChanLabels = [''] * self.NChan
 
+    if 'ChanUnits' in ConfDict:
+      self.ChanUnits = ConfDict['ChanUnits']
+    else:
+      self.ChanUnits = [''] * self.NChan
+
     if 'XYmode' in ConfDict:
       self.XYmode = ConfDict['XYmode']
     else:
@@ -44,7 +49,7 @@ class DataLogger(object):
     if self.NChan < 2: 
       self.XYmode = False
 
-    # assign Chanels to axes
+    # assign Channels to axes
     self.NAxes = min(2, self.NChan)
     if 'Chan2Axes' in ConfDict:
       self.Chan2Axes = ConfDict['Chan2Axes']
@@ -57,7 +62,9 @@ class DataLogger(object):
     except:
       self.NAxes = 1
       self.Cidx1 = self.Cidx0
-    self.AxisLabels = [self.ChanLabels[self.Cidx0], self.ChanLabels[self.Cidx1] ]
+    self.AxisLabels = [self.ChanLabels[self.Cidx0] + ' ('+self.ChanUnits[self.Cidx0]+')', 
+                       self.ChanLabels[self.Cidx1] + ' ('+self.ChanUnits[self.Cidx1]+')']
+
    # data structures needed throughout the class
     self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
     self.Vhist = np.zeros( [self.NChan, self.Npoints] )
