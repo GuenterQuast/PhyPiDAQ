@@ -185,7 +185,7 @@ class DataGraphs(object):
   # Voltage in Text form
     self.animtxt = self.axtxt.text(0.01, 0.025 , ' ',
               transform=self.axtxt.transAxes,
-              size='large', color='darkblue')
+              color='darkblue')
   
     self.XYgraphs = ()
     if self.XYmode:
