@@ -20,7 +20,7 @@ XYmode:     false                 # enable/disable XY-display
 
 
 # channel-specific information
-ChanLabels: [Spannung , Spannung ] # names for channels 
+ChanLabels: [U, U]                 # names for channels 
 ChanUnits: [V, V]                  # units for channels 
 ChanColors: [darkblue, sienna]     # channel colours in display
 

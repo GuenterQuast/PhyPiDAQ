@@ -62,8 +62,9 @@ Interval: 0.1                 # Datennahme-Intervall in Sekunden
 XYmode:     false             # XY-Darstellung ein/aus 
 
 # Angaben fuer jeden Kanal
-ChanLabels: [(V), (V) ]          # Namen und/oder Einheiten fuer jeden Kanal 
-ChanColors: [darkblue, sienna]   # Farbzuordnung in der Anzeige
+ChanLabels: [U, U]             # Namen fuer jeden Kanal  
+ChanUnits: [V, V]              # Einheiten fuer jeden Kanal 
+ChanColors: [darkblue, sienna] # Farbzuordnung in der Anzeige
 
 # ggf. werden hier die Informationen aus der Geraete-Konfiguration ueberschrieben 
 ##ChanLimits: 

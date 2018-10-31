@@ -65,8 +65,9 @@ Interval: 0.1                     # logging interval
 XYmode:     false                 # enable/disable XY-display
 
 # channel-specific information
-ChanLabels: [(V), (V) ]          # names and/or units for channels 
-ChanColors: [darkblue, sienna]    # channel colours in display
+ChanLabels: [U, U ]             # names for channels 
+ChanUnits: [V, V]               # units for channels 
+ChanColors: [darkblue, sienna]  # channel colours in display
 
 # eventually overwrite Channel Limits obtained from device config 
 ##ChanLimits: 
