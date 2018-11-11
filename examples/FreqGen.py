@@ -20,6 +20,8 @@ def pulse(pin, dt):
   time.sleep(dt)
   gpio.output(pin, 0)
 
+print('flashing GPIO pin %i with dt= %.3gs' %(GPIOpin, dt) )
+
 try:
   dtcum = 0.
   T0 = time.time()
