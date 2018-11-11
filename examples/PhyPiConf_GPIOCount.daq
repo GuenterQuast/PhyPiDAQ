@@ -16,10 +16,10 @@ DeviceFile: GPIOCount.yaml
 DisplayModule: DataLogger
 #DisplayModule: DataGraphs
 
-Interval: 1.                                # logging interval         
-ChanLabels: [Counts/s, Counts/s]          # names an units for channels 
-ChanColors: [darkblue, darkred]         # channel colours in display
-# ChanColors: [darkblue, sienna, red, green]      # only one channel
+Interval: 1.                              # logging interval         
+ChanLabels: [Rate, Rate]     # names for channels 
+ChanUnits: [Hz, Hz]              # units
+ChanColors: [darkblue, darkred]    # channel colours in display
 
 # overwrite Channel Limits of Device 
 ChanLimits: 
