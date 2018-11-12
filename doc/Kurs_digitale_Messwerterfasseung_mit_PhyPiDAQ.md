@@ -80,8 +80,9 @@ In der nachfolgenden Abbildung sind die elektrisch verbundenen Steckkontakte dur
 &nbsp;
 ------
 
-
 &nbsp;
+
+<div style="page-break-after: always;"></div>
 
 # 3. Was bedeutet digitales Messen?  
 
@@ -103,7 +104,7 @@ Damit wir über die GPIO-Pins mit dem Raspberry Pi kommunizieren können, müsse
 
 **Durchführung:**
 
-<span style="color:#5882FA; font-size: 12pt ">1. </span>Stecken Sie die Schaltung gemäß des  nachfolgenden Schaltplans und der Abbildung des Schaltungsaufbaus auf dem Breadboard und schließen Sie das Netzteil an die Spannungsversorgung des Breadboards an.  
+<span style="color:#5882FA; font-size: 12pt ">1. </span>Stecken Sie die Schaltung gemäß des  nachfolgenden Schaltplans und der Abbildung des Schaltungsaufbaus auf dem Breadboard und und schalten Sie nach einer Kontrolle des Schaltungsaufbaus die Spannungsversorgung des Breadboards an (grüne LED auf Spannungsversorgung leuchtet).   
 Mit Hilfe des Potentiometers kann die elektrische Spannung am Eingangspin GPIO17 in einem Bereich zwischen 0 und 3.3V eingestellt werden. Das Voltmeter wird über die beiden Leitungen zu den Bananenbuchsen so angeschlossen, dass die Spannung zwischen dem Schleifer (dem mittleren Pin) des Potentiometers und GND (0V) gemessen werden kann.
 
 ![](images/course/digital_circuit.JPG)
@@ -141,19 +142,13 @@ Wenn der Raspberry Pi gestartet ist, können wir uns vom Laptop (oder einem ande
 
 <span style="color:#5882FA; font-size: 12pt ">5. </span>Um herauszufinden, welchen Zustand der GPIO-Pin 17 hat und uns diesen Zustand anzeigen zu lassen, schreiben wir nun unser erstes kleines Programm:
 
-- Dazu öffnen wir als erstes die Kommandozeile, über die wir direkt über Befehle mit dem Raspberry Pi kommunizieren können.
+- Dazu öffnen zuerst über das **Ordnersymbol** oben links das Verzeichnis **PhyPi** und erstellen in diesem ein Verzeichnis **MeineProgramme**, in dem wir unsere Programme speichern. 
 
-  ![](images/course/command_line.png)
+- Über die **Himbeere** (oben links) und den Reiter **Entwicklung** öffnen wir das Programm **Python 3 (IDLE)**.
 
-- Mit dem Befehl ```cd PhyPi```  und bestätigen mit **Enter** wechseln wir in das Verzeichnis PhyPi.
+- Jetzt müssen wir uns noch über **File** und **New File** eine Datei für unser erstes Programm erzeugen.
 
-- Durch eingeben des Befehls ```mkdir MeineProgramme``` und bestätigen mit **Enter** erzeugen wir ein neues Verzeichnis "Meine Programme", in dem wir unsere Programme speichern.
-
-- Mit dem Befehl ```cd MeineProgramme```  und bestätigen mit **Enter** wechseln wir dann in dieses Verzeichnis.
-
-- Jetzt können wir in unserem Verzeichnis mit dem Befehl ```idle digital.py```  eine Datei für unser erstes Programm erzeugen.
-
-- In diese Datei (also nicht in die Kommandozeile) schreiben wir unseren ersten Programmcode:
+- In diese Datei schreiben wir unseren ersten Programmcode:
 
   Alles was im Programm hinter einem Hashtag # - Symbol steht ist ein erklärender Kommentar zur Programmzeile davor und keine Aufforderung zu twittern.
 
@@ -163,19 +158,18 @@ Wenn der Raspberry Pi gestartet ist, können wir uns vom Laptop (oder einem ande
   GPIO.setmode(GPIO.BCM) # Wir geben an, wie die GPIO-Pins nummeriert sind.
   GPIO.setup(17, GPIO.IN) # GPIO-Pin 17 wird als Eingang festgelegt.
   
-  while True: # Dauerschleife (alles eingerueckte danach wird wiederholt).
-  	print("Status GPIO17:") # Wir geben den Text "Status GPIO17:" aus.
-  	print(GPIO.input(17)) # Wir geben den Zustand des GPIO-Pin 17 aus.
-  	time.sleep(0.1) # Wir warten 0.1 s (Raspberry Pi "schlaeft").
+  try: # Ausfuehren des Programmcodes, solange es keine Unterbrechung gibt.
+  	while True: # Dauerschleife (alles eingerueckte danach wird wiederholt).
+  		print("Status GPIO17:") # Wir geben den Text "Status GPIO17:" aus.
+  		print(GPIO.input(17)) # Wir geben den Zustand des GPIO-Pin 17 aus.
+  		time.sleep(0.1) # Wir warten 0.1 s (Raspberry Pi "schlaeft").
+  except KeyboardInterrupt: # Wenn das Programm mit Strg + C unterbrochen wird,
+  	GPIO.cleanup() # ... wird noch aufgerauemt.
   ```
 
-<span style="color:#5882FA; font-size: 12pt ">6. </span>Bevor wir unser Programm starten können, müssen wir die Datei noch speichern und schließen.
+<span style="color:#5882FA; font-size: 12pt ">6. </span>Bevor wir unser Programm starten können, müssen wir unsere Datei noch über **File** und **Save** unter dem Namen **digital.py** in unser Unterverzeichnis **MeineProgramme** im Verzeichnis **PhyPi** speichern.
 
-![](images/course/save_digital_py.PNG)
-
-<span style="color:#5882FA; font-size: 12pt ">7. </span>Mit ```python3 digital.py``` starten wir über die Kommandozeile unser Programm und bekommen jetzt alle 0,1 Sekunden den Zustand des GPIO-Pins 17 angezeigt. 
-
-<div style="page-break-after: always;"></div>
+<span style="color:#5882FA; font-size: 12pt ">7. </span>Mit **Run** oder `F5` starten wir unser Programm und bekommen jetzt alle 0,1 Sekunden den Zustand des GPIO-Pins 17 angezeigt. 
 
 <span style="color:#5882FA; font-size: 12pt ">8. </span>Drehen Sie am Potentiometer und verändern Sie damit die Spannung am GPIO-Pin 17. Notieren Sie Ihre Beobachtungen.
 
@@ -194,7 +188,7 @@ Wenn der Raspberry Pi gestartet ist, können wir uns vom Laptop (oder einem ande
 
 &nbsp;
 
-<span style="color:#5882FA; font-size: 12pt ">9. </span>Alles was eingerückt (nach Zeile 6) in unserer Dauerschleife ```while(True):```  steht, wird jetzt immer weiter wiederholt. Wenn wir unser Programm beenden wollen, müssen wir also unsere Dauerschleife unterbrechen. Dafür drücken wir gleichzeitig ```Strg + c```.
+<span style="color:#5882FA; font-size: 12pt ">9. </span>Alles was eingerückt (nach Zeile 7) in unserer Dauerschleife ```while(True):```  steht, wird jetzt immer weiter wiederholt. Wenn wir unser Programm beenden wollen, müssen wir also unsere Dauerschleife unterbrechen. Dafür drücken wir gleichzeitig ```Strg + c```.
 
 <span style="color:#5882FA; font-size: 12pt ">10. </span>Formulieren Sie einen Merksatz: Was muss für die Spannung zwischen dem GPIO-Pin 17 und GND (0V) gelten, wenn der GPIO-Pin 17 den Zustand 1 (true) bzw. 0 (false) besitzt?
 
@@ -234,7 +228,7 @@ Jeder kennt bei neueren Autos die Lichtautomatik, die das Licht automatisch ansc
 
 **Material:**
 
- + 10 k&Omega; Widerstand (Farbcode: braun, schwarz, schwarz, rot, braun)
+ + 10 k&Omega; Potentiometer
  + 220 &Omega; Vorwiderstand für LED (Farbcode: rot, rot, schwarz, schwarz, braun)
  + Fotowiderstand (LDR Typ5516)
  + weiße LED
@@ -245,7 +239,7 @@ Jeder kennt bei neueren Autos die Lichtautomatik, die das Licht automatisch ansc
 
 **Durchführung:**
 
-<span style="color:#5882FA; font-size: 12pt ">1. </span>Stecken Sie die abgebildete Schaltung gemäß des nachfolgenden Schaltplans und der Abbildung des Schaltungsaufbaus auf dem Breadboard und schließen Sie Spannungsversorgung und Netzteil an.  
+<span style="color:#5882FA; font-size: 12pt ">1. </span>Stecken Sie die abgebildete Schaltung gemäß des nachfolgenden Schaltplans und der Abbildung des Schaltungsaufbaus auf dem Breadboard und schalten Sie nach einer Kontrolle des Schaltungsaufbaus die Spannungsversorgung des Breadboards an.  
 
 ![](images/course/ldr_digital_circuit.PNG)
 
@@ -253,8 +247,8 @@ Jeder kennt bei neueren Autos die Lichtautomatik, die das Licht automatisch ansc
 
 ![](images/course/ldr_digital.PNG)  
 
-<span style="color:#5882FA; font-size: 12pt ">2. </span>Öffnen Sie die Kommandozeile und wechseln Sie mit ```cd MeineProgramme``` in das Verzeichnis "MeineProgramme". Starten Sie nun mit ```sudo python digital.py``` das zuvor erstellte Programm.
-Dunkeln Sie den Fotowiderstand (LDR) mit der Hand ab. Wechseln Sie mehrfach zwischen abgedunkteltem und hellem Zustand ab und notieren Sie Ihre Beobachtungen.
+<span style="color:#5882FA; font-size: 12pt ">2. </span>Öffnen Sie wieder das Programm **Python 3 (IDLE)** und die zuvor erstellte Programmdatei **digital.py** im Verzeichnis **MeineProgramme**. Starten Sie nun mit **Run** oder `F5` das zuvor erstellte Programm.
+Dunkeln Sie den Fotowiderstand (LDR) mit der Hand ab. Wechseln Sie mehrfach zwischen abgedunkteltem und hellem Zustand ab und notieren Sie Ihre Beobachtungen. Mit `Strg + C` können Sie das Programm wieder beenden.
 
 
 &nbsp;
@@ -267,12 +261,12 @@ Dunkeln Sie den Fotowiderstand (LDR) mit der Hand ab. Wechseln Sie mehrfach zwis
 
 &nbsp;
 ------
-
-
-&nbsp;
 
 <span style="color:#5882FA; font-size: 12pt ">3. </span>Wie kommt es zu dem beobachteten Verhalten? Schauen wir uns dazu den Fotowiderstand LDR (**L**ight **D**ependent **R**esistor) genauer an:  
 ![](images/course/ldr.PNG)  
+
+<div style="page-break-after: always;"></div>
+
 Formulieren Sie auf Grundlage der Abbildung einen Merksatz, wie sich der ohmsche Widerstand des Fotowiderstands in Abhängigkeit von der Beleuchtungsstärke verhält.
 
 
@@ -349,8 +343,6 @@ Welchen Zustand besitzt der GPIO-Pin 17 in diesem Fall? Begründen Sie.
 
 &nbsp;
 
-<div style="page-break-after: always;"></div>
-
 **abgedunkelter Fall:**
 
 Welche Spannung liegt am GPIO-Pin 17 an? Berechnen Sie. 
@@ -381,8 +373,9 @@ Welchen Zustand besitzt der GPIO-Pin 17 in diesem Fall? Begründen Sie.
 &nbsp;
 ------
 
-
 &nbsp;
+
+<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt ">5. </span>Wir haben also aus einem Fotowiderstand und einem zweiten Widerstand einen einfachen Sensor gebaut, mit dem wir nach der Digitalisierung zwischen hell und dunkel unterscheiden können. Damit wir eine Lichtautomatik haben, fehlt uns noch eine Beleuchtung, die abhängig von unserem Sensor ein- bzw. ausgeschaltet wird. Dafür ergänzen wir unsere Schaltung um eine weiße LED (Polung beachten) mit Vorwiderstand (220 &Omega;) , die wir an den GPIO-Pin 27 anschließen.
 
@@ -390,11 +383,9 @@ Welchen Zustand besitzt der GPIO-Pin 17 in diesem Fall? Begründen Sie.
 
 <span style="color:#5882FA; font-size: 12pt ">6. </span>Jetzt müssen wir nur noch unser Programm anpassen, sodass die LED abhängig vom Zustand des GPIO-Pins 17 an- bzw. ausgeschaltet wird.
 
-- Wir öffnen die Kommandozeile und wechseln mit dem Befehl ```cd MeineProgramme```  und Enter in unser Verzeichnis MeineProgramme.
+- Wir öffnen wieder das Programm **Python 3 IDLE** und erzeugen dort eine Datei **lichtautomatik.py** für unser neues Programm, die wir im Verzeichnis **MeineProgramme** speichern.
 
-- Jetzt können wir in unserem Verzeichnis mit dem Befehl ```idle lichtautomatik.py```  eine Datei für unser neues Programm erzeugen.
-
-- In diese Datei (also nicht in die Kommandozeile) schreiben wir unseren Programmcode für die Lichtautomatik:
+- In diese Datei schreiben wir unseren Programmcode für die Lichtautomatik:
 
   ```python
   import RPi.GPIO as GPIO # Wir importieren die Bibliothek GPIO.
@@ -402,25 +393,25 @@ Welchen Zustand besitzt der GPIO-Pin 17 in diesem Fall? Begründen Sie.
   GPIO.setmode(GPIO.BCM) # Wir geben an, wie die GPIO-Pins nummeriert sind.
   GPIO.setup(17, GPIO.IN) # GPIO-Pin 17 wird als Eingang festgelegt.
   GPIO.setup(27, GPIO.OUT) # GPIO-Pin 27 wird als Ausgang festgelegt.
-  
-  while True: # Dauerschleife (alles eingerueckte danach wird wiederholt).
-  	statusGPIO17 = GPIO.input(17) # Wir fragen den Zustand von GPIO-Pin 17 ab
-      if statusGPIO17 == 1: # Wenn (if) der Zustand 1 ist, dann...
-          GPIO.output(27, GPIO.HIGH) # ...schalten wir die LED ein.
-  	if statusGPIO17 == 0: # Wenn (if) der Zustand 0 ist, dann...
-          GPIO.output(27, GPIO.LOW) # ...schalten wir die LED aus.
-  	time.sleep(0.1) # Wir warten 0.1 s (Raspberry Pi "schlaeft").
+  try: # Ausfuehren des Programmcodes, solange es keine Unterbrechung gibt.
+  	while True: # Dauerschleife (alles eingerueckte danach wird wiederholt).
+  		statusGPIO17 = GPIO.input(17) # Abfrage des Zustands von GPIO-Pin 17
+      	if statusGPIO17 == 1: # Wenn (if) der Zustand 1 ist, dann...
+          	GPIO.output(27, GPIO.HIGH) # ...schalten wir die LED ein.
+  		if statusGPIO17 == 0: # Wenn (if) der Zustand 0 ist, dann...
+          	GPIO.output(27, GPIO.LOW) # ...schalten wir die LED aus.
+  		time.sleep(0.1) # Wir warten 0.1 s (Raspberry Pi "schlaeft").
+  except KeyboardInterrupt: # Wenn das Programm mit Strg + C unterbrochen wird,
+  	GPIO.cleanup() # ... wird noch aufgerauemt.
   ```
 
   Das Programm sieht unserem ersten Programm sehr ähnlich. Für die LED brauchen wir aber einen GPIO-Pin, der als Ausgang geschaltet ist. Dessen Zustand wir also im Programm bestimmen können und mit dem wir die LED ein- bzw. ausschalten können. Der GPIO-Pin kann auch wieder die Zustände 1 (HIGH = 3,3 V = LED-EIN) und 0 (LOW = 0 V = LED-AUS)  annehmen.
 
-- Nun speichern wir unser Programm und schließen es.
+- Nun speichern wir unser Programm und staren es mit **Run** oder `F5`. 
 
-- Anschließend können wir es über die Kommandozeile mit dem Befehl ```python3 lichtautomatik.py``` starten und unsere Lichtautomatik testen. Beim Abdunkeln müsste die LED jetzt eingeschaltet werden.
+- Jetzte können wir unesere Lichtautomatik testen. Beim Abdunkeln müsste die LED jetzt eingeschaltet werden.
 
 - Wenn wir das Programm beenden wollen, können wir einfach wieder ```Strg + c``` drücken und unsere Dauerschleife wird gestoppt.
-
-<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt ">7. </span>Aufgrund unserer Beobachtungen der vergangenen Versuche lässt sich ein Grundprinzip der digitalen Messwerterfassung erkennen, das in der nachfolgenden Abbildung links dargestellt ist. Ergänzen Sie die allgemeine Darstellung mit den folgenden Begriffen aus dem Beispiel der Lichtautomatik:
 
@@ -528,9 +519,7 @@ Mit der entworfenen Schaltung haben wir nun die Grundlage für unser Thermometer
 
 <span style="color:#5882FA; font-size: 12pt ">3. </span>Nun haben wir unsere Schaltung für das digitale Thermometer aufgebaut und können uns um ein Programm zur Auswertung kümmern:
 
-- Dazu öffnen wir die Kommandozeile und wechseln mit ```cd MeineProgramme``` in unser Programmverzeichnis.
-
-- Mit ```idle thermometer.py``` erstellen wir eine Datei für unser Thermometer-Programm.
+- Dazu öffnen wir wieder das Programm **Python 3 (IDLE)** und erstellen eine Programmdatei **thermometer.py**.
 
 - Nun können wir unseren Programmcode zur Auswertung erstellen:
 
@@ -548,9 +537,7 @@ Mit der entworfenen Schaltung haben wir nun die Grundlage für unser Thermometer
 
   Unser Programm macht nun Folgendes: Es fragt den digitalisierten Signalwert am Anschluss A0 des AD-Wandlers ab und gibt diesen aus. Dann wartet es eine Sekunde und fragt anschließend den nächsten Wert ab, usw..
 
-- Wir speichern unser Programm und schließen es.
-
-- Jetzt können wir unser Programm über die Kommandozeile mit ```python3 thermometer.py``` starten.
+- Wir speichern unser Programm und starten es mit **Run** oder `F5`.
 
 - Notieren Sie den angezeigten Wert (ungefähr) bei Zimmertemperatur. Was passiert, wenn der NTC-Widerstand zwischen den Handflächen auf Handtemperatur gebracht wird? Notieren Sie Ihre Beobachtungen.
 
@@ -596,9 +583,9 @@ $$
      | 518   | &#x27F9; |                              |
      | 16383 | &#x27F9; |                              |
 
-   - Jetzt müssen wir noch unser Programm so ergänzen, dass wir nicht mehr den Wert der Stufe, sondern den Wert der digitalisierten Spannung angezeigt bekommen. Dazu müssen wir das nachfolgende Programm noch so ergänzen, dass in Zeile 4 die Auflösung berechnet wird und der Variablen "aufloesung" zugewiesen wird. Außerdem müssen wir noch in Zeile 6 die Berechnung des digitalisierten  Spannungswerts ergänzen. 
+   - Jetzt müssen wir noch unser Programm so ergänzen, dass wir nicht mehr den Wert der Stufe, sondern den Wert der digitalisierten Spannung angezeigt bekommen. Dazu müssen wir das nachfolgende Programm noch so ergänzen, dass in Zeile 4 die Auflösung berechnet wird und der Variablen `aufloesung` zugewiesen wird. Außerdem müssen wir noch in Zeile 6 die Berechnung des digitalisierten  Spannungswerts ergänzen. 
 
-   - Ergänzen Sie das Programm thermometer.py entsprechend. Dazu wechseln wir mit ```cd MeineProgramme``` in das Programmverzeichnis und öffnen mit ```ìdle thermometer.py``` unsere Programmdatei. 
+   - Ergänzen Sie das Programm **thermometer.py** entsprechend.
 
      <span style="color:crimson">Achtung: Beim Programmieren entspricht ein Punkt einem Komma ( also 6.114 &#8793;  6,114)! </span>
 
@@ -615,7 +602,7 @@ $$
          time.sleep(1) # Wir warten 1 s (Raspberry Pi "schlaeft").
      ```
 
-   - Jetzt können wir unser Programm testen. Dazu speichern wir die Programmdatei und schließen diese. Danach können wir unser Thermometer-Programm mit ```python3 thermometer.py``` starten. 
+   - Jetzt können wir unser Programm testen. Dazu speichern wir die Programmdatei und starten diese mit **Run** oder `F5`. 
 
    - Notieren Sie den ungefähren Spannungswert bei Zimmertemperatur. Was passiert, wenn der NTC-Widerstand zwischen den Handflächen auf Handtemperatur gebracht wird? Notieren Sie Ihre Beobachtungen.
 
@@ -676,8 +663,9 @@ Führen wir also die Kalibrierung durch:
 &nbsp;
 -----
 
-
 &nbsp;
+
+<div style="page-break-after: always;"></div>
 
 <span style="color:#5882FA; font-size: 12pt; ">6. </span>Die ermittelten Kalibrationswerte können wir nun nutzen, um mit der digitalisierten Messspannung des AD-Wandlers Temperaturwerte zu berechnen. Dabei gehen wir ähnlich vor wie beim sinnvollen Verbinden der Messwerte von Hand im Diagramm (vergleiche Aufgabe zuvor). 
 
@@ -685,9 +673,9 @@ Wir lassen den Raspberry Pi eine Funktion berechnen, deren Verlauf unsere Messpu
 
 Ergänzen wir also die Berechnung der Temperatur:
 
-- Dazu öffnen wir wieder unser Programm thermometer.py (Zur Erinnerung: ```cd MeineProgramme``` und ```idle thermometer.py```)
+- Dazu öffnen wir wieder unser Programm **thermometer.py**.
 
-- Nun können wir unser Programm um die Berechnung der Temperaturwerte ergänzen. Wir müssen für Wert1 bis Wert4 die Werte aus der Kalibrierung für Spannung bzw. für die Temperatur angeben (ohne Einheiten).
+- Nun können wir unser Programm um die Berechnung der Temperaturwerte ergänzen. Wir müssen für Wert1 bis Wert4 die Werte aus der Kalibrierung für Spannung bzw. für die Temperatur angeben (ohne Einheiten). <span style="color:crimson">Achtung: Aufsteigende Reihenfolge der Werte anwenden! </span>
 
   ```python
   import Adafruit_ADS1x15 # Wir importieren die Bibliothek für den AD-Wandler.
@@ -711,7 +699,7 @@ Ergänzen wir also die Berechnung der Temperatur:
       time.sleep(1) # Wir warten 1 s (Raspberry Pi "schlaeft").
   ```
 
-- Wir speichern und schließen unsere Programmdatei wieder und starten das Programm mit ```python3 thermometer.py```.
+- Wir speichern unsere Programmdatei wieder und starten das Programm mit **Run** oder `F5`.
 
 - Nun können wir unser digitales Thermometer testen.
 
@@ -946,7 +934,7 @@ Auf unserem Weg zu einem digitalen Kraftsensor steht nun also die Digitalisierun
 
 <div style="page-break-after: always;"></div>
 
-<span style="color:#5882FA; font-size: 12pt ">3. </span>Wenn wir die Schaltung aufgebaut haben und die Wägezelle am Stativ angebracht haben, können wir unseren digitalen Kraftsensor das erste mal testen. Dazu starten wir das Programm PhyPi auf dem Desktop des Raspberry Pi mit einem Doppelklick.
+<span style="color:#5882FA; font-size: 12pt ">3. </span>Wenn wir die Schaltung aufgebaut haben und die Wägezelle am Stativ angebracht haben, können wir unseren digitalen Kraftsensor das erste mal testen. Dazu starten wir das Programm "PhyPi" auf dem Desktop des Raspberry Pi mit einem Doppelklick.
 
 <span style="color:#5882FA; font-size: 12pt ">4. </span> Jetzt können wir uns die mit Hilfe des AD-Wandlers die digitalisierte Messspannung *U<sub>M</sub>* anzeigen lassen. Dafür müssen wir zuerst noch den AD-Wandler passend konfigurieren. Dazu gehen wir über den Reiter Configuration auf die Device Config des ADS1115 und aktivieren den Edit Mode oben rechts.
 
@@ -994,8 +982,8 @@ sampleRate: 860             # programmable Sample Rate of ADS1115
 
 <span style="color:#5882FA; font-size: 12pt ">6. </span> In der PhyPi Config können wir noch Einstellungen für die grafische Ausgabe, das Messintervall und weitere Einstellungen für die Ausgabe der Messwerte angeben. Hier passen wir noch den dargestellten Wertebereich für die grafische Darstellung an, damit wir nur den für uns interessanten Wertebereich angezeigt bekommen.
 
-1. Dazu löschen wir die beiden `##` vor `ChanLimits:` in Zeile 25, um die Einstellung des dargestellten Werteberichs zu aktivieren.
-2. Da unsere Messspannung *U<sub>M</sub>* sehr klein und bei einer einwirkenden Kraft von oben positiv ist, lassen wir uns einen Bereich von - 1 mV bis 5 mV anzeigen. Dazu entfernen wir die beiden `##` in Zeile und passen die Werte in der eckigen Klammer entsprechend an `- [-0.001, 0.005]`.
+1. Dazu löschen wir die beiden `##` vor `ChanLimits:` in Zeile 26, um die Einstellung des dargestellten Werteberichs zu aktivieren.
+2. Da unsere Messspannung *U<sub>M</sub>* sehr klein und bei einer einwirkenden Kraft von oben positiv ist, lassen wir uns einen Bereich von - 1 mV bis 5 mV anzeigen. Dazu entfernen wir die beiden `##` in Zeile 27 und passen die Werte in der eckigen Klammer entsprechend an `- [-0.001, 0.005]`.
 
 <div style="page-break-after: always;"></div>
 
@@ -1020,7 +1008,8 @@ XYmode:     false                 # enable/disable XY-display
 
 
 # channel-specific information
-ChanLabels: [(V), (V) ]          # names and/or units for channels 
+ChanLabels: [U, U]                 # names for channels 
+ChanUnits: [V, V]                  # units for channels
 ChanColors: [darkblue, sienna]    # channel colours in display
 
 # eventually overwrite Channel Limits obtained from device config 
@@ -1136,7 +1125,8 @@ XYmode:     false                 # enable/disable XY-display
 
 
 # channel-specific information
-ChanLabels: [(V), (V) ]          # names and/or units for channels 
+ChanLabels: [U, U]                 # names for channels 
+ChanUnits: [V, V]                  # units for channels
 ChanColors: [darkblue, sienna]    # channel colours in display
 
 # eventually overwrite Channel Limits obtained from device config 
@@ -1228,9 +1218,9 @@ Um die Messspannung *U<sub>M</sub>*  zu ermitteln, führen Sie die Schritte 1. b
 
 2. Wir öffnen links oben **Persönliche Ordner** und wechseln dann in das Verzeichnis **PhyPi**. Im neuesten phypi-Ordner liegt die Konfiguration unseres Tests bzw. unserer letzten Messung. Mit einem Doppelklick auf die **.daq-Datei** laden wir diese Konfiguration in PhyPi.
 
-3. Damit uns bei der Kalibrierung nur ein sinnvoller Wertebereich angezeigt wird, gehen wir über den Reiter **Configuration** wieder auf die **PhyPi Config** und aktivieren in Zeile 25 durch Entfernen der beiden `##` vor `ChanLimits` die Anzeigebereichseinstellung. Jetzt können wir durch Entfernen der beiden `## ` in der nachfolgenden Zeile einen Wertebereich für die Anzeige vorgeben `- [-0.5, 2.]   # chan 0`.
+3. Damit uns bei der Kalibrierung nur ein sinnvoller Wertebereich angezeigt wird, gehen wir über den Reiter **Configuration** wieder auf die **PhyPi Config** und aktivieren in Zeile 26 durch Entfernen der beiden `##` vor `ChanLimits` die Anzeigebereichseinstellung. Jetzt können wir durch Entfernen der beiden `## ` in der nachfolgenden Zeile einen Wertebereich für die Anzeige vorgeben `- [-0.5, 2.]   # chan 0`.
 
-4. Damit wir nicht nur Daten angezeigt bekommen, sondern diese auch zur Auswertung gespeichert werden, müssen wir in Zeile 44 unter `DataFile: ` einen Dateinamen `kalibrierung_<hier verwendete Masse eintragen>.csv` anstatt `null` angeben. Unsere Messdaten werden dann im PhyPi-Verzeichnis im neuesten Ordner abgelegt.
+4. Damit wir nicht nur Daten angezeigt bekommen, sondern diese auch zur Auswertung gespeichert werden, müssen wir in Zeile 45 unter `DataFile: ` einen Dateinamen `kalibrierung_<hier verwendete Masse eintragen>.csv` anstatt `null` angeben. Unsere Messdaten werden dann im PhyPi-Verzeichnis im neuesten Ordner abgelegt.
 
 5. Nun hängen wir das entsprechende Massestück an den Kraftsensor und achten darauf, dass dieses nicht pendelt, wenn wir die Messung beginnen.
 
@@ -1249,17 +1239,17 @@ Um die Messspannung *U<sub>M</sub>*  zu ermitteln, führen Sie die Schritte 1. b
 
     - Wir klicken auf eine beliebige leere Zelle in der Tabelle.
 
-    - Wir berechnen mit `= AVERAGE(A4:A103)` den Mittelwert aus den Zellen A4 bis A103.
+    - Wir berechnen mit `= MITTELWERT(A4:A103)` den Mittelwert aus den Zellen A4 bis A103.
 
     - Den errechneten Mittelwert für die Messspannung *U<sub>M</sub>* tragen wir nun in die Tabelle oben ein.  
 
 
 <span style="color:#5882FA; font-size: 12pt ">14. </span> Nun können wir die Kalibrierung abschließen, indem wir PhyPi starten und als Basis für die Konfiguration die .daq-Datei unserer letzten Messung im PhyPi-Verzeichnis öffnen. Wir wechseln wieder in die PhyPi Config und können nun unsere Kalibrierung vornehmen:
 
-1. Durch Entfernen der beiden `##` in Zeile 32 aktivieren wir die Kalibrierungsfunktion `ChanCalib:`.
+1. Durch Entfernen der beiden `##` in Zeile 33 aktivieren wir die Kalibrierungsfunktion `ChanCalib:`.
 2. In Zeile 32 fügen wir unsere Werte für die Gewichtskraft *F<sub>G</sub>* und die zugehörige Messspannung *U<sub>M</sub>* ein, mit deren Hilfe PhyPi dann eine Funktion für die gemessene Kraft in Abhängigkeit von der Messspannung *U<sub>M</sub>* berechnet. Mit dieser Funktion kann dann für jeden beliebigen Zwischenwert ein zugehöriger Kraftwert berechnet werden.
-3. Damit wir den passenden Wertebereich angezeigt bekommen, passen wir in Zeile 26 den Anzeigebereich entsprechend an `-[0., 5.]`.
-4. Da unser angezeigter Messwert nun keine Spannung mehr ist, passen wir in Zeile 21 die angezeigte Einheit entsprechend an `ChanLabels:[N]`.
+3. Damit wir den passenden Wertebereich angezeigt bekommen, passen wir in Zeile 27 den Anzeigebereich entsprechend an `-[0., 5.]`.
+4. Da unser angezeigter Messwert nun keine Spannung mehr ist, passen wir Zeile 21 an die Messgröße Kraft `ChanLabels:[N]` und Zeile 22 an die entsprechende Einheit `ChanUnits: [N]`  an.
 
 ```yaml
 # Configuration Options for PhyPiDAQ 
@@ -1282,7 +1272,8 @@ XYmode:     false                 # enable/disable XY-display
 
 
 # channel-specific information
-ChanLabels: [(N)]          # names and/or units for channels 
+ChanLabels: [F]                 # names for channels 
+ChanUnits: [N]                  # units for channels 
 ChanColors: [darkblue, sienna]    # channel colours in display
 
 # eventually overwrite Channel Limits obtained from device config 
