@@ -1,3 +1,12 @@
+Release notes for PhyPiDAQ
+--------------------------
+
+v0.9.1  November 24, 2018
+
+  - improved documentation
+  - latest versions  of dependencies
+  - added digital temperature sensor DS18B20
+  - support for PS2204A,
+  - user install script, documentation 
+
 v0.9.0 initial release
-v0.9.1 added digital temperature sensor DS18B20, support for PS2204A,
-       user install script, documentation 
