@@ -100,14 +100,24 @@ Der Raspberry Pi bietet die Möglichkeit, das Programm Mathematica kostenlos zu 
 1. Öffnen Sie oben links die **Kommandozeile**.   
    ![](images/commissioning/command_line.png)
 2. Installieren Sie durch Eingabe des Befehls `sudo apt-get update && sudo apt-get install wolfram-engine` und Bestätigen mit **Enter** die entsprechende Software.
+## 6. Deinstallation der vorinstallierten Spiele
+Auf dem Raspberry Pi sind wenige einfache Spiele vorinstinstalliert. Da diese Spiele ein großes Ablenkungspotential besitzen, sollten sie vor Verwendung im Unterricht deinstalliert werden. Dazu sind die nachfolgenden Befehle auf der Kommandozeile auszuführen:
+
+```bash
+sudo apt-get remove --purge python-minecraftpi
+rm -rf ~/python_games
+```
+
+Führen Sie danach einen Neustart des Raspberry Pi durch.
+
 <div style="page-break-after: always;"></div>
 
-## 6. Fernzugriff (VNC) einrichten
+## 7. Fernzugriff (VNC) einrichten
 Es besteht die Möglichkeit, bequem von anderen Geräten wie einem Laptop, Tablet oder Smartphone auf den Raspberry Pi aus der Ferne zuzugreifen. So ist es nicht notwendig, für jeden Raspberry Pi einen Bildschirm, eine Tastatur und eine Maus bereitzustellen und das System kann mit einer Powerbank als Spannungsversorgung auch mobil eingesetzt werden.  
 ![](images/commissioning/wlan_router_TL-WR903AC.png)  
 Damit ein Fernzugriff auf den Raspberry Pi erfolgen kann ist es notwendig, dass dieser sich in einem gemeinsamen WLAN mit dem entsprechenden Laptop etc. befindet. Hier bietet es sich an, einen kleinen, tragbaren WLAN-Router, wie den [tragbaren AC750-WLAN-Router TL-WR902AC](https://www.tp-link.com/de/products/details/TL-WR902AC.html) von tp-link zu verwenden. Dieser kann unabhängig vom Schulnetz betrieben werden und ist durch eine Spannungsversorgung über eine Powerbank mobil einsetzbar. Außerdem ist er sehr handlich und kann bei Bedarf mit dem LAN oder WLAN der Schule verbunden werden, um den Schülern den Zugang zum Internet zu ermöglichen. Um den Fernzugriff auf den Raspberry Pi zu ermöglichen, sind einige Konfigurationsschritte erforderlich, die im Folgenden aufgeführt sind.
 
-### 6.1 Raspberry Pi für VNC konfigurieren 
+### 7.1 Raspberry Pi für VNC konfigurieren 
 
  1. Rufen Sie über den Reiter **Einstellungen** die **Raspberry Pi Konfiguration** auf. 
 ![](images/commissioning/raspi_config.png)   
@@ -115,12 +125,12 @@ Damit ein Fernzugriff auf den Raspberry Pi erfolgen kann ist es notwendig, dass 
  2. **Aktivieren** Sie unter **Schnittstellen** den **VNC**-Server des Raspberry Pi, über den später der Fernzugriff erfolgt und bestätigen Sie die Änderungen mit **OK**.  
     ![](images/commissioning/activating_vnc.png)
 
-<div style="page-break-after: always;"></div>
-
  3. Die **erfolgreiche Aktivierung** des VNC-Servers lässt sich oben rechts auf dem Bildschirm durch das neu erschienene **VNC-Sysmbol** erkennen.  
     ![](images/commissioning/vnc_activated.png)
 
-### 6.2 Mobilen WLAN-Router konfigurieren
+<div style="page-break-after: always;"></div>
+
+### 7.2 Mobilen WLAN-Router konfigurieren
 Grundsätzlich kann der Fernzugriff über jedes LAN oder WLAN erfolgen. Für die sichere und reproduzierbare Verbindung des Raspberry Pi mit dem jeweiligen Anzeigegerät ist es sinnvoll, jedem Raspberry Pi eine feste IP-Adresse zuzuweisen. Da die IP-Adressen in einem Netzwerk im Normalfall dynamisch vergeben werden und somit nach jedem Neustart variieren können, ist es notwendig, Vorkehrungen in der Konfiguration des WLAN-Routers vorzunehmen. Die Beschreibung der Konfiguration erfolgt am Beispiel des empfohlenen tragbaren WLAN-Routers TL-WR902AC.
 
  1. Verbinden Sie den **WLAN-Router** mit der **Spannungsversorgung** und starten Sie ihn damit.
@@ -130,25 +140,22 @@ Grundsätzlich kann der Fernzugriff über jedes LAN oder WLAN erfolgen. Für die
  3. **Verbinden** Sie sich sich über [http://tplinkwifi.net](http://tplinkwifi.net) mit dem **Router** und loggen Sie sich mit dem **Username: admin** und **Password: admin** ein.
 
  4. Um später unerwünschte Zugriffe auf die Konfiguration und damit Störungen zu vermeiden, sollten Sie nun den **Benutzernamen** und das **Passwort** ändern. Wählen sie hierzu **System Tools** und darauffolgend **Password** aus. Nun können Sie einen **neuen Benutzernamen** und ein **neues Passwort** vergeben und mit **Save** speichern. 
-<div style="page-break-after: always;"></div>
-
  5. Um nun eine **feste IP-Adresse** für den Raspberry Pi zu **vergeben**, wird zuerst über **DHCP** und den Unterpunkt **DHCP Clients List** eine Liste aller im mit dem Netzwerk verbundenen Geräte aufgerufen. Hier erscheint auch der Raspberry Pi  mit dem Hostnamen, der im Vorfeld bei der Konfiguration vergeben wurde. **Kopieren** Sie die **MAC-Adresse** des Raspberry Pi.  
 ![](images/commissioning/DHCP_client_list.png)
 
- 6. Rufen Sie nun den Unterpunkt **Address Reservation** auf und **reservieren** Sie eine **feste IP-Adresse für den Raspberry Pi**. Klicken Sie hierzu **Add New**.  
-![](images/commissioning/DHCP_address_reservation.png)  
+<div style="page-break-after: always;"></div>
+
+  6. Rufen Sie nun den Unterpunkt **Address Reservation** auf und **reservieren** Sie eine **feste IP-Adresse für den Raspberry Pi**. Klicken Sie hierzu **Add New**.  
+  ![](images/commissioning/DHCP_address_reservation.png)  
+  7. Fügen Sie die zuvor kopierte **MAC-Adresse** ein, vergeben Sie **aufsteigend von 192.168.0.100** IP-Adressen für den verwendeten Raspberry Pi und wählen Sie unter Status **Enabled** aus. Bestätigen Sie den Vorgang mit **Save**.  
+  ![](images/commissioning/DHCP_static_ip_address.png)  
+  Ab dem nächsten Neustart des Routers wird dem Raspberry Pi nun die reservierte IP-Adresse zugewiesen, sodass er unter dieser zuverlässig im Netzwerk erreichbar ist.
+  8. Versehen Sie den Raspberry Pi mit einem **Aufkleber**, auf dem der **Hostname** und die **IP-Adresse** vermerkt sind.
+ 9. Reservieren Sie in gleicher Weise **feste IP-Adressen** für **alle weiteren Raspberry Pi**, die verwendet werden sollen und loggen Sie sich anschließend aus. 
 
 <div style="page-break-after: always;"></div>
 
- 7. Fügen Sie die zuvor kopierte **MAC-Adresse** ein, vergeben Sie **aufsteigend von 192.168.0.100** IP-Adressen für den verwendeten Raspberry Pi und wählen Sie unter Status **Enabled** aus. Bestätigen Sie den Vorgang mit **Save**.  
-![](images/commissioning/DHCP_static_ip_address.png)  
-Ab dem nächsten Neustart des Routers wird dem Raspberry Pi nun die reservierte IP-Adresse zugewiesen, sodass er unter dieser zuverlässig im Netzwerk erreichbar ist.
-
- 8. Versehen Sie den Raspberry Pi mit einem **Aufkleber**, auf dem der **Hostname** und die **IP-Adresse** vermerkt sind.
-
-9. Reservieren Sie in gleicher Weise **feste IP-Adressen** für **alle weiteren Raspberry Pi**, die verwendet werden sollen und loggen Sie sich anschließend aus.  
-
-### 6.3 VNC-Viewer auf dem Anzeigegerät  einrichten
+### 7.3 VNC-Viewer auf dem Anzeigegerät  einrichten
 Um den Fernzugriff auf den Raspberry Pi vom jeweiligen Anzeigegerät zu ermöglichen, ist ein VNC-Viewer auf diesem notwendig. Im Folgenden wird die Installation und Einrichtung des VNC-Viewers **REALVNC** gezeigt, der für alle gängigen Betriebssysteme verfügbar ist.  
 ![](images/commissioning/download_vnc_viewer.PNG)
 
@@ -174,7 +181,7 @@ Auf diese Weise lassen sich über die festgelegten IP-Adressen für jeden Raspbe
 
 <div style="page-break-after: always;"></div>
 
-## 7. Bildschirmauflösung an das Anzeigegerät anpassen
+## 8. Bildschirmauflösung an das Anzeigegerät anpassen
 Da bei einer Verbindung des Anzeigegeräts über **VNC** mit dem Raspberry Pi die **Bildschirmauflösung nicht automatisch angepasst** wird, muss diese so festgelegt werden, dass **angenehm** gearbeitet werden kann.
 
  1. Öffnen Sie oben links die **Kommandozeile**.   
@@ -202,7 +209,7 @@ Da bei einer Verbindung des Anzeigegeräts über **VNC** mit dem Raspberry Pi di
 ![](images/commissioning/reboot.png)  
 
 
-## 8. Systemabbild als Backup und für die Installation mehrerer Raspberry Pi mit identischer Konfiguration
+## 9. Systemabbild als Backup und für die Installation mehrerer Raspberry Pi mit identischer Konfiguration
 Um nicht für jeden einzurichtenden Raspberry Pi alle Konfigurationsschritte durchführen zu müssen und eine Sicherung des konfigurierten Zustandes vorzunehmen, ist es sinnvoll, ein Systemabbild (Image) zu erzeugen und zu sichern. Da die meisten Lehrer und Schulen mit Windows Computern arbeiten, wird das Vorgehen anhand dieses Betriebssystems erläutert.
 
  1. Stecken Sie die **Micro-SD-Karte**, von der das Systemabbild erzeugt werden soll, in den vorgesehen **Steckplatz** Ihres Computers oder in einen entsprechenden USB-Adapter. 
@@ -214,7 +221,7 @@ Um nicht für jeden einzurichtenden Raspberry Pi alle Konfigurationsschritte dur
 
 <div style="page-break-after: always;"></div>
 
-## 9. Systemabbild auf Micro-SD-Karte schreiben
+## 10. Systemabbild auf Micro-SD-Karte schreiben
 
 Nachfolgend wird beschrieben, wie Sie ein gesichertes **Systemabbild (Image)** auf eine Micro-SD-Karte **schreiben** können. Dies ist auch dann  sinnvoll, wenn Sie weitere Raspberry Pi mit **identischer Grundkonfiguration** verwenden wollen. Hier bietet es sich an, ein zuvor erstelltes **Systemabbild** (siehe 6.) eines einzelnen Raspberry Pi auf eine entsprechende Anzahl an **Micro-SD-Karten** zu **klonen**, um sich den Aufwand des mehrmaligen Konfigurierens zu ersparen. 
 

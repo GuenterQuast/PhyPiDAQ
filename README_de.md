@@ -213,7 +213,7 @@ Um die PicoTech-Treiber für PicoScope USB-Geräte zu installieren, muss das pic
 
 1. Öffnen Sie die  Datei /etc/apt/sources.list über die Kommandozeile mit `sudo nano /etc/apt/sources.list`.  
     ![](./images/open_etc_apt_sources_list.png)
-2. Navigieren Sie mit den Pfeiltasten in die nächste frei Zeile und ergänzen Sie den Eintrag `deb http://labs.picotech.com/raspbian/ picoscope main` in der Datei  /etc/apt/sources.list.  
+2. Navigieren Sie mit den Pfeiltasten in die nächste freie Zeile und ergänzen Sie den Eintrag `deb http://labs.picotech.com/raspbian/ picoscope main` in der Datei  /etc/apt/sources.list.  
     ![](./images/add_entry_picotech.png)
 3. Speichern Sie die Datei /etc/apt/sources.list mit `Strg + O` und `Enter`.
 4. Schließen Sie die Datei /etc/apt/sources.list mit `Strg + X`.
@@ -255,7 +255,7 @@ Um versehentliches Überschreiben von Dateien im Paket *PhyPiDAQ* zu vermeiden, 
 sudo mv ~/git/PhyPiDAQ /usr/local/
 ```
 
-Die Pfade in *~/Desktop/phipi.desktop* müssen dann ebenfalls entsprechend angepasst werden. Dies wird am einfachsten durch Klicken mit der rechten Maustaste auf das *phipi*-Symbol erreicht. Im sich dann öffnenden Menu den Dialog "Eigenschaften" wählen und alle Pfade von  *~/git/*  ->  */usr/local/* ändern.
+Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angepasst werden. Dies wird am einfachsten durch Klicken mit der rechten Maustaste auf das *phypi*-Symbol erreicht. Im sich dann öffnenden Menu den Dialog "Eigenschaften" wählen und alle Pfade von  *~/git/*  ->  */usr/local/* ändern.
 
 ## Übersicht über Dateien im Paket PhyPiDAQ 
 
@@ -343,4 +343,6 @@ Die Pfade in *~/Desktop/phipi.desktop* müssen dann ebenfalls entsprechend angep
     Aufsetzen des Raspberry Pi für dieses Projekt
 - `doc/Komponenten_fuer_PhyPi.md (.pdf)`   
     empfohlene Komponenten für dieses Projekt
+- `doc/Bauanleitung_Kraftsensor.md (.pdf)`   
+    Bauanleitung für den verwendeten Kraftsenor
 
