@@ -1,4 +1,10 @@
-# Komponenten für PhyPi (Stand: 10.10.2018)
+# Komponenten für PhyPi (Stand: 25.11.2018)
+
+Die beiden folgenden Abbildungen zeigen den Grundaufbau und die benötigten Komponenten für den Einführungskurs im Überblick sowie den zugehörigen Messkoffer.
+
+![](images/components/breadboard_raspi.png)
+
+![](images/components/box.png)
 
 ## 1. Grundausstattung Raspberry Pi
 
@@ -39,16 +45,17 @@
 
 In der folgenden Tabelle sind sämtliche Komponenten aufgeführt, die für den Zusammenbau des Kraftsensors benötigt werden. Dieser ist dann zu gängigem Stativmaterial kompatibel.
 
-|      | Komponente                                                   | Ausreichend für ... PhyPi-Schülersets | mögliche Bezugsquelle                 | Link / Art.Nr.:                                              | Preis in €              |
-| ---- | ------------------------------------------------------------ | :-----------------------------------: | ------------------------------------- | ------------------------------------------------------------ | ----------------------- |
-| 1.   | Kraftsensor TAL221 (Wägezelle, Biegebalken 500 g)            |                   1                   | [Eckstein](https://eckstein-shop.de/) | [SF14728](https://eckstein-shop.de/SparkFun-Mini-Load-Cell-500g-Straight-Bar-TAL221) | 11,84                   |
-| 2.   | USB-Datenkabel als Leitung für den Kraftsensor TAL221        |                   5                   | [reichelt](https://www.reichelt.de/)  | [USB2 DK 5M](https://www.reichelt.de/usb-2-0-datenkabel-5m-usb2-dk-5m-p109597.html?&trstct=vrt_pdn) | 5,99                    |
-| 3.   | Schrumpfschlauch  Ø 2,4 mm (50 Stück) für Leitung des Kraftsensors TAL221 |                  10                   | [Hornbach](https://www.hornbach.de/)  | [5071146](https://www.hornbach.de/shop/Schrumpfschlauch-2-4-mm-L-100-mm-schwarz-50-Stueck/5071146/artikel.html) | 1,95                    |
-| 4.   | Schrumpfschlauch  Ø 6,4 mm (25 Stück) für Leitung des Kraftsensors TAL221 |                  10                   | [Hornbach](https://www.hornbach.de/)  | [5071155](https://www.hornbach.de/shop/Schrumpfschlauch-6-4-mm-L-100-mm-schwarz-25-Stueck/5071155/artikel.html) | 1,95                    |
-| 5.   | Vierkantstange Aluminium 12 x 12 mm, 1m für Stativhalterung des Kraftsensors |                   4                   | [Hornbach](https://www.hornbach.de/)  | [4249111](https://www.hornbach.de/shop/Vierkantstange-Aluminium-silber-eloxiert-12x12-mm-1m/4249111/artikel.html) | 9,40                    |
-| 6.   | Linsenkopfschraube 4.8 m. Kreuzschlitz 3x16 mm galv.verzinkt DIN 7985 100 Stück |                  10                   | [Hornbach](https://www.hornbach.de/)  | [3831258](https://www.hornbach.de/shop/Linsenkopfschraube-4-8-m-Kreuzschlitz-3x16-mm-galv-verzinkt-DIN-7985-100-Stueck/3831258/artikel.html?varCat=S1784##v3831254) | 2,55                    |
-| 7.   | Drahtseilklemme 3 mm V4A als Aufhängepunkt am Kraftsensor    |                   1                   | [Hornbach](https://www.hornbach.de/)  | [7547130](https://www.hornbach.de/shop/Drahtseilklemme-3-mm-V4A-100-Stueck/7547130/artikel.html) | (nach Gewicht) ca. 2,10 |
-| 8.   | Kabelbinder UV-beständig schwarz 140 x 2,5 mm, <br/>100 Stück |                &gt; 10                | [Hornbach](https://www.hornbach.de/)  | [3883618](https://www.hornbach.de/shop/Kabelbinder-UV-bestaendig-schwarz-140-x-2-5-mm-100-Stueck/3883618/artikel.html) | 2,30                    |
+|      | Komponente                                                   | Ausreichend für ... PhyPi-Schülersets | mögliche Bezugsquelle                 | Link / Art.Nr.:                                              | Preis in € |
+| ---- | ------------------------------------------------------------ | :-----------------------------------: | ------------------------------------- | ------------------------------------------------------------ | ---------- |
+| 1.   | Kraftsensor TAL221 (Wägezelle, Biegebalken 500 g)            |                   1                   | [Eckstein](https://eckstein-shop.de/) | [SF14728](https://eckstein-shop.de/SparkFun-Mini-Load-Cell-500g-Straight-Bar-TAL221) | 11,84      |
+| 2.   | USB-Datenkabel als Leitung für den Kraftsensor TAL221        |                   5                   | [reichelt](https://www.reichelt.de/)  | [USB2 DK 5M](https://www.reichelt.de/usb-2-0-datenkabel-5m-usb2-dk-5m-p109597.html?&trstct=vrt_pdn) | 5,99       |
+| 3.   | Schrumpfschlauch  Ø 2,4 mm (50 Stück) für Leitung des Kraftsensors TAL221 |                  10                   | [Hornbach](https://www.hornbach.de/)  | [5071146](https://www.hornbach.de/shop/Schrumpfschlauch-2-4-mm-L-100-mm-schwarz-50-Stueck/5071146/artikel.html) | 1,95       |
+| 4.   | Schrumpfschlauch  Ø 6,4 mm (25 Stück) für Leitung des Kraftsensors TAL221 |                  10                   | [Hornbach](https://www.hornbach.de/)  | [5071155](https://www.hornbach.de/shop/Schrumpfschlauch-6-4-mm-L-100-mm-schwarz-25-Stueck/5071155/artikel.html) | 1,95       |
+| 5.   | Vierkantstange Aluminium 12 x 12 mm, 1m für Stativhalterung des Kraftsensors |                   4                   | [Hornbach](https://www.hornbach.de/)  | [4249111](https://www.hornbach.de/shop/Vierkantstange-Aluminium-silber-eloxiert-12x12-mm-1m/4249111/artikel.html) | 9,40       |
+| 6.   | Linsenkopfschraube 4.8 m. Kreuzschlitz 3x16 mm galv.verzinkt DIN 7985 100 Stück |                  10                   | [Hornbach](https://www.hornbach.de/)  | [3831258](https://www.hornbach.de/shop/Linsenkopfschraube-4-8-m-Kreuzschlitz-3x16-mm-galv-verzinkt-DIN-7985-100-Stueck/3831258/artikel.html?varCat=S1784##v3831254) | 2,55       |
+| 7.   | Kabelbinder UV-beständig schwarz 140 x 2,5 mm, <br/>100 Stück |                &gt; 10                | [Hornbach](https://www.hornbach.de/)  | [3883618](https://www.hornbach.de/shop/Kabelbinder-UV-bestaendig-schwarz-140-x-2-5-mm-100-Stueck/3883618/artikel.html) | 2,30       |
+| 8.   | Aderleitung H07 V-U 1G6 mm² grün-gelb, Meterware (0,5 m) für Aufhängeöse am Kraftsensor |                &gt; 10                | [Hornbach](https://www.hornbach.de/)  | [3870051](https://www.hornbach.de/shop/Aderleitung-H07-V-U-1G6-mm-gruen-gelb-Meterware/3870051/artikel.html) | 0,60       |
+| 9.   | UHU 2-komponenten-Kleber plus schnellfest 35 g zum Einkleben der Aufhängeöse |                &gt; 10                | [Hornbach](https://www.hornbach.de/)  | [2561731](https://www.hornbach.de/shop/UHU-2-komponenten-Kleber-plus-schnellfest-35-g/2561731/artikel.html) | 8,49       |
 
 <div style="page-break-after: always;"></div>
 
