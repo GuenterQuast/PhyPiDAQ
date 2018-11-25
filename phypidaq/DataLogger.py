@@ -62,9 +62,12 @@ class DataLogger(object):
     except:
       self.NAxes = 1
       self.Cidx1 = self.Cidx0
-    self.AxisLabels = [self.ChanLabels[self.Cidx0] + ' ('+self.ChanUnits[self.Cidx0]+')', 
-                       self.ChanLabels[self.Cidx1] + ' ('+self.ChanUnits[self.Cidx1]+')']
-
+    cu0= self.ChanUnits[self.Cidx0]
+    cu1= self.ChanUnits[self.Cidx1]
+    if cu0: cu0 = ' ('+ cu0 +')'
+    if cu1: cu1 = ' ('+ cu1 +')'
+    self.AxisLabels = [self.ChanLabels[self.Cidx0] + cu0, 
+                       self.ChanLabels[self.Cidx1] + cu1 ]
    # data structures needed throughout the class
     self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
     self.Vhist = np.zeros( [self.NChan, self.Npoints] )

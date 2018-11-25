@@ -62,8 +62,12 @@ class DataGraphs(object):
     except:
       self.NAxes = 1
       self.Cidx1 = self.Cidx0
-    self.AxisLabels = [self.ChanLabels[self.Cidx0] + ' ('+self.ChanUnits[self.Cidx0]+')', 
-                       self.ChanLabels[self.Cidx1] + ' ('+self.ChanUnits[self.Cidx1]+')']
+    cu0= self.ChanUnits[self.Cidx0]
+    cu1= self.ChanUnits[self.Cidx1]
+    if cu0: cu0 = ' ('+ cu0 +')'
+    if cu1: cu1 = ' ('+ cu1 +')'
+    self.AxisLabels = [self.ChanLabels[self.Cidx0] + cu0, 
+                       self.ChanLabels[self.Cidx1] + cu1 ]
 
 # config data needed throughout the class
     self.Npoints = 120  # number of points for history
@@ -220,7 +224,8 @@ class DataGraphs(object):
     # update text display
           endl = ''
           if i%2: endl = '\n'
-          txt += '  %s:   %.3g %s'% (self.ChanNams[i], self.Vhist[i,k], self.ChanUnits[i]) + endl 
+          txt += '  %s:   %.3g %s'% (self.ChanNams[i], self.Vhist[i,k], 
+            self.ChanUnits[i]) + endl 
     # update bar chart
           self.bgraphs[i].set_height(dat[i])
           self.animtxt.set_text(txt)
