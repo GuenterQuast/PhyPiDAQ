@@ -45,3 +45,14 @@ def stop_processes(proclst):
       if p.is_alive(): p.terminate()
       time.sleep(1.)
 
+def kbdwait():
+  ''' 
+    wait for keyboard input
+  '''
+  # 1st, remove pyhton 2 vs. python 3 incompatibility for keyboard input
+  if sys.version_info[:2] <=(2,7):
+    get_input = raw_input
+  else: 
+    get_input = input
+ #  wait for input
+  get_input(50*' '+'type <ret> to exit -> ')

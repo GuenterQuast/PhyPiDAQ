@@ -17,7 +17,7 @@ import sys, os, time, yaml, numpy as np, threading, multiprocessing as mp
 from phypidaq.mpTkDisplay import mpTkDisplay
 # more imports from phypidaq depend on configuration options
 
-from phypidaq.helpers import generateCalibrationFunction, stop_processes
+from phypidaq.helpers import generateCalibrationFunction, stop_processes,kbdwait
 
 # ----- helper functions --------------------
 
@@ -66,8 +66,12 @@ def setup():
   try:
     with open(PhyPiConfFile) as f:
       PhyPiConfDict = yaml.load(f)
-  except:
+  except Exception as e:
     print('!!! failed to read configuration file ' + PhyPiConfFile)
+    print(str(e))
+    # eventually exit in this case ...
+    # kbdwait()
+    # exit(1)
     print('   using default settings')
   # define default config dictionary
     PhyPiConfDict={}
@@ -113,8 +117,10 @@ def setup():
       f = open(fnam)
       DEVconfDicts.append(yaml.load(f))
       f.close()
-    except:
+    except Exception as e:
       print('!!! failed to read configuration file ' + fnam)
+      print(str(e))
+      kbdwait()
       exit(1)
 
 # configure and initialize all Devices
