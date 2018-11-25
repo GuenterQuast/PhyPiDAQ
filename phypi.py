@@ -490,20 +490,20 @@ class Ui_PhyPiWindow(object):
       # check if valid yaml syntax
       try:
         DAQconfdict=yaml.load(DAQconf)       
-      except: 
+      except Exception as e: 
         self.MB_Warning('Warning', 
-           'PhyPi Config is not valid yaml format')       
-        return
+          'PhyPi Config is not valid yaml format \n' + str(e))       
+        return 1
 
       DevConfs = []   
       for i in range(self.NDeviceConfigs):
         DevConfs.append(self.pTE_DeviceConfigs[i].toPlainText()) 
         try:
           _ =yaml.load(DevConfs[i])       
-        except: 
+        except Exception as e: 
           self.MB_Warning('Warning', 
-             'Device Config ', i, ' is not valid yaml format')       
-          return
+             'Device Config %i is not valid yaml format \n'%(i) + str(e) )
+          return 1
 
       # save DAQ configuration in cdir
       RunTag = str(self.lE_RunTag.text() ).replace(' ','')
@@ -535,7 +535,7 @@ class Ui_PhyPiWindow(object):
       return 0
 
     def saveDefaultConfig(self):
-      self.saveConfig(self.ConfDir)
+      return self.saveConfig(self.ConfDir)
 
     def actionStartRun(self):
       # start script run_phipy in subdirectory
