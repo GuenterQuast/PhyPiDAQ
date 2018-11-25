@@ -261,7 +261,7 @@ sudo mv ~/git/PhyPiDAQ /usr/local/
 ```
 
 Please note that the paths in the example above must be adjusted in this case, e.g. ´~/git/` -> /usr/local/.
-The paths in *~/Desktop/phipi.desktop* must also be changed appropriately. This is most easily achieved by
+The paths in *~/Desktop/phypi.desktop* must also be changed appropriately. This is most easily achieved by
 right-clicking the icon and use the dialog "Properties". 
 
 
@@ -348,4 +348,6 @@ right-clicking the icon and use the dialog "Properties".
     German only: setting up the Raspberry Pi for this project
 - `doc/Komponenten_fuer_PhyPi.md (.pdf)`  
     recommended components for this project
+- `doc/Bauanleitung_Kraftsensor.md (.pdf)`  
+    building instructions for used force sensor
 
