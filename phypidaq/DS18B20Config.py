@@ -36,9 +36,10 @@ class DS18B20Config(object):
     try:
     # Create an DS18B20 instance.
       self.DS18B20 = W1ThermSensor()
-    except:
+    except Exception as e:
       print("DS18B20Config: Error initialising device - exit")
-      sys.exit(1)
+      print(str(e)) 
+     sys.exit(1)
 
  # provide configuration parameters
     self.ChanNams = ['DS18B20']

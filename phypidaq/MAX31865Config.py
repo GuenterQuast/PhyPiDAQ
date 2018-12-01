@@ -84,8 +84,9 @@ class MAX31865Config(object):
       self.spi.writebytes(self.SPIMessage)
       time.sleep(0.1)
       
-    except:
+    except Excpetion as e:
       print("MAX31865Config: Error initialising device - exit")
+      print(str(e))
       sys.exit(1)
 
  # provide configuration parameters

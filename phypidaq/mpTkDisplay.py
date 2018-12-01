@@ -37,15 +37,17 @@ def mpTkDisplay(Q, conf,
   try:
     cmnd ='from .'+ ModuleName + ' import *' 
     exec(cmnd, globals(), locals())
-  except:
+  except Exception as e:
     print(' !!! TkDisplay: failed to import module - exiting')
+    print(str(e))
     sys.exit(1)
 
   try:
     cmnd = 'global DG; DG = ' + ModuleName +'(conf)'
     exec(cmnd, globals(), locals()) 
-  except: 
+  except Exception as e: 
     print(' !!! TkDisplay: failed to initialize module - exiting')
+    print(str(e))
     sys.exit(1)
 
 
@@ -101,7 +103,8 @@ def mpTkDisplay(Q, conf,
       filename = asksaveasfilename(initialdir='.', initialfile='DGraphs.png', 
                title='select file name')
       figDG.savefig(filename) 
-    except: 
+    except Exception as e:
+      print(str(e))
       pass
  
 # ------- executable part -------- 
@@ -172,6 +175,7 @@ def mpTkDisplay(Q, conf,
                        #     to fix memory leak in animate
   try:
     Tk.mainloop()
-  except:
+  except Exception as e:
     print('*==* mpTkDisplay running ' + ModuleName + ': forced exit')
+    print(str(e))
   sys.exit()

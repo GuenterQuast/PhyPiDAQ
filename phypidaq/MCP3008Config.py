@@ -44,8 +44,9 @@ class MCP3008Config(object):
     SPI_DEVICE = 0
     try:
       self.MCP = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE) )
-    except:
+    except Exception as e:
       print("MCP3008Config: Error initialising device - exit")
+      print(str(e))
       sys.exit(1)
 
 # provide configuration parameters

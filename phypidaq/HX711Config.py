@@ -44,9 +44,10 @@ class HX711Config(object):
         # setting offset
         self.OFFSET = self.readAverage()
         self.setOffset(self.OFFSET)
-    except:
+    except Exception as e:
         print("HX711Config: Error initialising device - exit")
-        #sys.exit(1)
+        print(str(e))
+        sys.exit(1)
 
  # provide configuration parameters
     self.NChannels = 1

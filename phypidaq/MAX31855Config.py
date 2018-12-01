@@ -43,8 +43,9 @@ class MAX31855Config(object):
     try:
     # Create an MAX31855 instance.
       self.MAX31855 = MAX31855.MAX31855(spi=SPI.SpiDev(0, self.ce))
-    except:
+    except Exception as e:
       print("MAX31855Config: Error initialising device - exit")
+      print(str(e))
       sys.exit(1)
 
  # provide configuration parameters

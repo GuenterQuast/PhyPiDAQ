@@ -64,8 +64,9 @@ class ADS1115Config(object):
     try:
       # Create an ADS1115 ADC (16-bit) instance.
       self.ADS = Adafruit_ADS1x15.ADS1115()
-    except:
+    except Exception as e:
       print("ADS1115Config: Error initialising device - exit")
+      print(str(e))
       sys.exit(1)
 
  # provide configuration parameters
