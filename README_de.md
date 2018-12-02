@@ -282,8 +282,12 @@ Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angep
 - `phypidaq/DS18B20Config.py`  
     Klasse zur Handhabung des digitalen Thermometers DS18B20
 
+- ``phypidaqBMP180Config.py`` 
+
+    Klasse zur Handhabung des dititalen Temperatur- und Drucksensors BMP180
+
 - `phypidaq/MCP3008Config.py`  
-    Klasse zur Handhabung des Analog-Digital-Wandlers MCP3008
+    Klasse zur Handhabung des Analog-Digital-Wandlers MCP3008 /MCP3208
 
 - `phypidaq/GPIOCount.py`   
     Klasse zur Ratenmessung an GPIO-Pins
@@ -327,6 +331,10 @@ Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angep
 
 - `examples/read_analog.py`  
     sehr minimalistisches Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
+- ``examples/read_18B20.py``
+    minimalistisches Beispiel zur Auslese des digitalen Temperatursensors DS18B20 
+- ``examples/readBMP180/``
+    minimalistisches Beispiel zur Auslese des digitalen Tempratur- und Drucksensors BMP180
 - `examples/runOsci.py`  
     Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben (Vorgabe `PSOsci.yaml`)
 - `examples/poissonLED.py`  

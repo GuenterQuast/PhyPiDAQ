@@ -278,40 +278,30 @@ right-clicking the icon and use the dialog "Properties".
 
 - `phypidaq/__init__.py`  
    initialisation for package *phypidaq*
-
 - `phypidaq/_version_info.py`  
     version info for package *phypidaq*
-
 - `phypidaq/ADS1115Config.py`  
     class for handling of analog-to-digital converter ADS1115
-
 - `phypidaq/DS18B20Config.py`  
     class for handling of digital thermometer DS18B20
-
+- ``phypidaq/BMP180Config.py``  
+    class for handling the ditital temperature and pressure sensor BMP180
 - `phypidaq/MCP3008Config.py`   
     class for handling of analog-to-digital converter MCP3008
-
 - `phypidaq/GPIOCount.py`   
     class for reading rates from GPIO pins
-
 - `phypidaq/MAX31855Config.py`  
     class for handling MAX31855 thermocouple-to-digital converter
-
 - `phypidaq/MAX31865Config.py`  
     class for handling MAX31865 resistance-to-digital converter
-
 - `phypidaq/PSConfig.py`  
     class for handling PicoScope USB oscilloscopes
-
 - `phypidaq/mpTkDisplay.py`  
     background-process handling data visualisation
-
 - `phypidaq/DataLogger.py`  
     class for display of data histories and xy diagrams
-
 - `phypidaq/DataGraphs.py`  
     general display module for data as bar graphs, history plots and xy-graphs
-
 - `phypidaq/DataRecorder.py`  
     store data in CSV format
 
@@ -331,6 +321,10 @@ right-clicking the icon and use the dialog "Properties".
 
 - `examples/read_analog.py`  
     very minimalist example to read one channel from an analog-to-ditigal converter
+- ``examples/read_18B20.py``
+    mimimalist example to read the temperature sensor DS18B20
+- ``examples/readBMP180/``
+    mimimalist example to read the digital temprature  and pressusre sensor BMP180
 - `examples/runOsci.py`  
     run an oscilloscope display, configuration as specified in *.yaml* file (default is `PSOsci.yaml`)
 - `examples/poissonLED.py`  
