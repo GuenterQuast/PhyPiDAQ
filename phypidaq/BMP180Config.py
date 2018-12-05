@@ -32,7 +32,7 @@ class BMP180Config(object):
       #   BMP085_HIGHRES, or 
       #   BMP085_ULTRAHIGHRES.  See the BMP085
       #self.sensor = BMP085.BMP085(mode=BMP085.BMP085_ULTRAHIGHRES)
-    except EXEPTION as e:      
+    except EXCEPTION as e:      
        print("BMP180: Error initialising device - exit")
        print(str(e))
        sys.exit(1)
