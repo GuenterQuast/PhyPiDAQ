@@ -1,6 +1,11 @@
 Release notes for PhyPiDAQ
 --------------------------
 
+  v0.9.1p1
+  - support for MMA8451 accelerometer
+  - added support for temperature and pressure sensor BMP180
+  - improved error messages
+  
 v0.9.1  November 24, 2018
 
   - improved documentation
