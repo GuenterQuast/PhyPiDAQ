@@ -285,7 +285,9 @@ right-clicking the icon and use the dialog "Properties".
 - `phypidaq/DS18B20Config.py`  
     class for handling of digital thermometer DS18B20
 - ``phypidaq/BMP180Config.py``  
-    class for handling the ditital temperature and pressure sensor BMP180
+    class for handling the digital temperature and pressure sensor BMP180
+- ``phypidaq/MMA8451Config.py``  
+    class for handling the digital accelerometer MMA8451
 - `phypidaq/MCP3008Config.py`   
     class for handling of analog-to-digital converter MCP3008
 - `phypidaq/GPIOCount.py`   
@@ -321,10 +323,12 @@ right-clicking the icon and use the dialog "Properties".
 
 - `examples/read_analog.py`  
     very minimalist example to read one channel from an analog-to-ditigal converter
-- ``examples/read_18B20.py``
-    mimimalist example to read the temperature sensor DS18B20
+- ``examples/read_18B20.py``s
+- simple example to read the temperature sensor DS18B20
 - ``examples/readBMP180/``
-    mimimalist example to read the digital temprature  and pressusre sensor BMP180
+    simple example to read the digital temperature  and pressure sensor BMP180
+- ``examples/readMMA8541/``
+    simple example to read the digital accelerometer MMA8451
 - `examples/runOsci.py`  
     run an oscilloscope display, configuration as specified in *.yaml* file (default is `PSOsci.yaml`)
 - `examples/poissonLED.py`  

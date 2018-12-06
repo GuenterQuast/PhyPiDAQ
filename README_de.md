@@ -282,9 +282,13 @@ Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angep
 - `phypidaq/DS18B20Config.py`  
     Klasse zur Handhabung des digitalen Thermometers DS18B20
 
-- ``phypidaqBMP180Config.py`` 
+- ``phypidaq/BMP180Config.py`` 
 
-    Klasse zur Handhabung des dititalen Temperatur- und Drucksensors BMP180
+    Klasse zur Handhabung des digitalen Temperatur- und Drucksensors BMP180
+
+- ``phypidaq/MMA8451Config.py`` 
+
+    Klasse zur Handhabung des digitalen Beschleunigungssensors MMA8451
 
 - `phypidaq/MCP3008Config.py`  
     Klasse zur Handhabung des Analog-Digital-Wandlers MCP3008 /MCP3208
@@ -335,6 +339,8 @@ Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angep
     minimalistisches Beispiel zur Auslese des digitalen Temperatursensors DS18B20 
 - ``examples/readBMP180/``
     minimalistisches Beispiel zur Auslese des digitalen Tempratur- und Drucksensors BMP180
+- examples/readMMA8451/``
+    minimalistisches Beispiel zur Auslese des digitalen Beschleunigungssensors MMA8451
 - `examples/runOsci.py`  
     Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben (Vorgabe `PSOsci.yaml`)
 - `examples/poissonLED.py`  
