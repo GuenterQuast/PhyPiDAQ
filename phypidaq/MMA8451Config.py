@@ -23,13 +23,13 @@ class MMA8451Config(object):
 
     try:
       self.sensor = MMA8451()
-    except EXCEPTION as e:      
+    except Exception as e:      
       print("MMA8451: Error setting up device - exit")
       print(str(e))
       sys.exit(1)
     try:
       self.sensor.init()     
-    except EXCEPTION as e:      
+    except Exception as e:      
       print("MMA8451: Error initialising device - exit")
       print(str(e))
       sys.exit(1)
