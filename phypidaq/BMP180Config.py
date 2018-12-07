@@ -16,7 +16,7 @@ class BMP180Config(object):
 # -- number of Channels
     self.NChannels = 2
     self.ChanLims = [[-40., 85.],[300., 1100.]]
-    self.ChanNams = ['Temperature','Pressure']
+    self.ChanNams = ['T','P']
     self.ChanUnits= ['°C','hPa']
 
 
