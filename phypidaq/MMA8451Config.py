@@ -15,8 +15,8 @@ class MMA8451Config(object):
 # -- number of Channels
     self.NChannels = 3
     self.ChanLims = [[-20., 20.],[-20., 20.], [-20., 20.]]
-    self.ChanNams = [['x accel.'],['y accel.'],['z accel']]
-    self.ChanUnits= [['m/s²'],['m/s²'], ['m/s²']]
+    self.ChanNams = ['x accel.','y accel.','z accel']
+    self.ChanUnits= ['m/s²','m/s²', 'm/s²']
 
 
   def init(self):
