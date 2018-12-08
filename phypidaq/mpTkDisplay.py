@@ -53,8 +53,7 @@ def mpTkDisplay(Q, conf,
 
   # Generator to provide data to animation
   def yieldEvt_fromQ():
-# random consumer of Buffer Manager, receives an event copy 
-   # via a Queue from package mutiprocessing
+# receive data via a Queue from package mutiprocessing
     cnt = 0
     lagging = False
 
@@ -79,8 +78,7 @@ def mpTkDisplay(Q, conf,
       else:
         lagging=True
         LblStatus.config(text='! lagging !', fg='red')
-
-    # print('*==* yieldEvt_fromQ: received END event')          
+# end of yieldEvt_fromQ
     sys.exit()
 
   def cmdResume(_event=None):
