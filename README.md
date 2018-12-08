@@ -335,6 +335,10 @@ right-clicking the icon and use the dialog "Properties".
     generate a random signal following Poisson statistics on a GPIO pin
 - `examples/FreqGen.py`  
     generate a fixed frequency signal on a GPIO pin
+- ``examples\Barometer.daq``
+    configuration file for *run_pyhpi.py*; uses BMB180 and displays temperature and air pressure
+- ``examples\Accelerometer.daq``
+    configuration file for *run_phypy.py*; uses MMA8451 to display x-, y- and z-acceleration
 
 <div style="page-break-after: always;"></div>
 

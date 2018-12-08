@@ -347,6 +347,10 @@ Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angep
     erzeugt ein zufälliges Signal an GPIO-Pin gemäß Poisson-Prozess 
 - `examples/FreqGen.py`  
     erzeugt Signal fester Frequenz an GPIO-Pin
+- ``examples\Barometer.daq``
+    Konfigurationsdatei für *run_pyhpi.py*; nutzt den Sensor BMB180 zur Anzeige von Temperatur und Luftdruck air
+- ``examples\Accelerometer.daq``
+    Konfigurationsdatei für *run_phypi.py*; nutzt den Sensor MMA8451 zur Anzeige der  x-, y- and z-Komponente der Beschleunigung.
 
 
 ### Dokumentation
