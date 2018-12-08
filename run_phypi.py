@@ -83,6 +83,8 @@ def setup():
 # set default options:
   if 'Interval' not in PhyPiConfDict:
     PhyPiConfDict['Interval'] = interval
+  else:
+    interval = PhyPiConfDict['Interval']
   if PhyPiConfDict['Interval'] < 0.05:
     print(" !!! read-out intervals < 0.05 s not reliable, setting to 0.05 s")
     PhyPiConfDict['Interval'] = 0.05
@@ -244,6 +246,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   try:
     cnt = 0
     T0 = time.time()
+    brk = False
+
     while True:
 
       if DAQ_ACTIVE:
@@ -255,10 +259,21 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
         if CalibFuncts: apply_calibs()
       # apply fromula(e) 
         if Formulae: apply_formulae()
-      # display calibrated data
-        DLmpQ.put(sig)
-      # record data to disc
-        if DatRec: DatRec(sig) # for data recorder
+
+      # regularly check for command input for long intervals
+        if interval > 10.:
+          brk = False
+          while not DLmpQ.empty():
+            if not cmdQ.empty():
+              brk = True
+              break
+            time.sleep(0.1)
+
+        if not brk:
+        # display data ...
+          DLmpQ.put(sig)
+        # ... and record data to disc
+          if DatRec: DatRec(sig) # for data recorder
 
    # check for control input (from keyboard or display module)
       if not cmdQ.empty():
@@ -291,3 +306,4 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     time.sleep(1.)
     stop_processes(procs)  # stop all sub-processes in list
     print('*==* ' + sys.argv[0] + ': normal end')
+    sys.exit()
