@@ -305,5 +305,5 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     DEV.closeDevice() # close down hardware device
     time.sleep(1.)
     stop_processes(procs)  # stop all sub-processes in list
-    print('*==* ' + sys.argv[0] + ': normal end')
+    print('*==* ' + sys.argv[0] + ': normal end -      press <ret>')
     sys.exit()
