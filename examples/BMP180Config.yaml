@@ -1,0 +1,5 @@
+# example config for BMP180 temperature and pressure sensor
+
+DAQModule: BMP180Config
+
+

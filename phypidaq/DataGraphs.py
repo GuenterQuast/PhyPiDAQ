@@ -19,6 +19,12 @@ class DataGraphs(object):
     self.dT = ConfDict['Interval'] 
     self.NChan = ConfDict['NChannels']
     self.ChanLim = ConfDict['ChanLimits']
+ 
+    if 'Title' in ConfDict:
+     self.Title = ConfDict['Title']
+    else:
+     self.Title= 'Voltmeter'
+
     if 'ChanNams' in ConfDict: 
       self.ChanNams = ConfDict['ChanNams']
     else:
@@ -141,7 +147,7 @@ class DataGraphs(object):
     axtxt.set_frame_on(False)
     axtxt.get_xaxis().set_visible(False)
     axtxt.get_yaxis().set_visible(False)
-    axtxt.set_title('Voltmeter', size='xx-large')
+    axtxt.set_title(self.Title, size='xx-large')
 
   # XY display
     if self.XYmode:
@@ -187,7 +193,7 @@ class DataGraphs(object):
       self.graphs += (g,)
 
   # Voltage in Text form
-    self.animtxt = self.axtxt.text(0.01, 0.025 , ' ',
+    self.animtxt = self.axtxt.text(0.01, 0.025 , ' ', size='large',
               transform=self.axtxt.transAxes,
               color='darkblue')
   
@@ -222,10 +228,14 @@ class DataGraphs(object):
           if self.XYmode and i>0:
             self.XYgraphs[i-1].set_data(self.d[0], self.d[i]) 
     # update text display
-          endl = ''
-          if i%2: endl = '\n'
-          txt += '  %s:   %.3g %s'% (self.ChanNams[i], self.Vhist[i,k], 
-            self.ChanUnits[i]) + endl 
+          if i%2:
+            bgn = '  ' 
+            end = '\n'
+          else:
+            bgn = ''
+            end = ''          
+          txt += bgn + '%s: % #.3g%s'% (self.ChanNams[i], self.Vhist[i,k], 
+            self.ChanUnits[i]) + end 
     # update bar chart
           self.bgraphs[i].set_height(dat[i])
           self.animtxt.set_text(txt)

@@ -1,0 +1,27 @@
+# configuration for PhyPiDAQ 
+#  Temperature and Air Pressure logging with BMP180
+
+# device configuration files 
+#DeviceFile: MCP3008Config.yaml  
+#DeviceFile: PSConfig.yaml         
+#DeviceFile: MAX31865Config.yaml 
+#DeviceFile: GPIOCount.yaml	
+DeviceFile: BMP180Config.yaml  
+
+#DisplayModule: DataLogger
+DisplayModule: DataGraphs
+
+Interval: 120.                    # logging interval         
+ChanLabels: [Temperature, Pressure] # names and units for channels 
+ChanLimits: [[0.,30.],[985.,1015.]]
+ChanUnits: ['°C','hPa']
+ChanColors: [darkblue, aquamarine] # channel colours in display
+XYmode:     false                  # enable XY-display
+
+# overwrite Channel Limits of Device 
+##ChanLimits: 
+## - [0., 1.]
+## - [0., 1.]
+
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 

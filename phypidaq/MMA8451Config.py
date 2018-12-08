@@ -14,15 +14,30 @@ class MMA8451Config(object):
           
 # -- number of Channels
     self.NChannels = 3
-    self.ChanLims = [[-20., 20.],[-20., 20.], [-20., 20.]]
     self.ChanNams = ['x','y','z']
     self.ChanUnits= ['m/s²','m/s²', 'm/s²']
 
+    if 'Range' in confdict:
+     self.range = confdict['Range']
+    else:
+     self.range = '2G'
+    if self.range == '2G':
+      r = 2
+    elif self.range == '4G':
+      r = 4
+    elif self.range == '8G':
+      r = 8
+    else:
+      # invalid range, set to 2
+      self.range ='2G'
+      r = 2     
+      print("MMA8451: invalid range - set to 2G")
+
+    self.ChanLims = [[-r*10., r*10.],[-r*10., r*10.], [-r*10., r*10.]]
 
   def init(self):
-
     try:
-      self.sensor = MMA8451()
+      self.sensor = MMA8451(self.range)
     except Exception as e:      
       print("MMA8451: Error setting up device - exit")
       print(str(e))
@@ -35,7 +50,6 @@ class MMA8451Config(object):
       sys.exit(1)
       
   def acquireData(self, buf):
-
     buf[0],buf[1], buf[2] = self.sensor.getAxisValue()
 
   def closeDevice(self):
@@ -310,7 +324,7 @@ class MMA8451():
     raspiBus = -1               # The Raspberry Pi Bus (dpends on hardware model)
     raspiInfo = ""              # Raspberry Pi Info
 
-    def __init__(self):
+    def __init__(self, range='4G'):
 
         #
         # Setup RPI specific bus
@@ -326,7 +340,17 @@ class MMA8451():
         self.b = smbus.SMBus(myBus)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)
         self.a = i2caddr
         self.high_res_mode = OVERSAMPLING_MODE
-        self.sensor_range = RANGE_4_G
+
+        # Set up sensor resolution
+        if range == '2G':
+          self.sensor_range = RANGE_2_G
+          self.flag_range = FLAG_XYZ_DATA_BIT_FS_2G
+        elif range == '8G':
+          self.sensor_range = RANGE_8_G
+          self.flag_range = FLAG_XYZ_DATA_BIT_FS_8G
+        else:
+          self.sensor_range = RANGE_4_G
+          self.flag_range = FLAG_XYZ_DATA_BIT_FS_4G
         self.raspiInfo = GPIO.RPI_INFO
 
 
@@ -340,7 +364,7 @@ class MMA8451():
         self.writeRegister(REG_CTRL_REG1, self.readRegister(REG_CTRL_REG1) & ~FLAG_ACTIVE)  # Put the device in Standby
         self.writeRegister(REG_CTRL_REG1, self.readRegister(REG_CTRL_REG1) & ~FLAG_F_READ)  # No Fast-Read (14-bits), Fast-Read (8-Bits)
         self.writeRegister(REG_CTRL_REG1, self.readRegister(REG_CTRL_REG1) | FLAG_ODR_50_HZ)  # Data Rate
-        self.writeRegister(REG_XYZ_DATA_CFG, self.readRegister(REG_XYZ_DATA_CFG) | FLAG_XYZ_DATA_BIT_FS_4G)  # Full Scale Range 2g, 4g or 8g
+        self.writeRegister(REG_XYZ_DATA_CFG, self.readRegister(REG_XYZ_DATA_CFG) | self.flag_range) # Range 2g, 4g or 8g
         self.writeRegister(REG_CTRL_REG1, self.readRegister(REG_CTRL_REG1) | FLAG_LNOISE)  # Low Noise
         self.writeRegister(REG_CTRL_REG2, self.readRegister(REG_CTRL_REG2) & ~FLAG_SLPE)  # No Auto-Sleep
         self.writeRegister(REG_CTRL_REG2, self.readRegister(REG_CTRL_REG2) | FLAG_SMODS_HR)  # High Resolution
