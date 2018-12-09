@@ -33,12 +33,12 @@ class PSConfig(object):
                         CRanges[i]-COffsets[i]) )
 # RMS or mean of samples ?
     self.AvModes = self.NChannels * [0]
-    if self.confdict['ChanAverages']:
+    if 'ChanAverages' in self.confdict:
       ChanAvs = self.confdict['ChanAverages']
       if type(ChanAvs) is not type([]): ChanAvs = [ChanAvs]      
-      for i,m in enumerate(ChanAvs):
+      for i, m in enumerate(ChanAvs):
         if m == 'rms': self.AvModes[i] = 1
-      print('Channel %i: averaging mode= %s'%(i,m))
+        print('Channel %i: averaging mode= %s'%(i,m))
          
 # data buffer for PicoScope driver
     self.NSamples = self.PS.NSamples

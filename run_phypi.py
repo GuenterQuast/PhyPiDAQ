@@ -101,8 +101,8 @@ def setup():
 # read Device configuration(s) and instantiate device handler(s)
   if 'DeviceFile' in PhyPiConfDict:
     DevFiles = PhyPiConfDict['DeviceFile']
-  elif "DAQModule" in phypiConfD: 
-    DevFiles = phypiConfD["DAQModule"] + '.yaml' 
+  elif "DAQModule" in PhyPiConfDict: 
+    DevFiles = PhyPiConfDict["DAQModule"] + '.yaml' 
   else:
     DevFiles = 'ADS1115Config.yaml'
     print("Configuring for ADC ADS1115")
