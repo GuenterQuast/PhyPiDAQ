@@ -11,7 +11,7 @@ PSmodel: '2000a'     # PS model 2x0xB
 picoChannels: [A]
 ChanRanges: [0.05]
 ChanModes: [AC]
-ChanOffsets: [-0.049] # !!! not for A series
+##ChanOffsets: [-0.049] # !!! not wanted here, and not possible for A series
 
 sampleTime: 2.0E-02
 Nsamples: 200

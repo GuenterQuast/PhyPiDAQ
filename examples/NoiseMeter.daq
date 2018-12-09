@@ -15,8 +15,8 @@ ChanColors: [darkblue, sienna]    # channel colours in display
 XYmode:     false                 # enable XY-display
 
 # overwrite Channel Limits of Device 
-##ChanLimits: 
-## - [0., 1.]
+ChanLimits: 
+ - [0., 0.035]  # scope at 50mV, eff. Voltage is smaller
 ## - [0., 1.]
 
 DataFile:   null                  # file name for output file 
