@@ -351,6 +351,9 @@ Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angep
     Konfigurationsdatei für *run_pyhpi.py*; nutzt den Sensor BMB180 zur Anzeige von Temperatur und Luftdruck air
 - ``examples\Accelerometer.daq``
     Konfigurationsdatei für *run_phypi.py*; nutzt den Sensor MMA8451 zur Anzeige der  x-, y- and z-Komponente der Beschleunigung.
+- ``examples\NoiseMeter.daq``
+    Konfigurationsdatei für *run_phypy.py* zur Messung der Lautstärke mit einem an ein PicoScope
+    USB-Osziloskop angeschlossenen Mikrofon; angezeigt werden die Effektivwerte von 200  in einem Zeitraum von 20 ms aufgezeichneten Messungen der Schallamplitude.
 
 
 ### Dokumentation

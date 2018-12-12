@@ -339,6 +339,11 @@ right-clicking the icon and use the dialog "Properties".
     configuration file for *run_pyhpi.py*; uses BMB180 and displays temperature and air pressure
 - ``examples\Accelerometer.daq``
     configuration file for *run_phypy.py*; uses MMA8451 to display x-, y- and z-acceleration
+- ``examples\NoiseMeter.daq``
+    configuration file for *run_phypy.py* to measure noise with a microphone connected to PicoScope
+    USB oscilloscope; displays the *rms* of 200 samples taken over a time periods of 20 ms 
+
+<div style="page-break-after: always;"></div>
 
 <div style="page-break-after: always;"></div>
 
