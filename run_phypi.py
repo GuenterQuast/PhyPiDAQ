@@ -280,7 +280,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
         cmd = cmdQ.get()
         if cmd == 'E':
           #DGmpQ.put(None)       # send empty "end" event
-          print('\n' + sys.argv[0] + ': End command recieved - closing down')
+          print('\n' + sys.argv[0] + ': End command received - closing down')
           ACTIVE = False
           break
         elif cmd == 'P':
@@ -299,6 +299,9 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     DAQ_ACTIVE = False     
     ACTIVE = False
     print('\n' + sys.argv[0]+': keyboard interrupt - closing down ...')
+
+  except Exception as e:
+    print("got Exception %s \n closing down"(str(e)) )
 
   finally:
     if DatRec: DatRec.close()

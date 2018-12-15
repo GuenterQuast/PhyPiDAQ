@@ -144,7 +144,7 @@ class MCP3x08(object):
         elif( bits == 12):
           self.parseMCPResponse = self.parse12bit
         else:
-          print(' !!! MCP3x00: %i bits not supported'%(bits) )
+          print(' !!! MCP3x08: %i bits not supported'%(bits) )
 
      
     def read_adc(self, adc_number):
@@ -160,7 +160,7 @@ class MCP3x08(object):
         # extra clock to do the conversion, and the low null bit returned at
         # the start of the response.
         resp = self._spi.transfer([command, 0x0, 0x0])
-        return self.parseMPCResponse(resp)
+        return self.parseMCPResponse(resp)
 
     def read_adc_difference(self, differential):
         """Read the difference between two channels.  Differential should be a
@@ -182,7 +182,7 @@ class MCP3x08(object):
         # extra clock to do the conversion, and the low null bit returned at
         # the start of the response.
         resp = self._spi.transfer([command, 0x0, 0x0])
-        return self.parseMPCResponse(resp)
+        return self.parseMCPResponse(resp)
 
     def parse10bit(self, r):
             # Parse out the 10 bits of response data and return it.

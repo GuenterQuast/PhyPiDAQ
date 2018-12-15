@@ -1,6 +1,6 @@
 # example of a configuration file for ADC MCP3008
 
-DAQModule: MCP3008Config  
+DAQModule: MCP3x08Config  
 
 ADCChannels:   [0, 1, 2, 3]   # active Channels (0 - 7)
 
