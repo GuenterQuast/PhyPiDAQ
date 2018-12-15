@@ -199,10 +199,10 @@ def apply_calibs():
 
 def apply_formulae():
   global sig
-  for i in range(NChannels):
-    exec('c'+str(i) + '=sig['+str(i)+']')
   for ic in range(NChannels):
-    if Formulae[i]:
+    exec('c'+str(ic) + '=sig['+str(ic)+']')
+  for ic in range(NChannels):
+    if Formulae[ic]:
       sig[ic] = eval(Formulae[ic])
 
 if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
@@ -259,7 +259,6 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
         if CalibFuncts: apply_calibs()
       # apply fromula(e) 
         if Formulae: apply_formulae()
-
       # regularly check for command input for long intervals
         if interval > 10.:
           brk = False
