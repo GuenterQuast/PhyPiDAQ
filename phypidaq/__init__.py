@@ -25,4 +25,4 @@ __version__ += _version_suffix
 __all__ = [ "helpers, mpTkDisplay", "DataLogger", "DataRecorder", "DataGraphs",
             "PSConfig", "MCP3x08Config", "ADS1115Config", "HX711Config", 
             "MAX31865Config", "GPIOCount", "DS18B20Config", "MAX31855Config",
-            "BMP180Config", "MMA8451Config"]
+            "BMP180Config", "BMP280Config", "MMA8451Config"]

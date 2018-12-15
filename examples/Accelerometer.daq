@@ -12,7 +12,7 @@ DeviceFile: MMA8451Config.yaml
 DisplayModule: DataGraphs
 Title: Accelerometer
 
-Interval: 0.05                    # logging interval         
+Interval: 0.1                    # logging interval         
 ChanLabels: [acceleration] # names and units for channels 
 #ChanLimits: [[-20., 20.],[-20., 20.],[-20., 20.]]
 ChanUnits: ['m/s²','m/s²','m/s²']
