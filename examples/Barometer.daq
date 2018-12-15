@@ -10,6 +10,7 @@ DeviceFile: BMP180Config.yaml
 
 #DisplayModule: DataLogger
 DisplayModule: DataGraphs
+Title: Temperature & Pressure
 
 Interval: 120.                    # logging interval         
 ChanLabels: [Temperature, P-1000] # names and units for channels 
