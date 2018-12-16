@@ -6,7 +6,7 @@ import numpy as np, time, sys, smbus
 
 # default addresses and ChipIDs of Bosch BMP 085/180 and BMP/E 280 sensors
 BMP_I2CADDR  = 0x77
-# BMP_I2CADDR = 0x76 # alternative device I2C address
+#BMP_I2CADDR = 0x76 # alternative device I2C address
 BMP180_CHIPID = 0x55
 BMP280_CHIPID = 0x58
 BME280_CHIPID = 0x60
@@ -17,11 +17,12 @@ REG_ID = 0xD0
 
 class BMPx80Config(object):
   '''digital thermometer DS18B20Config configuration and interface'''
-
   def __init__(self, confdict = None):
+    self.BMP_I2CADDR = BMP_I2CADDR
     if confdict==None: confdict={}
     if 'I2CADDR' in confdict:
-      BMP_I2CADDR = confdict['I2CADDR']
+      self.BMP_I2CADDR = confdict['I2CADDR']
+      print("BMPx80: I2C address set to %x "%(self.BMP_I2CADDR) )
     if 'NChannels' in confdict:
       self.NChannels = confdict["NChannels"]
     else:
@@ -43,16 +44,16 @@ class BMPx80Config(object):
 
     try:
       # find out which sensor we have:
-      (self.chipID,) = bus.read_i2c_block_data(BMP_I2CADDR, REG_ID, 1)
+      (self.chipID,) = bus.read_i2c_block_data(self.BMP_I2CADDR, REG_ID, 1)
       print("BMPx80: ChipID %x "%(self.chipID) )
     
       # now set up sensor
       if self.chipID == BMP180_CHIPID:
-        self.sensor = BMP085(address=BMP_I2CADDR, busnum=busnum, i2c_interface=smbus.SMBus)
+        self.sensor = BMP085(address=self.BMP_I2CADDR, busnum=busnum, i2c_interface=smbus.SMBus)
       elif self.chipID == BMP280_CHIPID:
-        self.sensor = BMP280(address=BMP_I2CADDR, busnum=busnum, i2c_interface=smbus.SMBus)
+        self.sensor = BMP280(address=self.BMP_I2CADDR, busnum=busnum, i2c_interface=smbus.SMBus)
       elif self.chipID == BME280_CHIPID:
-        self.sensor = BME280(address=BMP_I2CADDR, i2c = bus)
+        self.sensor = BME280(address=self.BMP_I2CADDR, i2c = bus)
       else:
        print("BMPx80: unknown chip ID - exiting")
        sys.exit(1)
