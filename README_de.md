@@ -282,9 +282,10 @@ Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angep
 - `phypidaq/DS18B20Config.py`  
     Klasse zur Handhabung des digitalen Thermometers DS18B20
 
-- ``phypidaq/BMP180Config.py`` 
+- ``phypidaq/BMPx80Config.py`` 
 
-    Klasse zur Handhabung des digitalen Temperatur- und Drucksensors BMP180
+    Klasse zur Handhabung des digitalen Temperatur- und Drucksensors BMP180/280
+    oder BME280
 
 - ``phypidaq/MMA8451Config.py`` 
 
@@ -338,7 +339,7 @@ Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angep
 - ``examples/read_18B20.py``
     minimalistisches Beispiel zur Auslese des digitalen Temperatursensors DS18B20 
 - ``examples/readBMP180/``
-    minimalistisches Beispiel zur Auslese des digitalen Tempratur- und Drucksensors BMP180
+    minimalistisches Beispiel zur Auslese des digitalen Tempratur- und Drucksensors BMP180/280
 - examples/readMMA8451/``
     minimalistisches Beispiel zur Auslese des digitalen Beschleunigungssensors MMA8451
 - `examples/runOsci.py`  
@@ -348,7 +349,7 @@ Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angep
 - `examples/FreqGen.py`  
     erzeugt Signal fester Frequenz an GPIO-Pin
 - ``examples\Barometer.daq``
-    Konfigurationsdatei für *run_pyhpi.py*; nutzt den Sensor BMB180 zur Anzeige von Temperatur und Luftdruck air
+    Konfigurationsdatei für *run_pyhpi.py*; nutzt Sensoren BMB180 der BMP280 zur Anzeige von Temperatur und Luftdruck air
 - ``examples\Accelerometer.daq``
     Konfigurationsdatei für *run_phypi.py*; nutzt den Sensor MMA8451 zur Anzeige der  x-, y- and z-Komponente der Beschleunigung.
 - ``examples\NoiseMeter.daq``

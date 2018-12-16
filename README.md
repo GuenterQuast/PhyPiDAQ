@@ -284,8 +284,9 @@ right-clicking the icon and use the dialog "Properties".
     class for handling of analog-to-digital converter ADS1115
 - `phypidaq/DS18B20Config.py`  
     class for handling of digital thermometer DS18B20
-- ``phypidaq/BMP180Config.py``  
-    class for handling the digital temperature and pressure sensor BMP180
+- ``phypidaq/BMPx80Config.py``  
+    class for handling the digital temperature and pressure sensor BMP180/280
+    or BME280
 - ``phypidaq/MMA8451Config.py``  
     class for handling the digital accelerometer MMA8451
 - `phypidaq/MCP3008Config.py`   
@@ -325,8 +326,8 @@ right-clicking the icon and use the dialog "Properties".
     very minimalist example to read one channel from an analog-to-ditigal converter
 - ``examples/read_18B20.py``s
 - simple example to read the temperature sensor DS18B20
-- ``examples/readBMP180/``
-    simple example to read the digital temperature  and pressure sensor BMP180
+- ``examples/readBMPx80/``
+    simple example to read the digital temperature  and pressure sensor BMP180/280
 - ``examples/readMMA8541/``
     simple example to read the digital accelerometer MMA8451
 - `examples/runOsci.py`  
@@ -336,7 +337,7 @@ right-clicking the icon and use the dialog "Properties".
 - `examples/FreqGen.py`  
     generate a fixed frequency signal on a GPIO pin
 - ``examples\Barometer.daq``
-    configuration file for *run_pyhpi.py*; uses BMB180 and displays temperature and air pressure
+    configuration file for *run_pyhpi.py*; uses BMB180 or BMP280 sensors to display temperature and air pressure
 - ``examples\Accelerometer.daq``
     configuration file for *run_phypy.py*; uses MMA8451 to display x-, y- and z-acceleration
 - ``examples\NoiseMeter.daq``
