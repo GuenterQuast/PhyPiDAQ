@@ -234,7 +234,7 @@ class DataGraphs(object):
           else:
             bgn = ''
             end = ''          
-          txt += bgn + '%s: % #.3g%s'% (self.ChanNams[i], self.Vhist[i,k], 
+          txt += bgn + '%s: % #.4g%s'% (self.ChanNams[i], self.Vhist[i,k], 
             self.ChanUnits[i]) + end 
     # update bar chart
           self.bgraphs[i].set_height(dat[i])

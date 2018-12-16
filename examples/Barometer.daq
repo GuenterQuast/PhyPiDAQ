@@ -13,11 +13,11 @@ DisplayModule: DataGraphs
 Title: Temperature & Pressure
 
 Interval: 120.                    # logging interval         
-ChanLabels: [Temperature, P-1000] # names and units for channels 
-ChanLimits: [[0.,30.],[-30., 30.]]
-ChanFormula:
- -  null
- -  c1 - 1000.
+ChanLabels: [Temperatur, Druck] # names and units for channels 
+ChanLimits: [[0.,30.],[970., 1030.]]
+#ChanFormula:
+# -  null
+# -  c1 - 1000.
 
 ChanUnits: ['°C','hPa']
 ChanColors: [darkblue, darkgreen]    # channel colours in display
