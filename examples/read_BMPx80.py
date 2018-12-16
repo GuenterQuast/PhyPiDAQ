@@ -9,10 +9,10 @@
 import time, numpy as np
 
 # import module controlling readout device
-from phypidaq.BMP180Config import *
+from phypidaq.BMPx80Config import *
 
 # create an instance of the device
-device = BMP180Config()
+device = BMPx80Config()
 
 # initialize the device
 device.init()
