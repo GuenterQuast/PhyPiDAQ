@@ -6,6 +6,7 @@ import numpy as np, time, sys, smbus
 
 # default addresses and ChipIDs of Bosch BMP 085/180 and BMP/E 280 sensors
 BMP_I2CADDR  = 0x77
+BMP_I2CADDR2 = 0x76
 #BMP_I2CADDR = 0x76 # alternative device I2C address
 BMP180_CHIPID = 0x55
 BMP280_CHIPID = 0x58
@@ -43,11 +44,17 @@ class BMPx80Config(object):
        sys.exit(1)
 
     try:
+      try:
       # find out which sensor we have:
-      (self.chipID,) = bus.read_i2c_block_data(self.BMP_I2CADDR, REG_ID, 1)
+        (self.chipID,) = bus.read_i2c_block_data(self.BMP_I2CADDR, REG_ID, 1)
+      except:
+      # try secondary address (BMP280)
+        print("BMPx80: trying secondary address %x "%(BMP_I2CADDR2) )
+        (self.chipID,) = bus.read_i2c_block_data(BMP_I2CADDR2, REG_ID, 1)
+        self.BMP_I2CADDR = BMP_I2CADDR2
+
+      # set up sensor
       print("BMPx80: ChipID %x "%(self.chipID) )
-    
-      # now set up sensor
       if self.chipID == BMP180_CHIPID:
         self.sensor = BMP085(address=self.BMP_I2CADDR, busnum=busnum, i2c_interface=smbus.SMBus)
       elif self.chipID == BMP280_CHIPID:
