@@ -11,6 +11,9 @@ Das Paket bietet eine Abstraktionsschicht für Messgeräte und Sensoren, die an 
  *Abb. 1*:  Darstellung der Zeitabhängigkeit von zwei Signalquellen an einem AD-Wandler  
  ![Figure 1](doc/Kondensator.png)
 
+Die Beschreibung des zu Grunde liegenden Konzepts, eine Liste der empfohlenen Komponenten und ausführlich  dokumentierte Beispiele finden sich in der [Masterarbeit von Moritz Aupperle](http://ekp-invenio.physik.uni-karlsruhe.de/record/49063) .
+
+
 
 ## Schnellstart
 
