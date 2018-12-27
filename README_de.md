@@ -260,6 +260,230 @@ sudo mv ~/git/PhyPiDAQ /usr/local/
 
 Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angepasst werden. Dies wird am einfachsten durch Klicken mit der rechten Maustaste auf das *phypi*-Symbol erreicht. Im sich dann öffnenden Menu den Dialog "Eigenschaften" wählen und alle Pfade von  *~/git/*  ->  */usr/local/* ändern.
 
+
+
+## Experimente und Messungen mit PhyPiDAQ
+
+Die hier bereit gestellte Software soll es sowohl Lernenden als auch Lehrenden ermöglichen, typische Messaufgaben im Physikunterricht durchzuführen. Dank der Realisierung mit Sensoren, die auch in Alltagsgeräten eingesetzt werden, und dem Raspberry Pi als Datennahme-Rechner können kostengünstige Einführungssets für Schülerversuche bereit gestellt werden.  
+
+Ein Vorschlag von Komponenten zur Grundausstattung wird in der Datei *Komponenten_fuer_PhyPi.pdf* beschreiben.  Die zum Umgang damit notwendigen Grundkenntnisse werden in einem Einführungskurs erarbeitet, der in der Datei *Kurs_digitale_Messwerterfasseung_mit_PhyPiDAQ.pdf* beschreiben ist. Zum Verständnis unumgänglich sind einige Grundkenntnisse in der Sprache *python* und die Vorgehensweise zum Ansprechen der GPIO-Pins des Raspberry Pi.  Es folgt eine Einführung in die Analog-Digital-Wandlung und die Verwendung des Wandlerbausteins ADS1115. Am Ende steht die Kalibration und Verwendung eines NTC-Widerstands als Temperatursensor. Die letzte Stufe des Einführungskurses bildet ein mit einer Wägezelle und einem Instrumentenverstärker realisierter Kraftsensor. 
+
+Um das Erstellen von eigenem Code für jede Messaufgabe zu vermeiden, liefert das Paket *PhyPiDAQ* eine einheitliche Programmierschnittstelle, die verschiedene Sensoren unterstützt und Standard-Anzeigen für die Datenaufnahme bereit stellt. 
+
+**Auslese eines Analog-Digitalwandlers**
+
+Ein einfaches Beispiel zur Auslese des Digital-Analog-Wandlers *ADS1115* illustriert die Anwendung:
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+'''read_analog.py
+     this script illustrates the general usage of package phypidaq
+     pirints data read from an analog channel
+'''
+import time, numpy as np
+# import module controlling readout device
+from phypidaq.ADS1115Config import *
+# create an instance of the device
+device = ADS1115Config()
+# initialize the device
+device.init()
+# reserve space for data (here only one channel)
+dat = np.array([0.]) 
+# read-out interval in s
+dt = 1.
+# start time
+T0 = time.time()
+
+print(' starting readout,     type <ctrl-C> to stop')
+# readout loop, stop with <crtl>-C
+while True:
+  device.acquireData(dat)
+  dT = time.time() - T0 
+  print('%.2g, %.4g' %(dT, dat) )
+  time.sleep(dt)
+```
+
+Werden andere Bausteine zur Dateneingabe verwendet, wie zum Beispiel der Analog-Digital-Wandler *MCP3208*, der digitale Temperatursensor *18B20*, der Temperatur- und Drucksensor *BMP180* oder der Beschleunigungssensor *MMA8451*, so müssen nur zwei Zeilen am Anfang des Scrips angepasst werden 
+
+``` python
+from phypidaq.<sensor> import *
+device = <sensor>
+```
+
+
+
+**Datenaufnamhe mit _run_phypi_**
+
+Das Script *run_phypi* stellt eine sehr allgemein und weitgehend konfigurierbare Auslese und Anzeige von Sensordaten bereit. Die Konfigurationsdateien im Dateiformat *.daq* enthalten dabei die notwendigen Informationen zum verwendeten Sensor, zu den Anzeigeoptionen als Echtzeitanzeige, Verlaufsdiagramm oder xy-Darstellung sowie zur Kalibration oder Umrechnung von Sensordaten. Ein allgemeines Beispiel einer solchen Hauptkonfigurationsdatei wurde bereits oben vorgestellt. Mit entsprechend vorbereiteten Konfigurationsdateien lassen sich sehr flexibel die für bestimmte Experimente notwendigen Messungen und Anzeigen vorbereiten und durchführen.  Im  Verzeichnis *examples/* sind einige konkrete Beispiele enthalten.
+
+**Barometer**
+
+Zur Messung und Aufzeichnung von Temperatur und Luftdruck mit einem *BMP180* -Sensor müssen nur vier Leitungen vom Sensor (+3,3V, Masse und die Signale SDA und SCL des I²C-Busees) an den Raspberry Pi angeschlossen werden.  Als Beispiel ist hier die Konfigurationsdatei *Barometer-daq* gezeigt:
+
+```yaml
+# Konfiguratinsdatei Barometer.daq für PhyPiDAQ 
+#  Temperatur und Luftdruck mit BMP180
+
+DeviceFile: BMP180Config.yaml  
+
+DisplayModule: DataGraphs
+Title: Temperatur & Luftdruck
+
+ChanLabels: [Temperatur, Druck]        # Namen der Messgrößen 
+ChanLimits: [[0.,30.],[970., 1030.]]   # Wertebereich
+ChanUnits: ['°C','hPa']                # Einheiten
+ChanColors: [darkblue, darkgreen]      # Farben in der Anzeige
+
+Interval: 120.         # Intervall für Datenaufnahme und Anzeige (in s)         
+```
+
+
+
+**Gleichzeitige Darstellung mehrerer LED-Kennlinien**
+
+Etwas aufwändiger ist die simultane Darstellung mehrerer Diodenkennlinien mit einem Analog-Digital-Wandler. Dazu werden die Dioden mit jeweils einem Vorwiderstand versehen parallel an eine variable Versorgungsspannung angeschlossen, die mit Hilfe eines Potentiometers aus der Betriebsspannung von 5 V des Raspberry Pi erzeugt werden kann. Gemessen werden auf Kanal 0 des ADS1115 die Versorgungsspannung sowie die Spannungen über den Dioden auf den Kanälen 1-3.  Der Strom durch jede der Dioden wird aus dem Spannungsabfall über dem jeweiligen (bekannten) Vorwiderstand bestimmt. Dies ist dank der Möglichkeit, Formeln auf die Eingangsspannungen  anzuwenden,  leicht mit PhyPiDAQ realisierbar. 
+
+```yaml
+# Konfiguration Diodenkennlinie.daq für PhyPiDAQ
+
+DeviceFile: ADS1115_Diode.yaml      # definiert 4 aktive Kanäle mit Verstärkung 1
+
+# Anwenden von Umrechnungsformeln auf die Eingangskanäle
+# aus den Messgrößen an den Kanälen c0 und c1-c3 werden 6 Werte berechnet
+ChanFormula:
+ - c1                  #  U Diode c1
+ - (c0 - c1) / 0.120   #  I Diode c1
+ - c2                  #  U Diode c2
+ - (c0 - c2) / 0.120   #  I Diode c2
+ - c3                  #  U Diode c3
+ - (c0 - c3) / 0.120   #  I Diode c3
+
+# Namen, Messgrößen und Einheiten für die sechs Ausgabewerte
+ChanNams: ['F0', 'F1', 'F2', 'F3', 'F4', 'F5'] # Namen der Kanäle
+ChanLabels: [U, I, U, I, U, I]      # Messgrößen
+ChanUnits: [V, mA, V, mA, V, mA]    # Einheiten 
+ChanColors: [black, red, black, green, black, blue] # Anzeigefarben
+ChanLimits:          # Wertebereiche
+ - [0., 3.1]   # U D1
+ - [0., 30.]   # I D1
+ - [0., 3.1]   # U D2
+ - [0., 30.]   # I D2
+ - [0., 3.1]   # U D3
+ - [0., 30.]   # I D3
+
+DisplayModule: DataLogger
+Interval: 0.1                   # Anzeige-Interval         
+XYmode:   true                  # XY-Darstellung
+xyPlots:   # Paare von Kanälen als xy-Grafik 
+ - [0,1]     # U0 - I0
+ - [2,3]     # U1 - I1
+ - [4,5]     # U2 - I2
+```
+
+
+
+**Datenaufnahme mittels USB-Oszilloskop**
+
+Digitaloszilloskope mit USB-Anschluss sind außer für die reine Anzeige von Signalen auch sehr flexibel einsetzbare Datenaufnahme-Systeme. `PhyPiDAQ` unterstützt USB-Oszilloskope der aus PicoScope-Reihe der Firma PicoTech, für die es eine gut dokumentierte Schnittstelle für Anwendungsprogramme  gibt. Die Installation der notwendigen Bibliotheken wurde weiter oben beschrieben und findet sich auch in der Datei *doc/Einrichten_des_Raspberry_pi.pdf*. Die preisgünstigste Variante mit einer Bandbreite von 10 MHz gibt es im Handel bereits für ca. 100,-€; empfehlenswert für praktisch alle Anwendungen im Physikunterricht ist die 50 MHz-Variante, mit der auch kurze Signale von Einzelphotondetektoren dargestellt werden können.
+
+Setzt man das Oszilloskop als Datenlogger ein, so werden viele Messwerte über eine kurze Zeit von wenigen Millisekunden aufgezeichnet und entweder der Mittelwert (bei langsam veränderlichen Signalen) oder der Effektivwert (bei Wechselspannungen) als Datenpunkte übergeben. Die Realisierung einer Lautstärkemessung illustriert die Datei *NoiseMeter.daq*:
+
+```yaml
+# Konfiguration NoiseMeter.daq für PhyPiDAQ 
+#   Ausgabe des Effektivwerts eines Schallsignals
+
+# Konfiguration des Oszilloskops
+DeviceFile: PSConfig_sound.yaml       # PS2000B -Typen  
+#DeviceFile: PSConfig2000A_sound.yaml  # PS2000A - Typ
+
+#DisplayModule: DataLogger
+DisplayModule: DataGraphs
+Title: Noisemeter
+Interval: 0.05                    # logging interval
+
+ChanLabels: [U_eff]               # Messgröße
+ChanUnits: [V]                 # Einheit 
+ChanColors: [darkblue]    # Farbe
+ChanLimits: 
+ - [0., 0.035]  # scope at 50mV, eff. Voltage is smaller
+## - [0., 1.]
+
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 
+```
+
+
+Ein Blick in die Konfiguration des Oszilloskops ist an dieser Stelle hilfreich.  Benötigt werden die für ein Oszilloskop notwendigen Informationen wie Kanalwahl, Messbereich, AC- oder DC-Kopplung, Zeitbasis und Triggereinstellung. Die in der Konfigurationsdatei *NoiseMeter.daq* spezifizierte Datei *PSConfig_sound.yaml* sieht wie folgt aus: 
+
+```yaml
+# Konfiguration eines PicoScope 2000
+
+DAQModule: PSConfig
+
+#PSmodel: '2000'      # PS model 220xA
+PSmodel: '2000a'     # PS model 2y0xB
+
+# channel configuration 
+picoChannels: [A]     # Kanals A
+ChanRanges: [0.05]    # +/- 50 mV
+ChanModes: [AC]       # AC-Kopplung
+
+sampleTime: 2.0E-02   # 20 ms Datenaufnahme
+Nsamples: 200         #  mit 200 Messpunkten
+
+# trigger
+trgActive: false  # ohne Triger
+trgChan: A   # 
+trgThr: 0.
+trgTyp: Rising
+trgTO: 4  # set short time-out for A series
+          # vlaues < 4 lead to readout instabilities 
+
+# frqSG: 100.E+3 # put 0. do disable
+frqSG: 0. # Signalgenerator aus 
+
+# spezielle Option für PhyPiDAQ
+ChanAverages: ['rms'] # ['mean'] für Mittelwert oder ['rms'] für Effektivwert
+
+```
+
+Analog zu einem Mikrofon lässt sich auch ein Geophon, z.B. das SM-24, anschließen, um einen Erschütterungs- oder Erdbebendetektor zu realisieren. 
+
+Verwendet man statt der Option *ChanAverages: ['rms']* die Option *ChanAverages: ['mean']* (letzteres ist die Voreinstellung), so ergibt sich ein sehr flexibler Datenlogger mit der vollen Flexibilität eines Oszilloskops, also in weiten Bereichen konfigurierbare Messbereiche auch für negative Spannungen und Überspannungsfestigkeit. Mittelt man Messwerte über 20 ms (wie oben in der Konfigurationsdatei voreingestellt), so werden Störungen durch die Frequenz von 50Hz des Stromnetzes herausgemittelt und man erhält sehr saubere Messwerte.
+
+ **Test der Oszilloskop-Funktion**
+
+Leider läuft die Oszilloskop-Software der Firma PicoTech (noch) nicht auf der Raspberry Pi. Als Test der Funktonalität eines PicoScopes gibt es daher das _python_-Script *examples/runOsci.py*, das eine Oszillografenanzeige darstellt. Das Script verwendet Funktionalität aus dem Paket *picoDAQ*  und stellt bis auf fehlende interatkive Einstellmöglichkeiten ein vollwertiges Oszlloskop für den Raspberry Pi bereit.  Die notwendigen Einstellungen finden sich in der Steuerdatei *PSOsci.yaml*, die genau so aufgebaut ist wie das Beispiel oben:
+
+```yaml
+# Konfiguration für PicoScope
+picoChannels:     [A, B]     # Kanäle A und B aktiv
+ChanModes:        [AC, AC]   #  mit AC-Kopplung
+ChanRanges:       [0.5, 0.5] # Messbereich +/- 0.5 V
+ChanColors:       [darkblue, sienna]
+
+sampleTime: 40.E-3   # 40 ms
+Nsamples: 400        # 400 Samples, d.h. 1 Datenpunkt alle 10 µs
+
+trgChan: A         # Trigger-Kanal A
+trgThr: 0.05       # Triggerschwelle 0.050 V
+trgTyp: Above      # Above, Below, Rising, Falling ....
+trgTO: 500         # 500 ms Timeout
+trgActive: true    # Trigger aktiv
+trgDelay:  0       # keine Triggerverögerung
+pretrig: 0.05      # 5% der Daten vor Triggerzeitpunkt anzeigen
+
+#frqSG: 10.E+3 # Frequenz des Signalgenerators in Hz
+frqSG: 0.0    # Signalgenerator aus
+```
+
+Zum Test reicht ein offenes Kabelende am Eingangskabel zu Kanal A, über das 50Hz-Einstreuungen
+aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe von Schaltnetzteilen, z. B. dem Steckernetzteil des Raspberry Pi. 
+
+
+
 ## Übersicht über Dateien im Paket PhyPiDAQ 
 
 ### Programme 
@@ -351,6 +575,8 @@ Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angep
     erzeugt ein zufälliges Signal an GPIO-Pin gemäß Poisson-Prozess 
 - `examples/FreqGen.py`  
     erzeugt Signal fester Frequenz an GPIO-Pin
+- `examples/DiodenKennlinie.daq`
+    simultane Messung und Darstellung von drei Diodenkennlinen mit einem ADS1115 Digital-Analog-Wandler
 - ``examples\Barometer.daq``
     Konfigurationsdatei für *run_pyhpi.py*; nutzt Sensoren BMB180 der BMP280 zur Anzeige von Temperatur und Luftdruck air
 - ``examples\Accelerometer.daq``

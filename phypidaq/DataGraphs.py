@@ -19,40 +19,41 @@ class DataGraphs(object):
     self.dT = ConfDict['Interval'] 
     self.NChan = ConfDict['NChannels']
     self.ChanLim = ConfDict['ChanLimits']
- 
+    
     if 'Title' in ConfDict:
      self.Title = ConfDict['Title']
     else:
      self.Title= 'Voltmeter'
 
-    if 'ChanNams' in ConfDict: 
-      self.ChanNams = ConfDict['ChanNams']
-    else:
-      self.ChanNams = [''] * self.NChan 
-
+    Nc = self.NChan
+    self.ChanNams = [''] * Nc
+    if 'ChanNams' in ConfDict:
+      v = ConfDict['ChanNams']
+      self.ChanNams[ 0 : min(len(v),Nc)] = v[0 : min(len(v),Nc)]
+      
     ColorList=['C1','C2','C3','C4','C5','C6','C7','C8','C9','C10','C11','C12'] 
     if 'ChanColors' in ConfDict:
       self.ChanColors = ConfDict['ChanColors']
-      if len(self.ChanColors) < self.NChan:
-        self.ChanColors += ColorList[0: self.NChan - len(self.ChanColors)]
+      if len(self.ChanColors) < Nc:
+        self.ChanColors += ColorList[0: Nc - len(self.ChanColors)]
     else:
-      self.ChanColors = ['darkblue','sienna'] + ColorList[0 : self.NChan]
+      self.ChanColors = ['darkblue','sienna'] + ColorList[0 : Nc]
 
+    self.ChanLabels = [''] * Nc
     if 'ChanLabels' in ConfDict:
-      self.ChanLabels = ConfDict['ChanLabels']
-    else:
-      self.ChanLabels = [''] * self.NChan
+      v = ConfDict['ChanLabels']
+      self.ChanLabels[0: min(len(v),Nc)] = v[0: min(len(v),Nc)] 
 
+    self.ChanUnits = [''] * Nc
     if 'ChanUnits' in ConfDict:
-      self.ChanUnits = ConfDict['ChanUnits']
-    else:
-      self.ChanUnits = [''] * self.NChan
+      v = ConfDict['ChanUnits']
+      self.ChanUnits[0: min(len(v),Nc)] = v[0:min(len(v),Nc)]
 
     if 'XYmode' in ConfDict:
       self.XYmode = ConfDict['XYmode']
     else:
       self.XYmode = False
-    if self.NChan < 2: 
+    if Nc < 2: 
       self.XYmode = False
 
 # assign Channels to Axes
@@ -61,7 +62,7 @@ class DataGraphs(object):
       self.Chan2Axes = ConfDict['Chan2Axes']
     else:
     # default: 0 -> ax0, >0 -> ax2 
-      self.Chan2Axes = [0] + [self.NAxes-1] * (self.NChan - 1)
+      self.Chan2Axes = [0] + [self.NAxes-1] * (Nc - 1)
     self.Cidx0 = self.Chan2Axes.index(0)  # 1st Channel axis0
     try:
       self.Cidx1 = self.Chan2Axes.index(1)    # 1st Channel axis1
@@ -75,14 +76,21 @@ class DataGraphs(object):
     self.AxisLabels = [self.ChanLabels[self.Cidx0] + cu0, 
                        self.ChanLabels[self.Cidx1] + cu1 ]
 
+    # define xy plots
+    if 'xyPlots' in ConfDict:
+      self.xyPlots = ConfDict['xyPlots']
+    else:
+      # plot chan1 vs. chan0, chan2 vs. chan0, ..., last chan vs cha0
+      self.xyPlots = [ [0,i] for i in range(1,Nc)]
+    
 # config data needed throughout the class
     self.Npoints = 120  # number of points for history
     self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
     self.bwidth = 0.5   # width of bars
-    self.ind = self.bwidth + np.arange(self.NChan) # bar position
+    self.ind = self.bwidth + np.arange(Nc) # bar position
   # 
-    self.Vhist = np.zeros( [self.NChan, self.Npoints] )
-    self.d = np.zeros( [self.NChan, self.Npoints] ) 
+    self.Vhist = np.zeros( [Nc, self.Npoints] )
+    self.d = np.zeros( [Nc, self.Npoints] ) 
 
 # set up a figure to plot voltage(s)
     if self.XYmode:
@@ -106,7 +114,7 @@ class DataGraphs(object):
     for i in range(self.NAxes):
       Cidx = self.Chan2Axes.index(i)
       axes[i].set_ylim(*self.ChanLim[Cidx])
-      axes[i].set_ylabel('Chan ' + self.ChanNams[Cidx] + ' ' + self.AxisLabels[i],
+      axes[i].set_ylabel(self.ChanNams[Cidx] + ' ' + self.AxisLabels[i],
                            color=self.ChanColors[Cidx])
       axes[i].grid(True, color=self.ChanColors[Cidx], linestyle = '--', alpha=0.3)
     axes[0].set_xlabel('History (s)', size='x-large')
@@ -121,7 +129,7 @@ class DataGraphs(object):
     axbar.append(axes[-1])
     axbar[0].set_frame_on(False)
     axbar[0].get_xaxis().set_visible(False)
-    axbar[0].set_xlim(0., self.NChan)
+    axbar[0].set_xlim(0., Nc)
     axbar[0].axvline(0, color = self.ChanColors[0])
     axbar[0].set_ylim(*self.ChanLim[0])
     axbar[0].axhline(0., color='k', linestyle='-', lw=2, alpha=0.5)
@@ -132,7 +140,7 @@ class DataGraphs(object):
       axbar.append(axbar[0].twinx() )
       axbar[1].set_frame_on(False)
       Cidx = self.Chan2Axes.index(1)
-      axbar[1].axvline(self.NChan, color = self.ChanColors[1])
+      axbar[1].axvline(Nc, color = self.ChanColors[1])
       axbar[1].set_ylim(*self.ChanLim[Cidx])
       axbar[1].set_ylabel(self.ChanNams[Cidx] + ' ' + self.AxisLabels[1],
                           size='x-large', color = self.ChanColors[Cidx])
@@ -153,12 +161,16 @@ class DataGraphs(object):
     if self.XYmode:
       axes.append(plt.subplot2grid((6,5),(0,2), rowspan=6, colspan=3) )
       axXY = axes[-1]
-      axXY.set_xlim(*self.ChanLim[self.Cidx0])
-      axXY.set_ylim(*self.ChanLim[self.Cidx1])
-      axXY.set_xlabel('Chan ' + self.ChanNams[self.Cidx0] + ' ' + self.AxisLabels[0], 
-         size='x-large', color=self.ChanColors[self.Cidx0])
-      axXY.set_ylabel('Chan ' + self.ChanNams[self.Cidx1] + ' ' + self.AxisLabels[1], 
-         size='x-large', color=self.ChanColors[self.Cidx1])
+      cx = self.xyPlots[0][0]
+      cy = self.xyPlots[0][1]
+      axXY.set_xlim(*self.ChanLim[cx])
+      axXY.set_ylim(*self.ChanLim[cy])
+      cux = ' (' + self.ChanUnits[cx]+')'
+      cuy = ' (' + self.ChanUnits[cy]+')'
+      axXY.set_xlabel(self.ChanNams[cx] + ' ' + self.ChanLabels[cx] + cux, 
+                      size='x-large', color=self.ChanColors[cx])
+      axXY.set_ylabel(self.ChanNams[cy] + ' ' + self.ChanLabels[cy] + cuy, 
+                      size='x-large', color=self.ChanColors[cy])
       axXY.set_title('XY-View', size='xx-large')
       axXY.grid(True, color='grey', linestyle = '--', alpha=0.3)
     else:
@@ -200,8 +212,9 @@ class DataGraphs(object):
     self.XYgraphs = ()
     if self.XYmode:
       # plot XY-graph(s)
-      for i in range(1, self.NChan):
-        XYg, = self.axes[-1].plot( [0.], [0.], color=self.ChanColors[i] )
+      for i in range(len(self.xyPlots)):
+        cy = self.xyPlots[i][1]
+        XYg, = self.axes[-1].plot( [0.], [0.], color=self.ChanColors[cy] )
         self.XYgraphs += (XYg,)
 
     self.t0=time.time() # remember start time
@@ -224,21 +237,24 @@ class DataGraphs(object):
         self.d[i] = np.concatenate((self.Vhist[i, k+1:], self.Vhist[i, :k+1]), axis=0)
         if n > 1: # !!! fix to avoid permanent display of first object in blit mode
           self.graphs[i].set_data(self.Ti, self.d[i])
-    # update XY display
-          if self.XYmode and i>0:
-            self.XYgraphs[i-1].set_data(self.d[0], self.d[i]) 
     # update text display
           if i%2:
             bgn = '  ' 
             end = '\n'
           else:
             bgn = ''
-            end = ''          
+            end = ''
           txt += bgn + '%s: % #.4g%s'% (self.ChanNams[i], self.Vhist[i,k], 
             self.ChanUnits[i]) + end 
     # update bar chart
           self.bgraphs[i].set_height(dat[i])
           self.animtxt.set_text(txt)
+      if self.XYmode:
+    # update XY display 
+        for i in range(len(self.xyPlots)):
+          cx = self.xyPlots[i][0]
+          cy = self.xyPlots[i][1]            
+          self.XYgraphs[i].set_data( self.d[cx], self.d[cy])
     # -- end if != None
     return self.bgraphs + self.graphs + self.XYgraphs + (self.animtxt,)  
 #- -end def DataGraphs.__call__

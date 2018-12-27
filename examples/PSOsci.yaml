@@ -1,12 +1,12 @@
-# PicoScope configuration with free-running trigger
+# Konfiguration für PicoScope
 
 picoChannels:     [A, B]
-ChanModes:        [AC, AC, AC]
-ChanRanges:       [0.5, 0.5, 0.5]
-ChanColors:       [darkblue, sienna, indigo]
+ChanModes:        [AC, AC]
+ChanRanges:       [0.5, 0.5]
+ChanColors:       [darkblue, sienna]
 
+sampleTime: 40E-3 
 Nsamples: 400  
-sampleTime: 0.1E-3 
 
 trgChan: A    
 trgThr: 0.05       

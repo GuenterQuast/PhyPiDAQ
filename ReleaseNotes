@@ -1,8 +1,19 @@
 Release notes for PhyPiDAQ
 --------------------------
 
-  v0.9.1p1
-  - support for MMA8451 accelerometer
+v1.0dev
+
+v0.9.1p2
+
+- documented all *.daq Files
+  - made sure channel information in DataLogger and DataGraphs are initialised
+  - added option xyPlots to DataLogger an DataGraphs to select xy-Plots
+  - number of formulae in run_phypi now may exceed number of hardware chnannels
+  - added DiodenKennlinie.daq to simultaneously record I(U) diagrams of three LEDs
+
+v0.9.1p1
+
+- support for MMA8451 accelerometer
   - added support for temperature and pressure sensor BMP180
   - improved error messages
   

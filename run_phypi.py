@@ -39,7 +39,7 @@ def setup():
 # set up data source, display module and options
 
   global interval, PhyPiConfDict, DEVs, ChanIdx_ofDevice,\
-         CalibFuncts, Formulae, DatRec 
+         CalibFuncts, Formulae, NFormulae, DatRec 
   ''' 
     interval:            sampling interval
     PhyPiConfDict:       dictionary with config options
@@ -166,15 +166,18 @@ def setup():
         CalibFuncts[ic] = generateCalibrationFunction(calibData[ic])
 
 # Apply Formula(e) to calibrated channel reading(s)
+#    ! number of channels may be greater than number of physical channels
   Formulae = None
+  NFormulae = 0
   if 'ChanFormula' in PhyPiConfDict:
     Formulae = PhyPiConfDict['ChanFormula']
-    print('  Applying formulae:')   
-    for ic in range( NChannels): 
-      if Formulae[ic]: print('   Chan ', ic, '   ', Formulae[ic])   
+    NFormulae = len(Formulae)
+    print('applying fromulae:')
+    for ifc in range( NFormulae): 
+      if Formulae[ifc]: print('   FChan ', ifc, '   ', Formulae[ifc])   
 
 # Add information for graphical display(s) to PhyPiConfDict
-  PhyPiConfDict['NChannels'] = NChannels
+  PhyPiConfDict['NChannels'] = max(NChannels, NFormulae)
   if 'ChanNams' not in PhyPiConfDict:
     PhyPiConfDict['ChanNams' ] = ChanNams 
   if 'ChanLimits' not in PhyPiConfDict:  
@@ -192,18 +195,23 @@ def setup():
   print (yaml.dump(PhyPiConfDict) )
 
 def apply_calibs():
-  global sig
+  global sigdat
   for i in range(NChannels):
     if CalibFuncts[i] is not None:
-      sig[i] = CalibFuncts[i](sig[i])
+      sigdat[i] = CalibFuncts[i](sigdat[i])
 
 def apply_formulae():
-  global sig
-  for ic in range(NChannels):
-    exec('c'+str(ic) + '=sig['+str(ic)+']')
-  for ic in range(NChannels):
-    if Formulae[ic]:
-      sig[ic] = eval(Formulae[ic])
+  global sigdat
+  # calculate new quantities from hardware channels c0, c1, ...
+  #  replace entries in sigdat by calculated quantities
+  #
+  #  copy data
+  for ifc in range(NFormulae):
+    exec('c'+str(ifc) + '=sigdat['+str(ifc)+']')
+  #  apply formulae to signal data
+  for ifc in range(NFormulae):
+    if Formulae[ifc]:
+        sigdat[ifc] = eval(Formulae[ifc])
 
 if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
@@ -242,7 +250,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
   DAQ_ACTIVE = True  # Data Acquisition active    
 # -- LOOP 
-  sig = np.zeros(NChannels)
+  sigdat = np.zeros(NChannels)
   try:
     cnt = 0
     T0 = time.time()
@@ -254,7 +262,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
         cnt +=1
       # read data
         for i, DEV in enumerate(DEVs):
-          DEV.acquireData(sig[ChanIdx_ofDevice[i]:])
+          DEV.acquireData(sigdat[ChanIdx_ofDevice[i]:])
       # calibrate raw readings
         if CalibFuncts: apply_calibs()
       # apply fromula(e) 
@@ -270,9 +278,9 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
         if not brk:
         # display data ...
-          DLmpQ.put(sig)
+          DLmpQ.put(sigdat)
         # ... and record data to disc
-          if DatRec: DatRec(sig) # for data recorder
+          if DatRec: DatRec(sigdat)
 
    # check for control input (from keyboard or display module)
       if not cmdQ.empty():
