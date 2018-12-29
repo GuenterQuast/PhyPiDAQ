@@ -35,17 +35,21 @@ def kbdInput(cmdQ):
     kbdtxt = get_input(20*' ' + 'type -> P(ause), R(esume), E(nd) or s(ave) + <ret> ')
     cmdQ.put(kbdtxt)
     kbdtxt = ''
+
 def setup():
 # set up data source, display module and options
 
-  global interval, PhyPiConfDict, DEVs, ChanIdx_ofDevice,\
+  global interval, PhyPiConfDict, DEVs, ChanIdx_ofDevice, NHWChannels, \
          CalibFuncts, Formulae, NFormulae, DatRec 
   ''' 
     interval:            sampling interval
     PhyPiConfDict:       dictionary with config options
     DEVs:                list of instances of device classes
     ChanIdx_ofDevice:    index to store 1st chanel of device i
+    NHWChannels          number of active hardware channels
     CalibFuncts:         functions for calibration of raw channel readings
+    Formulae             list of formulae to apply to hardware channels
+    NFormlae             number of forulae 
     DatRec:              instance of DataRecorder
   '''
 
@@ -77,7 +81,7 @@ def setup():
     PhyPiConfDict={}
     PhyPiConfDict['DeviceFile'] = 'ADS1115Config.yaml'
     PhyPiConfDict['ChanUnits'] = ['V', 'V']  
-    PhyPiConfDict['ChanLabels'] = ['', '']  
+    PhyPiConfDict['ChanLabels'] = ['?', '?']  
     PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
 
 # set default options:
@@ -126,11 +130,11 @@ def setup():
       exit(1)
 
 # configure and initialize all Devices
-  DEVNames = []
-  NChannels = 0
-  ChanNams = []
-  ChanLims = []
-  ChanIdx_ofDevice = []
+  DEVNames = []               # device names
+  NHWChannels = 0             # total number of hardware channels
+  ChanNams = []               # names of HW channels
+  ChanLims = []               # limits
+  ChanIdx_ofDevice = []       # first channel of each device
 
   DEVs = []
   for i in range(NDevices):
@@ -148,25 +152,24 @@ def setup():
     # ...  and instantiate device handler
     exec('global DEVs;  DEVs.append(' + DEVNames[i] + '(DEVconfDicts[i]) )' )
     DEVs[i].init()
-    ChanIdx_ofDevice.append(NChannels)
+    ChanIdx_ofDevice.append(NHWChannels)
     nC = DEVs[i].NChannels  
-    NChannels += nC
+    NHWChannels += nC
     ChanNams += DEVs[i].ChanNams[0 : nC]
     ChanLims += DEVs[i].ChanLims[0 : nC]
 
 # set up calibration Functions
   CalibFuncts = None
   if 'ChanCalib' in PhyPiConfDict:
-    CalibFuncts = [None] * NChannels    
+    CalibFuncts = [None] * NHWChannels    
     calibData = PhyPiConfDict['ChanCalib']
     print('  Calibrating channels:')   
-    for ic in range( NChannels): 
+    for ic in range( NHWChannels): 
       print('   Chan ', ic, '   ', calibData[ic])   
       if calibData[ic] is not None: 
         CalibFuncts[ic] = generateCalibrationFunction(calibData[ic])
 
 # Apply Formula(e) to calibrated channel reading(s)
-#    ! number of channels may be greater than number of physical channels
   Formulae = None
   NFormulae = 0
   if 'ChanFormula' in PhyPiConfDict:
@@ -176,11 +179,23 @@ def setup():
     for ifc in range( NFormulae): 
       if Formulae[ifc]: print('   FChan ', ifc, '   ', Formulae[ifc])   
 
+# number of channels may be greater than number of hardware channels
+  NChannels = max(NHWChannels, NFormulae)
+  PhyPiConfDict['NChannels'] = NChannels
+
 # Add information for graphical display(s) to PhyPiConfDict
-  PhyPiConfDict['NChannels'] = max(NChannels, NFormulae)
   if 'ChanNams' not in PhyPiConfDict:
     PhyPiConfDict['ChanNams' ] = ChanNams 
-  if 'ChanLimits' not in PhyPiConfDict:  
+    if NFormulae > NHWChannels:
+      ChanNams += (NFormulae-NHWChannels) * ['F']
+      for ifc in range( NFormulae): 
+        if Formulae[ifc]: ChanNams[ifc] = 'F' + str(ifc)
+     
+  if 'ChanLimits' not in PhyPiConfDict:
+    if NFormulae > 0:
+      print('PhyPiDAQ: forumla(e) defined, but no ChanLimits supplied ')  
+      print('     results may become unpredictable - exiting')  
+      exit(1)
     PhyPiConfDict['ChanLimits'] = ChanLims # take from devices if not set
 
 # start data recording to disk if required
@@ -196,7 +211,7 @@ def setup():
 
 def apply_calibs():
   global sigdat
-  for i in range(NChannels):
+  for i in range(NHWChannels):
     if CalibFuncts[i] is not None:
       sigdat[i] = CalibFuncts[i](sigdat[i])
 

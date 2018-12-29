@@ -23,10 +23,9 @@ ChanFormula:
  - (c0 - c3) / 0.120   #  I Diode c3
 
 # channel-specific information for calculated quantities
-ChanNams: ['F0', 'F1', 'F2', 'F3', 'F4', 'F5'] # Names of Channels
 ChanLabels: [U, I, U, I, U, I]      # Labes for channels 
 ChanUnits: [V, mA, V, mA, V, mA]    # units for channels 
-ChanColors: [black, red, black, green, black, blue] # channel colours in display
+ChanColors: [red, darkred, green, darkgreen, blue, darkblue]
 
 # Channel Limits 
 ChanLimits: 
