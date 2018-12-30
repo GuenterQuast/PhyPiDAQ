@@ -36,6 +36,40 @@ def kbdInput(cmdQ):
     cmdQ.put(kbdtxt)
     kbdtxt = ''
 
+def decodeCommand(cmdQ):
+  global ACTIVE, DAQ_ACTIVE
+  '''
+    evaluate keyboard commands
+    returns:  0 invalid command
+              1 status change
+              2 exit
+  '''
+
+  cmd = cmdQ.get()
+  rc = 0
+  if cmd == 'E':
+    #DGmpQ.put(None)       # send empty "end" event
+    print('\n' + sys.argv[0] + ': End command received - closing down')
+    ACTIVE = False
+    rc = 2
+  elif cmd == 'P':
+    DAQ_ACTIVE = False
+    rc = 1     
+  elif cmd == 'R':
+    DAQ_ACTIVE = True
+    rc = 1
+  elif cmd == 's':  
+    #DGmpQ.put(None)       # send empty "end" event
+    DAQ_ACTIVE = False     
+    ACTIVE = False
+    # print('\n storing data to file, ending')
+    print('\n storing data to file not yet implemented, ending')
+    # still to be implemented ...
+    rc = 2
+
+  return rc
+
+
 def setup():
 # set up data source, display module and options
 
@@ -232,6 +266,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
   print('\n*==* script ' + sys.argv[0] + ' running \n')
 
+
+  longInterval = 2. # definiton of a "long" readout interval
   setup()
   NChannels = PhyPiConfDict['NChannels']
   DisplayModule = PhyPiConfDict['DisplayModule']
@@ -263,9 +299,9 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     thrd.deamon = True
     thrd.start()
 
+  sigdat = np.zeros(NChannels)
   DAQ_ACTIVE = True  # Data Acquisition active    
 # -- LOOP 
-  sigdat = np.zeros(NChannels)
   try:
     cnt = 0
     T0 = time.time()
@@ -273,6 +309,16 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
     while True:
 
+      # regularly check for command input for long intervals
+      if interval > longInterval and DAQ_ACTIVE:
+        cmd = 0 
+        while not DLmpQ.empty():  # check for command input
+          if not cmdQ.empty():
+            cmd = decodeCommand(cmdQ)  
+            if cmd: break # got valid command
+          time.sleep( min(interval/100., 0.2) )
+        if cmd >= 2: break  # end command received
+         
       if DAQ_ACTIVE:
         cnt +=1
       # read data
@@ -282,40 +328,15 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
         if CalibFuncts: apply_calibs()
       # apply fromula(e) 
         if Formulae: apply_formulae()
-      # regularly check for command input for long intervals
-        if interval > 10.:
-          brk = False
-          while not DLmpQ.empty():
-            if not cmdQ.empty():
-              brk = True
-              break
-            time.sleep(0.1)
 
-        if not brk:
-        # display data ...
-          DLmpQ.put(sigdat)
-        # ... and record data to disc
-          if DatRec: DatRec(sigdat)
+      # display data ...
+        DLmpQ.put(sigdat)
+      # ... and record data to disc
+        if DatRec: DatRec(sigdat)
 
    # check for control input (from keyboard or display module)
       if not cmdQ.empty():
-        cmd = cmdQ.get()
-        if cmd == 'E':
-          #DGmpQ.put(None)       # send empty "end" event
-          print('\n' + sys.argv[0] + ': End command received - closing down')
-          ACTIVE = False
-          break
-        elif cmd == 'P':
-          DAQ_ACTIVE = False     
-        elif cmd == 'R':
-          DAQ_ACTIVE = True
-        elif cmd == 's':  
-          #DGmpQ.put(None)       # send empty "end" event
-          DAQ_ACTIVE = False     
-          ACTIVE = False
-          print('\n storing data to file, ending')
-          pass # to be implemented ...
-          break
+        if decodeCommand(cmdQ)>=2: break # end command received
  
   except KeyboardInterrupt:
     DAQ_ACTIVE = False     

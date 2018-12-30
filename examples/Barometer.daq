@@ -8,25 +8,17 @@
 #DeviceFile: GPIOCount.yaml	
 DeviceFile: BMP180Config.yaml  
 
-#DisplayModule: DataLogger
-DisplayModule: DataGraphs
+DisplayModule: DataLogger
+#DisplayModule: DataGraphs
 Title: Temperature & Pressure
 
-Interval: 120.                    # logging interval         
+Interval: 300.                  # logging interval         
 ChanLabels: [Temperatur, Druck] # names and units for channels 
 ChanLimits: [[0.,30.],[970., 1030.]]
-#ChanFormula:
-# -  null
-# -  c1 - 1000.
 
 ChanUnits: ['°C','hPa']
 ChanColors: [darkblue, darkgreen]    # channel colours in display
 XYmode:     false                  # enable XY-display
-
-# overwrite Channel Limits of Device 
-##ChanLimits: 
-## - [0., 1.]
-## - [0., 1.]
 
 DataFile:   null                  # file name for output file 
 #DataFile:   testfile             # file name for output file 
