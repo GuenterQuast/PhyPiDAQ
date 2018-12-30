@@ -17,7 +17,18 @@ class DataGraphs(object):
  
    # get relevant settings from PhyPiConfDict
     self.dT = ConfDict['Interval'] 
+    if self.dT < 60:
+      self.tUnit = 's'
+      self.tUnitFactor = 1.
+    elif self.dT < 3600:
+      self.tUnit = 'min'
+      self.tUnitFactor = 1./60.
+    else:
+      self.tUnit = 'h'
+      self.tUnitFactor = 1./3600.
+
     self.NChan = ConfDict['NChannels']
+
     self.ChanLim = ConfDict['ChanLimits']
     
     if 'Title' in ConfDict:
@@ -85,14 +96,14 @@ class DataGraphs(object):
     
 # config data needed throughout the class
     self.Npoints = 120  # number of points for history
-    self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
+    self.Ti = self.dT * np.linspace(-self.Npoints+1, 0, self.Npoints) * self.tUnitFactor
     self.bwidth = 0.5   # width of bars
     self.ind = self.bwidth + np.arange(Nc) # bar position
   # 
     self.Vhist = np.zeros( [Nc, self.Npoints] )
     self.d = np.zeros( [Nc, self.Npoints] ) 
 
-# set up a figure to plot voltage(s)
+# set up a figure to plot value(s)
     if self.XYmode:
       fig = plt.figure("DataGraphs", figsize=(10., 5.5) )
       fig.subplots_adjust(left=0.09, bottom=0.1, right=0.975, top=0.94,
@@ -117,7 +128,7 @@ class DataGraphs(object):
       axes[i].set_ylabel(self.ChanNams[Cidx] + ' ' + self.AxisLabels[i],
                            color=self.ChanColors[Cidx])
       axes[i].grid(True, color=self.ChanColors[Cidx], linestyle = '--', alpha=0.3)
-    axes[0].set_xlabel('History (s)', size='x-large')
+    axes[0].set_xlabel('History (' + self.tUnit + ')', size='x-large')
 
     if self.XYmode:
       axes.append(plt.subplot2grid((6,5),(1,0), rowspan=3, colspan=2) )
@@ -146,7 +157,7 @@ class DataGraphs(object):
                           size='x-large', color = self.ChanColors[Cidx])
       axbar[1].grid(True, color=self.ChanColors[Cidx], 
                     linestyle = '--', alpha=0.3)
-  # Voltage in Text format
+  # Values in Text format
     if self.XYmode:
       axes.append(plt.subplot2grid((6,5), (0,0), rowspan=1, colspan=2) )
     else:
@@ -186,7 +197,7 @@ class DataGraphs(object):
   def init(self):
   # initialize objects to be animated
 
-  # bar graph for voltages
+  # bar graph for values
     self.bgraphs = ()
     for i in range(self.NChan):
       iax = self.Chan2Axes[i]
@@ -204,7 +215,7 @@ class DataGraphs(object):
                               color=self.ChanColors[i])
       self.graphs += (g,)
 
-  # Voltage in Text form
+  # Values in Text form
     self.animtxt = self.axtxt.text(0.01, 0.025 , ' ', size='large',
               transform=self.axtxt.transAxes,
               color='darkblue')

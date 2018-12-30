@@ -17,7 +17,18 @@ class DataLogger(object):
 
    # get relevant settings from PhyPiConfDict
     self.dT = ConfDict['Interval'] 
+    if self.dT < 60:
+      self.tUnit = 's'
+      self.tUnitFactor = 1.
+    elif self.dT < 3600:
+      self.tUnit = 'min'
+      self.tUnitFactor = 1./60.
+    else:
+      self.tUnit = 'h'
+      self.tUnitFactor = 1./3600.
+
     self.NChan = ConfDict['NChannels']
+
     self.ChanLim = ConfDict['ChanLimits']
 
     Nc = self.NChan
@@ -80,11 +91,11 @@ class DataLogger(object):
       self.xyPlots = [ [0,i] for i in range(1,Nc)]
 
     # data structures needed throughout the class
-    self.Ti = self.dT* np.linspace(-self.Npoints+1, 0, self.Npoints) 
+    self.Ti = self.dT * np.linspace(-self.Npoints+1, 0, self.Npoints) * self.tUnitFactor
     self.Vhist = np.zeros( [Nc, self.Npoints] )
     self.d = np.zeros( [Nc, self.Npoints] ) 
 
-# set up a figure to plot actual voltage(s)
+# set up a figure to plot actual value(s)
     if self.XYmode:
       fig = plt.figure("DataLogger", figsize=(6.3, 6.) )
       fig.subplots_adjust(left=0.2, bottom=0.15, right=0.95, top=0.95,
@@ -106,7 +117,7 @@ class DataLogger(object):
         axes[i].set_ylabel(self.ChanNams[Cidx] + ' ' + self.AxisLabels[i], 
                            color=self.ChanColors[Cidx])
         axes[i].grid(True, color=self.ChanColors[Cidx], linestyle = '--', alpha=0.3)
-      axes[0].set_xlabel('History (s)')
+      axes[0].set_xlabel('History (' + self.tUnit + ')')
     else:
   # XY plot
       axes.append(fig.add_subplot(1,1,1, facecolor='ivory'))
