@@ -8,8 +8,8 @@
 #DeviceFile: GPIOCount.yaml	
 DeviceFile: BMP180Config.yaml  
 
-DisplayModule: DataLogger
-#DisplayModule: DataGraphs
+#DisplayModule: DataLogger
+DisplayModule: DataGraphs
 Title: Temperature & Pressure
 
 Interval: 300.                  # logging interval         
