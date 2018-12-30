@@ -245,22 +245,48 @@ def setup():
 
 def apply_calibs():
   global sigdat
+  '''
+    apply calibration functions to hardware channels    
+
+    input: Calibration Functions as calucated by 
+           generateCalibrationFunctions() from interpolated 
+           values in calibration table calibData[]
+
+    output: calibrated channel values
+  '''
+
   for i in range(NHWChannels):
     if CalibFuncts[i] is not None:
       sigdat[i] = CalibFuncts[i](sigdat[i])
 
 def apply_formulae():
   global sigdat
-  # calculate new quantities from hardware channels c0, c1, ...
-  #  replace entries in sigdat by calculated quantities
-  #
-  #  copy data
+  '''
+    calculate new quantities from hardware channels c0, c1, ...
+     replace entries in sigdat by calculated quantities
+  
+    input:  - data from hardware channels
+            - list of formulae 
+            data in hw channels c0, c1, ...
+
+    formula expressions are valid python expressions, where
+    all functions from math package can be used
+
+    output: calcuated quantities by applying formula 
+            f1(c0, c1 ...), f2(c0, c1, ...), ...
+
+    number of formulae may exceed number of hardware channels
+  '''
+
+  #  copy data from hardware channels
   for ifc in range(NFormulae):
     exec('c'+str(ifc) + '=sigdat['+str(ifc)+']')
+
   #  apply formulae to signal data
   for ifc in range(NFormulae):
     if Formulae[ifc]:
         sigdat[ifc] = eval(Formulae[ifc])
+
 
 if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
