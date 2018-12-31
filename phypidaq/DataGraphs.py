@@ -124,6 +124,7 @@ class DataGraphs(object):
     # history plot
     for i in range(self.NAxes):
       Cidx = self.Chan2Axes.index(i)
+      axes[i].set_xlim(self.Ti[0], self.Ti[-1])
       axes[i].set_ylim(*self.ChanLim[Cidx])
       axes[i].set_ylabel(self.ChanNams[Cidx] + ' ' + self.AxisLabels[i],
                            color=self.ChanColors[Cidx])
@@ -209,10 +210,7 @@ class DataGraphs(object):
     self.graphs=()
     for i in range(self.NChan):
       iax = self.Chan2Axes[i]
-   # intitialize with graphs outside range
-      offset = self.ChanLim[i][0] - 0.1*(self.ChanLim[i][1] - self.ChanLim[i][0]) 
-      g, = self.axes[iax].plot(self.Ti, offset*np.ones(self.Npoints), 
-                              color=self.ChanColors[i])
+      g, = self.axes[iax].plot( [], [], color=self.ChanColors[i])
       self.graphs += (g,)
 
   # Values in Text form
@@ -225,7 +223,8 @@ class DataGraphs(object):
       # plot XY-graph(s)
       for i in range(len(self.xyPlots)):
         cy = self.xyPlots[i][1]
-        XYg, = self.axes[-1].plot( [0.], [0.], color=self.ChanColors[cy] )
+#!        XYg, = self.axes[-1].plot( [0.], [0.], color=self.ChanColors[cy] )
+        XYg, = self.axes[-1].plot( [], [], color=self.ChanColors[cy] )
         self.XYgraphs += (XYg,)
 
     self.t0=time.time() # remember start time

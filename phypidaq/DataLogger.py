@@ -113,6 +113,7 @@ class DataLogger(object):
         axes.append(axes[0].twinx())
       for i in range(self.NAxes):
         Cidx = self.Chan2Axes.index(i)
+        axes[i].set_xlim(self.Ti[0], self.Ti[-1])
         axes[i].set_ylim(*self.ChanLim[Cidx])
         axes[i].set_ylabel(self.ChanNams[Cidx] + ' ' + self.AxisLabels[i], 
                            color=self.ChanColors[Cidx])
@@ -151,15 +152,13 @@ class DataLogger(object):
           colr = None
         else:
           colr = self.ChanColors[i]
-   # intitialize with graph outside range
-        g,= self.axes[iax].plot(self.Ti, 
-                      self.ChanLim[iax][1] * 1.1 * np.ones(self.Npoints), color= colr)
+        g,= self.axes[iax].plot([], [], color= colr)
         self.graphs += (g,)
     else:
       # plot XY-graph(s)
       for i in range(len(self.xyPlots)):
         cy = self.xyPlots[i][1]
-        g, = self.axes[-1].plot( [0.], [0.], color=self.ChanColors[cy] )
+        g, = self.axes[-1].plot( [], [], color=self.ChanColors[cy] )
         self.graphs += (g,)
     return self.graphs
 # -- end DataLogger.init()
