@@ -93,7 +93,7 @@ class DataLogger(object):
     # data structures needed throughout the class
     self.Ti = self.dT * np.linspace(-self.Npoints+1, 0, self.Npoints) * self.tUnitFactor
     self.Vhist = np.zeros( [Nc, self.Npoints] )
-    self.d = np.zeros( [Nc, self.Npoints] ) 
+    self.h = np.zeros( [Nc, self.Npoints] ) 
 
 # set up a figure to plot actual value(s)
     if self.XYmode:
@@ -170,22 +170,24 @@ class DataLogger(object):
     if data !=None: 
       n, dat = data
 
-      k = n % self.Npoints
+      k = (n-1) % self.Npoints
       for i in range(self.NChan):
         self.Vhist[i, k] = dat[i]
-        self.d[i] = np.concatenate((self.Vhist[i, k+1:], 
+        self.h[i] = np.concatenate((self.Vhist[i, k+1:], 
                                     self.Vhist[i, :k+1]), axis=0)
       if not self.XYmode:       
       # update history graph(s) 
         for i in range(self.NChan):
           if n>1: # !!! fix to avoid permanent display of first object in blit mode
-            self.graphs[i].set_data(self.Ti, self.d[i])
+            self.graphs[i].set_data(self.Ti, self.h[i])
       else:
       # update XY display 
         for i in range(len(self.xyPlots)):
           cx = self.xyPlots[i][0]
-          cy = self.xyPlots[i][1]            
-          self.graphs[i].set_data( self.d[cx], self.d[cy])
+          cy = self.xyPlots[i][1]  
+          i1 = max(0, self.Npoints - n)           
+          self.graphs[i].set_data( self.h[cx, i1:],
+                                     self.h[cy, i1:] )
     return self.graphs
 #- -end def DataLogger.__call__
 #-end class DataLogger

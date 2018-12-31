@@ -101,7 +101,7 @@ class DataGraphs(object):
     self.ind = self.bwidth + np.arange(Nc) # bar position
   # 
     self.Vhist = np.zeros( [Nc, self.Npoints] )
-    self.d = np.zeros( [Nc, self.Npoints] ) 
+    self.h = np.zeros( [Nc, self.Npoints] ) 
 
 # set up a figure to plot value(s)
     if self.XYmode:
@@ -237,17 +237,15 @@ class DataGraphs(object):
     # update graphics with actual data
     if data != None: 
       n, dat = data
-      if n == 0:
-        return self.init()
 
-      k = n % self.Npoints
+      k = (n-1) % self.Npoints
       txt=''
       for i in range(self.NChan):
         self.Vhist[i, k] = dat[i]
     # update history graph
-        self.d[i] = np.concatenate((self.Vhist[i, k+1:], self.Vhist[i, :k+1]), axis=0)
+        self.h[i] = np.concatenate((self.Vhist[i, k+1:], self.Vhist[i, :k+1]), axis=0)
         if n > 1: # !!! fix to avoid permanent display of first object in blit mode
-          self.graphs[i].set_data(self.Ti, self.d[i])
+          self.graphs[i].set_data(self.Ti, self.h[i])
     # update text display
           if i%2:
             bgn = '  ' 
@@ -264,8 +262,10 @@ class DataGraphs(object):
     # update XY display 
         for i in range(len(self.xyPlots)):
           cx = self.xyPlots[i][0]
-          cy = self.xyPlots[i][1]            
-          self.XYgraphs[i].set_data( self.d[cx], self.d[cy])
+          cy = self.xyPlots[i][1] 
+          i1 = max(0, self.Npoints - n)           
+          self.XYgraphs[i].set_data( self.h[cx, i1:],
+                                     self.h[cy, i1:] )
     # -- end if != None
     return self.bgraphs + self.graphs + self.XYgraphs + (self.animtxt,)  
 #- -end def DataGraphs.__call__
