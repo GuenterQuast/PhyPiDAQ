@@ -130,6 +130,7 @@ class DataGraphs(object):
                            color=self.ChanColors[Cidx])
       axes[i].grid(True, color=self.ChanColors[Cidx], linestyle = '--', alpha=0.3)
     axes[0].set_xlabel('History (' + self.tUnit + ')', size='x-large')
+    axes[0].axvline(0., color = 'yellow', alpha=0.5, lw=5) # highlight t=0
 
     if self.XYmode:
       axes.append(plt.subplot2grid((6,5),(1,0), rowspan=3, colspan=2) )

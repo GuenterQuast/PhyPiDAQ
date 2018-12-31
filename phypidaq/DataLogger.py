@@ -119,6 +119,8 @@ class DataLogger(object):
                            color=self.ChanColors[Cidx])
         axes[i].grid(True, color=self.ChanColors[Cidx], linestyle = '--', alpha=0.3)
       axes[0].set_xlabel('History (' + self.tUnit + ')')
+      axes[0].axvline(0., color = 'yellow', alpha=0.5, lw=5) # highlight t=0
+
     else:
   # XY plot
       axes.append(fig.add_subplot(1,1,1, facecolor='ivory'))
