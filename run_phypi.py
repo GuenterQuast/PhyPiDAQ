@@ -49,7 +49,7 @@ def decodeCommand(cmdQ):
   rc = 0
   if cmd == 'E':
     #DGmpQ.put(None)       # send empty "end" event
-    print('\n' + sys.argv[0] + ': End command received - closing down')
+    print('\n' + sys.argv[0] + ': End command received')
     ACTIVE = False
     rc = 2
   elif cmd == 'P':
@@ -363,19 +363,26 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
    # check for control input (from keyboard or display module)
       if not cmdQ.empty():
         if decodeCommand(cmdQ)>=2: break # end command received
+
+    print('\n' + sys.argv[0] + ': normal end') 
  
   except KeyboardInterrupt:
     DAQ_ACTIVE = False     
     ACTIVE = False
-    print('\n' + sys.argv[0]+': keyboard interrupt - closing down ...')
+    print('\n' + sys.argv[0] +': keyboard interrupt - closing down ...')
 
-  except Exception as e:
-    print("got Exception %s \n closing down"(str(e)) )
+  #except Exception as e:
+  #  print('!!! ' + sys.argv[0] + 'got Exception %s \n closing down'(str(e)) )
 
+  except:
+    # 'except Exception as e' leaves some errors unnoted
+    print('\n!!! ' + sys.argv[0] + ': exception in data-taking loop' )
+    print(sys.exc_info()[1])
   finally:
+    ACTIVE = False
     if DatRec: DatRec.close()
     DEV.closeDevice() # close down hardware device
     time.sleep(1.)
     stop_processes(procs)  # stop all sub-processes in list
-    print('*==* ' + sys.argv[0] + ': normal end -      press <ret>')
+    print('*==* ' + sys.argv[0] + ': end -      press <ret>')
     sys.exit()
