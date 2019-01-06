@@ -107,16 +107,17 @@ def setup():
   except Exception as e:
     print('!!! failed to read configuration file ' + PhyPiConfFile)
     print(str(e))
-    # eventually exit in this case ...
-    # kbdwait()
-    # exit(1)
-    print('   using default settings')
+  # exit in this case ...
+  #  kbdwait()
+    exit(1)
+  # ... or eventually continue with defaults ???
+  #  print('   using default settings')
   # define default config dictionary
-    PhyPiConfDict={}
-    PhyPiConfDict['DeviceFile'] = 'ADS1115Config.yaml'
-    PhyPiConfDict['ChanUnits'] = ['V', 'V']  
-    PhyPiConfDict['ChanLabels'] = ['?', '?']  
-    PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
+  #  PhyPiConfDict={}
+  #  PhyPiConfDict['DeviceFile'] = 'ADS1115Config.yaml'
+  #  PhyPiConfDict['ChanUnits'] = ['V', 'V']  
+  #  PhyPiConfDict['ChanLabels'] = ['?', '?']  
+  #  PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
 
 # set default options:
   if 'Interval' not in PhyPiConfDict:
@@ -160,7 +161,7 @@ def setup():
     except Exception as e:
       print('!!! failed to read configuration file ' + fnam)
       print(str(e))
-      kbdwait()
+      # kbdwait()
       exit(1)
 
 # configure and initialize all Devices
@@ -364,7 +365,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
       if not cmdQ.empty():
         if decodeCommand(cmdQ)>=2: break # end command received
 
-    print('\n' + sys.argv[0] + ': normal end') 
+    #print('\n' + sys.argv[0] + ': normal end') 
  
   except KeyboardInterrupt:
     DAQ_ACTIVE = False     
