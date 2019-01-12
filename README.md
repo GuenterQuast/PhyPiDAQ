@@ -59,11 +59,18 @@ DeviceFile: config/ADS1115Config.yaml
 ## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
 
-DisplayModule: DataLogger
+Interval: 0.1           # logging intervalDisplay
+Module: DataLogger
 # DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
-Interval: 0.1                     # logging interval
-XYmode:     false                 # enable/disable XY-display
+Chan2Axes: [0,1]             # assign chanel to axis: 0: left, 1: right axis
+                 # default is [0,1,1,...]
 
+XYmode:     false                 # enable/disable XY-display
+#xyPlots:   # pairs of channels as xy-plot 
+# - [0,1]     # x: channel 0, y: channel 1
+# - [0,2]     # x: channel 0, y: channel 2 (if present)
+   # default [0,1], [0,2], ..., [0, n-1] for n active channels
+   
 # channel-specific information
 ChanLabels: [U, U ]             # names for channels 
 ChanUnits: [V, V]               # units for channels 

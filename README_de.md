@@ -59,14 +59,22 @@ DeviceFile: config/ADS1115Config.yaml
 ## ein Beispiel fuer mehrere Geraete
 #DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
 
-DisplayModule: DataLogger     # zeitlicher Verlauf der Messgroessen
-# DisplayModule: DataGraphs   # text, Balkendiagramm, zeitlicher Verlauf und xy-Darstellung
-Interval: 0.1                 # Datennahme-Intervall in Sekunden
-XYmode:     false             # XY-Darstellung ein/aus 
+Interval: 0.1                # Datennahme-Intervall in Sekunden
 
-# Angaben fuer jeden Kanal
-ChanLabels: [U, U]             # Namen fuer jeden Kanal  
-ChanUnits: [V, V]              # Einheiten fuer jeden Kanal 
+DisplayModule: DataLogger    # zeitlicher Verlauf der Messgroessen
+# DisplayModule: DataGraphs   # text, Balkendiagramm, zeitlicher Verlauf und xy-Darstellung
+Chan2Axes: [0,1]             # Kanal auf linker(0) oder rechter(1) Achse
+                             # Voreinstellung [0,1,1,...]
+
+XYmode:     false             # XY-Darstellung ein/aus 
+#xyPlots:   # Paare von Kanaelen als xy-Grafik 
+# - [0,1]     # x: Kanal 0, y: Kanal 1
+# - [0,2]     # x: Kanal 0, y: Kanal 2 (falls vorhanden)
+     # Voreinstellung [0,1], [0,2], ..., [0, n-1] bei n aktiven Kanaelen
+
+#  Meta-Daten fuer jeden Kanal
+ChanLabels: [U, U]             # Namen  
+ChanUnits: [V, V]              # Einheiten 
 ChanColors: [darkblue, sienna] # Farbzuordnung in der Anzeige
 
 # ggf. werden hier die Informationen aus der Geraete-Konfiguration ueberschrieben 
@@ -374,8 +382,10 @@ ChanLimits:          # Wertebereiche
  - [0., 30.]   # I D3
 
 DisplayModule: DataLogger
-Interval: 0.1                   # Anzeige-Interval         
-XYmode:   true                  # XY-Darstellung
+Chan2Axes: [0,1,0,1,0,1]    # Kanal auf linker(0) oder rechter(1) Achse
+                            # Voreinstellung [0,1,1,...]
+Interval: 0.1               # Anzeige-Interval         
+XYmode:   true              # XY-Darstellung
 xyPlots:   # Paare von Kanälen als xy-Grafik 
  - [0,1]     # U0 - I0
  - [2,3]     # U1 - I1
