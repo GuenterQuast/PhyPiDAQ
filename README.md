@@ -289,23 +289,24 @@ right-clicking the icon and use the dialog "Properties".
     version info for package *phypidaq*
 - `phypidaq/ADS1115Config.py`  
     class for handling of analog-to-digital converter ADS1115
+- `phypidaq/MCP3008Config.py`   
+    class analog-to-digital converter MCP3008
+- `phypidaq/MCP3008Config.py`  
+    class for current and voltage sensor INA219
 - `phypidaq/DS18B20Config.py`  
     class for handling of digital thermometer DS18B20
 - ``phypidaq/BMPx80Config.py``  
-    class for handling the digital temperature and pressure sensor BMP180/280
-    or BME280
+    class for the digital temperature and pressure sensors BMP180/280 or BME280
 - ``phypidaq/MMA8451Config.py``  
-    class for handling the digital accelerometer MMA8451
-- `phypidaq/MCP3008Config.py`   
-    class for handling of analog-to-digital converter MCP3008
+    class for the digital accelerometer MMA8451
 - `phypidaq/GPIOCount.py`   
     class for reading rates from GPIO pins
 - `phypidaq/MAX31855Config.py`  
-    class for handling MAX31855 thermocouple-to-digital converter
+    class for MAX31855 thermocouple-to-digital converter
 - `phypidaq/MAX31865Config.py`  
-    class for handling MAX31865 resistance-to-digital converter
+    class for MAX31865 resistance-to-digital converter
 - `phypidaq/PSConfig.py`  
-    class for handling PicoScope USB oscilloscopes
+    class for PicoScope USB oscilloscopes
 - `phypidaq/mpTkDisplay.py`  
     background-process handling data visualisation
 - `phypidaq/DataLogger.py`  
@@ -320,22 +321,25 @@ right-clicking the icon and use the dialog "Properties".
 - `PhyPiConf.daq`  
      main configuration file, depends on device configurations in sub-directory *config/*
 - `config/ADS1115Config.yaml`
+- `config/MCP3008Config.yaml`
+- `config/INA219Config.yaml`
 - `config/DS18B20Config.yaml`
 - `config/GPIOCount.yaml`
 - `config/MAX31855Config.yaml`
 - `config/MAX31865Config.yaml`
-- `config/MCP3008Config.yaml`
 - `config/PSConfig.yaml`
 
 ### Examples 
 
 - `examples/read_analog.py`  
     very minimalist example to read one channel from an analog-to-ditigal converter
+- `examples/read_INA210.py`  
+    read data from INA219 current and voltage sensor
 - ``examples/read_18B20.py``s
-- simple example to read the temperature sensor DS18B20
-- ``examples/readBMPx80/``
+     simple example to read the temperature sensor DS18B20
+- ``examples/readBMPx80.py``
     simple example to read the digital temperature  and pressure sensor BMP180/280
-- ``examples/readMMA8541/``
+- ``examples/readMMA8541.py``
     simple example to read the digital accelerometer MMA8451
 - `examples/runOsci.py`  
     run an oscilloscope display, configuration as specified in *.yaml* file (default is `PSOsci.yaml`)
@@ -343,13 +347,17 @@ right-clicking the icon and use the dialog "Properties".
     generate a random signal following Poisson statistics on a GPIO pin
 - `examples/FreqGen.py`  
     generate a fixed frequency signal on a GPIO pin
-- ``examples\Barometer.daq``
-    configuration file for *run_pyhpi.py*; uses BMB180 or BMP280 sensors to display temperature and air pressure
-- ``examples\Accelerometer.daq``
-    configuration file for *run_phypy.py*; uses MMA8451 to display x-, y- and z-acceleration
-- ``examples\NoiseMeter.daq``
-    configuration file for *run_phypy.py* to measure noise with a microphone connected to PicoScope
-    USB oscilloscope; displays the *rms* of 200 samples taken over a time periods of 20 ms 
+### Configuration files for *run_phypi.py*
+- `examples/Amperemeter.daq`  
+    display current and eventually voltage read from INA219 sensor
+- ``examples\Barometer.daq``  
+    uses BMB180 or BMP280 sensors to display temperature and air pressure
+- ``examples\Accelerometer.daq``  
+    uses MMA8451 to display x-, y- and z-acceleration
+- ``examples\NoiseMeter.daq``  
+    measure noise with a microphone connected to PicoScope USB oscilloscope;
+     displays the *rms* of 200 samples taken over a time periods of 20 ms.
+    Can also be used with geophone SM-24.
 
 <div style="page-break-after: always;"></div>
 

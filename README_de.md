@@ -344,9 +344,8 @@ ChanLimits: [[0.,30.],[970., 1030.]]   # Wertebereich
 ChanUnits: ['°C','hPa']                # Einheiten
 ChanColors: [darkblue, darkgreen]      # Farben in der Anzeige
 
-Interval: 120.         # Intervall für Datenaufnahme und Anzeige (in s)         
+Interval: 120.         # Intervall für Datenaufnahme und Anzeige (in s)  
 ```
-
 
 
 **Gleichzeitige Darstellung mehrerer LED-Kennlinien**
@@ -516,29 +515,30 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 - `phypidaq/ADS1115Config.py`  
     Klasse zur Handhabung des Analog-Digital-Wandlers ADS1115
 
+- `phypidaq/MCP3008Config.py`  
+    Klasse zur Handhabung des Strom- und Spannungssensors INA219
+
+-  `phypidaq/INA219Config.py`  
+    Klasse für Analog-Digital-Wandlers MCP3008 /MCP3208
+
 - `phypidaq/DS18B20Config.py`  
     Klasse zur Handhabung des digitalen Thermometers DS18B20
 
-- ``phypidaq/BMPx80Config.py`` 
-
+- `phypidaq/BMPx80Config.py`  
     Klasse zur Handhabung des digitalen Temperatur- und Drucksensors BMP180/280
     oder BME280
 
-- ``phypidaq/MMA8451Config.py`` 
-
+- `phypidaq/MMA8451Config.py`  
     Klasse zur Handhabung des digitalen Beschleunigungssensors MMA8451
-
-- `phypidaq/MCP3008Config.py`  
-    Klasse zur Handhabung des Analog-Digital-Wandlers MCP3008 /MCP3208
 
 - `phypidaq/GPIOCount.py`   
     Klasse zur Ratenmessung an GPIO-Pins
 
 - `phypidaq/MAX31855Config.py`  
-    Klasse zur Handhabung des Thermolement-nach-digital-Wandlers MAX31855
+    Klasse für Thermolement-Wandlers MAX31855
 
 - `phypidaq/MAX31865Config.py`  
-    Klasse zur Handhabung des Widerstand-nach-digial-Wandlers MAX31865
+    Klasse für den Widerstand-nach-digial-Wandler MAX31865
 
 - `phypidaq/PSConfig.py`  
     Klasse für PicoScope USB-Oszilloskope
@@ -560,6 +560,8 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 - `PhyPiConf.daq`  
      Haputkonfigurationsdatei, hängt von Dateien im Unterverzeichnis *config/* ab
 - `config/ADS1115Config.yaml`
+- `config/BMP280Config.yaml`
+- `config/INA219Config.yaml`
 - `config/DS18B20Config.yaml`
 - `config/GPIOCount.yaml`
 - `config/MAX31855Config.yaml`
@@ -573,27 +575,33 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 
 - `examples/read_analog.py`  
     sehr minimalistisches Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
-- ``examples/read_18B20.py``
-    minimalistisches Beispiel zur Auslese des digitalen Temperatursensors DS18B20 
-- ``examples/readBMP180/``
-    minimalistisches Beispiel zur Auslese des digitalen Tempratur- und Drucksensors BMP180/280
-- examples/readMMA8451/``
-    minimalistisches Beispiel zur Auslese des digitalen Beschleunigungssensors MMA8451
+- `examples/read_INA210.py`  
+    Beispiel zum Auslesen des Strom- und Spannungssensors INA219
+- ``examples/read_18B20.py``  
+    Auslese des digitalen Temperatursensors DS18B20 
+- ``examples/readBMP180.py``  
+    Auslese des digitalen Tempratur- und Drucksensors BMP180/280
+- examples/readMMA8451.py``  
+    Auslese des digitalen Beschleunigungssensors MMA8451
 - `examples/runOsci.py`  
     Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben (Vorgabe `PSOsci.yaml`)
 - `examples/poissonLED.py`  
     erzeugt ein zufälliges Signal an GPIO-Pin gemäß Poisson-Prozess 
 - `examples/FreqGen.py`  
     erzeugt Signal fester Frequenz an GPIO-Pin
-- `examples/DiodenKennlinie.daq`
+### Konfigurationsdateien für *run_phypi.py*
+- `examples/Amperemeter.daq`  
+    simultane Messung und Darstellung von Strom und ggf. Spannung mit dem Strom- und Spannungssensor INA219
+- `examples/DiodenKennlinie.daq`  
     simultane Messung und Darstellung von drei Diodenkennlinen mit einem ADS1115 Digital-Analog-Wandler
-- ``examples\Barometer.daq``
-    Konfigurationsdatei für *run_pyhpi.py*; nutzt Sensoren BMB180 der BMP280 zur Anzeige von Temperatur und Luftdruck air
-- ``examples\Accelerometer.daq``
-    Konfigurationsdatei für *run_phypi.py*; nutzt den Sensor MMA8451 zur Anzeige der  x-, y- and z-Komponente der Beschleunigung.
-- ``examples\NoiseMeter.daq``
-    Konfigurationsdatei für *run_phypi.py* zur Messung der Lautstärke mit einem an ein PicoScope
-    USB-Osziloskop angeschlossenen Mikrofon; angezeigt werden die Effektivwerte von 200  in einem Zeitraum von 20 ms aufgezeichneten Messungen der Schallamplitude.
+- ``examples\Barometer.daq``  
+    nutzt Sensoren BMB180 der BMP280 zur Anzeige von Temperatur und Luftdruck air
+- ``examples\Accelerometer.daq``  
+    nutzt den Sensor MMA8451 zur Anzeige der  x-, y- and z-Komponente der Beschleunigung.
+- ``examples\NoiseMeter.daq``  
+    Messung der Lautstärke mit einem an ein PicoScope USB-Osziloskop angeschlossenen Mikrofon;
+    angezeigt werden die Effektivwerte von 200  in einem Zeitraum von 20 ms aufgezeichneten
+    Messungen der Schallamplitude. Kann auch mit dem Geophon SM-24 verwendet werden.  
 
 
 ### Dokumentation
