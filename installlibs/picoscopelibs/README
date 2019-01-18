@@ -1,0 +1,4 @@
+# Install picoscope libraries
+sudo dpkg -i *.deb
+# grant acces to USB port for user pi
+sudo usermod -a -G tty pi
