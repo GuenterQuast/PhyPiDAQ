@@ -176,7 +176,19 @@ Beispiele für andere Geräte, wie den Analog-Digital-Wandler MCP3008, für Rate
 
 ## Installation von PhyPiDAQ auf dem Raspberry Pi
 
-Dieses Paket basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte bereitstellen:
+**Beziehen des PhyPiDAQ Codes und aller Software-Abhaengigkeiten**
+
+Geben Sie nach dem Einrichten Ihres Raspberry Pi mit dem aktuellen Debian-Release *stretch* im Konsolenfenster folgende Befehle ein: 
+
+```bash
+mkdir git
+cd git
+git clone https://github.com/GuenterQuast/PhyPiDAQ
+```
+
+
+
+PhyPiDAQ* basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte und  Bibliotheken für die Visualisierung bereitstellen:
 
 - die Adafruit Python MCP3008 Bibliothek  
     <https://github.com/adafruit/Adafruit_Python_MCP3008>
@@ -191,18 +203,26 @@ Dieses Paket basiert auf Code aus anderen Paketen, die die Treiber für die unte
 - das  *python* Interface für die PicoScope Treiber des *pico-python*-Projekts  von Colin O'Flynn  
     <https://github.com/colinoflynn/pico-python>
 - die C-Treiber aus dem Pico Technology Software Development Kit  
-    <https://www.picotech.com/downloads>
+    <https://labs.picotech.com/raspbian>
 
-Zur Vereinfachung der Installation werden Installationsdateien
-für benötigte externe Pakete und für die Module dieses Pakets  
-im *pip*-Wheel-Format im Unterverzeichnis *./whl*/ bereitgestellt .
+Zur Vereinfachung der Installation werden Installationsdateien für benötigte externe Pakete und für die Module dieses Pakets als Debian Installationsdateien im *.deb*-Format oder als python-Module im
+*pip*-Wheel-Format im Unterverzeichnis *./installlibs*/ bereitgestellt.
 
-Die Module zur Visualisierung hängen von *matplotlib.pyplot* , *Tkinter* und *pyQt5* ab, die ebenfalls installiert sein müssen.
+Die Module zur Visualisierung hängen von *matplotlib.pyplot* , *Tkinter* und *pyQt5* ab, die ebenfalls noch installiert werden müssen.
 
-Nach dem Einrichten Ihres Raspberry Pi mit dem aktuellen Debian-Release *stretch* sollten die folgenden Schritte in einem Konsolenfenster auf der Kommandozeile durchgeführt werden, um alle erforderlichen Pakete zu installieren:
-
+Allen notwendigen Bibliotheken können bequem durch Ausführen des Scripts *installlibs.sh*
+installiert werden:
 
 ```bash
+cd git/PhyPiDAQ
+installlibs.sh
+```
+
+Die ausgeführten Schritte sind die folgenden:
+
+```bash
+# script installlibs.sh
+
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install python3-scipy
@@ -212,15 +232,19 @@ sudo apt-get install libatlas-base-dev # wird benoetigt für neueste Version von
 
 sudo pip3 install pyyaml
 
-# Beziehen des PhyPiDAQ Codes und aller Software-Abhaengigkeiten
-mkdir git
-cd git
-git clone https://github.com/GuenterQuast/PhyPiDAQ
-cd PhyPiDAQ/whl
-sudo pip3 install *.whl
+sudo pip3 install installlibs/whl/*.whl
+
+# Treiber für PicoScope 2000 und 2000B
+sudo dpkg -i installlibs/picoscopelibs/*.deb
+
+sudo usermod -a -G tty pi # USB-Zugang für user pi gewaehren
+
 ```
 
-Um die PicoTech-Treiber für PicoScope USB-Geräte zu installieren, muss das picotech-raspbian-Repository hinzugefügt werden:
+
+
+Die Treiber für PicoTech-Oszilloskope können auch von der Webseite des Herstellers bezogen
+werden; das picotech-raspbian-Repository kann dazu hinzugefügt werden:
 
 1. Öffnen Sie die  Datei /etc/apt/sources.list über die Kommandozeile mit `sudo nano /etc/apt/sources.list`.  
     ![](./images/open_etc_apt_sources_list.png)
@@ -231,11 +255,11 @@ Um die PicoTech-Treiber für PicoScope USB-Geräte zu installieren, muss das pic
 
 <div style="page-break-after: always;"></div>
 
-Nachdem Sie das PicoTech-Repository hinzugefügt haben, sollten die folgenden Schritte auf der Kommandozeile durchgeführt werden.
+Nun können die Treiber für PicoScope-Geräte mit *apt-get* eingebunden und ggf. aktualisiert werden: 
 
 ```bash
-sudo apt-get update
 wget -O - http://labs.picotech.com/debian/dists/picoscope/Release.gpg.key | sudo apt-key add -
+sudo apt-get update
 sudo apt-get install libps2000
 sudo apt-get install libps2000a
 
@@ -243,9 +267,11 @@ sudo apt-get install libps2000a
 sudo usermod -a -G tty pi
 ```
 
+
+
 **Starten Sie Ihren Raspberry Pi nach der Installation neu!**
 
-### Didaktische Anmerkungen
+### Anmerkungen
 
 Schüler oder Studierende zu Beginn mit dem vollen Umfang des Pakets *PhyPiDAQ* zu konfrontieren, ist aus didaktischer Sicht wenig angebracht. Stattdessen wird empfohlen, ein Arbeitsverzeichnis zu erstellen und benötigte Beispiele von dort in ein eigenes Arbeitsverzeichnis zu kopieren. Dies wird durch folgende Befehle erreicht:
 

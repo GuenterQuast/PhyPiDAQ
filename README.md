@@ -180,7 +180,19 @@ Examples of other devices like the analog-to-digital converter MCP3008, of rate 
 
 ## Installation of PhyPiDAQ on a Raspberry Pi
 
-This package relies on code from other packages providing the drivers for the supported devices:
+**Get PhyPiDAQ code and dependencies**
+
+After setting up your Raspberry pi with the most recent version of the Debian Release *stretch*, enter the following commands in the console window:
+
+```bash
+mkdir git
+cd git
+git clone https://github.com/GuenterQuast/PhyPiDAQ
+```
+
+
+
+The PhyPiDAQ package relies on code from other packages providing the drivers for the supported devices and libraries for data visualisation:
 
 - the Adafruit Pyhon MCP3008 library  
      <https://github.com/adafruit/Adafruit_Python_MCP3008>
@@ -195,16 +207,26 @@ This package relies on code from other packages providing the drivers for the su
 - the  *python* bindings of the *pico-python* project by Colin O'Flynn  
      <https://github.com/colinoflynn/pico-python>
 - the low-level drivers contained in the Pico Technology Software Development Kit   
-    <https://www.picotech.com/downloads>
+    <https://labs.picotech.com/raspbian>
 
 For convenience, installation files for external packages and for modules of this package 
-in pip wheel format are provided in sub-directory *./whl*. 
+in pip wheel format are provided in sub-directory *./installlibs*. 
 
 The visualization modules depend on *matplotlib.pyplot*, *Tkinter* and *pyQt5*, which must also be installed.
 
-After setting up your Raspberry Pi with the actual stable Debian release *stretch*, the following steps should be taken to update and install all necessary packages:
+For your convenience, the script *installlibs.sh* installs all components needed for PhyPiDAQ. Simply execute
+the script *installlibs.sh* once on the command line:
 
 ```bash
+cd git/PhyPiDAQ
+install.sh
+```
+
+The steps performed by the script are are the following:
+
+```bash
+# script installlibs.sh
+
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install python3-scipy
@@ -214,16 +236,17 @@ sudo apt-get install libatlas-base-dev # needed by latest version of numpy
 
 sudo pip3 install pyyaml
 
-# get PhyPiDAQ code and dependencies
-mkdir git
-cd git
-git clone https://github.com/GuenterQuast/PhyPiDAQ
-cd PhyPiDAQ/whl
-sudo pip3 install *.whl
+sudo pip3 install installlibs/whl/*.whl
+
+# install drivers for PicoScope 2000 and 2000B 
+sudo dpkg -i installlibs/picoscopelibs/*.deb
+
+sudo usermod -a -G tty pi # USB access for user pi
 ```
 <div style="page-break-after: always;"></div>
 
-To install the PicoTech base drivers for PicoScope USB devices the picotech raspbian repository has to be included:
+The drivers for PicoScope oscilloscopes can also be installed from the repository of the vendor, which
+may be included as follows:
 
 1. Open file /etc/apt/sources.list by `sudo nano /etc/apt/sources.list`.   
     ![](./images/open_etc_apt_sources_list.png)
@@ -234,11 +257,12 @@ To install the PicoTech base drivers for PicoScope USB devices the picotech rasp
 
 <div style="page-break-after: always;"></div>
 
-After including the PicoTech repository the following steps should be taken.
+Now the drivers for drivers for the various PicoScope devices can be included end eventually
+updated with *apt-get*:
 
 ```bash
-sudo apt-get update
 wget -O - http://labs.picotech.com/debian/dists/picoscope/Release.gpg.key | sudo apt-key add -
+sudo apt-get update
 sudo apt-get install libps2000
 sudo apt-get install libps2000a
 
@@ -246,11 +270,15 @@ sudo apt-get install libps2000a
 sudo usermod -a -G tty pi
 ```
 
+
+
 **Reboot your Raspberry Pi after the installation!**
 
-### Educational remarks
 
-*PhyPiDAQ* is meant to be an educational tool to introduce students to the concepts of digital data acquisition, visualisation and analysis. Confronting students with the full contents of this package is therefore not appropriate. Instead, it is recommended to create a working directory and copy examples from there to the student's working directory. This is achieved via the following commands:
+
+### Remarks
+
+*PhyPiDAQ* is meant to be an educational tool.  Confronting students with the full contents of this package is therefore not appropriate. Instead, it is recommended to create a working directory and copy examples from there to the student's working directory. This is achieved via the following commands:
 
 ```bash
 # create PhyPi working directory and make examples and config files available
