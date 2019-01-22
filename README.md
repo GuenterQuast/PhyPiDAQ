@@ -219,7 +219,7 @@ the script *installlibs.sh* once on the command line:
 
 ```bash
 cd git/PhyPiDAQ
-install.sh
+installlibs.sh
 ```
 
 The steps performed by the script are are the following:
