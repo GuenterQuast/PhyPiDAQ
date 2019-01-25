@@ -219,10 +219,12 @@ the script *installlibs.sh* once on the command line:
 
 ```bash
 cd git/PhyPiDAQ
-installlibs.sh
+./installlibs.sh
 ```
 
-The steps performed by the script are are the following:
+The installation is now done and *PhyPiDAQ* is ready to be used.
+
+For completeness, a description of the installallation process is given here. The steps performed by the script are are the following:
 
 ```bash
 # script installlibs.sh
@@ -233,11 +235,9 @@ sudo apt-get install python3-scipy
 sudo apt-get install python3-matplotlib
 sudo apt-get install python3-pyqt5
 sudo apt-get install libatlas-base-dev # needed by latest version of numpy
-
 sudo pip3 install pyyaml
-
+# pyhton drivers for sensors and devices
 sudo pip3 install installlibs/whl/*.whl
-
 # install drivers for PicoScope 2000 and 2000B 
 sudo dpkg -i installlibs/picoscopelibs/*.deb
 
@@ -245,8 +245,7 @@ sudo usermod -a -G tty pi # USB access for user pi
 ```
 <div style="page-break-after: always;"></div>
 
-The drivers for PicoScope oscilloscopes can also be installed from the repository of the vendor, which
-may be included as follows:
+The drivers for PicoScope oscilloscopes may also be installed from the repository of the vendor, which is included as follows:
 
 1. Open file /etc/apt/sources.list by `sudo nano /etc/apt/sources.list`.   
     ![](./images/open_etc_apt_sources_list.png)

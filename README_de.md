@@ -205,8 +205,7 @@ PhyPiDAQ* basiert auf Code aus anderen Paketen, die die Treiber für die unterst
 - die C-Treiber aus dem Pico Technology Software Development Kit  
     <https://labs.picotech.com/raspbian>
 
-Zur Vereinfachung der Installation werden Installationsdateien für benötigte externe Pakete und für die Module dieses Pakets als Debian Installationsdateien im *.deb*-Format oder als python-Module im
-*pip*-Wheel-Format im Unterverzeichnis *./installlibs*/ bereitgestellt.
+Zur Vereinfachung der Installation werden Installationsdateien für benötigte externe Pakete und für die Module dieses Pakets als Debian Installationsdateien im *.deb*-Format oder als python-Module im *pip*-Wheel-Format im Unterverzeichnis *./installlibs*/ bereitgestellt.
 
 Die Module zur Visualisierung hängen von *matplotlib.pyplot* , *Tkinter* und *pyQt5* ab, die ebenfalls noch installiert werden müssen.
 
@@ -215,25 +214,22 @@ installiert werden:
 
 ```bash
 cd git/PhyPiDAQ
-installlibs.sh
+./installlibs.sh
 ```
 
-Die ausgeführten Schritte sind die folgenden:
+Damit ist die Installation schon abgeschlossen. Die dabei  ausgeführten Schritte sind im folgenden beschrieben:
 
 ```bash
 # script installlibs.sh
-
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install python3-scipy
 sudo apt-get install python3-matplotlib
 sudo apt-get install python3-pyqt5
 sudo apt-get install libatlas-base-dev # wird benoetigt für neueste Version von numpy
-
 sudo pip3 install pyyaml
-
+# Treiber for unterstützte Sensoren und Komponenten
 sudo pip3 install installlibs/whl/*.whl
-
 # Treiber für PicoScope 2000 und 2000B
 sudo dpkg -i installlibs/picoscopelibs/*.deb
 
