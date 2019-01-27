@@ -300,7 +300,6 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   DisplayModule = PhyPiConfDict['DisplayModule']
   if Formulae: from math import *   # make math functions available
 
-  thrds=[]
   procs=[]
 
   cmdQ =  mp.Queue(1) # Queue for command input
@@ -309,6 +308,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
              args=(DLmpQ, PhyPiConfDict, DisplayModule , cmdQ) ) )
 #                   Queue    config        ModuleName    commandQ
 
+  thrds=[]
   thrds.append(threading.Thread(name='kbdInput', target = kbdInput, 
                args = (cmdQ,)  ) )
 #                      Queue       
@@ -319,15 +319,25 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     prc.start()
     print(' -> starting process ', prc.name, ' PID=', prc.pid)
 
-  ACTIVE = True # thread(s) active 
-  # start threads
+  ACTIVE = True # sub-processes active 
+  
+  start_paused = True
+  if start_paused:
+  # start in paused-mode
+    DAQ_ACTIVE = False # Data Acquisition inactive  # start threads
+    print('  starting in Paused mode - type R to resme')
+  else:
+    DAQ_ACTIVE = True # Data Acquisition active
+
   for thrd in thrds:
     print(' -> starting thread ', thrd.name)
     thrd.deamon = True
     thrd.start()
 
+  # set up space for data
   sigdat = np.zeros(NChannels)
-  DAQ_ACTIVE = True  # Data Acquisition active    
+
+#  DAQ_ACTIVE = True  # Data Acquisition active    
 # -- LOOP 
   try:
     cnt = 0

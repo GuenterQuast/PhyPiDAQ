@@ -81,17 +81,28 @@ def mpTkDisplay(Q, conf,
 # end of yieldEvt_fromQ
     sys.exit()
 
-  def cmdResume(_event=None):
-    cmdQ.put('R')
+
+# set initial state
+  def setInitialPaused(): # usually, start in Paused mode
+    buttonP.config(text='paused', fg='grey', state=Tk.DISABLED)
+    buttonR.config(state=Tk.NORMAL, text='start')
+
+  def setPaused():
+    buttonP.config(text='paused', fg='grey', state=Tk.DISABLED)
+    buttonR.config(state=Tk.NORMAL, text='resume')
+
+  def setRunning():
     buttonP.config(text='Pause', underline=0, fg='blue', state=Tk.NORMAL)
     buttonR.config(state=Tk.DISABLED)
 
+  def cmdResume(_event=None):
+    cmdQ.put('R')
+    setRunning()
+
   def cmdPause(_event=None):
     cmdQ.put('P')
-    buttonP.config(text='paused', fg='grey', state=Tk.DISABLED)
-    buttonR.config(state=Tk.NORMAL)
-    
-
+    setPaused() 
+   
   def cmdEnd(_event=None):
     cmdQ.put('E')
 
@@ -163,6 +174,9 @@ def mpTkDisplay(Q, conf,
   canvas.draw()
   canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
   canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+# set initial state
+  setInitialPaused() # usually, start in Paused mode
 
 # set up matplotlib animation
   tw = max(WaitTime-100., 0.5) # smaller than WaitTime to allow for processing
