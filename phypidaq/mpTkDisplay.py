@@ -81,15 +81,15 @@ def mpTkDisplay(Q, conf,
 # end of yieldEvt_fromQ
     sys.exit()
 
-
+# define bindinds for graphical command buttons
 # set initial state
   def setInitialPaused(): # usually, start in Paused mode
     buttonP.config(text='paused', fg='grey', state=Tk.DISABLED)
-    buttonR.config(state=Tk.NORMAL, text='start')
+    buttonR.config(state=Tk.NORMAL, text='Resume/start')
 
   def setPaused():
     buttonP.config(text='paused', fg='grey', state=Tk.DISABLED)
-    buttonR.config(state=Tk.NORMAL, text='resume')
+    buttonR.config(state=Tk.NORMAL, text='Resume')
 
   def setRunning():
     buttonP.config(text='Pause', underline=0, fg='blue', state=Tk.NORMAL)
@@ -121,6 +121,16 @@ def mpTkDisplay(Q, conf,
 
   interval = conf['Interval']
   WaitTime = interval * 1000 # in ms
+  
+  if 'startActive' in conf:
+    startActive = conf['startActive'] # start in active mode
+  else:
+    startActive = False
+
+  if 'DAQCntrl' in conf:       # enable control buttons
+    DAQCntrl = conf['DAQCntrl']
+  else:
+    DAQCntrl = True
 
   figDG = DG.fig
 
@@ -135,48 +145,51 @@ def mpTkDisplay(Q, conf,
        root.destroy()
   root.protocol("WM_DELETE_WINDOW", _delete_window)
 
-
-# Comand buttons
+# initialize status and control field
   frame = Tk.Frame(master=root)
   frame.grid(row=0, column=8)
   frame.pack(padx=5, side=Tk.BOTTOM)
+  if DAQCntrl:
+# initialize Comand buttons
+    buttonE = Tk.Button(frame, text='End', underline=0, fg='red', command=cmdEnd)
+    buttonE.grid(row=0, column=8)
+    root.bind('E', cmdEnd)
 
-  buttonE = Tk.Button(frame, text='End', underline=0, fg='red', command=cmdEnd)
-  buttonE.grid(row=0, column=8)
-  root.bind('E', cmdEnd)
+    blank = Tk.Label(frame, width=7, text="")
+    blank.grid(row=0, column=7)
 
-  blank = Tk.Label(frame, width=7, text="")
-  blank.grid(row=0, column=7)
+    clock = Tk.Label(frame)
+    clock.grid(row=0, column=5)
 
-  clock = Tk.Label(frame)
-  clock.grid(row=0, column=5)
-
-  buttonSv = Tk.Button(frame, width=8, text='save', underline=0, fg='purple',
+    buttonSv = Tk.Button(frame, width=8, text='Save', underline=0, fg='purple',
                    command=cmdSave)
-  buttonSv.grid(row=0, column=4)
-  root.bind('S', cmdSave)
+    buttonSv.grid(row=0, column=4)
+    root.bind('S', cmdSave)
 
-  buttonP = Tk.Button(frame, width=8, text='Pause', underline=0,  fg='blue',
+    buttonP = Tk.Button(frame, width=8, text='Pause', underline=0,  fg='blue',
                    command=cmdPause)
-  buttonP.grid(row=0, column=3)
-  root.bind('P', cmdPause)
+    buttonP.grid(row=0, column=3)
+    root.bind('P', cmdPause)
 
-  buttonR = Tk.Button(frame, width=8, text='Resume', underline=0, fg='blue',
+    buttonR = Tk.Button(frame, width=8, text='Resume', underline=0, fg='blue',
                     command=cmdResume)
-  buttonR.grid(row=0, column=2)
-  buttonR.config(state=Tk.DISABLED)
-  root.bind('R', cmdResume)
+    buttonR.grid(row=0, column=2)
+    buttonR.config(state=Tk.DISABLED)
+    root.bind('R', cmdResume)
 
+  # set up fild for status
   LblStatus = Tk.Label(frame, width=13, text="")
   LblStatus.grid(row=0, column=0)
 
+  # set up window for graphics output
   canvas = FigureCanvasTkAgg(figDG, master=root)
   canvas.draw()
   canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
   canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
 
 # set initial state
-  setInitialPaused() # usually, start in Paused mode
+  if not startActive and DAQCntrl:
+    setInitialPaused() # start in Paused mode
 
 # set up matplotlib animation
   tw = max(WaitTime-100., 0.5) # smaller than WaitTime to allow for processing

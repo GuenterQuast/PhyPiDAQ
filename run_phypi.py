@@ -128,14 +128,17 @@ def setup():
     print(" !!! read-out intervals < 0.05 s not reliable, setting to 0.05 s")
     PhyPiConfDict['Interval'] = 0.05
 
-  if 'XYmode' not in PhyPiConfDict:
+  if 'XYmode' not in PhyPiConfDict:  # default is XY mode off
     PhyPiConfDict['XYmode'] = False
 
-  if 'DataFile' not in PhyPiConfDict:
+  if 'DataFile' not in PhyPiConfDict:  # default is not to write output file
     PhyPiConfDict['DataFile'] = None
 
-  if 'DisplayModule' not in PhyPiConfDict:
+  if 'DisplayModule' not in PhyPiConfDict: # default display is DataLogger
     PhyPiConfDict['DisplayModule'] = 'DataLogger'
+
+  if 'startActive' not in PhyPiConfDict:  # default is to start in Paused mode
+    PhyPiConfDict['startActive'] = False
 
 # read Device configuration(s) and instantiate device handler(s)
   if 'DeviceFile' in PhyPiConfDict:
@@ -322,12 +325,12 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   ACTIVE = True # sub-processes active 
   
   start_paused = True
-  if start_paused:
+  if PhyPiConfDict['startActive']:
+    DAQ_ACTIVE = True # Data Acquisition active
+  else:
   # start in paused-mode
     DAQ_ACTIVE = False # Data Acquisition inactive  # start threads
-    print('  starting in Paused mode - type R to resme')
-  else:
-    DAQ_ACTIVE = True # Data Acquisition active
+    print('  starting in Paused mode - type R to resume')
 
   for thrd in thrds:
     print(' -> starting thread ', thrd.name)
@@ -392,7 +395,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   finally:
     ACTIVE = False
     if DatRec: DatRec.close()
-    DEV.closeDevice() # close down hardware device
+    for DEV in DEVs:
+      DEV.closeDevice() # close down hardware device
     time.sleep(1.)
     stop_processes(procs)  # stop all sub-processes in list
     print('*==* ' + sys.argv[0] + ': end -      press <ret>')
