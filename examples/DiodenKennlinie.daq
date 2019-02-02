@@ -30,15 +30,15 @@ ChanColors: [red, darkred, green, darkgreen, blue, darkblue]
 
 # Channel Limits 
 ChanLimits: 
- - [0., 3.1]   # U D1
- - [0., 30.]   # I D1
- - [0., 3.1]   # U D2
- - [0., 30.]   # I D2
- - [0., 3.1]   # U D3
- - [0., 30.]   # I D3
+ - [0., 3.5]   # U D1
+ - [0., 10.]   # I D1
+ - [0., 3.5]   # U D2
+ - [0., 10.]   # I D2
+ - [0., 3.5]   # U D3
+ - [0., 10.]   # I D3
 
-#DisplayModule: DataLogger
-DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+DisplayModule: DataLogger
+#DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
 Chan2Axes: [0,1,0,1,0,1]
 Interval: 0.1                   # logging interval         
 XYmode:   true                  # enable/disable XY-display
