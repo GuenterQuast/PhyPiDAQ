@@ -5,6 +5,9 @@ v1.0dev
 
 v0.9.1p2
 
+- start of data acquisition in paused mode 
+- added pocoscope installation libraries and script installlibs.sh
+- support for INA219 current sensor
 - documented all *.daq Files
   - made sure channel information in DataLogger and DataGraphs are initialised
   - added option xyPlots to DataLogger an DataGraphs to select xy-Plots
