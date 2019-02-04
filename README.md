@@ -360,6 +360,9 @@ right-clicking the icon and use the dialog "Properties".
 
 - `examples/read_analog.py`  
     very minimalist example to read one channel from an analog-to-ditigal converter
+- examples/display_analog.py`  
+    very minimalist example to read one channel from an analog-to-ditigal converter and
+    display data as a history graph
 - `examples/read_INA210.py`  
     read data from INA219 current and voltage sensor
 - ``examples/read_18B20.py``s

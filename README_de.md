@@ -597,6 +597,9 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 
 - `examples/read_analog.py`  
     sehr minimalistisches Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
+- `examples/read_analog.py`  
+    sehr minimalistisches Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
+    mit grafischer Anzeige des zeitlichen Verlaufs
 - `examples/read_INA210.py`  
     Beispiel zum Auslesen des Strom- und Spannungssensors INA219
 - ``examples/read_18B20.py``  
