@@ -14,7 +14,9 @@ from phypidaq.Display import *
 
 # create device and display ...
 device = ADS1115Config( {'ADCChannels': [0,1]} ) # channels 0 and 1
-display = Display( interval=0.1, confdict={'NChannels': 2} ) # display 2 channels
+  # dictionary with graphics options
+ddict = {'NChannels': 2, 'XYmode': False} 
+display = Display( interval=0.1, confdict=ddict) # display 2 channels
 # ... and initalize 
 device.init()
 display.init()
@@ -30,7 +32,7 @@ try:
   while True:
     device.acquireData(dat)
     dT = time.time() - T0
-    print('%.2g, %.4g' %(dT, dat) )
+    print('%.2g, %.4g %.4g' %(dT, dat[0], dat[1]) )
     display.show(dat)
 except KeyboardInterrupt:
   print('ctrl-C received - ending')

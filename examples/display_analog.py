@@ -30,7 +30,7 @@ try:
   while True:
     device.acquireData(dat)
     dT = time.time() - T0
-    print('%.2g, %.4g' %(dT, dat) )
+    print('%.1f, %.4g' %(dT, dat) )
     display.show(dat)
 except KeyboardInterrupt:
   print('ctrl-C received - ending')

@@ -13,6 +13,8 @@ class Display(object):
 
   def __init__(self, interval = 0.1, confdict = None):
 
+    print(confdict)
+
     if confdict!=None: 
       self.confdict = confdict      
     else:
@@ -40,17 +42,16 @@ class Display(object):
     if 'NChannels' not in self.confdict:  
       self.confdict['NChannels'] = 1
 
+    NC = self.confdict['NChannels']
     if 'ChanLimits' not in self.confdict:
-      self.confdict['ChanLimits'] = [ [0., 5.] ]
-
+      self.confdict['ChanLimits'] = [ [0., 5.] ]*NC
     if 'ChanNams' not in self.confdict:
-      self.confdict['ChanNams'] = ['']*self.confdict['NChannels']
-
+      self.confdict['ChanNams'] = ['']*NC 
     if 'ChanUnits' not in self.confdict:
-      self.confdict['ChanUnits'] = ['V']*self.confdict['NChannels']
+      self.confdict['ChanUnits'] = ['V']*NC
 
     if 'ChanLabels' not in self.confdict:
-      self.confdict['ChanLabesl'] = ['']*self.confdict['NChannels']
+      self.confdict['ChanLabesl'] = ['']*NC
 
 # set display control options
     if 'startActive' not in self.confdict:  # start with active data taking
