@@ -565,8 +565,8 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 - `phypidaq/PSConfig.py`  
     Klasse für PicoScope USB-Oszilloskope
 
-- `phypidaq/mpTkDisplay.py`  
-    Hintergrund-Prozess zur Datenvisualisierung
+- `phypidaq/Display.py`  
+    Interface und Hintergrund-Prozess zur Datenvisualisierung
 
 - `phypidaq/DataLogger.py`  
     Klasse zur Anzeige von Datenverlauf und xy-Diagrammen

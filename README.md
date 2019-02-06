@@ -334,8 +334,8 @@ right-clicking the icon and use the dialog "Properties".
     class for MAX31865 resistance-to-digital converter
 - `phypidaq/PSConfig.py`  
     class for PicoScope USB oscilloscopes
-- `phypidaq/mpTkDisplay.py`  
-    background-process handling data visualisation
+- `phypidaq/Display.py`  
+    interface and background-process handling data visualisation
 - `phypidaq/DataLogger.py`  
     class for display of data histories and xy diagrams
 - `phypidaq/DataGraphs.py`  
