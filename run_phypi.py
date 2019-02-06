@@ -312,12 +312,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     PhyPiConfDict['DAQCntrl'] = True
   display = Display(interval = 0.1, confdict = PhyPiConfDict, cmdQ = cmdQ)
   display.init()
-# start keyboard control
-  kbdthrd=threading.Thread(name='kbdInput', target = kbdInput, args = (cmdQ,)  )
-#                                                                      Queue       
   ACTIVE = True #  background process(es) active
-  kbdthrd.daemon = True
-  kbdthrd.start()  
 
   if PhyPiConfDict['startActive']:
     DAQ_ACTIVE = True # Data Acquisition active
@@ -325,6 +320,12 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   # start in paused-mode
     DAQ_ACTIVE = False # Data Acquisition inactive  # start threads
     print('  starting in Paused mode - type R to resume')
+
+# start keyboard control
+  kbdthrd=threading.Thread(name='kbdInput', target = kbdInput, args = (cmdQ,)  )
+#                                                                      Queue       
+  kbdthrd.daemon = True
+  kbdthrd.start()  
 
   # set up space for data
   sigdat = np.zeros(NChannels)
