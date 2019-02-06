@@ -11,10 +11,9 @@ from phypidaq.mpTkDisplay import mpTkDisplay
 class Display(object):
   '''configure and control graphical data displays'''
 
-  def __init__(self, interval = 0.1, confdict = None):
+  def __init__(self, interval = 0.1, confdict = None, cmdQ = None):
 
-    print(confdict)
-
+    self.cmdQ = cmdQ
     if confdict!=None: 
       self.confdict = confdict      
     else:
@@ -24,7 +23,7 @@ class Display(object):
     if 'Interval' not in self.confdict:
       self.confdict['Interval'] = interval
     else:
-      interval = self.confict['Interval']
+      interval = self.confdict['Interval']
     if interval < 0.05:
       print(" !!! read-out intervals < 0.05 s not reliable, setting to 0.05 s")
       self.confdict['Interval'] = 0.05
@@ -57,19 +56,18 @@ class Display(object):
     if 'startActive' not in self.confdict:  # start with active data taking
       self.self.confdict['startActive'] = True
 
-    if 'DAQCbtrk' not in self.confdict:  # no run control buttons
+    if 'DAQCntrl' not in self.confdict:  # no run control buttons
       self.confdict['DAQCntrl'] = False
 
   def init(self):
     '''create data transfer queue and start display process'''
  
     self.procs=[]
-    cmdQ = None
     self.DmpQ = mp.Queue(1) # Queue for data transfer to sub-process
     DisplayModule = self.confdict['DisplayModule']
     self.procs.append(mp.Process(name=DisplayModule, target = mpTkDisplay, 
-           args=(self.DmpQ, self.confdict, DisplayModule , cmdQ) ) )
-#                   Queue      config       ModuleName    commandQ
+           args=(self.DmpQ, self.confdict, DisplayModule , self.cmdQ) ) )
+#                   Queue      config       ModuleName      commandQ
 
     for prc in self.procs:
       prc.deamon = True

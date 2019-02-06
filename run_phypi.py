@@ -14,7 +14,8 @@ from __future__ import absolute_import
 import sys, os, time, yaml, numpy as np, threading, multiprocessing as mp
 
 # display module
-from phypidaq.mpTkDisplay import mpTkDisplay
+from phypidaq.Display import *
+
 # more imports from phypidaq depend on configuration options
 
 from phypidaq.helpers import generateCalibrationFunction, stop_processes,kbdwait
@@ -303,39 +304,27 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   DisplayModule = PhyPiConfDict['DisplayModule']
   if Formulae: from math import *   # make math functions available
 
-  procs=[]
 
   cmdQ =  mp.Queue(1) # Queue for command input
-  DLmpQ = mp.Queue(1) # Queue for data transfer to sub-process
-  procs.append(mp.Process(name=DisplayModule, target = mpTkDisplay, 
-             args=(DLmpQ, PhyPiConfDict, DisplayModule , cmdQ) ) )
-#                   Queue    config        ModuleName    commandQ
+  if 'startActive' not in PhyPiConfDict:  # start in paused-mode
+    PhyPiConfDict['startActive'] = False
+  if 'DAQCntrl' not in PhyPiConfDict:  # enable run control buttons
+    PhyPiConfDict['DAQCntrl'] = True
+  display = Display(interval = 0.1, confdict = PhyPiConfDict, cmdQ = cmdQ)
+  display.init()
+# start keyboard control
+  kbdthrd=threading.Thread(name='kbdInput', target = kbdInput, args = (cmdQ,)  )
+#                                                                      Queue       
+  ACTIVE = True #  background process(es) active
+  kbdthrd.daemon = True
+  kbdthrd.start()  
 
-  thrds=[]
-  thrds.append(threading.Thread(name='kbdInput', target = kbdInput, 
-               args = (cmdQ,)  ) )
-#                      Queue       
-
-# start subprocess(es)
-  for prc in procs:
-    prc.deamon = True
-    prc.start()
-    print(' -> starting process ', prc.name, ' PID=', prc.pid)
-
-  ACTIVE = True # sub-processes active 
-  
-  start_paused = True
   if PhyPiConfDict['startActive']:
     DAQ_ACTIVE = True # Data Acquisition active
   else:
   # start in paused-mode
     DAQ_ACTIVE = False # Data Acquisition inactive  # start threads
     print('  starting in Paused mode - type R to resume')
-
-  for thrd in thrds:
-    print(' -> starting thread ', thrd.name)
-    thrd.deamon = True
-    thrd.start()
 
   # set up space for data
   sigdat = np.zeros(NChannels)
@@ -370,7 +359,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
         if Formulae: apply_formulae()
 
       # display data ...
-        DLmpQ.put(sigdat)
+        display.show(sigdat)
       # ... and record data to disc
         if DatRec: DatRec(sigdat)
 
@@ -397,7 +386,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     if DatRec: DatRec.close()
     for DEV in DEVs:
       DEV.closeDevice() # close down hardware device
+    display.close()
     time.sleep(1.)
-    stop_processes(procs)  # stop all sub-processes in list
+     
     print('*==* ' + sys.argv[0] + ': end -      press <ret>')
     sys.exit()
