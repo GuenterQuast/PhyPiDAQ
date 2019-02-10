@@ -108,17 +108,7 @@ def setup():
   except Exception as e:
     print('!!! failed to read configuration file ' + PhyPiConfFile)
     print(str(e))
-  # exit in this case ...
-  #  kbdwait()
     exit(1)
-  # ... or eventually continue with defaults ???
-  #  print('   using default settings')
-  # define default config dictionary
-  #  PhyPiConfDict={}
-  #  PhyPiConfDict['DeviceFile'] = 'ADS1115Config.yaml'
-  #  PhyPiConfDict['ChanUnits'] = ['V', 'V']  
-  #  PhyPiConfDict['ChanLabels'] = ['?', '?']  
-  #  PhyPiConfDict['ChanColors'] = ['darkblue', 'sienna'] 
 
 # set default options:
   if 'Interval' not in PhyPiConfDict:
@@ -249,7 +239,7 @@ def setup():
   print (yaml.dump(PhyPiConfDict) )
 
 def apply_calibs():
-  global sigdat
+  global data
   '''
     apply calibration functions to hardware channels    
 
@@ -262,13 +252,13 @@ def apply_calibs():
 
   for i in range(NHWChannels):
     if CalibFuncts[i] is not None:
-      sigdat[i] = CalibFuncts[i](sigdat[i])
+      data[i] = CalibFuncts[i](data[i])
 
 def apply_formulae():
-  global sigdat
+  global data
   '''
     calculate new quantities from hardware channels c0, c1, ...
-     replace entries in sigdat by calculated quantities
+     replace entries in data by calculated quantities
   
     input:  - data from hardware channels
             - list of formulae 
@@ -285,12 +275,12 @@ def apply_formulae():
 
   #  copy data from hardware channels
   for ifc in range(NFormulae):
-    exec('c'+str(ifc) + '=sigdat['+str(ifc)+']')
+    exec('c'+str(ifc) + '=data['+str(ifc)+']')
 
   #  apply formulae to signal data
   for ifc in range(NFormulae):
     if Formulae[ifc]:
-        sigdat[ifc] = eval(Formulae[ifc])
+        data[ifc] = eval(Formulae[ifc])
 
 
 if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
@@ -328,7 +318,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   kbdthrd.start()  
 
   # set up space for data
-  sigdat = np.zeros(NChannels)
+  data = np.zeros(NChannels)
 
 #  DAQ_ACTIVE = True  # Data Acquisition active    
 # -- LOOP 
@@ -337,37 +327,28 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     T0 = time.time()
     brk = False
 
-    while True:
-
-      # regularly check for command input for long intervals
-      if interval > longInterval and DAQ_ACTIVE:
-        cmd = 0 
-        while not DLmpQ.empty():  # check for command input
-          if not cmdQ.empty():
-            cmd = decodeCommand(cmdQ)  
-            if cmd: break # got valid command
-          time.sleep( min(interval/100., 0.2) )
-        if cmd >= 2: break  # end command received
+    while ACTIVE:
          
       if DAQ_ACTIVE:
         cnt +=1
       # read data
         for i, DEV in enumerate(DEVs):
-          DEV.acquireData(sigdat[ChanIdx_ofDevice[i]:])
+          DEV.acquireData(data[ChanIdx_ofDevice[i]:])
       # calibrate raw readings
         if CalibFuncts: apply_calibs()
       # apply fromula(e) 
         if Formulae: apply_formulae()
 
       # display data ...
-        display.show(sigdat)
+        display.show(data)
+
       # ... and record data to disc
-        if DatRec: DatRec(sigdat)
+        if DatRec: DatRec(data)
 
-   # check for control input (from keyboard or display module)
-      if not cmdQ.empty():
-        if decodeCommand(cmdQ)>=2: break # end command received
+      # check for control input (from keyboard or display module)
+      if not cmdQ.empty(): decodeCommand(cmdQ)
 
+    # -- end while ACITVE 
     #print('\n' + sys.argv[0] + ': normal end') 
  
   except KeyboardInterrupt:

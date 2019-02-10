@@ -11,14 +11,16 @@ DeviceFile: BMP180Config.yaml
 #DisplayModule: DataLogger
 DisplayModule: DataGraphs
 Title: Temperature & Pressure
-
-Interval: 300.                  # logging interval         
+        
 ChanLabels: [Temperatur, Druck] # names and units for channels 
 ChanLimits: [[0.,30.],[970., 1030.]]
 
 ChanUnits: ['°C','hPa']
 ChanColors: [darkblue, darkgreen]    # channel colours in display
 XYmode:     false                  # enable XY-display
+
+Interval: 10.                  # logging interval 
+startActive: true              # start in "active" mode
 
 DataFile:   null                  # file name for output file 
 #DataFile:   testfile             # file name for output file 
