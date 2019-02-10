@@ -1,0 +1,13 @@
+# configuration for PhyPiDAQ 
+# Current (and Voltage and Power) with INA219
+
+# device configuration files 
+DeviceFile: INA219Config.yaml
+
+Interval: 0.1                  # logging interval         
+
+#DisplayModule: DataLogger
+DisplayModule: DataGraphs
+Title: Current & Voltage
+
+
