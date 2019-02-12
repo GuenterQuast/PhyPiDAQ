@@ -360,6 +360,9 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
       # ... and record data to disc
         if DatRec: DatRec(data)
 
+      else:   # paused mode
+        time.sleep( min(interval/10., 0.2) )
+
       # check for control input (from keyboard or display module)
       if not cmdQ.empty(): decodeCommand(cmdQ)
 
