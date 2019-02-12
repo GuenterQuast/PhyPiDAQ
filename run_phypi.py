@@ -296,11 +296,16 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
 
   cmdQ =  mp.Queue(1) # Queue for command input
+  datQ =  mp.Queue(1) # Queue to spy on data transfer inside class Display
   if 'startActive' not in PhyPiConfDict:  # start in paused-mode
     PhyPiConfDict['startActive'] = False
   if 'DAQCntrl' not in PhyPiConfDict:  # enable run control buttons
     PhyPiConfDict['DAQCntrl'] = True
-  display = Display(interval = 0.1, confdict = PhyPiConfDict, cmdQ = cmdQ)
+
+  display = Display(interval = 0.1, 
+                    confdict = PhyPiConfDict, 
+                    cmdQ = cmdQ,
+                    datQ = datQ )
   display.init()
   ACTIVE = True #  background process(es) active
 
@@ -329,6 +334,16 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
     while ACTIVE:
          
+      # regularly check for command input for long intervals
+      if interval > longInterval and DAQ_ACTIVE:
+        cmd = 0 
+        while not datQ.empty():  # check for command input
+          if not cmdQ.empty():
+            cmd = decodeCommand(cmdQ)  
+            if cmd: break # got valid command
+          time.sleep( min(interval/100., 0.2) )
+        if cmd >= 2: break  # end command received
+
       if DAQ_ACTIVE:
         cnt +=1
       # read data

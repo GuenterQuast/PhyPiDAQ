@@ -28,15 +28,22 @@ import matplotlib.pyplot as plt, matplotlib.animation as anim
 class Display(object):
   '''configure and control graphical data displays'''
 
-  def __init__(self, interval = 0.1, confdict = None, cmdQ = None):
+  def __init__(self, interval = 0.1, confdict = None, cmdQ = None, datQ=None):
+    '''Args: 
+         interval:  logging interal, eventually overwritten by entry in confdict
+         confdict:  dictionary with configuration
+         cmdQ:      multiprocessing Queue for command transfer to caller
+         datQ:      multiprocessing Queue for data transfer
+    '''
 
     self.cmdQ = cmdQ
+    self.datQ = datQ
     if confdict!=None: 
       self.confdict = confdict      
     else:
       self.confdict={}
 
-# set options for graphical display
+# set default options for graphical display
     if 'Interval' not in self.confdict:
       self.confdict['Interval'] = interval
     else:
@@ -79,7 +86,8 @@ class Display(object):
   def init(self):
     '''create data transfer queue and start display process'''
  
-    self.DmpQ = mp.Queue(1) # Queue for data transfer to sub-process
+    if self.datQ == None: 
+      self.datQ = mp.Queue(1) # Queue for data transfer to sub-process
     DisplayModule = self.confdict['DisplayModule']
     self.procs=[]
     self.procs.append(mp.Process(name=DisplayModule, 
@@ -92,7 +100,7 @@ class Display(object):
 
   def show(self, dat): 
     # send data to display process 
-    self.DmpQ.put(dat)
+    self.datQ.put(dat)
 
   def close(self):
     # shut-down sub-process(es) 
@@ -107,7 +115,7 @@ class Display(object):
         data is passed via multiprocessing.Queue
     '''
 
-    Q = self.DmpQ    # multiprocessing.Queue() for data 
+    Q = self.datQ    # multiprocessing.Queue() for data 
     conf = self.confdict # configuration
     cmdQ = self.cmdQ  # Queue to send commands back to calling process
  
