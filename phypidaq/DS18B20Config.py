@@ -39,7 +39,7 @@ class DS18B20Config(object):
     except Exception as e:
       print("DS18B20Config: Error initialising device - exit")
       print(str(e)) 
-     sys.exit(1)
+      sys.exit(1)
 
  # provide configuration parameters
     self.ChanNams = ['DS18B20']
