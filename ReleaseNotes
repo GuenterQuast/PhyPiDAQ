@@ -3,9 +3,11 @@ Release notes for PhyPiDAQ
 
 v1.0dev
 
-v0.92b
 
-  - added simple display (with minimal configuration)
+
+v0.92 February 13, 2019
+
+  - added simple display functionality (with minimal configuration)
 
 v0.9.1p2
 
@@ -16,7 +18,7 @@ v0.9.1p2
   - made sure channel information in DataLogger and DataGraphs are initialised
   - added option xyPlots to DataLogger an DataGraphs to select xy-Plots
   - number of formulae in run_phypi now may exceed number of hardware chnannels
-  - added DiodenKennlinie.daq to simultaneously record I(U) diagrams of three LEDs
+  - added DiodenKennlinie.daq to record I(U) diagrams of three LEDs
 
 v0.9.1p1
 
