@@ -197,6 +197,9 @@ git pull           # optional, falls Sie Ihre PhyPiDAQ-Installation aktualisiern
 
 Damit ist die Installation schon abgeschlossen und `PhyPiDAQ` ist bereit für den ersten Einsatz. 
 
+Die letzten Zeilen der Installationsvorschrift gelten auch, wenn eine schon installierte Version von
+`PhyPiDAQ` aktualisiert werden soll.
+
 
 
 **Anmerkung**
