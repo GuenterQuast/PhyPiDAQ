@@ -190,7 +190,45 @@ cd git
 git clone https://github.com/GuenterQuast/PhyPiDAQ
 ```
 
+For your convenience, the script *installlibs.sh* installs all components needed for PhyPiDAQ. Simply execute
+the script *installlibs.sh* once on the command line (without text after `#`):
 
+```bash
+cd ~/git/PhyPiDAQ  # change to installation directory 
+git pull           # eventually update to latest version of PhyPiDAQ
+./installlibs.sh  
+```
+
+The installation is now done and *PhyPiDAQ* is ready to be used.
+
+
+
+**Remark**
+
+*PhyPiDAQ* is meant to be an educational tool.  Confronting students with the full contents of this package is therefore not appropriate. Instead, it is recommended to create a working directory and copy examples from there to the student's working directory. This is achieved via the following commands:
+
+```bash
+# create PhyPi working directory and make examples and config files available
+cd ~/git/PhyPiDAQ
+./install_user.sh
+
+# provide icon to graphical user interface
+cp ~/git/PhyPiDAQ/phypi.desktop ~/Desktop
+```
+
+ You might also consider moving the *PhyPiDAQ* package to system space, e.g. /usr/local:
+
+```bash
+sudo mv ~/git/PhyPiDAQ /usr/local/
+```
+
+Please note that the paths in the example above must be adjusted in this case, e.g. ´~/git/` -> /usr/local/.
+The paths in *~/Desktop/phypi.desktop* must also be changed appropriately. This is most easily achieved by
+right-clicking the icon and use the dialog "Properties". 
+
+
+
+### Dependencies on external packages
 
 The PhyPiDAQ package relies on code from other packages providing the drivers for the supported devices and libraries for data visualisation:
 
@@ -214,17 +252,7 @@ in pip wheel format are provided in sub-directory *./installlibs*.
 
 The visualization modules depend on *matplotlib.pyplot*, *Tkinter* and *pyQt5*, which must also be installed.
 
-For your convenience, the script *installlibs.sh* installs all components needed for PhyPiDAQ. Simply execute
-the script *installlibs.sh* once on the command line:
-
-```bash
-cd git/PhyPiDAQ
-./installlibs.sh
-```
-
-The installation is now done and *PhyPiDAQ* is ready to be used.
-
-For completeness, a description of the installallation process is given here. The steps performed by the script are are the following:
+For completeness, the steps performed by the script `installlibs.sh` are documented here:
 
 ```bash
 # script installlibs.sh
@@ -270,33 +298,6 @@ sudo usermod -a -G tty pi
 ```
 
 
-
-**Reboot your Raspberry Pi after the installation!**
-
-
-
-### Remarks
-
-*PhyPiDAQ* is meant to be an educational tool.  Confronting students with the full contents of this package is therefore not appropriate. Instead, it is recommended to create a working directory and copy examples from there to the student's working directory. This is achieved via the following commands:
-
-```bash
-# create PhyPi working directory and make examples and config files available
-cd ~/git/PhyPiDAQ
-./install_user.sh
-
-# provide icon to graphical user interface
-cp ~/git/PhyPiDAQ/phypi.desktop ~/Desktop
-```
-
- You might also consider moving the *PhyPiDAQ* package to system space, e.g. /usr/local:
-
-```bash
-sudo mv ~/git/PhyPiDAQ /usr/local/
-```
-
-Please note that the paths in the example above must be adjusted in this case, e.g. ´~/git/` -> /usr/local/.
-The paths in *~/Desktop/phypi.desktop* must also be changed appropriately. This is most easily achieved by
-right-clicking the icon and use the dialog "Properties". 
 
 
 ## Overview of files contained in PhyPiDAQ 

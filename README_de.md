@@ -17,9 +17,7 @@ Die Beschreibung des zu Grunde liegenden Konzepts, eine Liste der empfohlenen Ko
 
 ## Schnellstart
 
-Nach der Installation - siehe unten - steht eine Reihe von einheitlichen Klassen für die Datenerfassung, Visualisierung und Aufzeichnung aus dem Unterverzeichnis
-`./phypidaq/` zur Verfügung. Jedes unterstützte Gerät benötigt eine spezifische Konfiguration, die aus Konfigurationsdateien im Unterverzeichnis `./config/` gelesen wird. Die Gesamtkonfiguration wird in Konfigurationsdateien vom Typ `.daq`
-angegeben, die spezifizieren, welche Geräte und Anzeigemodule verwendet werden sollen, welche Ausleserate, Kalibrierungen oder analytische Formeln für aufgezeichnete Daten gelten sollen, oder auch Bereiche und Achsenbeschriftungen der grafischen Ausgabe.
+Nach der Installation - siehe unten - steht eine Reihe von einheitlichen Klassen für die Datenerfassung, Visualisierung und Aufzeichnung aus dem Unterverzeichnis `./phypidaq/` zur Verfügung. Jedes unterstützte Gerät benötigt eine spezifische Konfiguration, die aus Konfigurationsdateien im Unterverzeichnis `./config/` gelesen wird. Die Gesamtkonfiguration wird in Konfigurationsdateien vom Typ `.daq` angegeben, die spezifizieren, welche Geräte und Anzeigemodule verwendet werden sollen, welche Ausleserate, Kalibrierungen oder analytische Formeln für aufgezeichnete Daten gelten sollen, oder auch Bereiche und Achsenbeschriftungen der grafischen Ausgabe.
 
 Die grafische Benutzeroberfläche `phypi.py` hilft bei der Verwaltung der Konfigurationsoptionen und kann zum Starten der Datenerfassung verwendet werden.
 In diesem Fall werden Konfigurationen und erzeugte Datendateien in einem dedizierten Unterverzeichnis in `$HOME/PhyPi` abgelegt. Der Name des Unterverzeichnisses wird von einem benutzerdefinierten Tag und dem aktuellen Datum und der Uhrzeit abgeleitet.
@@ -176,9 +174,9 @@ Beispiele für andere Geräte, wie den Analog-Digital-Wandler MCP3008, für Rate
 
 ## Installation von PhyPiDAQ auf dem Raspberry Pi
 
-**Beziehen des PhyPiDAQ Codes und aller Software-Abhaengigkeiten**
+**Beziehen des PhyPiDAQ Codes und einfache Installation**
 
-Geben Sie nach dem Einrichten Ihres Raspberry Pi mit dem aktuellen Debian-Release *stretch* im Konsolenfenster folgende Befehle ein: 
+Bitte beachten Sie , dass Ihr Raspberry Pi für die folgenden Schritte mit dem Internet verbunden sein muss. Zur Installation von `PhyPiDAQ` geben Sie nach dem Einrichten Ihres Raspberry Pi mit dem aktuellen Debian-Release *stretch* im Konsolenfenster folgende Befehle ein : 
 
 ```bash
 mkdir git
@@ -188,7 +186,45 @@ git clone https://github.com/GuenterQuast/PhyPiDAQ
 
 
 
-PhyPiDAQ* basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte und  Bibliotheken für die Visualisierung bereitstellen:
+PhyPiDAQ* basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte und  Bibliotheken für die Visualisierung bereitstellen. Die notwendigen Befehle zu deren Installation sind
+im Scritp `installlibs.sh` zusammengefasst.  Geben Sie auf der Kommandozeile folgende Befehle ein (ohne den erklärenden Text nachdem `#`-Zeichen):
+
+```bash
+cd ~/git/PhyPiDAQ  # ins Installationsverzeichnis wechlsen
+git pull           # optional, falls Sie Ihre PhyPiDAQ-Installation aktualisiern möchten
+./installlibs.sh   # Installations-Script ausführen
+```
+
+Damit ist die Installation schon abgeschlossen und `PhyPiDAQ` ist bereit für den ersten Einsatz. 
+
+
+
+**Anmerkung**
+
+Schüler oder Studierende zu Beginn mit dem vollen Umfang des Pakets *PhyPiDAQ* zu konfrontieren, ist aus didaktischer Sicht wenig angebracht. Stattdessen wird empfohlen, ein Arbeitsverzeichnis zu erstellen und benötigte Beispiele von dort in ein eigenes Arbeitsverzeichnis zu kopieren. Dies wird durch folgende Befehle erreicht:
+
+```bash
+# Erzeugen eines Arbeitsverzeichnissen PhyPi und Kopieren von Beispielen und Konfigurationsdateien in das neu erzeugte Verzeichnis.
+cd ~/git/PhyPiDAQ
+./install_user.sh
+
+# klickbares Symbol auf dem Desktop zum Zugang zu phypi
+cp ~/git/PhyPiDAQ/phypi.desktop ~/Desktop
+```
+
+Um versehentliches Überschreiben von Dateien im Paket *PhyPiDAQ* zu vermeiden, sollte eine Verschiebung bzw. Kopieren in den Systembereich in Erwägung gezogen werden, z. B. nach  /usr/local/:
+
+```bash
+sudo cp ~/git/PhyPiDAQ /usr/local/
+```
+
+Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angepasst werden. Dies wird am einfachsten durch Klicken mit der rechten Maustaste auf das *phypi*-Symbol erreicht. Im sich dann öffnenden Menu den Dialog "Eigenschaften" wählen und alle Pfade von  *~/git/*  ->  */usr/local/* ändern.
+
+
+
+### Dokumentation der Abhängigkeiten von externen Paketen
+
+Dies ist die Liste der externen Pakete, von denen `PhyPiDAQ` abhängt:
 
 - die Adafruit Python MCP3008 Bibliothek  
     <https://github.com/adafruit/Adafruit_Python_MCP3008>
@@ -209,15 +245,7 @@ Zur Vereinfachung der Installation werden Installationsdateien für benötigte e
 
 Die Module zur Visualisierung hängen von *matplotlib.pyplot* , *Tkinter* und *pyQt5* ab, die ebenfalls noch installiert werden müssen.
 
-Allen notwendigen Bibliotheken können bequem durch Ausführen des Scripts *installlibs.sh*
-installiert werden:
-
-```bash
-cd git/PhyPiDAQ
-./installlibs.sh
-```
-
-Damit ist die Installation schon abgeschlossen. Die dabei  ausgeführten Schritte sind im folgenden beschrieben:
+Die vom oben schon verwendeten Scritp `installlibs.sh`  ausgeführten Schritte sind die folgenden:
 
 ```bash
 # script installlibs.sh
@@ -265,33 +293,6 @@ sudo usermod -a -G tty pi
 
 
 
-**Starten Sie Ihren Raspberry Pi nach der Installation neu!**
-
-### Anmerkungen
-
-Schüler oder Studierende zu Beginn mit dem vollen Umfang des Pakets *PhyPiDAQ* zu konfrontieren, ist aus didaktischer Sicht wenig angebracht. Stattdessen wird empfohlen, ein Arbeitsverzeichnis zu erstellen und benötigte Beispiele von dort in ein eigenes Arbeitsverzeichnis zu kopieren. Dies wird durch folgende Befehle erreicht:
-
-
-```bash
-# Erzeugen eines Arbeitsverzeichnissen PhyPi und Kopieren von Beispielen und Konfigurationsdateien in das neu erzeugte Verzeichnis.
-cd ~/git/PhyPiDAQ
-./install_user.sh
-
-# klickbares Symbol auf dem Desktop zum Zugang zu phypi
-cp ~/git/PhyPiDAQ/phypi.desktop ~/Desktop
-```
-
-Um versehentliches Überschreiben von Dateien im Paket *PhyPiDAQ* zu vermeiden, sollte eine Verschiebung in den Systembereich in Erwägung gezogen werden, z. B. nach 
-/usr/local/:
-
-```bash
-sudo mv ~/git/PhyPiDAQ /usr/local/
-```
-
-Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angepasst werden. Dies wird am einfachsten durch Klicken mit der rechten Maustaste auf das *phypi*-Symbol erreicht. Im sich dann öffnenden Menu den Dialog "Eigenschaften" wählen und alle Pfade von  *~/git/*  ->  */usr/local/* ändern.
-
-
-
 ## Experimente und Messungen mit PhyPiDAQ
 
 Die hier bereit gestellte Software soll es sowohl Lernenden als auch Lehrenden ermöglichen, typische Messaufgaben im Physikunterricht durchzuführen. Dank der Realisierung mit Sensoren, die auch in Alltagsgeräten eingesetzt werden, und dem Raspberry Pi als Datennahme-Rechner können kostengünstige Einführungssets für Schülerversuche bereit gestellt werden.  
@@ -302,7 +303,9 @@ Um das Erstellen von eigenem Code für jede Messaufgabe zu vermeiden, liefert da
 
 **Auslese eines Analog-Digitalwandlers**
 
-Ein einfaches Beispiel zur Auslese des Digital-Analog-Wandlers *ADS1115* illustriert die Anwendung:
+Ein einfaches Beispiel zur Auslese des Digital-Analog-Wandlers *ADS1115* illustriert die Anwendung (Script
+
+`read_analog.py`):
 
 ```python
 #!/usr/bin/env python3
@@ -344,6 +347,53 @@ device = <sensor>
 
 
 
+**Auslese eines Analog-Digitalwandlers und Visualisierung der Daten**
+
+Ein einfaches Beispiel zur Auslese von zwei Kanälen eines Analog-Digitalwandlers sowie die Echtzeit-Anzeige der Daten als Verlaufsdiagramm ist das Script `display_analog2.py`:
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+'''display_analog2.py
+     illustrates the general usage of package phypidaq
+     prints and displays data read from 2 analog channels
+'''
+import time, numpy as np
+# import module controlling readout device
+from phypidaq.ADS1115Config import *
+# import display
+from phypidaq.Display import *
+
+# create device and display ...
+device = ADS1115Config( {'ADCChannels': [0,1]} ) # channels 0 and 1
+  # dictionary with graphics options
+ddict = {'NChannels': 2, 'XYmode': False} # configuration options
+display = Display( interval=0.1, confdict=ddict) # display 2 channels
+# ... and initalize 
+device.init()
+display.init()
+
+# reserve space for data (two channels)
+dat = np.array([0., 0.]) 
+
+print(' starting readout,     type <ctrl-C> to stop')
+# start time
+T0 = time.time()
+try:
+# readout loop, stop with <crtl>-C
+  while True:
+    device.acquireData(dat)
+    dT = time.time() - T0
+    print('%.2g, %.4g %.4g' %(dT, dat[0], dat[1]) )
+    display.show(dat)
+except KeyboardInterrupt:
+  print('ctrl-C received - ending')
+  device.closeDevice()
+  display.close()
+```
+
+
+
 **Datenaufnamhe mit _run_phypi_**
 
 Das Script *run_phypi* stellt eine sehr allgemein und weitgehend konfigurierbare Auslese und Anzeige von Sensordaten bereit. Die Konfigurationsdateien im Dateiformat *.daq* enthalten dabei die notwendigen Informationen zum verwendeten Sensor, zu den Anzeigeoptionen als Echtzeitanzeige, Verlaufsdiagramm oder xy-Darstellung sowie zur Kalibration oder Umrechnung von Sensordaten. Ein allgemeines Beispiel einer solchen Hauptkonfigurationsdatei wurde bereits oben vorgestellt. Mit entsprechend vorbereiteten Konfigurationsdateien lassen sich sehr flexibel die für bestimmte Experimente notwendigen Messungen und Anzeigen vorbereiten und durchführen.  Im  Verzeichnis *examples/* sind einige konkrete Beispiele enthalten.
@@ -368,6 +418,7 @@ ChanColors: [darkblue, darkgreen]      # Farben in der Anzeige
 
 Interval: 120.         # Intervall für Datenaufnahme und Anzeige (in s)  
 ```
+
 
 
 **Gleichzeitige Darstellung mehrerer LED-Kennlinien**
