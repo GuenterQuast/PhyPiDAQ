@@ -33,11 +33,11 @@ try:     # Ausfuehren des Programmcodes, solange es keine Unterbrechung gibt.
 
   while True:   # Dauerschleife (alles eingerueckte danach wird wiederholt).
 
-    if GPIO.input(pSens):          # Abfrage des Zustsands am Eingangspin
-      GPIO.output(pOut, GPIO.HIGH) # Ausgabe auf Eins, wenn Eins 
-    else:                          #   sonst ...
-      GPIO.output(pOut, GPIO.LOW)  #   .... Ausgabe auf Null
-    time.sleep(dt)                 # warten (Raspberry Pi "schlaeft").
+    if GPIO.input(pSens):   # Abfrage des Zustsands am Eingangspin
+      GPIO.output(pOut, 1)  # Ausgabe auf Eins, wenn Eins 
+    else:                   #   sonst ...
+      GPIO.output(pOut, 0)  #   .... Ausgabe auf Null
+    time.sleep(dt)          # warten (Raspberry Pi "schlaeft").
 
 except KeyboardInterrupt: # Wenn das Programm mit Strg + C unterbrochen wird,
   GPIO.cleanup()          # ... wird noch aufgerauemt#
