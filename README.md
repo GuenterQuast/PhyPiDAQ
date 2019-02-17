@@ -15,7 +15,7 @@ In addition to the GPIO inputs/outputs of the Raspberry Pi, the analog-to-digita
 The package provides an abstraction layer for measurement devices and sensors connected to a Raspberry Pi.  Dedicated classes for each device provide a simple, unified interface, containing only the methods `init(<config_dictionary>)`, `acquireData(buffer)` and `closeDevice()`. Simple examples with minimalist code illustrate the usage. The graphical user interface `phypi.py` and the script `run_phypi.py` provide a configurable environment for more complex measurements.
 
 *Fig. 1*:  Visualisation of  the time  dependence of two signals connected to an ADC
-![Figure 1](doc/Kondensator.png)
+           ![Figure 1](doc/Kondensator.png)
 
 
 ## Quick-start guide
@@ -377,6 +377,8 @@ sudo usermod -a -G tty pi
     simple example to read the digital accelerometer MMA8451
 - `examples/runOsci.py`  
     run an oscilloscope display, configuration as specified in *.yaml* file (default is `PSOsci.yaml`)
+- `examples/GPIO-In-Out.py`  
+    example to control  GPIO pins: generate square signal on output pin from variable voltage on input pin
 - `examples/poissonLED.py`  
     generate a random signal following Poisson statistics on a GPIO pin
 - `examples/FreqGen.py`  

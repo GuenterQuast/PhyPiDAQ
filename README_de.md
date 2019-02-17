@@ -8,8 +8,8 @@ Neben den GPIO Ein- und Ausgängen des Raspberry Pi werden die Analog-Digital-Wa
 
 Das Paket bietet eine Abstraktionsschicht für Messgeräte und Sensoren, die an einen Raspberry Pi angeschlossen sind. Eigene Klassen für jedes Gerät bieten eine einfache, einheitliche Schnittstelle, die nur die Methoden `init(<config_dictionary>)`, `acquireData(buffer)`und `closeDevice()` enthalten. Einfache Beispiele mit minimalem Code veranschaulichen die Verwendung. Die grafische Benutzeroberfläche `phypi.py` und das Skript `run_phypi.py` bieten eine konfigurierbare Umgebung für komplexere Messprojekte.
 
- *Abb. 1*:  Darstellung der Zeitabhängigkeit von zwei Signalquellen an einem AD-Wandler  
- ![Figure 1](doc/Kondensator.png)
+ *Abb. 1*:  Darstellung der Zeitabhängigkeit von zwei Signalquellen an einem AD-Wandler
+                    ![Figure 1](doc/Kondensator.png)
 
 Die Beschreibung des zu Grunde liegenden Konzepts, eine Liste der empfohlenen Komponenten und ausführlich  dokumentierte Beispiele finden sich in der [Masterarbeit von Moritz Aupperle](http://ekp-invenio.physik.uni-karlsruhe.de/record/49063) .
 
@@ -667,6 +667,8 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
     Auslese des digitalen Beschleunigungssensors MMA8451
 - `examples/runOsci.py`  
     Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben (Vorgabe `PSOsci.yaml`)
+- `examples/GPIO-In-out.py`  
+     Beispiel zur Ansteuerung der GPIO-Pins: Erzeugung einer Rechteckspannung am Ausgabe-Pin durch Verändern der Spannung am Eingabe-Pin
 - `examples/poissonLED.py`  
     erzeugt ein zufälliges Signal an GPIO-Pin gemäß Poisson-Prozess 
 - `examples/FreqGen.py`  
