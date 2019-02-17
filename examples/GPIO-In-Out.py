@@ -27,7 +27,7 @@ GPIO.setup(pOut, GPIO.OUT) # als Ausgang festgelegen
 print('*==* ', sys.argv[0], ' Lesen von Pin ', pSens, 
                             '    Ausgabe an Pin ', pOut)
 
-print('        <STRG>C zum Beenden ... --> ', end='' )
+print('        <STRG>c zum Beenden ... ', end="-> ", flush=True )
 # -- Endlosschleife
 try:     # Ausfuehren des Programmcodes, solange es keine Unterbrechung gibt.
 
@@ -40,6 +40,6 @@ try:     # Ausfuehren des Programmcodes, solange es keine Unterbrechung gibt.
     time.sleep(dt)                 # warten (Raspberry Pi "schlaeft").
 
 except KeyboardInterrupt: # Wenn das Programm mit Strg + C unterbrochen wird,
-  GPIO.cleanup()          # ... wird noch aufgerauemt
-  print('*==* ', sys.argv[0], ' Ende') 
+  GPIO.cleanup()          # ... wird noch aufgerauemt#
+  print(' *==* ', sys.argv[0], ' Ende') 
 
