@@ -5,8 +5,13 @@ v1.0dev
 
 
 
+v0.92p0 post-release
+
+  - added Script GPIO-In-Out.py 
+
 v0.92 February 13, 2019
 
+  - some fixes of small problems
   - added simple display functionality (with minimal configuration)
 
 v0.9.1p2
@@ -16,7 +21,7 @@ v0.9.1p2
   - support for INA219 current sensor
   - documented all *.daq Files
   - made sure channel information in DataLogger and DataGraphs are initialised
-  - added option xyPlots to DataLogger an DataGraphs to select xy-Plots
+  - added option xyPlots to DataLogger and DataGraphs to select xy-Plots
   - number of formulae in run_phypi now may exceed number of hardware chnannels
   - added DiodenKennlinie.daq to record I(U) diagrams of three LEDs
 
@@ -34,4 +39,4 @@ v0.9.1  November 24, 2018
   - support for PS2204A,
   - user install script, documentation 
 
-v0.9.0 initial release
+v0.9.0 initial release October 7, 2018
