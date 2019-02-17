@@ -41,4 +41,5 @@ try:     # Ausfuehren des Programmcodes, solange es keine Unterbrechung gibt.
 
 except KeyboardInterrupt: # Wenn das Programm mit Strg + C unterbrochen wird,
   GPIO.cleanup()          # ... wird noch aufgerauemt
-  
+  print('*==* ', sys.argv[0], ' Ende') 
+
