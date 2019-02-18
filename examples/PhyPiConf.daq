@@ -1,7 +1,7 @@
 # Configuration Options for PhyPiDAQ 
 
 # device configuration files 
-DeviceFile: config/ADS1115Config.yaml  
+DeviceFile: ADS1115Config.yaml  
 #DeviceFile: config/MCP3208Config.yaml  
 #DeviceFile: config/MCP3008Config.yaml  
 #DeviceFile: config/PSConfig.yaml         
@@ -14,8 +14,9 @@ DeviceFile: config/ADS1115Config.yaml
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
 
 
-DisplayModule: DataLogger
-# DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+# DisplayModule: DataLogger
+DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+NHistoryPoints: 200
 Interval: 0.1                     # logging interval         
 XYmode:     false                 # enable/disable XY-display
 

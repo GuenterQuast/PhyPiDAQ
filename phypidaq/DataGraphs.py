@@ -96,7 +96,7 @@ class DataGraphs(object):
 
     # number of points for history
     if 'NHistoryPoints' in ConfDict:
-      self.Npoints = ConfDict('NHistoryPoints')
+      self.Npoints = ConfDict['NHistoryPoints']
     else:
       self.Npoints = 120  
       
