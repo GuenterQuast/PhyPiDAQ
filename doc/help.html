@@ -12,7 +12,7 @@
 <p>In addition to the GPIO inputs/outputs of the Raspberry Pi, the analog-to-digital converters ADS1115 and MCP3008 and PicoScope USB-oscilloscopes are supported as input devices for analog data, as well as a number of digital sensors using protocols like I²C or SPI.</p>
 <p>This graphical user interface helps manage configuration options and can be used to start data collection. The configurations and generated data files are stored in a dedicated sub-directory in <em>$HOME/PhyPi</em>. The respective file names are derived from a user-defined day and the current date and time.</p>
 <h2>Operating instructions</h2>
-<p>In the tab Control, the main configuration file of the type <em>.daq</em> is set - the default is
+<p>In the tab <strong>Control</strong>, the main configuration file of the type <em>.daq</em> is set - the default is
 <em>$HOME/PhyPi/ phypi.daq</em>. This file specifies at least one additional configuration file containing the configuration for the sensor or ADC used (hereafter referred to as 'Device'). Furthermore, the working directory (default <em>$HOME/PhyPi/</em>) and a tag for the measurement project can be specified in this tab. 
 With the Start button we start the script <code>run_phypi.py</code>, which controls the data acquisition.</p>
 <p>The <strong>Configuration</strong> tab displays the content of the configuration files, which and can be edited and saved after activating the <code>EditMode</code> button. The file name used for the main configuration is the name set in the Control tab as the tag; the names for the device configuration files are the file names specified in the main configuration, including any given file paths.</p>

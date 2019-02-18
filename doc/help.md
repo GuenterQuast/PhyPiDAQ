@@ -10,7 +10,7 @@ This graphical user interface helps manage configuration options and can be used
 
 
 ## Operating instructions
-In the tab Control, the main configuration file of the type *.daq* is set - the default is
+In the tab **Control**, the main configuration file of the type *.daq* is set - the default is
 *$HOME/PhyPi/ phypi.daq*. This file specifies at least one additional configuration file containing the configuration for the sensor or ADC used (hereafter referred to as 'Device'). Furthermore, the working directory (default *$HOME/PhyPi/*) and a tag for the measurement project can be specified in this tab. 
 With the Start button we start the script `run_phypi.py`, which controls the data acquisition.
 
