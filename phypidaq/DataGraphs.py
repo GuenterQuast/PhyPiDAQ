@@ -93,9 +93,14 @@ class DataGraphs(object):
     else:
       # plot chan1 vs. chan0, chan2 vs. chan0, ..., last chan vs cha0
       self.xyPlots = [ [0,i] for i in range(1,Nc)]
-    
+
+    # number of points for history
+    if 'NHistoryPoints' in ConfDict:
+      self.Npoints = ConfDict('NHistoryPoints')
+    else:
+      self.Npoints = 120  
+      
 # config data needed throughout the class
-    self.Npoints = 120  # number of points for history
     self.Ti = self.dT * np.linspace(-self.Npoints+1, 0, self.Npoints) * self.tUnitFactor
     self.bwidth = 0.5   # width of bars
     self.ind = self.bwidth + np.arange(Nc) # bar position

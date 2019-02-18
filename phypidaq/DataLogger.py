@@ -13,7 +13,6 @@ class DataLogger(object):
     '''Args:  ConfDict: configuration dictionary
     '''
    # collect relevant configuration parameters
-    self.Npoints = 120  # number of points for history
 
    # get relevant settings from PhyPiConfDict
     self.dT = ConfDict['Interval'] 
@@ -26,6 +25,12 @@ class DataLogger(object):
     else:
       self.tUnit = 'h'
       self.tUnitFactor = 1./3600.
+
+   # number of points for history
+    if 'NHistoryPoints' in ConfDict:
+      self.Npoints = ConfDict('NHistoryPoints')
+    else:
+      self.Npoints = 120  
 
     self.NChan = ConfDict['NChannels']
 

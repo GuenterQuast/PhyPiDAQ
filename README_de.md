@@ -176,22 +176,28 @@ Beispiele für andere Geräte, wie den Analog-Digital-Wandler MCP3008, für Rate
 
 **Beziehen des PhyPiDAQ Codes und einfache Installation**
 
-Bitte beachten Sie , dass Ihr Raspberry Pi für die folgenden Schritte mit dem Internet verbunden sein muss. Zur Installation von `PhyPiDAQ` geben Sie nach dem Einrichten Ihres Raspberry Pi mit dem aktuellen Debian-Release *stretch* im Konsolenfenster folgende Befehle ein : 
+Bitte beachten Sie , dass Ihr Raspberry Pi für die folgenden Schritte mit dem Internet verbunden sein muss. Mit dem Befehl *git* lassen sich alle Dateien des Pakets `PhyPiDAQ` herunter laden. 
+Zur Installation von *git* geben Sie nach dem Einrichten Ihres Raspberry Pi mit dem aktuellen Debian-Release *stretch* im Konsolenfenster folgenden Befehl ein : 
 
 ```bash
-mkdir git
-cd git
+sudo apt-get install git
+```
+
+Zur Installation von `PhyPiDAQ` geben Sie folgende Befehle ein : 
+
+```bash
+mkdir ~/git
+cd ~/git
 git clone https://github.com/GuenterQuast/PhyPiDAQ
 ```
 
 
 
-PhyPiDAQ* basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte und  Bibliotheken für die Visualisierung bereitstellen. Die notwendigen Befehle zu deren Installation sind
-im Scritp `installlibs.sh` zusammengefasst.  Geben Sie auf der Kommandozeile folgende Befehle ein (ohne den erklärenden Text nachdem `#`-Zeichen):
+PhyPiDAQ* basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte und  Bibliotheken für die Visualisierung bereitstellen. Die notwendigen Befehle zu deren Installation sind im Scritp `installlibs.sh` zusammengefasst.  Geben Sie auf der Kommandozeile folgende Befehle ein (ohne den erklärenden Text nachdem `#`-Zeichen):
 
 ```bash
 cd ~/git/PhyPiDAQ  # ins Installationsverzeichnis wechlsen
-git pull           # optional, falls Sie Ihre PhyPiDAQ-Installation aktualisiern möchten
+git pull           # optional, falls Sie PhyPiDAQ aktualisiern möchten
 ./installlibs.sh   # Installations-Script ausführen
 ```
 
