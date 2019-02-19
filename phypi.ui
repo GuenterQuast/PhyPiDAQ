@@ -57,8 +57,8 @@
      <widget class="QLabel" name="label_Picture">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>60</y>
+        <x>160</x>
+        <y>250</y>
         <width>90</width>
         <height>70</height>
        </rect>
@@ -85,10 +85,10 @@
      <widget class="QLabel" name="label_caption">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>150</y>
-        <width>431</width>
-        <height>30</height>
+        <x>230</x>
+        <y>220</y>
+        <width>391</width>
+        <height>141</height>
        </rect>
       </property>
       <property name="font">
@@ -97,7 +97,7 @@
        </font>
       </property>
       <property name="text">
-       <string> Data Acquisition for Physics with Raspberry Pi  </string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#0000ff;&quot;&gt;D&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#00007f;&quot;&gt;ata &lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#0000ff;&quot;&gt;A&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#00007f;&quot;&gt;c&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#0000ff;&quot;&gt;q&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#00007f;&quot;&gt;uisition &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#00007f;&quot;&gt;for &lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#0000ff;&quot;&gt;Phy&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#00007f;&quot;&gt;sics &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#00007f;&quot;&gt;with Raspberry &lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#0000ff;&quot;&gt;Pi&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#00007f;&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_DAQconfig">
@@ -226,7 +226,7 @@
       <property name="geometry">
        <rect>
         <x>160</x>
-        <y>340</y>
+        <y>380</y>
         <width>371</width>
         <height>32</height>
        </rect>
@@ -239,7 +239,7 @@
       <property name="geometry">
        <rect>
         <x>76</x>
-        <y>343</y>
+        <y>386</y>
         <width>81</width>
         <height>20</height>
        </rect>
@@ -258,7 +258,7 @@
       <property name="geometry">
        <rect>
         <x>540</x>
-        <y>340</y>
+        <y>380</y>
         <width>31</width>
         <height>34</height>
        </rect>
@@ -274,6 +274,50 @@
         <normaloff>images/open-folder.jpg</normaloff>images/open-folder.jpg</iconset>
       </property>
      </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>50</y>
+        <width>471</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_diagram">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>0</y>
+        <width>551</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>images/PhyPiDAQdiagram.png</pixmap>
+      </property>
+     </widget>
+     <zorder>label_Picture</zorder>
+     <zorder>label_caption</zorder>
+     <zorder>label_DAQconfig</zorder>
+     <zorder>lE_DAQConfFile</zorder>
+     <zorder>pB_StartRun</zorder>
+     <zorder>pB_FileSelect</zorder>
+     <zorder>lE_WorkDir</zorder>
+     <zorder>label_WorkDir</zorder>
+     <zorder>pB_WDselect</zorder>
+     <zorder>label_2</zorder>
+     <zorder>label_diagram</zorder>
+     <zorder>pB_abort</zorder>
     </widget>
     <widget class="QWidget" name="Tab_Config">
      <property name="toolTip">
@@ -593,7 +637,7 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;common name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
-     <string>Run Tag:</string>
+     <string>Name:</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -633,6 +677,8 @@
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../picoCosmo/images/open-folder.jpg"/>
+ </resources>
  <connections/>
 </ui>
