@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>711</width>
-    <height>595</height>
+    <width>705</width>
+    <height>590</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -29,7 +29,7 @@
    <widget class="QTabWidget" name="tab_Main">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-1</x>
       <y>0</y>
       <width>711</width>
       <height>591</height>
@@ -85,9 +85,9 @@
      <widget class="QLabel" name="label_caption">
       <property name="geometry">
        <rect>
-        <x>170</x>
+        <x>160</x>
         <y>150</y>
-        <width>360</width>
+        <width>431</width>
         <height>30</height>
        </rect>
       </property>
@@ -97,15 +97,15 @@
        </font>
       </property>
       <property name="text">
-       <string>Data Acquisition for Physics with Raspberry Pi</string>
+       <string> Data Acquisition for Physics with Raspberry Pi  </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_DAQconfig">
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>360</y>
-        <width>101</width>
+        <y>426</y>
+        <width>91</width>
         <height>30</height>
        </rect>
       </property>
@@ -116,7 +116,7 @@
        </font>
       </property>
       <property name="text">
-       <string>DAQ config:</string>
+       <string>DAQ config: </string>
       </property>
       <property name="textFormat">
        <enum>Qt::PlainText</enum>
@@ -126,7 +126,7 @@
       <property name="geometry">
        <rect>
         <x>160</x>
-        <y>360</y>
+        <y>430</y>
         <width>371</width>
         <height>32</height>
        </rect>
@@ -144,52 +144,11 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>465</y>
-        <width>60</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Latin Modern Sans</family>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="whatsThis">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;common name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>Run Tag:</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::PlainText</enum>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lE_RunTag">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>466</y>
-        <width>113</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Name for the run&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>phypi</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="pB_StartRun">
       <property name="geometry">
        <rect>
-        <x>600</x>
-        <y>500</y>
+        <x>599</x>
+        <y>517</y>
         <width>101</width>
         <height>40</height>
        </rect>
@@ -215,7 +174,7 @@
       <property name="geometry">
        <rect>
         <x>540</x>
-        <y>360</y>
+        <y>430</y>
         <width>31</width>
         <height>34</height>
        </rect>
@@ -267,7 +226,7 @@
       <property name="geometry">
        <rect>
         <x>160</x>
-        <y>410</y>
+        <y>340</y>
         <width>371</width>
         <height>32</height>
        </rect>
@@ -279,8 +238,8 @@
      <widget class="QLabel" name="label_WorkDir">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>413</y>
+        <x>76</x>
+        <y>343</y>
         <width>81</width>
         <height>20</height>
        </rect>
@@ -292,14 +251,14 @@
        </font>
       </property>
       <property name="text">
-       <string>Work Dir:</string>
+       <string>Work Dir: </string>
       </property>
      </widget>
      <widget class="QPushButton" name="pB_WDselect">
       <property name="geometry">
        <rect>
         <x>540</x>
-        <y>410</y>
+        <y>340</y>
         <width>31</width>
         <height>34</height>
        </rect>
@@ -372,7 +331,7 @@
           <x>0</x>
           <y>10</y>
           <width>681</width>
-          <height>411</height>
+          <height>431</height>
          </rect>
         </property>
         <property name="toolTip">
@@ -389,7 +348,7 @@
         <property name="geometry">
          <rect>
           <x>590</x>
-          <y>420</y>
+          <y>440</y>
           <width>81</width>
           <height>21</height>
          </rect>
@@ -543,29 +502,13 @@
       <property name="geometry">
        <rect>
         <x>596</x>
-        <y>15</y>
+        <y>4</y>
         <width>91</width>
         <height>30</height>
        </rect>
       </property>
       <property name="text">
        <string>Edit Mode</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pB_SaveDefault">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>520</y>
-        <width>141</width>
-        <height>34</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;save all config files&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>Save Config</string>
       </property>
      </widget>
     </widget>
@@ -630,6 +573,63 @@
       </property>
      </widget>
     </widget>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>550</y>
+      <width>60</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Latin Modern Sans</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;common name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Run Tag:</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lE_RunTag">
+    <property name="geometry">
+     <rect>
+      <x>99</x>
+      <y>552</y>
+      <width>113</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Name for the run&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>phypi</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pB_SaveDefault">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>550</y>
+      <width>141</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;save all config files&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Save Config</string>
+    </property>
    </widget>
   </widget>
  </widget>
