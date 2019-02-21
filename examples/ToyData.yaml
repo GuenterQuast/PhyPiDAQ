@@ -2,4 +2,4 @@
 
 DAQModule: ToyDataConfig
 
-NChannels: 2  
+NChannels: 4

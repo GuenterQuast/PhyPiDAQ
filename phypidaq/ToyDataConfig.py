@@ -23,12 +23,19 @@ class ToyDataConfig(object):
     self.ChanLims = [[0., 1.]] * self.NChannels
     self.ChanNams = ['c'+str(i) for i in range(self.NChannels)]
 
-      
+    self.count=0.
+    self.offset = 1./(self.NChannels+1.)
+    self.amplitude = 0.1
+    self.noise = 0.075
+    
   def acquireData(self, buf):
     '''fill random data
     '''
+    self.count += 1
     for i in range(self.NChannels):
-      buf[i]= 0.25 + i*0.2 + 0.1*np.random.rand()
+      buf[i]= (i+1) * self.offset \
+              + self.amplitude * np.sin(self.count/20.*np.pi - i*np.pi/3.) \
+              + self.noise * np.random.rand()
       
   def closeDevice(self):
    # nothing to do here
