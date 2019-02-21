@@ -1,0 +1,5 @@
+# example config for INA219 current sensor
+
+DAQModule: ToyDataConfig
+
+NChannels: 2  

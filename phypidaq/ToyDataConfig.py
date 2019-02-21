@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+from __future__ import print_function, division, unicode_literals
+from __future__ import absolute_import
+
+import numpy as np, time, sys
+
+class ToyDataConfig(object):
+  '''generate artifical data to test/debug PhyPiDAQ
+  '''
+
+  def __init__(self, confdict = None):
+    if confdict==None: confdict={}
+          
+# -- number of Channels
+    if "NChannels" in confdict:
+      self.NChannels = confdict["NChannels"]
+    else:
+      self.NChannels = 1
+
+  def init(self):
+
+  # provide configuration parameters
+    self.ChanLims = [[0., 1.]] * self.NChannels
+    self.ChanNams = ['c'+str(i) for i in range(self.NChannels)]
+
+      
+  def acquireData(self, buf):
+    '''fill random data
+    '''
+    for i in range(self.NChannels):
+      buf[i]= 0.25 + i*0.2 + 0.1*np.random.rand()
+      
+  def closeDevice(self):
+   # nothing to do here
+    pass
