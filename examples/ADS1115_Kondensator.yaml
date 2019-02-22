@@ -2,14 +2,14 @@
 
 DAQModule: ADS1115Config
 
-ADCChannels: [0, 3]         # active ADC-Channels
+ADCChannels: [0, 1]         # active ADC-Channels
                             # possible values: 0, 1, 2, 3
                               # when using differential mode:
                                 #  -  0 = ADCChannel 0 minus ADCChannel 1
                                 #  -  1 = ADCChannel 0 minus ADCChannel 3
                                 #  -  2 = ADCChannel 1 minus ADCChannel 3
                                 #  -  3 = ADCChannel 2 minus ADCChannel 3
-DifModeChan: [true, true]   # enable differential mode for Channels
+DifModeChan: [false, false]   # enable differential mode for Channels
 Gain: [1, 1]                # programmable gain of ADC-Channel
                               # possible values for Gain:
                               #  - 2/3 = +/-6.144V

@@ -2,8 +2,8 @@
 #   display RMS of sound signal
 
 # device configuration files 
-DeviceFile: PSConfig_sound.yaml         
-#DeviceFile: PSConfig2000A_sound.yaml         
+#DeviceFile: PSConfig_sound.yaml         
+DeviceFile: PSConfig2000A_sound.yaml         
 
 DisplayModule: DataLogger
 #DisplayModule: DataGraphs

@@ -9,8 +9,8 @@ PSmodel: '2000'      # PS model 220xA
 
 # channel configuration 
 picoChannels: [A, B]
-ChanRanges: [5., 5.]
-ChanModes: [DC, DC]
+ChanRanges: [.05, .05]
+ChanModes: [AC, AC]
 ## ChanOffsets: [-1.95, -1.95] # !!! not for A series
 
 sampleTime: 2.0E-02
