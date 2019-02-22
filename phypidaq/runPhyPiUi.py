@@ -60,7 +60,7 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
 
     def init(self, Window, DAQconfFile ):
 # initialisation 
-      Ui_PhyPiWindow.setupUi(self, Window) # initialize base class
+      super().setupUi(Window) # initialize base class
       self.Window = Window
       
 # set display options, fonts etc.

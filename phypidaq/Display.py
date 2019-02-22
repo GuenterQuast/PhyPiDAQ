@@ -96,12 +96,13 @@ class Display(object):
     for prc in self.procs:
       prc.deamon = True
       prc.start()
-      print(' -> starting subprocess ', prc.name, ' PID=', prc.pid)
+      # print(' -> starting subprocess ', prc.name, ' PID=', prc.pid)
 
   def show(self, dat): 
     # send data to display process 
     self.datQ.put(dat)
-
+    time.sleep(0.00005) # !!! waiting time to make data transfer reliable
+    
   def close(self):
     # shut-down sub-process(es) 
     for p in self.procs:
