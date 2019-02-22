@@ -108,7 +108,7 @@ class Display(object):
     for p in self.procs:
       if p.is_alive():
         p.terminate()
-        print('    terminating ' + p.name)
+        # print('    terminating ' + p.name)
 
   def mpTkDisplay(self):
     ''' Tk background process for graphical display of data

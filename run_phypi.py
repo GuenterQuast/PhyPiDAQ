@@ -13,7 +13,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - -
    print("run_phypi.py usage:\n run_phypi.py <config>.daq")
    sys.exit(1)      
   
- daq=runPhyPiDAQ(verbose=0) # 1: normal output
+ 
+ daq=runPhyPiDAQ(verbose=1) # 1: normal output
                             # 0: only errors are printed
                             # 2: verbose output
 
@@ -21,3 +22,4 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - -
  print( "DAQ set-up:\n", yaml.dump(daq.PhyPiConfDict))
 
  daq.run()
+

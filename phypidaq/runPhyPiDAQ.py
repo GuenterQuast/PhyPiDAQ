@@ -109,8 +109,7 @@ class runPhyPiDAQ(object):
     cmd = cmdQ.get()
     rc = 0
     if cmd == 'E':
-      #DGmpQ.put(None)       # send empty "end" event
-      if self.verbose:
+      if self.verbose > 1:
         print('\n' + sys.argv[0] + ': End command received')
       self.ACTIVE = False
       rc = 2
@@ -121,7 +120,6 @@ class runPhyPiDAQ(object):
       self.DAQ_ACTIVE = True
       rc = 1
     elif cmd == 's':  
-      #DGmpQ.put(None)       # send empty "end" event
       self.DAQ_ACTIVE = False     
       self.ACTIVE = False
       # print('\n storing data to file, ending')
@@ -360,7 +358,7 @@ class runPhyPiDAQ(object):
     '''  
 
     if self.verbose:
-      print('*==* script ' + sys.argv[0] + ' running \n')
+      print('*==* script ' + sys.argv[0] + ': data taking active \n')
 
     longInterval = 2. # definiton of a "long" readout interval
 
@@ -463,6 +461,7 @@ class runPhyPiDAQ(object):
      
       if self.verbose:
         print('*==* ' + sys.argv[0] + ': normal end')
+      print(' ')
       sys.exit()
 
 # execute only if called directly, but not when imported
