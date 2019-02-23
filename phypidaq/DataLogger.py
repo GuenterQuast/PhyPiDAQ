@@ -189,7 +189,7 @@ class DataLogger(object):
             self.graphs[i].set_data(self.Ti, self.h[i])
       else:
       # update XY display 
-        for i in range(len(self.xyPlots)):
+        for i in range(len(self.graphs)):
           cx = self.xyPlots[i][0]
           cy = self.xyPlots[i][1]  
           i1 = max(0, self.Npoints - n)           

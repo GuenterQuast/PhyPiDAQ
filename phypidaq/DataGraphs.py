@@ -264,7 +264,7 @@ class DataGraphs(object):
           self.animtxt.set_text(txt)
       if self.XYmode:
     # update XY display 
-        for i in range(len(self.xyPlots)):
+        for i in range(len(self.XYgraphs)):
           cx = self.xyPlots[i][0]
           cy = self.xyPlots[i][1] 
           i1 = max(0, self.Npoints - n)           
