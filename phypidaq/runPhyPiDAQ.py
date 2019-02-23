@@ -458,9 +458,9 @@ class runPhyPiDAQ(object):
         # display data
           display.show(self.data)
 
-        # store (latest) data in ring buffer ...
+        # store (latest) data in ring buffer as a list ...
           if self.RBuf != None:
-            self.RBuf.store( [self.data[i] for i in range(NChannels)] )
+            self.RBuf.store( self.data.tolist())
 
         # ... and eventually record all data to disc
           if self.DatRec: self.DatRec(self.data)

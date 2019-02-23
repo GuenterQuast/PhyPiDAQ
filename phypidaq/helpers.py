@@ -58,7 +58,7 @@ def kbdwait():
   get_input(50*' '+'type <ret> to exit -> ')
 
 class RingBuffer(object):
-  '''a ring-buffer to store N objcts
+  '''ring buffer to store N objcts
   '''
 
   def __init__(self, N):
@@ -66,25 +66,28 @@ class RingBuffer(object):
       N: size of buffer
     '''
     self.N = N
-    self.Buf = []
-    self.i = 0  
+    self.B = [None] * N # initialize a tuple
+    self.full = False 
+    self.k = -1
 
   def store(self, d):
     '''
       d: data object
     '''
-    if self.i < self.N:
-      self.Buf.append(d)
-    else: # overwrite old data
-      k = self.i % self.N
-      self.Buf[k] = d
+ 
+    # increment index, eventually overwrite oldest data
+    self.k += 1
+    if self.k == self.N:
+      self.k = 0
+      self.full = True
+    # store data 
+    self.B[self.k] = d
 
-    self.i += 1
 
   def read(self):
+    '''return all data'''
 
-     if self.i < self.N:
-       return self.Buf[ : self.i]
-     else:
-       k = self.i % self.N
-       return self.Buf[k : ] + self.Buf[ : k]
+    if self.full:
+      return self.B[self.k : ] + self.B[ : self.k]
+    else:
+      return self.B[ : self.k]
