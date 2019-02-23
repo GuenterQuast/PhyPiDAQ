@@ -112,12 +112,11 @@ class runPhyPiDAQ(object):
     elif cmd == 's':  
       self.DAQ_ACTIVE = False 
       if self.RBuf != None:
-        print('\n storing data to file ', self.bufferFile, ' and ending')
+        print('\n storing data to file ', self.bufferFile, ' - now paused')
         self.storeBufferData(self.bufferFile) 
       else:
-        print('\n buffer storage not active - ending')
-      self.ACTIVE = False
-      rc = 2
+        print('\n buffer storage not active - no action')
+      rc=1
 
     return rc
 

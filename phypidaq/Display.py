@@ -174,7 +174,7 @@ class Display(object):
   # set initial state
     def setInitialPaused(): # usually, start in Paused mode
       buttonP.config(text='paused', fg='grey', state=Tk.DISABLED)
-      buttonR.config(state=Tk.NORMAL, text='Resume/start')
+      buttonR.config(state=Tk.NORMAL, text='Run')
 
     def setPaused():
       buttonP.config(text='paused', fg='grey', state=Tk.DISABLED)
@@ -182,11 +182,12 @@ class Display(object):
 
     def setRunning():
       buttonP.config(text='Pause', underline=0, fg='blue', state=Tk.NORMAL)
-      buttonR.config(state=Tk.DISABLED)
+      buttonR.config(state=Tk.DISABLED, text='Resume')
 
     def cmdResume(_event=None):
       cmdQ.put('R')
       setRunning()
+      self.t0 = time.time()
 
     def cmdPause(_event=None):
       cmdQ.put('P')
@@ -195,7 +196,11 @@ class Display(object):
     def cmdEnd(_event=None):
       cmdQ.put('E')
 
-    def cmdSave(_event=None):
+    def cmdSaveData(_event=None):
+      cmdQ.put('s')
+      setPaused() 
+
+    def cmdSaveGraph(_event=None):
       cmdPause()
       try:
         filename = asksaveasfilename(initialdir='.', initialfile='DGraphs.png', 
@@ -204,7 +209,17 @@ class Display(object):
       except Exception as e:
         print(str(e))
         pass
- 
+
+   # a simple clock
+    def clkLabel(TkLabel):
+      self.t0=time.time()
+      def clkUpdate():
+        dt = int(time.time() - self.t0)
+        # datetime = time.strftime('%y/%m/%d %H:%M', time.localtime(t0))
+        TkLabel.config(text = ' ' + str(dt) + 's  ', fg='blue' )
+        TkLabel.after(1000, clkUpdate)
+      clkUpdate()
+   
 # ------- executable part -------- 
   #  print(' -> mpTkDisplay starting')
 
@@ -236,31 +251,39 @@ class Display(object):
 
   # initialize status and control field
     frame = Tk.Frame(master=root)
-    frame.grid(row=0, column=8)
+    frame.grid(row=0, column=10)
     frame.pack(padx=5, side=Tk.BOTTOM)
     if DAQCntrl:
   # initialize Comand buttons
       buttonE = Tk.Button(frame, text='End', underline=0, fg='red', command=cmdEnd)
-      buttonE.grid(row=0, column=8)
+      buttonE.grid(row=0, column=10)
       root.bind('E', cmdEnd)
 
-      blank = Tk.Label(frame, width=7, text="")
-      blank.grid(row=0, column=7)
+      blank1 = Tk.Label(frame, width=5, text="")
+      blank1.grid(row=0, column=9)
 
       clock = Tk.Label(frame)
-      clock.grid(row=0, column=5)
+      clock.grid(row=0, column=7)
 
-      buttonSv = Tk.Button(frame, width=8, text='Save', underline=0, fg='purple',
-                   command=cmdSave)
-      buttonSv.grid(row=0, column=4)
-      root.bind('S', cmdSave)
+      buttonSvDa = Tk.Button(frame, width=7, text='saveData', underline=0, fg='purple',
+                             command=cmdSaveData)
+      buttonSvDa.grid(row=0, column=6)
+      root.bind('s', cmdSaveData)
 
-      buttonP = Tk.Button(frame, width=8, text='Pause', underline=0,  fg='blue',
+      buttonSvGr = Tk.Button(frame, width=7, text='SaveGraph', underline=0, fg='purple',
+                           command=cmdSaveGraph)
+      buttonSvGr.grid(row=0, column=5)
+      root.bind('S', cmdSaveGraph)
+
+      blank2 = Tk.Label(frame, width=5, text="")
+      blank2.grid(row=0, column=4)
+
+      buttonP = Tk.Button(frame, width=7, text='Pause', underline=0,  fg='blue',
                    command=cmdPause)
       buttonP.grid(row=0, column=3)
       root.bind('P', cmdPause)
 
-      buttonR = Tk.Button(frame, width=8, text='Resume', underline=0, fg='blue',
+      buttonR = Tk.Button(frame, width=7, text='Resume', underline=0, fg='blue',
                     command=cmdResume)
       buttonR.grid(row=0, column=2)
       buttonR.config(state=Tk.DISABLED)
@@ -288,7 +311,9 @@ class Display(object):
                        # save_count=None is a (temporary) work-around 
                        #     to fix memory leak in animate
     try:
-      Tk.mainloop()
+      clkLabel(clock) # start clock
+
+      Tk.mainloop()   # start event loop
     except Exception as e:
       print('*==* mpTkDisplay running ' + ModuleName + ': forced exit')
       print(str(e))
