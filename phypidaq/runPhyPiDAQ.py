@@ -111,9 +111,11 @@ class runPhyPiDAQ(object):
       rc = 1
     elif cmd == 's':  
       self.DAQ_ACTIVE = False 
-      fnam = 'PhyPiData'
-      print('\n storing data to file ', fnam , ' and ending')
-      self.storeBufferData(fnam)    
+      if self.RBuf != None:
+        print('\n storing data to file ', self.bufferFile, ' and ending')
+        self.storeBufferData(self.bufferFile) 
+      else:
+        print('\n buffer storage not active - ending')
       self.ACTIVE = False
       rc = 2
 
@@ -278,7 +280,8 @@ class runPhyPiDAQ(object):
     self.NFormulae = NFormulae
         
   # number of channels may be greater than number of hardware channels
-    PhyPiConfDict['NChannels'] = max(NHWChannels, NFormulae)
+    nc = max(NHWChannels, NFormulae)
+    PhyPiConfDict['NChannels'] = nc
 
   # Add information for graphical display(s) to PhyPiConfDict
     if 'ChanNams' not in PhyPiConfDict:
@@ -289,14 +292,25 @@ class runPhyPiDAQ(object):
         if Formulae[ifc]: self.ChanNams[ifc] = 'F' + str(ifc)
      
     if 'ChanUnits' not in PhyPiConfDict:
-      PhyPiConfDict['ChanUnits' ] = [''] * max(NHWChannels, NFormulae)
+      PhyPiConfDict['ChanUnits' ] = [''] * nc 
+    else:
+      l = len(PhyPiConfDict['ChanUnits'])
+      if l < nc:
+        PhyPiConfDict['ChanUnits'] += (nc-l) * ['']
+
+    if 'ChanLabels' not in PhyPiConfDict:
+      PhyPiConfDict['ChanLabels' ] = [''] * nc 
+    else:
+      l = len(PhyPiConfDict['ChanLabels'])
+      if l < nc:
+        PhyPiConfDict['ChanLabels'] += (nc-l) * ['']
 
     if 'ChanLimits' not in PhyPiConfDict:
       if NFormulae > 0:
         print('PhyPiDAQ: forumla(e) defined, but no ChanLimits supplied ')  
         print('     results may become unpredictable - exiting')  
         exit(1)
-      PhyPiConfDict['ChanLimits'] = ChanLims # take from devices if not set
+      PhyPiConfDict['ChanLimits'] = ChanLims # take from hw devices if not set
       
   # start data recording to disk if required
     if PhyPiConfDict['DataFile'] != None:
@@ -305,8 +319,16 @@ class runPhyPiDAQ(object):
     else:
       self.DatRec = None
 
-  # set-up a ring buffer to store latest data
-    self.RBuf = RingBuffer(PhyPiConfDict['NHistoryPoints'])
+  # buffer latest data (number of data points given by NHistoryPoints)
+    if 'bufferData' in PhyPiConfDict:
+      self.bufferFile = PhyPiConfDict['bufferData']      
+    else:
+      self.bufferFile = "PhyPiData"
+    # set-up a ring buffer 
+    if self.bufferFile != None:    
+      self.RBuf = RingBuffer(PhyPiConfDict['NHistoryPoints'])
+    else:
+      self.RBuf = None
 
     if self.verbose > 1:
       print ('\nPhyPiDAQ Configuration:')
@@ -435,7 +457,8 @@ class runPhyPiDAQ(object):
           display.show(self.data)
 
         # store (latest) data in ring buffer ...
-          self.RBuf.store( [self.data[i] for i in range(NChannels)] )
+          if self.RBuf != None:
+            self.RBuf.store( [self.data[i] for i in range(NChannels)] )
 
         # ... and eventually record all data to disc
           if self.DatRec: self.DatRec(self.data)
