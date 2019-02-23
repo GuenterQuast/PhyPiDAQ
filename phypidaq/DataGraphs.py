@@ -228,12 +228,11 @@ class DataGraphs(object):
     if self.XYmode:
       # plot XY-graph(s)
       for i in range(len(self.xyPlots)):
+        cx = self.xyPlots[i][0]
         cy = self.xyPlots[i][1]
-#!        XYg, = self.axes[-1].plot( [0.], [0.], color=self.ChanColors[cy] )
-        XYg, = self.axes[-1].plot( [], [], color=self.ChanColors[cy] )
-        self.XYgraphs += (XYg,)
-
-    self.t0=time.time() # remember start time
+        if cx < self.NChan and cy < self.NChan:
+          XYg, = self.axes[-1].plot( [], [], color=self.ChanColors[cy] )
+          self.XYgraphs += (XYg,)
 
     return self.bgraphs + self.graphs + self.XYgraphs + (self.animtxt,)  
 # -- end DataGraphs.init()

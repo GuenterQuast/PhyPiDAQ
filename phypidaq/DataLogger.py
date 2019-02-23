@@ -164,9 +164,11 @@ class DataLogger(object):
     else:
       # plot XY-graph(s)
       for i in range(len(self.xyPlots)):
+        cx = self.xyPlots[i][0]
         cy = self.xyPlots[i][1]
-        g, = self.axes[-1].plot( [], [], color=self.ChanColors[cy] )
-        self.graphs += (g,)
+        if cx < self.NChan and cy < self.NChan:
+          g, = self.axes[-1].plot( [], [], color=self.ChanColors[cy] )
+          self.graphs += (g,)
     return self.graphs
 # -- end DataLogger.init()
 
