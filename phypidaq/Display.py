@@ -251,19 +251,16 @@ class Display(object):
 
   # initialize status and control field
     frame = Tk.Frame(master=root)
-    frame.grid(row=0, column=10)
+    frame.grid(row=0, column=9)
     frame.pack(padx=5, side=Tk.BOTTOM)
     if DAQCntrl:
   # initialize Comand buttons
       buttonE = Tk.Button(frame, text='End', underline=0, fg='red', command=cmdEnd)
-      buttonE.grid(row=0, column=10)
+      buttonE.grid(row=0, column=8)
       root.bind('E', cmdEnd)
 
       blank1 = Tk.Label(frame, width=5, text="")
-      blank1.grid(row=0, column=9)
-
-      clock = Tk.Label(frame)
-      clock.grid(row=0, column=7)
+      blank1.grid(row=0, column=7)
 
       buttonSvDa = Tk.Button(frame, width=7, text='saveData', underline=0, fg='purple',
                              command=cmdSaveData)
@@ -289,7 +286,9 @@ class Display(object):
       buttonR.config(state=Tk.DISABLED)
       root.bind('R', cmdResume)
 
-  # set up fild for status
+  # set up fields for status and clock
+    clock = Tk.Label(frame)
+    clock.grid(row=0, column=9)
     LblStatus = Tk.Label(frame, width=13, text="")
     LblStatus.grid(row=0, column=0)
 
