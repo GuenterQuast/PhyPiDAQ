@@ -61,12 +61,15 @@ class RingBuffer(object):
   '''ring buffer to store N objcts
   '''
 
+  # implemented as a simple list, where old entries
+  #  are overwritten if lenght of list is exceeded
+
   def __init__(self, N):
     '''
       N: size of buffer
     '''
     self.N = N
-    self.B = [None] * N # initialize a tuple
+    self.B = [None] * N # initialize a list 
     self.full = False 
     self.k = -1
 
