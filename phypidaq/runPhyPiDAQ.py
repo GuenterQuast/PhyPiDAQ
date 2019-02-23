@@ -21,6 +21,9 @@ from scipy import interpolate
 # display module
 from .Display import *
 
+from .DataRecorder import DataRecorder
+from .helpers import RingBuffer
+
 # ----- helper functions --------------------
 
 def generateCalibrationFunction(calibd):
@@ -62,19 +65,6 @@ def stop_processes(proclst):
       # print('    terminating ' + p.name)
       if p.is_alive(): p.terminate()
       time.sleep(1.)
-
-def kbdwait():
-  ''' wait for keyboard input
-  '''
-  # 1st, remove pyhton 2 vs. python 3 incompatibility for keyboard input
-  if sys.version_info[:2] <=(2,7):
-    get_input = raw_input
-  else: 
-    get_input = input
-
-  #  wait for input
-  get_input(50*' '+'type <ret> to exit -> ')
-
 
 # ----- class for running data acquisition --------------------
 
@@ -120,14 +110,20 @@ class runPhyPiDAQ(object):
       self.DAQ_ACTIVE = True
       rc = 1
     elif cmd == 's':  
-      self.DAQ_ACTIVE = False     
+      self.DAQ_ACTIVE = False 
+      fnam = 'PhyPiData'
+      print('\n storing data to file ', fnam , ' and ending')
+      self.storeBufferData(fnam)    
       self.ACTIVE = False
-      # print('\n storing data to file, ending')
-      print('\n storing data to file not yet implemented, ending')
-      # still to be implemented ...
       rc = 2
 
     return rc
+
+  def storeBufferData(self, fnam):
+     bufRec = DataRecorder(fnam, self.PhyPiConfDict)
+     for d in self.RBuf.read():
+       bufRec(d)
+     bufRec.close()
 
   def setup(self):
     '''
@@ -175,6 +171,9 @@ class runPhyPiDAQ(object):
     if PhyPiConfDict['Interval'] < 0.05:
       print(" !!! read-out intervals < 0.05 s not reliable, setting to 0.05 s")
       PhyPiConfDict['Interval'] = 0.05
+
+    if 'NHistoryPoints' not in PhyPiConfDict: # length of stored history
+      PhyPiConfDict['NHistoryPoints'] = 120.
 
     if 'XYmode' not in PhyPiConfDict:  # default is XY mode off
       PhyPiConfDict['XYmode'] = False
@@ -289,6 +288,9 @@ class runPhyPiDAQ(object):
       for ifc in range( NFormulae): 
         if Formulae[ifc]: self.ChanNams[ifc] = 'F' + str(ifc)
      
+    if 'ChanUnits' not in PhyPiConfDict:
+      PhyPiConfDict['ChanUnits' ] = [''] * max(NHWChannels, NFormulae)
+
     if 'ChanLimits' not in PhyPiConfDict:
       if NFormulae > 0:
         print('PhyPiDAQ: forumla(e) defined, but no ChanLimits supplied ')  
@@ -299,10 +301,12 @@ class runPhyPiDAQ(object):
   # start data recording to disk if required
     if PhyPiConfDict['DataFile'] != None:
       FName = PhyPiConfDict['DataFile']
-      from .DataRecorder import DataRecorder
       self.DatRec = DataRecorder(FName, PhyPiConfDict)
     else:
       self.DatRec = None
+
+  # set-up a ring buffer to store latest data
+    self.RBuf = RingBuffer(PhyPiConfDict['NHistoryPoints'])
 
     if self.verbose > 1:
       print ('\nPhyPiDAQ Configuration:')
@@ -427,10 +431,13 @@ class runPhyPiDAQ(object):
         # eventualy apply fromula(e) 
           if self.Formulae: self.apply_formulae()
 
-        # display data ...
+        # display data
           display.show(self.data)
 
-        # ... and record data to disc
+        # store (latest) data in ring buffer ...
+          self.RBuf.store( [self.data[i] for i in range(NChannels)] )
+
+        # ... and eventually record all data to disc
           if self.DatRec: self.DatRec(self.data)
 
         else:   # paused mode
@@ -440,7 +447,8 @@ class runPhyPiDAQ(object):
         if not cmdQ.empty(): self.decodeCommand(cmdQ)
 
       # -- end while ACITVE 
- 
+
+
     except KeyboardInterrupt:
       self.DAQ_ACTIVE = False     
       self.ACTIVE = False
@@ -460,8 +468,7 @@ class runPhyPiDAQ(object):
       time.sleep(1.)
      
       if self.verbose:
-        print('*==* ' + sys.argv[0] + ': normal end')
-      print(' ')
+        print('\n*==* ' + sys.argv[0] + ': normal end - type <ret>')
       sys.exit()
 
 # execute only if called directly, but not when imported

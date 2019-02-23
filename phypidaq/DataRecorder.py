@@ -27,9 +27,14 @@ class DataRecorder(object):
       ChanLabels = ConfDict['ChanLabels']
     else:
       ChanLabels = [''] * self.NChan
+    if 'ChanUnits' in ConfDict:
+      ChanUnits = ConfDict['ChanUnits']
+    else:
+      ChanUnits = [''] * self.NChan
+
     self.ChanTags = []
     for i, c in enumerate(ChanNams):
-      self.ChanTags.append( c + ':' + ChanLabels[i])
+      self.ChanTags.append( c + ':' + ChanLabels[i] + '('+ChanUnits[i]+')')
 
     fname = Fname.split('.')
     fnam = fname[0]
@@ -58,8 +63,8 @@ class DataRecorder(object):
   # explicit close method
     if not self.f.closed: self.f.close()
 
-  def __del__(self):
-  # define a destructor in case .close() is forgotten
-    if not self.f.closed: self.f.close()
+#  def __del__(self):
+#  # define a destructor in case .close() is forgotten
+#    if not self.f.closed: self.f.close()
       
 #-end class DataRecorder
