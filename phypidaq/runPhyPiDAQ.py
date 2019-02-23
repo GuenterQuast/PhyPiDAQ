@@ -175,7 +175,7 @@ class runPhyPiDAQ(object):
       PhyPiConfDict['Interval'] = 0.05
 
     if 'NHistoryPoints' not in PhyPiConfDict: # length of stored history
-      PhyPiConfDict['NHistoryPoints'] = 120.
+      PhyPiConfDict['NHistoryPoints'] = 120
 
     if 'XYmode' not in PhyPiConfDict:  # default is XY mode off
       PhyPiConfDict['XYmode'] = False
