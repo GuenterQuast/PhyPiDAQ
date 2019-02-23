@@ -318,12 +318,14 @@ class runPhyPiDAQ(object):
       self.DatRec = DataRecorder(FName, PhyPiConfDict)
     else:
       self.DatRec = None
+      PhyPiConfDict['DataFile'] = self.DatRec
 
   # buffer latest data (number of data points given by NHistoryPoints)
     if 'bufferData' in PhyPiConfDict:
       self.bufferFile = PhyPiConfDict['bufferData']      
     else:
       self.bufferFile = "PhyPiData"
+      PhyPiConfDict['bufferData'] = self.bufferFile     
     # set-up a ring buffer 
     if self.bufferFile != None:    
       self.RBuf = RingBuffer(PhyPiConfDict['NHistoryPoints'])
