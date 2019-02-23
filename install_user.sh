@@ -14,14 +14,21 @@ mkdir -p $DIR
 
 if [ -d $DIR ]; then
   # enter here, if direcotry exists
+#
     # copy documentation
   mkdir -p $DIR/doc
   cp -auv doc/*.pdf $DIR/doc/
   cp -auv README_de.pdf $DIR
+#
+    #copy python code
+  cp -auv phypi.py $DIR
+  cp -auv run_phypi.py $DIR
+#  
     #copy config examples
   cp -auv config/ $DIR
   cp -auv default.daq $DIR
   cp -auv PhyPiConf.daq $DIR
+#
     # copy examples
   cp -auv examples/ $DIR
 fi
