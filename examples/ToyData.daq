@@ -49,3 +49,6 @@ ChanFormula:
 DataFile:   null                  # file name for output file 
 #DataFile:   testfile.csv         # file name for output file 
 #CSVseparator: ';'
+
+#bufferData: null    # file name to track latest data and evetually 
+                     #  store them, or null to switch off 

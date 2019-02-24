@@ -1,0 +1,5 @@
+# example config for MMA8451 accelerometer
+
+DAQModule: MMA8451Config
+Range: 4G  # 2G, 4G or 8G
+

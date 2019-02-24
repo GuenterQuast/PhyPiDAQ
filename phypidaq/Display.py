@@ -262,18 +262,23 @@ class Display(object):
       blank1 = Tk.Label(frame, width=5, text="")
       blank1.grid(row=0, column=7)
 
-      buttonSvDa = Tk.Button(frame, width=7, text='saveData', underline=0, fg='purple',
-                             command=cmdSaveData)
-      buttonSvDa.grid(row=0, column=6)
-      root.bind('s', cmdSaveData)
+      if 'bufferData' in self.confdict:
+       if self.confdict['bufferData'] != None:
+         buttonSvDa = Tk.Button(frame, width=7, text='saveData', 
+                        underline=0, fg='purple', command=cmdSaveData)
+         buttonSvDa.grid(row=0, column=6)
+         root.bind('s', cmdSaveData)
+      else:
+        blank2 = Tk.Label(frame, width=5, text="")
+        blank2.grid(row=0, column=6)
 
       buttonSvGr = Tk.Button(frame, width=7, text='SaveGraph', underline=0, fg='purple',
                            command=cmdSaveGraph)
       buttonSvGr.grid(row=0, column=5)
       root.bind('S', cmdSaveGraph)
 
-      blank2 = Tk.Label(frame, width=5, text="")
-      blank2.grid(row=0, column=4)
+      blank3 = Tk.Label(frame, width=5, text="")
+      blank3.grid(row=0, column=4)
 
       buttonP = Tk.Button(frame, width=7, text='Pause', underline=0,  fg='blue',
                    command=cmdPause)
