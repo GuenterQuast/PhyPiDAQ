@@ -8,10 +8,10 @@ DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
 # optional: 
 #DeviceFile: config/MCP3008Config.yaml   # 10 bit ADC, SPI bus
 #DeviceFile: config/MCP3208Config.yaml   # 12 bit ADC, SPI bus
-#DeviceFile: config/PSConfig.yaml        # PicoTechnology USB scopt 
-#DeviceFile: config/MAX31865Config.yaml  # pt100 sensor
+#DeviceFile: config/PSConfig.yaml        # PicoTechnology USB scope 
+#DeviceFile: config/MAX31865Config.yaml  # Pt 100 sensor
 #DeviceFile: config/GPIOCount.yaml       # frequency count
-#DeviceFile: config/DS18B20Config.yaml   # digital tmperatur sensor
+#DeviceFile: config/DS18B20Config.yaml   # digital temperature sensor
 #DeviceFile: config/MAX31855Config.yaml  # thermo element
 #DeviceFile: config/BMP180Config.yaml    # pressure/temperature sensor
 #DeviceFile: config/INA219Config.yaml    # Voltage/Current sensor
@@ -71,6 +71,6 @@ DataFile:   null              #  null to disable
 #CSVseparator: ';'            # field separator, set to ';' for German Excel   
 
 # enable buffering of latest data (depth NHistoryPoints from above)
-#bufferData: PhyPiData    # file name to track latest data and evetually 
+#bufferData: PhyPiData    # file name to track latest data and eventually 
 #bufferData: null         #  store them, or null to switch off  
                      

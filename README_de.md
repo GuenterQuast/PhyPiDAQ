@@ -28,14 +28,16 @@ Die Datenerfassung kann auch über die Kommandozeile gestartet werden:
 
 Wenn keine Konfigurationsdatei angegeben ist, wird der Standardwert `PhyPiConf.daq` verwendet.
 
-Das Unterverzeichnis `./examples/` enthält eine Reihe einfacher Python-Skripte, die die Verwendung der bereitgestellten Datenerfassungs- und Anzeigemodule mit minimalem Code veranschaulichen.
+Das Unterverzeichnis `./examples/` enthält eine Reihe einfacher Python-Skripte, die die Verwendung der bereitgestellten Datenerfassungs- und Anzeigemodule mit minimalem Code veranschaulichen. Außerdem sind
+vorbereitete Konfigurationen (*.daq*-Dateien) enthalten, die für typische Messaufgaben mit dem Script  
+*run_phypi.py* verwendet werden können. 
 
 
 ## Konfigurationsdateien für PhyPiDAQ
 
 Mit dem Skript `run_phypi.py` können sehr allgemeine Messaufgaben ausgeführt werden, ohne eigenen Code schreiben zu müssen. Die Konfigurationsoptionen für Eingabegeräte und deren Kanäle sowie für die Anzeige- und Datenspeichermodule werden in einer globalen Konfigurationsdatei vom Typ `.daq` angegeben, die Verweise auf Gerätekonfigurationsdateien vom Typ `.yaml` enthält.
 
-Generell entspricht die in den Konfigurationsdateien verwendete Syntax der Markup-Sprache *yaml*. Insbesondere kennzeichnet Text nach einem`#` -Zeichen erklärende Kommentare oder enthält alternative, auskommentierte Konfigurationsoptionen, die durch Löschen des `#` -Zeichens aktiviert werden können.
+Generell entspricht die in den Konfigurationsdateien verwendete Syntax der mark-up Sprache *yaml*. Insbesondere kennzeichnet Text nach einem`#` -Zeichen erklärende Kommentare oder enthält alternative, auskommentierte Konfigurationsoptionen, die durch Löschen des `#` -Zeichens aktiviert werden können.
 
 ### Hauptkonfiguration 
 
@@ -44,62 +46,89 @@ Ein typisches, ausführlich kommentiertes Beispiel für die Hauptkonfigurationsd
 **Inhalt der Hauptkonfigurationsdatei `PhyPiConf.daq`**
 
 ```yaml
-# Konfigurations-Optionen fuer PhyPiDAQ
+# -- Konfigurations-Optionen fuer PhyPiDAQ
+# -----------------------------------------
 
-# Konfigurationsdateien fuer Geraete
-DeviceFile: config/ADS1115Config.yaml
-#DeviceFile: config/MCP3008Config.yaml
-#DeviceFile: config/PSConfig.yaml
-#DeviceFile: config/MAX31865Config.yaml
-#DeviceFile: config/GPIOCount.yaml
-#DeviceFile: config/DS18B20Config.yaml
-#DeviceFile: config/MAX31855Config.yaml
-## ein Beispiel fuer mehrere Geraete
-#DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
+#
+# -- Konfigurationsdateien fuer Geraete
+#
+DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
+## optional: 
+#DeviceFile: config/MCP3008Config.yaml   # 10 bit ADC, SPI-Bus
+#DeviceFile: config/MCP3208Config.yaml   # 12 bit ADC, SPI-Bus
+#DeviceFile: config/PSConfig.yaml        # PicoTechnology USB-Oszilloskop 
+#DeviceFile: config/MAX31865Config.yaml  # pt100 Temperatursensor
+#DeviceFile: config/GPIOCount.yaml       # Frequenzzaehler
+#DeviceFile: config/DS18B20Config.yaml   # digitaler Temperatursensor
+#DeviceFile: config/MAX31855Config.yaml  # Thermoelement
+#DeviceFile: config/BMP180Config.yaml    # Druck-/Temperatursensor
+#DeviceFile: config/INA219Config.yaml    # Strom-/Spannungssensor
+#DeviceFile: config/MMA8451Config.yaml   # Beschleunigungssensor
+#DeviceFile: ToyData.yaml                # Simulierte Daten
 
-Interval: 0.1                # Datennahme-Intervall in Sekunden
+## Beispiel für die Verwendung mehrer Sensoren:
+#DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
 
-DisplayModule: DataLogger    # zeitlicher Verlauf der Messgroessen
-# DisplayModule: DataGraphs   # text, Balkendiagramm, zeitlicher Verlauf und xy-Darstellung
-Chan2Axes: [0,1]             # Kanal auf linker(0) oder rechter(1) Achse
-                             # Voreinstellung [0,1,1,...]
-
-XYmode:     false             # XY-Darstellung ein/aus 
-#xyPlots:   # Paare von Kanaelen als xy-Grafik 
-# - [0,1]     # x: Kanal 0, y: Kanal 1
-# - [0,2]     # x: Kanal 0, y: Kanal 2 (falls vorhanden)
-     # Voreinstellung [0,1], [0,2], ..., [0, n-1] bei n aktiven Kanaelen
-
-#  Meta-Daten fuer jeden Kanal
+#
+# -- Konfigurationsoptionen fuer Kanaele 
+#
+##  Meta-Daten fuer jeden Kanal
 ChanLabels: [U, U]             # Namen  
 ChanUnits: [V, V]              # Einheiten 
 ChanColors: [darkblue, sienna] # Farbzuordnung in der Anzeige
 
-# ggf. werden hier die Informationen aus der Geraete-Konfiguration ueberschrieben 
-##ChanLimits: 
-## - [0., 1.]   # chan 0
-## - [0., 1.]   # chan 1
-## - [0., 1.]   # chan 2
+## ggf. werden hier die Informationen aus der Geraete-Konfiguration ueberschrieben 
+#ChanLimits: 
+# - [0., 1.]   # chan 0
+# - [0., 1.]   # chan 1
+# - [0., 1.]   # chan 2
 
-# ggf. Kalibration der Rohmessungen
+## ggf. Kalibration der Rohmessungen
 #ChanCalib:
 #  - null    oder  - <Faktor> or  - [ [ <wahre Werte> ], [ <Rohwerte> ] ] 
 #  - 1.                       # chan0: ein einfacher Faktor fuer Kanal 0
 #  - [ [0.,1.], [0., 1.] ]    # chan1: Interpolation [wahr]([roh] )
 #  - null                     # chan2: Keine Kalibration
 
-# Formel auf Werte anwenden
+## Formel auf Werte anwenden
 #ChanFormula:
 #  - c0 + c1     # chan0 = Summe von Kanal 0 und 1
 #  - c1          # chan1 : = Kanal 1 (Keine Aenderung)
 #  - null        # chan2 : Keine Formel
 
+#
+# -- Konfiguation der grafischen Anzeige
+#
+Interval: 0.1                # Datennahme-Intervall in Sekunden
+#NHistoryPoints: 120          # Anzahl Datenpunkte im Verlaufspuffer (Vorgabe 120)
+DisplayModule: DataLogger    # zeitlicher Verlauf der Messgroessen
+# DisplayModule: DataGraphs   # text, Balkendiagramm, zeitlicher Verlauf und xy-Darstellung
+#Title: Demo                  # Titel fuer die Anzeige
+## falls mehr als zwei Kanaele aktiv sind: 
+Chan2Axes: [0, 1, 0]         # Kanal auf linker(0) oder rechter(1) Achse
+                             #     Voreinstellung [0, 1, 1, ...]
+XYmode:     false            # XY-Darstellung ein/aus 
+## falls mehr als zwei Kanaele aktiv sind: 
+#xyPlots:      # Paare von Kanaelen als xy-Grafik 
+# - [0, 1]     # x: Kanal 0, y: Kanal 1
+# - [0, 2]     # x: Kanal 0, y: Kanal 2 (falls vorhanden)
+# - [2, 3]     # Voreinstellung [0,1], [0,2], ..., [0, n-1] bei n aktiven Kanaelen
+
+#
+# -- Konfiguration fuer Ausgabe in Dateien
+#
 # Name der Ausgabedatei im CSV-Format
 #DataFile:   testfile.csv     # Dateiname
 DataFile:   null              #   null falls keine Ausgebe gewuenscht
 #CSVseparator: ';'            # Feld-Trenner auf ';' setzen, Vorgabe ist ','
 
+# Speicherung der letzen NHistoryPoints Datenpunke
+#bufferData: PhyPiData    # Dateiname für (optionale) Speicherung 
+#bufferData: null         #  null zum Ausschalten; Voreinstellung: Datei PhyPiData.dat 
+
 ```
+
+
 
 ### Gerätekonfigurationen 
 
@@ -196,8 +225,8 @@ git clone https://github.com/GuenterQuast/PhyPiDAQ
 PhyPiDAQ* basiert auf Code aus anderen Paketen, die die Treiber für die unterstützten Geräte und  Bibliotheken für die Visualisierung bereitstellen. Die notwendigen Befehle zu deren Installation sind im Scritp `installlibs.sh` zusammengefasst.  Geben Sie auf der Kommandozeile folgende Befehle ein (ohne den erklärenden Text nachdem `#`-Zeichen):
 
 ```bash
-cd ~/git/PhyPiDAQ  # ins Installationsverzeichnis wechlsen
-git pull           # optional, falls Sie PhyPiDAQ aktualisiern möchten
+cd ~/git/PhyPiDAQ  # ins Installationsverzeichnis wechseln
+git pull           # optional, falls Sie PhyPiDAQ aktualisieren möchten
 ./installlibs.sh   # Installations-Script ausführen
 ```
 
@@ -227,7 +256,7 @@ Um versehentliches Überschreiben von Dateien im Paket *PhyPiDAQ* zu vermeiden, 
 sudo cp ~/git/PhyPiDAQ /usr/local/
 ```
 
-Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angepasst werden. Dies wird am einfachsten durch Klicken mit der rechten Maustaste auf das *phypi*-Symbol erreicht. Im sich dann öffnenden Menu den Dialog "Eigenschaften" wählen und alle Pfade von  *~/git/*  ->  */usr/local/* ändern.
+Die Pfade in *~/Desktop/phypi.desktop* müssen dann ebenfalls entsprechend angepasst werden. Dies wird am einfachsten durch Klicken mit der rechten Maustaste auf das *phypi*-Symbol erreicht. Im sich dann öffnenden Menü den Dialog "Eigenschaften" wählen und alle Pfade von  *~/git/*  ->  */usr/local/* ändern.
 
 
 
@@ -306,14 +335,13 @@ sudo usermod -a -G tty pi
 
 Die hier bereit gestellte Software soll es sowohl Lernenden als auch Lehrenden ermöglichen, typische Messaufgaben im Physikunterricht durchzuführen. Dank der Realisierung mit Sensoren, die auch in Alltagsgeräten eingesetzt werden, und dem Raspberry Pi als Datennahme-Rechner können kostengünstige Einführungssets für Schülerversuche bereit gestellt werden.  
 
-Ein Vorschlag von Komponenten zur Grundausstattung wird in der Datei *Komponenten_fuer_PhyPi.pdf* beschreiben.  Die zum Umgang damit notwendigen Grundkenntnisse werden in einem Einführungskurs erarbeitet, der in der Datei *Kurs_digitale_Messwerterfasseung_mit_PhyPiDAQ.pdf* beschreiben ist. Zum Verständnis unumgänglich sind einige Grundkenntnisse in der Sprache *python* und die Vorgehensweise zum Ansprechen der GPIO-Pins des Raspberry Pi.  Es folgt eine Einführung in die Analog-Digital-Wandlung und die Verwendung des Wandlerbausteins ADS1115. Am Ende steht die Kalibration und Verwendung eines NTC-Widerstands als Temperatursensor. Die letzte Stufe des Einführungskurses bildet ein mit einer Wägezelle und einem Instrumentenverstärker realisierter Kraftsensor. 
+Ein Vorschlag von Komponenten zur Grundausstattung wird in der Datei *Komponenten_fuer_PhyPi.pdf* beschreiben.  Die zum Umgang damit notwendigen Grundkenntnisse werden in einem Einführungskurs erarbeitet, der in der Datei *Kurs_digitale_Messwerterfassung_mit_PhyPiDAQ.pdf* beschreiben ist. Zum Verständnis unumgänglich sind einige Grundkenntnisse in der Sprache *python* und die Vorgehensweise zum Ansprechen der GPIO-Pins des Raspberry Pi.  Es folgt eine Einführung in die Analog-Digital-Wandlung und die Verwendung des Wandlerbausteins ADS1115. Am Ende steht die Kalibration und Verwendung eines NTC-Widerstands als Temperatursensor. Die letzte Stufe des Einführungskurses bildet ein mit einer Wägezelle und einem Instrumentenverstärker realisierter Kraftsensor. 
 
 Um das Erstellen von eigenem Code für jede Messaufgabe zu vermeiden, liefert das Paket *PhyPiDAQ* eine einheitliche Programmierschnittstelle, die verschiedene Sensoren unterstützt und Standard-Anzeigen für die Datenaufnahme bereit stellt. 
 
 **Auslese eines Analog-Digitalwandlers**
 
 Ein einfaches Beispiel zur Auslese des Digital-Analog-Wandlers *ADS1115* illustriert die Anwendung (Script
-
 `read_analog.py`):
 
 ```python
@@ -322,7 +350,7 @@ Ein einfaches Beispiel zur Auslese des Digital-Analog-Wandlers *ADS1115* illustr
 
 '''read_analog.py
      this script illustrates the general usage of package phypidaq
-     pirints data read from an analog channel
+     prints data read from an analog channel
 '''
 import time, numpy as np
 # import module controlling readout device
@@ -403,9 +431,9 @@ except KeyboardInterrupt:
 
 
 
-**Datenaufnamhe mit _run_phypi_**
+**Datenaufnamhe mit _phypi.py oder  _run_phypi.py_**
 
-Das Script *run_phypi* stellt eine sehr allgemein und weitgehend konfigurierbare Auslese und Anzeige von Sensordaten bereit. Die Konfigurationsdateien im Dateiformat *.daq* enthalten dabei die notwendigen Informationen zum verwendeten Sensor, zu den Anzeigeoptionen als Echtzeitanzeige, Verlaufsdiagramm oder xy-Darstellung sowie zur Kalibration oder Umrechnung von Sensordaten. Ein allgemeines Beispiel einer solchen Hauptkonfigurationsdatei wurde bereits oben vorgestellt. Mit entsprechend vorbereiteten Konfigurationsdateien lassen sich sehr flexibel die für bestimmte Experimente notwendigen Messungen und Anzeigen vorbereiten und durchführen.  Im  Verzeichnis *examples/* sind einige konkrete Beispiele enthalten.
+Das Script *run_phypi* stellt eine sehr allgemein und weitgehend konfigurierbare Auslese und Anzeige von Sensordaten bereit. Die Konfigurationsdateien im Dateiformat *.daq* enthalten dabei die notwendigen Informationen zum verwendeten Sensor, zu den Anzeigeoptionen als Echtzeitanzeige, Verlaufsdiagramm oder xy-Darstellung sowie zur Kalibration oder Umrechnung von Sensordaten. Ein allgemeines Beispiel einer solchen Hauptkonfigurationsdatei wurde bereits oben vorgestellt. Mit entsprechend vorbereiteten Konfigurationsdateien lassen sich sehr flexibel die für bestimmte Experimente notwendigen Messungen und Anzeigen vorbereiten und durchführen.  Mit Hilfe der grafische Oberfläche *phypi.py* lassen sich die Konfigurationen bequem anschauen, anpassen und abspeichern und die Datenaufnahme kann gestartet werden.  Konkrete Beispiele sind Im  Verzeichnis *examples/* enthalten.
 
 **Barometer**
 
@@ -440,7 +468,7 @@ Etwas aufwändiger ist die simultane Darstellung mehrerer Diodenkennlinien mit e
 DeviceFile: ADS1115_Diode.yaml      # definiert 4 aktive Kanäle mit Verstärkung 1
 
 # Anwenden von Umrechnungsformeln auf die Eingangskanäle
-# aus den Messgrößen an den Kanälen c0 und c1-c3 werden 6 Werte berechnet
+#  aus den Messgrößen an den Kanälen c0 und c1-c3 werden 6 Werte berechnet
 ChanFormula:
  - c1                  #  U Diode c1
  - (c0 - c1) / 0.120   #  I Diode c1
@@ -465,7 +493,7 @@ ChanLimits:          # Wertebereiche
 DisplayModule: DataLogger
 Chan2Axes: [0,1,0,1,0,1]    # Kanal auf linker(0) oder rechter(1) Achse
                             # Voreinstellung [0,1,1,...]
-Interval: 0.1               # Anzeige-Interval         
+Interval: 0.1               # Anzeige-Intervall 
 XYmode:   true              # XY-Darstellung
 xyPlots:   # Paare von Kanälen als xy-Grafik 
  - [0,1]     # U0 - I0
@@ -546,7 +574,7 @@ Verwendet man statt der Option *ChanAverages: ['rms']* die Option *ChanAverages:
 
  **Test der Oszilloskop-Funktion**
 
-Leider läuft die Oszilloskop-Software der Firma PicoTech (noch) nicht auf der Raspberry Pi. Als Test der Funktonalität eines PicoScopes gibt es daher das _python_-Script *examples/runOsci.py*, das eine Oszillografenanzeige darstellt. Das Script verwendet Funktionalität aus dem Paket *picoDAQ*  und stellt bis auf fehlende interatkive Einstellmöglichkeiten ein vollwertiges Oszlloskop für den Raspberry Pi bereit.  Die notwendigen Einstellungen finden sich in der Steuerdatei *PSOsci.yaml*, die genau so aufgebaut ist wie das Beispiel oben:
+Leider läuft die Oszilloskop-Software der Firma PicoTech (noch) nicht auf der Raspberry Pi. Als Test der Funktonalität eines PicoScopes gibt es daher das _python_-Script *examples/runOsci.py*, das eine Oszillografenanzeige darstellt. Das Script verwendet Funktionalität aus dem Paket *picoDAQ*  und stellt bis auf fehlende interaktive Einstellmöglichkeiten ein vollwertiges Oszilloskop für den Raspberry Pi bereit.  Die notwendigen Einstellungen finden sich in der Steuerdatei *PSOsci.yaml*, die genau so aufgebaut ist wie das Beispiel oben:
 
 ```yaml
 # Konfiguration für PicoScope
@@ -571,7 +599,7 @@ frqSG: 0.0    # Signalgenerator aus
 ```
 
 Zum Test reicht ein offenes Kabelende am Eingangskabel zu Kanal A, über das 50Hz-Einstreuungen
-aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe von Schaltnetzteilen, z. B. dem Steckernetzteil des Raspberry Pi. 
+aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der Nähe von Schaltnetzteilen, z. B. dem Steckernetzteil des Raspberry Pi. 
 
 
 
@@ -640,16 +668,16 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 - `phypidaq/DataRecorder.py`  
     Speichern von Daten im CSV-Format
 
-- `runPhyPiDAQ.py`    
+- `runPhyPiDAQ.py`  
     Klasse für das Script  `run_phypi.py`
 
-- `runPhyPyUI.py`
+- `runPhyPyUI.py`  
     Klasse für die grafische Oberfläche `phypi.py`, abgeleitet von `phypiUI`
 
-- ``phypiUI`
+- `phypiUI`  
     mit `pyuic5` aus `phypi.ui` erzeugte Basis-Klasse für grafische Oberfläche
 
-- `phypi.ui`
+- `phypi.ui`  
     Ausgabe von `designer-qt5` , beschreibt die grafischen Oberfläche
 
 
@@ -667,7 +695,6 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 - `config/MCP3008Config.yaml`
 - `config/PSConfig.yaml`
 
-<div style="page-break-after: always;"></div>
 
 ### Beispiele
 
@@ -712,7 +739,7 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 - `examples/DiodenKennlinie.daq`  
     simultane Messung und Darstellung von drei Diodenkennlinen mit einem ADS1115 Digital-Analog-Wandler
 - ``examples\Barometer.daq``  
-    nutzt Sensoren BMB180 der BMP280 zur Anzeige von Temperatur und Luftdruck air
+    nutzt Sensoren BMB180 der BMP280 zur Anzeige von Temperatur und Luftdruck
 - ``examples\Accelerometer.daq``  
     nutzt den Sensor MMA8451 zur Anzeige der  x-, y- and z-Komponente der Beschleunigung.
 - ``examples\NoiseMeter.daq``  
@@ -720,7 +747,7 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
     angezeigt werden die Effektivwerte von 200  in einem Zeitraum von 20 ms aufgezeichneten
     Messungen der Schallamplitude. Kann auch mit dem Geophon SM-24 verwendet werden.
 - `examples/ToyData.daq`
-    Erzeugung und Anzeige  von simulierten Daten 
+    Erzeugung und Anzeige von simulierten Daten 
 
 
 ### Dokumentation

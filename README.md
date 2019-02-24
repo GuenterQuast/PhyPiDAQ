@@ -10,7 +10,7 @@ Die **deutsche Version** dieses Dokuments findet sich unter dem Link [README_de.
 
 This *python3*  code provides some basic functionality for data acquisition and visualisation like data logger, bar-chart, XY- or oscilloscope display and data recording on disk.  
 
-In addition to the GPIO inputs/outputs of the Raspberry Pi, the analog-to-digital converters ADS1115 and MCP3008 and PicoScope USB-oscilloscopes are supported as input devices for analog data, as well as a number of digital sensors using protocols like I²C or SPI.
+In addition to the GPIO inputs/outputs of the Raspberry Pi, the analogue-to-digital converters ADS1115 and MCP3008 and PicoScope USB-oscilloscopes are supported as input devices for analogue data, as well as a number of digital sensors using protocols like I²C or SPI.
 
 The package provides an abstraction layer for measurement devices and sensors connected to a Raspberry Pi.  Dedicated classes for each device provide a simple, unified interface, containing only the methods `init(<config_dictionary>)`, `acquireData(buffer)` and `closeDevice()`. Simple examples with minimalist code illustrate the usage. The graphical user interface `phypi.py` and the script `run_phypi.py` provide a configurable environment for more complex measurements.
 
@@ -40,72 +40,95 @@ The script `run_phypi.py` allows users to perform very general measurement tasks
 
 ### Main configuration file
 
-A typical, commented example of the main configuration file is shown here:
+A typical, commented example of the main configuration file is shown below.
+Note that text following a ''#''-sign is ignored and contains descriptive comments or alternatives.
 
 **file PhyPiConf.daq**
 
 ```yaml
-# Configuration Options for PhyPiDAQ
+# -- Configuration Options for PhyPiDAQ 
+# --------------------------------------
 
-# device configuration files
-DeviceFile: config/ADS1115Config.yaml
-#DeviceFile: config/MCP3008Config.yaml
-#DeviceFile: config/PSConfig.yaml
-#DeviceFile: config/MAX31865Config.yaml
-#DeviceFile: config/GPIOCount.yaml
-#DeviceFile: config/DS18B20Config.yaml
-#DeviceFile: config/MAX31855Config.yaml
+#
+# -- configuration files for hardware devices 
+#
+DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
+## optional: 
+#DeviceFile: config/MCP3008Config.yaml   # 10 bit ADC, SPI bus
+#DeviceFile: config/MCP3208Config.yaml   # 12 bit ADC, SPI bus
+#DeviceFile: config/PSConfig.yaml        # PicoTechnology USB scope
+#DeviceFile: config/MAX31865Config.yaml  # Pt 100 sensor
+#DeviceFile: config/GPIOCount.yaml       # frequency count
+#DeviceFile: config/DS18B20Config.yaml   # digital temperature sensor
+#DeviceFile: config/MAX31855Config.yaml  # thermo element
+#DeviceFile: config/BMP180Config.yaml    # pressure/temperature sensor
+#DeviceFile: config/INA219Config.yaml    # Voltage/Current sensor
+#DeviceFile: config/MMA8451Config.yaml   # accelerometer 
+#DeviceFile: ToyData.yaml                # simulated data
 
 ## an example of multiple devices
-#DeviceFile: [config/ADS1115Config.yaml, config/ GPIOCount.yaml]
+#DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
 
-Interval: 0.1           # logging intervalDisplay
-Module: DataLogger
-# DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
-Chan2Axes: [0,1]             # assign chanel to axis: 0: left, 1: right axis
-                 # default is [0,1,1,...]
+#
+# -- configuration options for Channels 
+# 
+ChanLabels: [U, U]                 # names for channels 
+ChanUnits: [V, V]                  # units for channels 
+ChanColors: [darkblue, sienna]     # channel colours in display
 
-XYmode:     false                 # enable/disable XY-display
-#xyPlots:   # pairs of channels as xy-plot 
-# - [0,1]     # x: channel 0, y: channel 1
-# - [0,2]     # x: channel 0, y: channel 2 (if present)
-   # default [0,1], [0,2], ..., [0, n-1] for n active channels
-   
-# channel-specific information
-ChanLabels: [U, U ]             # names for channels 
-ChanUnits: [V, V]               # units for channels 
-ChanColors: [darkblue, sienna]  # channel colours in display
+## eventually overwrite Channel Limits obtained from device config 
+#ChanLimits: 
+# - [0., 1.]   # chan 0
+# - [0., 1.]   # chan 1
+# - [0., 1.]   # chan 2
 
-# eventually overwrite Channel Limits obtained from device config 
-##ChanLimits: 
-## - [0., 1.]   # chan 0
-## - [0., 1.]   # chan 1
-## - [0., 1.]   # chan 2
-
-# calibration of channel values
-#  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
-#ChanCalib:
+## calibration of raw channel values
+##   - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
+#ChanCalib: 
 #  - 1.                       # chan0: simple calibration factor
 #  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
 #  - null                     # chan2: no calibration
 
-# apply formulae to calibrated channel values
+## apply formulae to (calibrated) channel values
 #ChanFormula:
 #  - c0 + c1  # chan0
 #  - c1          # chan1
 #  - null        # chan2 : no formula
 
-# name of output file
-#DataFile:   testfile.csv     # file name for output file 
-DataFile:   null              #      use null if no output wanted
-#CSVseparator: ';'            # field separator for output file, defaults to ','
+#
+# -- configuration options for graphical display 
+#
+Interval: 0.1                # logging interval  
+#NHistoryPoints: 120          # number of points used in history buffer
+DisplayModule: DataLogger    # history of channel signals
+#DisplayModule: DataGraphs    # text, bar-graph, history and xy-view
+#Title: Demo                  # display title
+#XYmode:     false            # enable/disable XY-display
+## if more than two channels active:
+#Chan2Axes: [0, 1, 0]         # assign channels to axes
+#xyPlots:                     # define which axes to show 
+# - [0, 1]                    #  in xy-plot
+# - [0, 2]
+# - [1, 2]
+
+#
+# -- configuration options for output to file 
+#
+#DataFile:   testfile.csv     # file name for output file, 
+DataFile:   null              #  null to disable 
+#CSVseparator: ';'            # field separator, set to ';' for German Excel  
+
+# enable buffering of latest data (depth NHistoryPoints from above)
+#bufferData: PhyPiData    # file name to track latest data and eventually 
+#bufferData: null         #  store them, or null to switch off  
+
 ```
 
 
 
 ## Device configuration files
 
-Typical, commented examples of device configurations are shown below. The device configuration file for the analog-to-digital converter **ADS1115** specifies the active channels, their ranges and single or differential operation modes.
+Typical, commented examples of device configurations are shown below. The device configuration file for the analogue-to-digital converter **ADS1115** specifies the active channels, their ranges and single or differential operation modes.
 
 **file ADS1115Config.yaml**
 
@@ -298,14 +321,13 @@ sudo usermod -a -G tty pi
 ```
 
 
-
-
 ## Overview of files contained in PhyPiDAQ 
 
 ### Programs 
 
 - `run_phypi.py`  
-    run data acquisition and display modules as specified in configuration files (default `PhyPiConf.daq` and *.yaml* files ins subdirectory *config/*)
+    run data acquisition and display modules as specified in configuration files (default `PhyPiConf.daq`
+    and *.yaml* files ins subdirectory *config/*)
 - `phypi.py`  
     graphical user interface to edit configuration files and start the script `run_phypi.py`
 
@@ -415,7 +437,8 @@ sudo usermod -a -G tty pi
 - `examples/poissonLED.py`  
     generate a random signal following Poisson statistics on a GPIO pin
 - `examples/FreqGen.py`  
-    generate a fixed frequency signal on a GPIO pin
+    generate a fixed frequency signal on a GPIO pin  
+
 ### Configuration files for *run_phypi.py*
 - `examples/Amperemeter.daq`  
     display current and eventually voltage read from INA219 sensor
@@ -428,13 +451,13 @@ sudo usermod -a -G tty pi
      displays the *rms* of 200 samples taken over a time periods of 20 ms.
     Can also be used with geophone SM-24.
 - `examples/ToyData.daq`
-    generation and display of simulated data 
+    generation and display of simulated data  
 
 ###  Documentation
 
-- `doc/Kurs_digitale_Messwerterfassung_mit_PhyPiDAQ.md (.pdf)`    
+- `doc/Kurs_digitale_Messwerterfassung_mit_PhyPiDAQ.md (.pdf)`  
     German only: Introductory course to measuring with the Raspberry Pi
-- `doc/Einrichten_des_Raspberry_Pi.md (.pdf)`   
+- `doc/Einrichten_des_Raspberry_Pi.md (.pdf)`  
     German only: setting up the Raspberry Pi for this project
 - `doc/Komponenten_fuer_PhyPi.md (.pdf)`  
     recommended components for this project
