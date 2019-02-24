@@ -600,7 +600,7 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 - `phypidaq/MCP3008Config.py`  
     Klasse zur Handhabung des Strom- und Spannungssensors INA219
 
--  `phypidaq/INA219Config.py`  
+- `phypidaq/INA219Config.py`  
     Klasse für Analog-Digital-Wandlers MCP3008 /MCP3208
 
 - `phypidaq/DS18B20Config.py`  
@@ -625,6 +625,9 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 - `phypidaq/PSConfig.py`  
     Klasse für PicoScope USB-Oszilloskope
 
+- `phypidaq/ToyDataConfig.py`  
+    Klasse zur Erzeugung simulierter Daten (für Test, Fehlersuche oder Übungsaufgaben)
+
 - `phypidaq/Display.py`  
     Interface und Hintergrund-Prozess zur Datenvisualisierung
 
@@ -636,6 +639,19 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 
 - `phypidaq/DataRecorder.py`  
     Speichern von Daten im CSV-Format
+
+- `runPhyPiDAQ.py`    
+    Klasse für das Script  `run_phypi.py`
+
+- `runPhyPyUI.py`
+    Klasse für die grafische Oberfläche `phypi.py`, abgeleitet von `phypiUI`
+
+- ``phypiUI`
+    mit `pyuic5` aus `phypi.ui` erzeugte Basis-Klasse für grafische Oberfläche
+
+- `phypi.ui`
+    Ausgabe von `designer-qt5` , beschreibt die grafischen Oberfläche
+
 
 ### Konfigurationsdateien
 
@@ -657,28 +673,39 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 
 - `examples/read_analog.py`  
     sehr minimalistisches Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
+
 - `examples/display_analog.py`  
     Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
     mit grafischer Anzeige des zeitlichen Verlaufs
+
 - `examples/display_analog2.py`  
     Beispiel zum Auslesen von zwei Kanälen von einem Analog-Digital-Wandler
     mit grafischer Anzeige des zeitlichen Verlaufs
+
 - `examples/read_INA210.py`  
     Beispiel zum Auslesen des Strom- und Spannungssensors INA219
+
 - ``examples/read_18B20.py``  
     Auslese des digitalen Temperatursensors DS18B20 
+
 - ``examples/readBMP180.py``  
     Auslese des digitalen Tempratur- und Drucksensors BMP180/280
+
 - examples/readMMA8451.py``  
     Auslese des digitalen Beschleunigungssensors MMA8451
+
 - `examples/runOsci.py`  
     Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben (Vorgabe `PSOsci.yaml`)
+
 - `examples/GPIO-In-out.py`  
      Beispiel zur Ansteuerung der GPIO-Pins: Erzeugung einer Rechteckspannung am Ausgabe-Pin durch Verändern der Spannung am Eingabe-Pin
+
 - `examples/poissonLED.py`  
     erzeugt ein zufälliges Signal an GPIO-Pin gemäß Poisson-Prozess 
+
 - `examples/FreqGen.py`  
     erzeugt Signal fester Frequenz an GPIO-Pin
+
 ### Konfigurationsdateien für *run_phypi.py*
 - `examples/Amperemeter.daq`  
     simultane Messung und Darstellung von Strom und ggf. Spannung mit dem Strom- und Spannungssensor INA219
@@ -691,7 +718,9 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 - ``examples\NoiseMeter.daq``  
     Messung der Lautstärke mit einem an ein PicoScope USB-Osziloskop angeschlossenen Mikrofon;
     angezeigt werden die Effektivwerte von 200  in einem Zeitraum von 20 ms aufgezeichneten
-    Messungen der Schallamplitude. Kann auch mit dem Geophon SM-24 verwendet werden.  
+    Messungen der Schallamplitude. Kann auch mit dem Geophon SM-24 verwendet werden.
+- `examples/ToyData.daq`
+    Erzeugung und Anzeige  von simulierten Daten 
 
 
 ### Dokumentation
@@ -703,5 +732,5 @@ aus dem Stromnetz aufgefangen werden. Höhere Frequenzen findet man in der Nähe
 - `doc/Komponenten_fuer_PhyPi.md (.pdf)`   
     empfohlene Komponenten für dieses Projekt
 - `doc/Bauanleitung_Kraftsensor.md (.pdf)`   
-    Bauanleitung für den verwendeten Kraftsenor
+    Bauanleitung für Kraftsenor
 

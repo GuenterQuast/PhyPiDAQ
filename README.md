@@ -313,36 +313,69 @@ sudo usermod -a -G tty pi
 
 - `phypidaq/__init__.py`  
    initialisation for package *phypidaq*
+
 - `phypidaq/_version_info.py`  
     version info for package *phypidaq*
+
 - `phypidaq/ADS1115Config.py`  
     class for handling of analog-to-digital converter ADS1115
+
 - `phypidaq/MCP3008Config.py`   
     class analog-to-digital converter MCP3008
+
 - `phypidaq/MCP3008Config.py`  
     class for current and voltage sensor INA219
+
 - `phypidaq/DS18B20Config.py`  
     class for handling of digital thermometer DS18B20
+
 - ``phypidaq/BMPx80Config.py``  
     class for the digital temperature and pressure sensors BMP180/280 or BME280
+
 - ``phypidaq/MMA8451Config.py``  
     class for the digital accelerometer MMA8451
+
 - `phypidaq/GPIOCount.py`   
     class for reading rates from GPIO pins
+
 - `phypidaq/MAX31855Config.py`  
     class for MAX31855 thermocouple-to-digital converter
+
 - `phypidaq/MAX31865Config.py`  
     class for MAX31865 resistance-to-digital converter
+
 - `phypidaq/PSConfig.py`  
     class for PicoScope USB oscilloscopes
+
+- `phypidaq/ToyDataConfig.py`  
+    class to generate simulated data (for test, debugging or exercises) 
+
 - `phypidaq/Display.py`  
     interface and background-process handling data visualisation
+
 - `phypidaq/DataLogger.py`  
     class for display of data histories and xy diagrams
+
 - `phypidaq/DataGraphs.py`  
     general display module for data as bar graphs, history plots and xy-graphs
+
 - `phypidaq/DataRecorder.py`  
     store data in CSV format
+
+- `runPhyPiDAQ.py`  
+    class containing the implementation of script `run_phypi.py`
+
+- `runPhyPiUI.py`
+    class implementing the graphical user interface `phypi.py`, uses
+    `phypiUI` as base class
+
+- `phypyUI`
+
+    base class for `runPhyPyUI`, generated from `phypi.ui` with `pyuic5`
+
+- `phypi.ui`
+    output of `designer-qt5` , describes the graphical user interface
+
 
 ### Configuration files 
 
@@ -394,12 +427,10 @@ sudo usermod -a -G tty pi
     measure noise with a microphone connected to PicoScope USB oscilloscope;
      displays the *rms* of 200 samples taken over a time periods of 20 ms.
     Can also be used with geophone SM-24.
+- `examples/ToyData.daq`
+    generation and display of simulated data 
 
-<div style="page-break-after: always;"></div>
-
-<div style="page-break-after: always;"></div>
-
-### Documentation
+###  Documentation
 
 - `doc/Kurs_digitale_Messwerterfassung_mit_PhyPiDAQ.md (.pdf)`    
     German only: Introductory course to measuring with the Raspberry Pi
@@ -408,5 +439,5 @@ sudo usermod -a -G tty pi
 - `doc/Komponenten_fuer_PhyPi.md (.pdf)`  
     recommended components for this project
 - `doc/Bauanleitung_Kraftsensor.md (.pdf)`  
-    building instructions for used force sensor
+    building instructions for a force sensor
 

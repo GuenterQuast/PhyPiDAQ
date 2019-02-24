@@ -287,7 +287,7 @@ class Display(object):
       root.bind('R', cmdResume)
 
   # set up fields for status and clock
-    clock = Tk.Label(frame)
+    clock = Tk.Label(frame, width=10)
     clock.grid(row=0, column=9)
     LblStatus = Tk.Label(frame, width=13, text="")
     LblStatus.grid(row=0, column=0)
