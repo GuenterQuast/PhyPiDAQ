@@ -239,7 +239,7 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
         self.pTE_DeviceConfig1.setReadOnly(not checked)
         self.pTE_DeviceConfig2.setReadOnly(not checked)
 
-    def saveConfig(self, confdir):
+    def saveConfig(self, confdir, verbose=0):
     # save all Config files to disk
 
       # retrieve actual configuration from GUI
@@ -307,12 +307,13 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
         fDev.close()
         print('   - saved Device configuration to ' + fullDevFile)
 
-      message = self.MB_Info('Info', 
-                     'saved PhyPi and Device Configuration')               
+      if verbose:
+        message = self.MB_Info('Info', 
+                        'saved PhyPi and Device Configuration')               
       return 0
 
     def saveDefaultConfig(self):
-      return self.saveConfig(self.ConfDir)
+      return self.saveConfig(self.ConfDir, verbose = 1)
 
     def actionStartRun(self):
       # start script run_phipy in subdirectory
