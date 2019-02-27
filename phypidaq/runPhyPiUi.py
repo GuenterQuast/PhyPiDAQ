@@ -279,29 +279,22 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
       #   ... device config files
       for DevFile in DevFiles:
         fullDevFile = confdir + '/' + DevFile
-        try:
-          fDev = open(fullDevFile, 'r')
-          fDev.close()
+        if os.path.isfile(fullDevFile):
           if self.MB_Question('Question', 
             'File '+fullDevFile+' exists - overwrite ?') == QMessageBox.Cancel:
             return 1
-        except:
-          pass  
       #  ... DAQ file         
-      try:
-        fDAQ = open(fullDAQfile, 'r')
-        fDAQ.close()
+      if os.path.isfile(fullDAQfile):
         if self.MB_Question('Question', 
           'File '+fullDAQfile+' exists - overwrite ?') == QMessageBox.Cancel:
           return 1
-      except:
-        pass
     
       # if ok, write all files
       fDAQ = open(fullDAQfile, 'w')
       print(DAQconf, file = fDAQ )
       self.DAQfile = DAQfile
-      fDAQ.close()     
+      fDAQ.close()
+      print('   - saved PhyPy configuration to ' + fullDAQfile)
 
       for i, DevFile in enumerate(DevFiles):
         cdir, fnam = os.path.split(DevFile)
@@ -312,7 +305,10 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
         fDev = open(confdir + '/' + DevFile, 'w')
         print(DevConfs[i], file = fDev )
         fDev.close()
-      
+        print('   - saved Device configuration to ' + fullDevFile)
+
+      message = self.MB_Info('Info', 
+                     'saved PhyPi and Device Configuration')               
       return 0
 
     def saveDefaultConfig(self):
