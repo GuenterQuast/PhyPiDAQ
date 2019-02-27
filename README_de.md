@@ -618,65 +618,47 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 
 - `phypidaq/__init__.py`  
    Initialisierung für das Paket *phypidaq*
-
 - `phypidaq/_version_info.py`  
     Versionsinformation für das Paket *phypidaq*
-
 - `phypidaq/ADS1115Config.py`  
     Klasse zur Handhabung des Analog-Digital-Wandlers ADS1115
-
 - `phypidaq/MCP3008Config.py`  
     Klasse zur Handhabung des Strom- und Spannungssensors INA219
-
 - `phypidaq/INA219Config.py`  
     Klasse für Analog-Digital-Wandlers MCP3008 /MCP3208
-
 - `phypidaq/DS18B20Config.py`  
     Klasse zur Handhabung des digitalen Thermometers DS18B20
-
 - `phypidaq/BMPx80Config.py`  
     Klasse zur Handhabung des digitalen Temperatur- und Drucksensors BMP180/280
     oder BME280
-
 - `phypidaq/MMA8451Config.py`  
     Klasse zur Handhabung des digitalen Beschleunigungssensors MMA8451
-
 - `phypidaq/GPIOCount.py`   
     Klasse zur Ratenmessung an GPIO-Pins
-
 - `phypidaq/MAX31855Config.py`  
     Klasse für Thermolement-Wandlers MAX31855
-
 - `phypidaq/MAX31865Config.py`  
     Klasse für den Widerstand-nach-digial-Wandler MAX31865
-
 - `phypidaq/PSConfig.py`  
     Klasse für PicoScope USB-Oszilloskope
-
+- `phypidaq/TCS34725Config`
+    Klasse für TCS34725 RGB Farbsensor
 - `phypidaq/ToyDataConfig.py`  
     Klasse zur Erzeugung simulierter Daten (für Test, Fehlersuche oder Übungsaufgaben)
-
 - `phypidaq/Display.py`  
     Interface und Hintergrund-Prozess zur Datenvisualisierung
-
 - `phypidaq/DataLogger.py`  
     Klasse zur Anzeige von Datenverlauf und xy-Diagrammen
-
 - `phypidaq/DataGraphs.py`  
     allgemeine Klasse zur Anzeige von Balkendiagrammen, Datenverläufen und xy-Diagrammen
-
 - `phypidaq/DataRecorder.py`  
     Speichern von Daten im CSV-Format
-
 - `runPhyPiDAQ.py`  
     Klasse für das Script  `run_phypi.py`
-
 - `runPhyPyUI.py`  
     Klasse für die grafische Oberfläche `phypi.py`, abgeleitet von `phypiUI`
-
 - `phypiUI`  
     mit `pyuic5` aus `phypi.ui` erzeugte Basis-Klasse für grafische Oberfläche
-
 - `phypi.ui`  
     Ausgabe von `designer-qt5` , beschreibt die grafischen Oberfläche
 
@@ -745,7 +727,9 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 - ``examples\NoiseMeter.daq``  
     Messung der Lautstärke mit einem an ein PicoScope USB-Osziloskop angeschlossenen Mikrofon;
     angezeigt werden die Effektivwerte von 200  in einem Zeitraum von 20 ms aufgezeichneten
-    Messungen der Schallamplitude. Kann auch mit dem Geophon SM-24 verwendet werden.
+    Messungen der Schallamplitude. Kann auch mit dem Geophon SM-24 verwendet werden
+- `examples\RGBsensor.daq¸
+    RGB Farbsensor 
 - `examples/ToyData.daq`
     Erzeugung und Anzeige von simulierten Daten 
 

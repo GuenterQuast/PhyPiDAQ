@@ -369,6 +369,9 @@ sudo usermod -a -G tty pi
 - `phypidaq/PSConfig.py`  
     class for PicoScope USB oscilloscopes
 
+- `phypidaq/TCS34725Config`
+    class for TCS34725 RGB color sensor 
+
 - `phypidaq/ToyDataConfig.py`  
     class to generate simulated data (for test, debugging or exercises) 
 
@@ -449,7 +452,9 @@ sudo usermod -a -G tty pi
 - ``examples\NoiseMeter.daq``  
     measure noise with a microphone connected to PicoScope USB oscilloscope;
      displays the *rms* of 200 samples taken over a time periods of 20 ms.
-    Can also be used with geophone SM-24.
+    Can also be used with geophone SM-24
+- `examples/RGBsensor.daq`
+    RGB color sensor
 - `examples/ToyData.daq`
     generation and display of simulated data  
 
