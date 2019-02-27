@@ -262,7 +262,7 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
              'Device Config %i is not valid yaml format \n'%(i) + str(e) )
           return 1
 
-      # save DAQ configuration in cdir
+      # DAQ configuration file in confdir
       RunTag = str(self.lE_RunTag.text() ).replace(' ','')
 
       DAQfile = RunTag + '.daq'
@@ -270,25 +270,49 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
       if self.MB_Question('Question', 
           'saving Config to file ' + fullDAQfile) == QMessageBox.Cancel:
         return 1
+     
+      DevFiles = DAQconfdict["DeviceFile"] 
+      if type(DevFiles) != type([]):
+        DevFiles = [DevFiles]
+
+      # check for overwriting ...
+      #   ... device config files
+      for DevFile in DevFiles:
+        fullDevFile = confdir + '/' + DevFile
+        try:
+          fDev = open(fullDevFile, 'r')
+          if self.MB_Question('Question', 
+            'File '+fullDevFile+' exists - overwrite ?') == QMessageBox.Cancel:
+            return 1
+          fDev.close()
+        except:
+          pass  
+      #  ... DAQ file         
+      try:
+        fDAQ = open(fullDAQfile, 'r')
+        if self.MB_Question('Question', 
+          'File '+fullDAQfile+' exists - overwrite ?') == QMessageBox.Cancel:
+          return 1
+        fDAQ.close()
+      except:
+        pass
+    
+      # if ok, write all files
       fDAQ = open(fullDAQfile, 'w')
       print(DAQconf, file = fDAQ )
       self.DAQfile = DAQfile
       fDAQ.close()     
 
-      # save device config
-      DevFiles = DAQconfdict["DeviceFile"] 
-      if type(DevFiles) != type([]):
-        DevFiles = [DevFiles]
       for i, DevFile in enumerate(DevFiles):
         cdir, fnam = os.path.split(DevFile)
-        # make sub-directory if needed an non-existent        
+        # make sub-directory if needed and non-existent        
         if cdir != '':
           if not os.path.exists(confdir + '/' + cdir):
             os.makedirs(confdir + '/' + cdir) 
         fDev = open(confdir + '/' + DevFile, 'w')
         print(DevConfs[i], file = fDev )
         fDev.close()
-
+      
       return 0
 
     def saveDefaultConfig(self):
