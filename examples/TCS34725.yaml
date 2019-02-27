@@ -1,0 +1,6 @@
+# example config for BMP180 temperature and pressure sensor
+
+DAQModule: TCS34725Config
+NChannels: 3  # 3 or 4 
+I2CADDR: 0x29 # default, 0x30 alternative
+
