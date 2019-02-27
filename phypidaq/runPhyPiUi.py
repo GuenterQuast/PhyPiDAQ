@@ -281,19 +281,19 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
         fullDevFile = confdir + '/' + DevFile
         try:
           fDev = open(fullDevFile, 'r')
+          fDev.close()
           if self.MB_Question('Question', 
             'File '+fullDevFile+' exists - overwrite ?') == QMessageBox.Cancel:
             return 1
-          fDev.close()
         except:
           pass  
       #  ... DAQ file         
       try:
         fDAQ = open(fullDAQfile, 'r')
+        fDAQ.close()
         if self.MB_Question('Question', 
           'File '+fullDAQfile+' exists - overwrite ?') == QMessageBox.Cancel:
           return 1
-        fDAQ.close()
       except:
         pass
     
