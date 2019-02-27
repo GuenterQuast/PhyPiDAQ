@@ -8,7 +8,7 @@ import numpy as np, time, sys
 import Adafruit_TCS34725 as TCS34725
 
 
-class TCT34725Config(object):
+class TCS34725Config(object):
   ''' TC34725 configuration and interface'''
 
   def __init__(self, confdict = None):
@@ -23,7 +23,7 @@ class TCT34725Config(object):
     if 'Gain' in confdict:
       self.gain = confdict['Gain']      
     else:
-      self.gain = TCS34725_GAIN_4X
+      self.gain = TCS34725.TCS34725_GAIN_60X
         # Possible gain values:
         #  - TCS34725_GAIN_1X
         #  - TCS34725_GAIN_4X  (default)
@@ -33,8 +33,8 @@ class TCT34725Config(object):
     if 'IntegrationTime' in confdict:
       self.IntT = confdict['IntegrationTime']      
     else:
-      self.IntT = TCS34725_INTEGRATIONTIME_24MS
-#      self.IntT = TCS34725_INTEGRATIONTIME_2_4MS
+      self.IntT = TCS34725.TCS34725_INTEGRATIONTIME_2_4MS
+#      self.IntT = TCS34725.TCS34725_INTEGRATIONTIME_24MS
         # Possible integration time values:
         #  - TCS34725_INTEGRATIONTIME_2_4MS  (default)
         #  - TCS34725_INTEGRATIONTIME_24MS
@@ -55,32 +55,31 @@ class TCT34725Config(object):
     else: 
       self.busnum=1 # use default
     
-    self.maxVal = 65535. # 16 bit
+    self.maxVal = 1024. # 10 bit
+
+ # provide configuration parameters
+    self.ChanNams = ['R', 'G', 'B', 'c']
+    self.ChanLims = [[0., 1.]] * self.NChannels
       
   def init(self):
   #Hardware configuration:
     try:
     # Create a TCS34725 instance
-      tcs = TCS34725.TCS34725(address=self.I2CAddr, smbus=self.busnum,
+      self.tcs = TCS34725.TCS34725(address=self.I2CAddr, busnum=self.busnum,
                         integration_time = self.IntT, gain = self.gain)
     except Exception as e:
       print("TCS34725Config: Error initialising device - exit")
       print(str(e))
       sys.exit(1)
 
- # provide configuration parameters
-    self.ChanNams = ['R', 'G', 'B', 'c']
-    self.ChanLimis = [[0., 1.]] * self.NChannels
+    # Disable interrupts (can enable them by passing true, see the set_interrupt_limits function too).
+    self.tcs.set_interrupt(False)
+
       
   def acquireData(self, buf):
-    tcs.set_interrupt(False)
-
-    # Disable interrupts (can enable them by passing true, see the set_interrupt_limits function too).
-    tcs.set_interrupt(False)
 
     # Read the R, G, B, C color data.
-    r, g, b, c = tcs.get_raw_data()
-
+    r, g, b, c = self.tcs.get_raw_data()
     buf[0] = r / self.maxVal
     buf[1] = g / self.maxVal
     buf[2] = b / self.maxVal
@@ -94,8 +93,8 @@ class TCT34725Config(object):
     ## lux = Adafruit_TCS34725.calculate_lux(r, g, b)
 
     # Enable interrupts and put the chip back to low power sleep/disabled.
-    tcs.set_interrupt(True)
-    tcs.disable()
+    #  self.tcs.set_interrupt(True)
+    #  self.tcs.disable()
  
 
   def closeDevice(self):

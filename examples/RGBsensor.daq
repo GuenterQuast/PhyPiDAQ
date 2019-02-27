@@ -1,0 +1,19 @@
+# configuration for PhyPiDAQ 
+# RGBsensor TCS34725
+
+# device configuration files 
+DeviceFile: TCS34725.yaml  
+
+Interval: 0.3                   # logging interval 
+#DisplayModule: DataLogger
+DisplayModule: DataGraphs
+Chan2Axes: [0, 0, 0]
+Title: RGB color
+        
+ChanLabels: ['G B', '', ''] # names for channels 
+ChanLimits: [ [0.,1.], [0.,1], [0.,1] ]
+ChanUnits: ['','', '']
+ChanColors: [red, green, blue]    # channel colours in display
+
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 
