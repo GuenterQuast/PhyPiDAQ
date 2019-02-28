@@ -315,7 +315,6 @@
      <zorder>pB_WDselect</zorder>
      <zorder>label_2</zorder>
      <zorder>pB_abort</zorder>
-     <zorder>horizontalSpacer</zorder>
      <zorder>verticalLayoutWidget</zorder>
     </widget>
     <widget class="QWidget" name="Tab_Config">
@@ -390,17 +389,17 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>590</x>
+          <x>500</x>
           <y>440</y>
-          <width>81</width>
+          <width>171</width>
           <height>21</height>
          </rect>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;accept and reload all dependencies&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;reload device configuation files if names or paths changed&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>reload</string>
+         <string>reload device config(s)</string>
         </property>
         <property name="icon">
          <iconset>
