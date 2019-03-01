@@ -6,8 +6,9 @@ v1.0dev
 
 v0.92p1 post-release
 
-- added ToyDataConfig to test/debug w/o hardware
-- refacoring of phypi.py and run_phypi.py
+  - added RGB sensor TCS24725 and color sensor AS7262
+  - added ToyDataConfig to test/debug w/o hardware
+  - refacoring of phypi.py and run_phypi.py
     most code now in subdir. phypidaq/
 
 v0.92p0 post-release
