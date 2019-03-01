@@ -192,8 +192,6 @@ class runPhyPiDAQ(object):
   # read Device configuration(s) and instantiate device handler(s)
     if 'DeviceFile' in PhyPiConfDict:
       DevFiles = PhyPiConfDict['DeviceFile']
-    elif "DAQModule" in PhyPiConfDict: 
-      DevFiles = PhyPiConfDict["DAQModule"] + '.yaml' 
     else:
       DevFiles = 'ADS1115Config.yaml'
       print("!!! no device config given - trying ADC ADS1115")
@@ -226,8 +224,6 @@ class runPhyPiDAQ(object):
     for i in range(NDevices):
       if 'DAQModule' in DEVconfDicts[i]:
         DEVNames.append(DEVconfDicts[i]['DAQModule'])
-      elif 'DAQModule' in PhyPiConfDict:
-        DEVNames.append(PhyPiConfDict['DAQModule'])
       else:  # try to derive from name of Device Config File
         cdir, cfnam = os.path.split(DeviceFiles[i])
         DEVNames.append(cfnam.split('.')[0])
