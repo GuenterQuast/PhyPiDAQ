@@ -1,0 +1,19 @@
+# configuration for PhyPiDAQ 
+# Color sensor AS7262
+
+# device configuration files 
+DeviceFile: AS7262.yaml  
+
+Interval: 0.3                   # logging interval 
+#DisplayModule: DataLogger
+DisplayModule: DataGraphs
+Chan2Axes: [0, 0, 0, 0, 0, 0]
+Title: 'Color Spectrum'
+        
+ChanLabels: ['o y g b v', '', '', '', '', ''] # names for channels 
+ChanLimits: [ [0.,1.], [0.,1], [0.,1], [0.,1.], [0., 1.], [0.,1] ]
+ChanUnits: ['', '', '', '', '', '']
+ChanColors: [red, orange, yellow, green, blue, violet]    # channel colours in display
+
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 
