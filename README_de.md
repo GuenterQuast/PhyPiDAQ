@@ -641,8 +641,10 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
     Klasse für den Widerstand-nach-digial-Wandler MAX31865
 - `phypidaq/PSConfig.py`  
     Klasse für PicoScope USB-Oszilloskope
-- `phypidaq/TCS34725Config`
+- `phypidaq/TCS34725Config`  
     Klasse für TCS34725 RGB Farbsensor
+- `phypidaq/AS7262Config`    
+    Klasse für sechs-Kanal Farbsensor AS7262
 - `phypidaq/ToyDataConfig.py`  
     Klasse zur Erzeugung simulierter Daten (für Test, Fehlersuche oder Übungsaufgaben)
 - `phypidaq/Display.py`  
@@ -720,17 +722,19 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
     simultane Messung und Darstellung von Strom und ggf. Spannung mit dem Strom- und Spannungssensor INA219
 - `examples/DiodenKennlinie.daq`  
     simultane Messung und Darstellung von drei Diodenkennlinen mit einem ADS1115 Digital-Analog-Wandler
-- ``examples\Barometer.daq``  
+- ``examples/Barometer.daq``  
     nutzt Sensoren BMB180 der BMP280 zur Anzeige von Temperatur und Luftdruck
-- ``examples\Accelerometer.daq``  
+- ``examples/Accelerometer.daq``  
     nutzt den Sensor MMA8451 zur Anzeige der  x-, y- and z-Komponente der Beschleunigung.
-- ``examples\NoiseMeter.daq``  
+- ``examples/NoiseMeter.daq``  
     Messung der Lautstärke mit einem an ein PicoScope USB-Osziloskop angeschlossenen Mikrofon;
     angezeigt werden die Effektivwerte von 200  in einem Zeitraum von 20 ms aufgezeichneten
     Messungen der Schallamplitude. Kann auch mit dem Geophon SM-24 verwendet werden
-- `examples\RGBsensor.daq¸
+- `examples/RGBsensor.daq`  
     RGB Farbsensor 
-- `examples/ToyData.daq`
+- `examples/ColorSpectrum.daq`  
+    sechs-Kanal Farbsensor
+- S`examples/ToyData.daq`
     Erzeugung und Anzeige von simulierten Daten 
 
 

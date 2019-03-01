@@ -372,6 +372,9 @@ sudo usermod -a -G tty pi
 - `phypidaq/TCS34725Config`
     class for TCS34725 RGB color sensor 
 
+- `phypidaq\AS7262Config`
+    class for AS7262 six channel color sensor
+
 - `phypidaq/ToyDataConfig.py`  
     class to generate simulated data (for test, debugging or exercises) 
 
@@ -445,16 +448,18 @@ sudo usermod -a -G tty pi
 ### Configuration files for *run_phypi.py*
 - `examples/Amperemeter.daq`  
     display current and eventually voltage read from INA219 sensor
-- ``examples\Barometer.daq``  
+- ``examples/Barometer.daq``  
     uses BMB180 or BMP280 sensors to display temperature and air pressure
-- ``examples\Accelerometer.daq``  
+- ``examples/Accelerometer.daq``  
     uses MMA8451 to display x-, y- and z-acceleration
-- ``examples\NoiseMeter.daq``  
+- ``examples/NoiseMeter.daq``  
     measure noise with a microphone connected to PicoScope USB oscilloscope;
      displays the *rms* of 200 samples taken over a time periods of 20 ms.
     Can also be used with geophone SM-24
 - `examples/RGBsensor.daq`
     RGB color sensor
+- `examples/ColorSpectrum.daq`
+    six channel color sensor
 - `examples/ToyData.daq`
     generation and display of simulated data  
 
