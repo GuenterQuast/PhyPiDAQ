@@ -26,4 +26,4 @@ __all__ = [ "helpers", "Display", "DataLogger", "DataRecorder", "DataGraphs",
             "PSConfig", "ToyDataConfig", "MCP3x08Config", "ADS1115Config",
             "HX711Config", "MAX31865Config", "GPIOCount", "DS18B20Config", 
             "MAX31855Config", "BMP180Config", "BMPx80Config", "MMA8451Config", 
-            "INA219Config", "TCS34725Config", "AS7262Config"]
+            "INA219Config", "TCS34725Config", "AS7262Config", "VL53L1XConfig"]
