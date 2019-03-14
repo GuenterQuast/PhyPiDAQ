@@ -1,0 +1,3 @@
+# "device" config for ToyDataConfig.py 
+DAQModule: ReplayConfig
+#csvFile: ToyData.csv
