@@ -3,7 +3,14 @@ Release notes for PhyPiDAQ
 
 v1.0dev
 
+v9.3 March 27, 2019
+  
 
+v9.3dev0 
+
+  - added ReplayConfig.yp to inject data from file 
+  - added distance sensor VL53L1X
+  
 v0.92p1 post-release
 
   - added RGB sensor TCS24725 and color sensor AS7262

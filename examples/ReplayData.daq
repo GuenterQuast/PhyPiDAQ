@@ -1,7 +1,7 @@
 # Configuration Options for PhyPiDAQ 
 
 # device configuration files 
-DeviceFile: ReplayData.yaml
+DeviceFile: ReplayConfig.yaml
 
 # DisplayModule: DataLogger
 DisplayModule: DataGraphs  # text, bar-graph, history and xy-view

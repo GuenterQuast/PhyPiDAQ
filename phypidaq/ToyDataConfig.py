@@ -26,7 +26,7 @@ class ToyDataConfig(object):
     self.count=0.
     self.offset = 1./(self.NChannels+1.)
     self.amplitude = 0.1
-    self.noise = 0.075
+    self.noise = 0.33     # 33% noise
     self.omega = 1./20.
     
   def acquireData(self, buf):
@@ -35,8 +35,8 @@ class ToyDataConfig(object):
     self.count += 1
     for i in range(self.NChannels):
       buf[i]= (i+1) * self.offset\
-        + self.amplitude * np.sin(self.count*self.omega*(i+1)*np.pi-i*np.pi/3.)\
-        + self.noise * np.random.rand()
+        + self.amplitude * (np.sin(self.count*self.omega*(i+1)*np.pi-i*np.pi/3.)\
+        + self.noise * np.random.rand())
       
   def closeDevice(self):
    # nothing to do here

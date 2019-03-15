@@ -2,7 +2,7 @@
 from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
 
-import numpy as np, time, sys
+import numpy as np, time, sys, os
 
 class ReplayConfig(object):
   '''replay data from file 
@@ -14,8 +14,14 @@ class ReplayConfig(object):
     if "csvFile" in confdict:
       self.csvFile = confdict["csvFile"]
     else:
-      self.csvFile = "ToyData.csv"
+      self.csvFile = "PhyPiData.csv"
 
+    if "csvSepatator" in confdict:
+      self.csvSeparator = confdict["csvSeparator"]
+    else:
+      self.csvSeparator = ',' # field separator used in csv file
+
+      
 # -- number of Channels is defined in input file
     if "NChannels" in confdict:
       self.NChannels = confdict["NChannels"]
@@ -25,14 +31,16 @@ class ReplayConfig(object):
   def init(self):
 
 # open data file
-    f = open(self.csvFile,'r')
+    f = open(os.path.expanduser(self.csvFile),'r')
 # read header
     h0 = f.readline()[1:] # remove leading '#'
     h1 = f.readline()[1:]
-    tags = f.readline()[1:].split(',')
+    tags = f.readline()[1:].split(self.csvSeparator)
     if self.NChannels == None: self.NChannels = len(tags)
 
-    self.data = np.loadtxt(f, dtype=np.float32, delimiter=',', unpack=True)    # read data part of file
+    self.data = np.loadtxt(f, dtype=np.float32,
+                           delimiter=self.csvSeparator,
+                           unpack=True)    # read data part of file
     self.Ndat = len(self.data[0]) # number of data points in file
     f.close()
     
@@ -40,7 +48,7 @@ class ReplayConfig(object):
     self.ChanLims = [ [min(self.data[i]), max(self.data[i]) ] for i in range(self.NChannels)]
     self.ChanNams = [tags[i].split(':')[0] for i in range(self.NChannels)]
 
-    self.idx = 0                 
+    self.idx = 0   # initialize index to data             
                      
   def acquireData(self, buf):
     '''return data 

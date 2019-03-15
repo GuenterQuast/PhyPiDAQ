@@ -16,10 +16,13 @@ DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
 #DeviceFile: config/BMP180Config.yaml    # pressure/temperature sensor
 #DeviceFile: config/INA219Config.yaml    # Voltage/Current sensor
 #DeviceFile: config/MMA8451Config.yaml   # Accelerometer 
-#DeviceFile: ToyData.yaml                # simulated data
 
 ## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+# Demo options:
+#DeviceFile: ToyDataConfig.yaml          # simulated data
+#DeviceFile: config/ReplayConfig.yaml    # data from File
 
 #
 # -- configuration options for Channels 

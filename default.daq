@@ -1,28 +1,37 @@
-# Configuration Options for PhyPiDAQ 
+# -- Configuration Options for PhyPiDAQ 
+# --------------------------------------
 
-# device configuration files 
-DeviceFile: config/ADS1115Config.yaml  
-#DeviceFile: config/MCP3008Config.yaml  
-#DeviceFile: config/PSConfig.yaml         
-#DeviceFile: config/MAX31865Config.yaml 
-#DeviceFile: config/GPIOCount.yaml
-#DeviceFile: config/DS18B20Config.yaml
-#DeviceFile: config/MAX31855Config.yaml 
+#
+# -- configuration files for hardware devices 
+#
+DeviceFile: config/ReplayConfig.yaml     # data from File
+#optional:
+#DeviceFile: config/ToyDataConfig.yaml   # simulated data
+
+# other options(requires connected hardware): 
+#DeviceFile: config/ADS1115Config.yaml   # 16 bit ADC, I2C bus
+#DeviceFile: config/MCP3008Config.yaml   # 10 bit ADC, SPI bus
+#DeviceFile: config/MCP3208Config.yaml   # 12 bit ADC, SPI bus
+#DeviceFile: config/PSConfig.yaml        # PicoTechnology USB scope 
+#DeviceFile: config/MAX31865Config.yaml  # Pt 100 sensor
+#DeviceFile: config/GPIOCount.yaml       # frequency count
+#DeviceFile: config/DS18B20Config.yaml   # digital temperature sensor
+#DeviceFile: config/MAX31855Config.yaml  # thermo element
+#DeviceFile: config/BMP180Config.yaml    # pressure/temperature sensor
+#DeviceFile: config/INA219Config.yaml    # Voltage/Current sensor
+#DeviceFile: config/MMA8451Config.yaml   # Accelerometer 
 
 ## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
 
-
-DisplayModule: DataLogger
-# DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
-Interval: 0.1                     # logging interval         
-XYmode:     false                 # enable/disable XY-display
-
-
-# channel-specific information
-ChanLabels: [U, U]                 # names for channels 
-ChanUnits: [V, V]                  # units for channels 
-ChanColors: [darkblue, sienna]     # channel colours in display
+#
+# -- configuration options for Channels 
+# 
+ChanLabels: ['X1', 'X2']            # names for channels 
+ChanUnits: ['a.U.', 'a.U.']         # units for channels 
+#ChanLabels: [U, U]                 # names for channels 
+#ChanUnits: [V, V]                  # units for channels 
+ChanColors: [darkblue, sienna]      # channel colours in display
 
 # eventually overwrite Channel Limits obtained from device config 
 ##ChanLimits: 
@@ -37,13 +46,36 @@ ChanColors: [darkblue, sienna]     # channel colours in display
 #  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
 #  - null                     # chan2: no calibration
 
-# apply formulae to calibrated channel values
+# apply formulae to (calibrated) channel values
 #ChanFormula:
 #  - c0 + c1  # chan0
 #  - c1          # chan1
 #  - null        # chan2 : no formula
 
-# name of output file
-DataFile:   null                  # file name for output file 
-#DataFile:   testfile.csv         # file name for output file 
-#CSVseparator: ';'
+#
+# -- configuration options for graphical display 
+#
+Interval: 0.1                 # logging interval         
+#NHistoryPoints: 120           # number of points used in history buffer
+#DisplayModule: DataLogger     # history of channel signals
+DisplayModule: DataGraphs     # text, bar-graph, history and xy-view
+Title: "Data from File"       # display title
+#XYmode:     false             # enable/disable XY-display
+## if more than two channels active:
+#Chan2Axes: [0, 1, 0]         # assign channels to axes
+#xyPlots:                     # define which axes to show 
+# - [0, 1]                    #  in xy-plot
+# - [0, 2]
+# - [1, 2]
+
+#
+# -- configuration options for output to file 
+#
+#DataFile:   testfile.csv     # file name for output file, 
+DataFile:   null              #  null to disable 
+#CSVseparator: ';'            # field separator, set to ';' for German Excel   
+
+# enable buffering of latest data (depth NHistoryPoints from above)
+#bufferData: PhyPiData    # file name to track latest data and eventually 
+#bufferData: null         #  store them, or null to switch off  
+                     
