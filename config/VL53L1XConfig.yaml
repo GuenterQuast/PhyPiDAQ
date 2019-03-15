@@ -1,0 +1,4 @@
+# example config fo VL53L1X distance sensor
+
+DAQModule: VL53L1XConfig
+range : 1                 # 1: short   2: medium 3: long range

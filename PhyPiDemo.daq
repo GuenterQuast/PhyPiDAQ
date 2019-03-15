@@ -1,11 +1,17 @@
 # -- Configuration Options for PhyPiDAQ 
 # --------------------------------------
 
+# demonstration: read data from file and display them
+
 #
 # -- configuration files for hardware devices 
 #
-DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
-# optional: 
+DeviceFile: config/ReplayConfig.yaml     # data from File
+#optional:
+#DeviceFile: config/ToyDataConfig.yaml   # simulated data
+
+# other options(requires connected hardware): 
+#DeviceFile: config/ADS1115Config.yaml   # 16 bit ADC, I2C bus
 #DeviceFile: config/MCP3008Config.yaml   # 10 bit ADC, SPI bus
 #DeviceFile: config/MCP3208Config.yaml   # 12 bit ADC, SPI bus
 #DeviceFile: config/PSConfig.yaml        # PicoTechnology USB scope 
@@ -16,21 +22,19 @@ DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
 #DeviceFile: config/BMP180Config.yaml    # pressure/temperature sensor
 #DeviceFile: config/INA219Config.yaml    # Voltage/Current sensor
 #DeviceFile: config/MMA8451Config.yaml   # Accelerometer 
-#DeviceFile: config/VL53L1XConfig.yaml   # ToF distance sensor 
+#DeviceFile: config/VL53L1XConfig.yaml   # ToF distance sensor
 
 ## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
 
-# Demo options:
-#DeviceFile: ToyDataConfig.yaml          # simulated data
-#DeviceFile: config/ReplayConfig.yaml    # data from File
-
 #
 # -- configuration options for Channels 
 # 
-ChanLabels: [U, U]                 # names for channels 
-ChanUnits: [V, V]                  # units for channels 
-ChanColors: [darkblue, sienna]     # channel colours in display
+ChanLabels: ['X1', 'X2']            # names for channels 
+ChanUnits: ['a.U.', 'a.U.']         # units for channels 
+#ChanLabels: [U, U]                 # names for channels 
+#ChanUnits: [V, V]                  # units for channels 
+ChanColors: [darkblue, sienna]      # channel colours in display
 
 # eventually overwrite Channel Limits obtained from device config 
 ##ChanLimits: 
@@ -54,12 +58,12 @@ ChanColors: [darkblue, sienna]     # channel colours in display
 #
 # -- configuration options for graphical display 
 #
-Interval: 0.1                # logging interval         
-#NHistoryPoints: 120          # number of points used in history buffer
-DisplayModule: DataLogger    # history of channel signals
-#DisplayModule: DataGraphs    # text, bar-graph, history and xy-view
-#Title: Demo                  # display title
-#XYmode:     false            # enable/disable XY-display
+Interval: 0.1                 # logging interval         
+#NHistoryPoints: 120           # number of points used in history buffer
+#DisplayModule: DataLogger     # history of channel signals
+DisplayModule: DataGraphs     # text, bar-graph, history and xy-view
+Title: "Data from File"       # display title
+#XYmode:     false             # enable/disable XY-display
 ## if more than two channels active:
 #Chan2Axes: [0, 1, 0]         # assign channels to axes
 #xyPlots:                     # define which axes to show 
