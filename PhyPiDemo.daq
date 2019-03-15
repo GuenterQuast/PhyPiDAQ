@@ -60,8 +60,8 @@ ChanColors: [darkblue, sienna]      # channel colours in display
 #
 Interval: 0.1                 # logging interval         
 #NHistoryPoints: 120           # number of points used in history buffer
-#DisplayModule: DataLogger     # history of channel signals
-DisplayModule: DataGraphs     # text, bar-graph, history and xy-view
+DisplayModule: DataLogger     # history of channel signals
+#DisplayModule: DataGraphs     # text, bar-graph, history and xy-view
 Title: "Data from File"       # display title
 #XYmode:     false             # enable/disable XY-display
 ## if more than two channels active:
