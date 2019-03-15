@@ -643,10 +643,14 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
     Klasse für PicoScope USB-Oszilloskope
 - `phypidaq/TCS34725Config`  
     Klasse für TCS34725 RGB Farbsensor
+- `phypidaq/VL53L1XConfig`  
+    Klasse zur Ansteuerung des Abstandssensors VL53L1X 
 - `phypidaq/AS7262Config`    
     Klasse für sechs-Kanal Farbsensor AS7262
 - `phypidaq/ToyDataConfig.py`  
     Klasse zur Erzeugung simulierter Daten (für Test, Fehlersuche oder Übungsaufgaben)
+- `phypidaq/ReplayConfig`  
+    Klasse zur Wiedergabe von Daten aus Datei
 - `phypidaq/Display.py`  
     Interface und Hintergrund-Prozess zur Datenvisualisierung
 - `phypidaq/DataLogger.py`  
@@ -669,15 +673,21 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 
 - `PhyPiConf.daq`  
      Haputkonfigurationsdatei, hängt von Dateien im Unterverzeichnis *config/* ab
-- `config/ADS1115Config.yaml`
-- `config/BMP280Config.yaml`
-- `config/INA219Config.yaml`
-- `config/DS18B20Config.yaml`
-- `config/GPIOCount.yaml`
-- `config/MAX31855Config.yaml`
-- `config/MAX31865Config.yaml`
-- `config/MCP3008Config.yaml`
-- `config/PSConfig.yaml`
+- `config/ADS1115Config.yaml` 16 Bit Analog-Digigalwandler
+- `config/MCP3008Config.yaml` 10 Bit Analog Digitalwandler
+- `config/MCP3208Config.yaml` 12 Bit Analog Digitalwandler
+- `config/INA219Config.yaml` Strom- Spannungssensor
+- `config/DS18B20Config.yaml` digitaler Temperatursensor
+- `config/BMP180Config.yaml` Temperatur- und Drucksensor
+- `config/BMP280Config.yaml` Temperatur- und Drucksensor
+- `config/GPIOCount.yaml`  Freqeuenzmessung an GPIO-Pin
+- `config/MAX31855Config.yaml`  Konverter für Termoelement 
+- `config/MAX31865Config.yaml` Konvertger für PT-100 
+- `config/TCS34752Config.yaml` RGB-Sensor
+- ``config/AS7262Config.yaml` 6-Kanal Farbsensor
+- `config/VL53L1XConfig.yaml` Abstandssensor
+- `config/PSConfig.yaml`  PicoScope USB-Oszilloskop
+
 
 
 ### Beispiele
@@ -702,7 +712,7 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 - ``examples/readBMP180.py``  
     Auslese des digitalen Tempratur- und Drucksensors BMP180/280
 
-- examples/readMMA8451.py``  
+- `examples/readMMA8451.py`  
     Auslese des digitalen Beschleunigungssensors MMA8451
 
 - `examples/runOsci.py`  
@@ -734,8 +744,10 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
     RGB Farbsensor 
 - `examples/ColorSpectrum.daq`  
     sechs-Kanal Farbsensor
-- S`examples/ToyData.daq`
+- `examples/ToyData.daq`
     Erzeugung und Anzeige von simulierten Daten 
+- `examples/ReplayData.daq`  
+    Daten aus Datei (für Demo-Zwecke)
 
 
 ### Dokumentation

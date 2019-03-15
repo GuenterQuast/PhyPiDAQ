@@ -372,11 +372,17 @@ sudo usermod -a -G tty pi
 - `phypidaq/TCS34725Config`
     class for TCS34725 RGB color sensor 
 
-- `phypidaq\AS7262Config`
+- `phypidaq/AS7262Config`
     class for AS7262 six channel color sensor
+
+- `phypidaq/VL53L1XConfig`  
+    class for VL53L1X distance sensor
 
 - `phypidaq/ToyDataConfig.py`  
     class to generate simulated data (for test, debugging or exercises) 
+
+- `phypidaq/ReplayConfig`  
+    class to replay data from file
 
 - `phypidaq/Display.py`  
     interface and background-process handling data visualisation
@@ -409,14 +415,22 @@ sudo usermod -a -G tty pi
 
 - `PhyPiConf.daq`  
      main configuration file, depends on device configurations in sub-directory *config/*
-- `config/ADS1115Config.yaml`
-- `config/MCP3008Config.yaml`
-- `config/INA219Config.yaml`
-- `config/DS18B20Config.yaml`
-- `config/GPIOCount.yaml`
-- `config/MAX31855Config.yaml`
-- `config/MAX31865Config.yaml`
-- `config/PSConfig.yaml`
+- `config/ADS1115Config.yaml` 16 bit ADC
+- `config/MCP3008Config.yaml` 10 bit ADC
+- `config/MCP3208Config.yaml`  12 bit ADC
+- `config/INA219Config.yaml` current and voltage sensore
+- `config/DS18B20Config.yaml` digital temperature sensor
+- `config/BMP280Config.yaml` temperature and pressure sensor
+- ``config/BMP180Config.yaml` temperature and pressure sensor
+- `config/GPIOCount.yaml`  frequency measruement via GPIO pin
+- `config/MAX31855Config.yaml` converter for thermocouple 
+- `config/MAX31865Config.yaml` converter for PT-100
+- `config/INA219Config.yaml` current-voltage sensor
+- `config/TCS34752Config.yaml` RGB sensor
+- `config/AS7262Config.yaml` 6 channel color sensor
+- `config/VL53L1XConfig.yaml` distance sensor
+- `config/PSConfig.yaml`  PicoScope usb oscilloscope
+
 
 ### Examples 
 
@@ -448,20 +462,30 @@ sudo usermod -a -G tty pi
 ### Configuration files for *run_phypi.py*
 - `examples/Amperemeter.daq`  
     display current and eventually voltage read from INA219 sensor
+
 - ``examples/Barometer.daq``  
     uses BMB180 or BMP280 sensors to display temperature and air pressure
+
 - ``examples/Accelerometer.daq``  
     uses MMA8451 to display x-, y- and z-acceleration
+
 - ``examples/NoiseMeter.daq``  
     measure noise with a microphone connected to PicoScope USB oscilloscope;
      displays the *rms* of 200 samples taken over a time periods of 20 ms.
     Can also be used with geophone SM-24
+
 - `examples/RGBsensor.daq`
     RGB color sensor
+
 - `examples/ColorSpectrum.daq`
     six channel color sensor
+
 - `examples/ToyData.daq`
     generation and display of simulated data  
+
+- `examples/ReplayData.daq`   
+    data from file (for demo mode)
+
 
 ###  Documentation
 
