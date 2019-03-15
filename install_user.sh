@@ -15,6 +15,9 @@ mkdir -p $DIR
 if [ -d $DIR ]; then
   # enter here, if direcotry exists
 #
+    # create desktop icon
+  cp -auv *.desktop $HOME/Desktop
+
     # copy documentation
   mkdir -p $DIR/doc
   cp -auv doc/*.pdf $DIR/doc/
