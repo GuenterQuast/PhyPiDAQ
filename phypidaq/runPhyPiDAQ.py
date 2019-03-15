@@ -312,6 +312,7 @@ class runPhyPiDAQ(object):
     if PhyPiConfDict['DataFile'] != None:
       FName = PhyPiConfDict['DataFile']
       self.DatRec = DataRecorder(FName, PhyPiConfDict)
+      if self.verbose:  print('  storing data to file ',FName)
     else:
       self.DatRec = None
       PhyPiConfDict['DataFile'] = self.DatRec

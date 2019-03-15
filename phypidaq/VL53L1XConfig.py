@@ -24,7 +24,7 @@ class VL53L1XConfig(object):
 
     if 'range' in confdict:
       self.range = confdict['range']
-      print("VL53L1X: range set to %s "%(VL53_Ranges[i-1]) )
+      print("VL53L1X: range set to %s "%(VL53_Ranges[self.range-1]) )
            # possible vales: 1 short, 2 medium, 3 long
     else: 
       self.range=2 # medium range
@@ -33,7 +33,7 @@ class VL53L1XConfig(object):
       self.I2CAddr = confdict['I2CADDR']
       print("VL53L1X: I2C address set to %x "%(self.I2CAddr) )
     else: 
-      self.I2CAdddr = 0x29 # use default
+      self.I2CAddr = 0x29 # use default
      
     if 'busnum' in confdict:
       self.busnum = confdict['busnum']
@@ -49,7 +49,7 @@ class VL53L1XConfig(object):
   #Hardware configuration:
     try:
     # Create a VL53L1X instance
-      self.vl53 = VL53L1X.VL531L1X(i2c_bus=self.busnum, i2c_address=self.I2CAddr) 
+      self.vl53 = VL53L1X.VL53L1X(i2c_bus=self.busnum, i2c_address=self.I2CAddr) 
     except Exception as e:
       print("VLC53L1XConfig: Error initialising device - exit")
       print(str(e))
