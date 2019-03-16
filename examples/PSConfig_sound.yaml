@@ -9,7 +9,7 @@ PSmodel: '2000a'     # PS model 2x0xB
 
 # channel configuration 
 picoChannels: [A]
-ChanRanges: [0.05]
+ChanRanges: [5.] # for microphone with amplifier
 ChanModes: [AC]
 ##ChanOffsets: [-0.049] # !!! not wanted here, and not possible for A series
 
