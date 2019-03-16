@@ -231,7 +231,7 @@ class Ui_PhyPiWindow(object):
         PhyPiWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(PhyPiWindow)
-        self.tab_Main.setCurrentIndex(1)
+        self.tab_Main.setCurrentIndex(0)
         self.tabConfig.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(PhyPiWindow)
 
