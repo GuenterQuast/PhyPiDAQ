@@ -190,7 +190,7 @@ class Ui_PhyPiWindow(object):
         self.pB_DeviceSelect2.setObjectName("pB_DeviceSelect2")
         self.tabConfig.addTab(self.tab_DeviceConfig2, "")
         self.rB_EditMode = QtWidgets.QRadioButton(self.Tab_Config)
-        self.rB_EditMode.setGeometry(QtCore.QRect(580, 4, 91, 30))
+        self.rB_EditMode.setGeometry(QtCore.QRect(550, 4, 91, 40))
         self.rB_EditMode.setObjectName("rB_EditMode")
         self.tab_Main.addTab(self.Tab_Config, "")
         self.Tab_Help = QtWidgets.QWidget()
