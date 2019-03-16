@@ -42,7 +42,7 @@
      <string/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Tab_Control">
      <property name="toolTip">
@@ -543,10 +543,10 @@
      <widget class="QRadioButton" name="rB_EditMode">
       <property name="geometry">
        <rect>
-        <x>550</x>
-        <y>4</y>
-        <width>91</width>
-        <height>40</height>
+        <x>580</x>
+        <y>10</y>
+        <width>111</width>
+        <height>30</height>
        </rect>
       </property>
       <property name="text">
