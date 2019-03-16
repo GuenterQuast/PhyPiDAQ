@@ -8,15 +8,15 @@ v9.3 March 27, 2019
 
 v9.3dev0 
 
-  - added ReplayConfig.yp to inject data from file 
+  - added ReplayConfig.py to inject data from file 
   - added distance sensor VL53L1X
   
 v0.92p1 post-release
 
   - added RGB sensor TCS24725 and color sensor AS7262
   - added ToyDataConfig to test/debug w/o hardware
-  - refacoring of phypi.py and run_phypi.py
-    most code now in subdir. phypidaq/
+  - refactoring of phypi.py and run_phypi.py
+      most of the code now in subdir. phypidaq/
 
 v0.92p0 post-release
 
