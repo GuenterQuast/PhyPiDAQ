@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'phypi.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.5.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -109,7 +109,6 @@ class Ui_PhyPiWindow(object):
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(11, 475, 681, 31))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label_Picture.raise_()
         self.label_caption.raise_()
@@ -191,7 +190,7 @@ class Ui_PhyPiWindow(object):
         self.pB_DeviceSelect2.setObjectName("pB_DeviceSelect2")
         self.tabConfig.addTab(self.tab_DeviceConfig2, "")
         self.rB_EditMode = QtWidgets.QRadioButton(self.Tab_Config)
-        self.rB_EditMode.setGeometry(QtCore.QRect(596, 4, 91, 30))
+        self.rB_EditMode.setGeometry(QtCore.QRect(580, 4, 91, 30))
         self.rB_EditMode.setObjectName("rB_EditMode")
         self.tab_Main.addTab(self.Tab_Config, "")
         self.Tab_Help = QtWidgets.QWidget()

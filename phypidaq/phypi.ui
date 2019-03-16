@@ -543,7 +543,7 @@
      <widget class="QRadioButton" name="rB_EditMode">
       <property name="geometry">
        <rect>
-        <x>596</x>
+        <x>580</x>
         <y>4</y>
         <width>91</width>
         <height>30</height>
