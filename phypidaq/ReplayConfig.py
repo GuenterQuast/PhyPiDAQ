@@ -47,8 +47,8 @@ class ReplayConfig(object):
   # provide configuration parameters
     self.ChanLims = [ [0., 1.], [0., 1.] ] * self.NChannels
     for i in range(self.NChannels):
-      mn = min(self.data[i])
-      mx = max(self.data[i])
+      mn = min(self.data[i]).tolist() # .tolist() needed to
+      mx = max(self.data[i]).tolist() #   store as python floats
       d = (mx - mn)*0.05
       self.ChanLims[i] = [mn-d, mx+d]
     self.ChanNams = [tags[i].split(':')[0] for i in range(self.NChannels)]

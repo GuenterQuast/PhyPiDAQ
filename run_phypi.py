@@ -12,9 +12,9 @@ from phypidaq.helpers import kbdwait
 if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - -
 
  if len(sys.argv) != 2 :
-   print("run_phypi.py usage:\n run_phypi.py <config>.daq\n")
+   print("\n!!! run_phypi.py usage:\n" + 10*' ' + "run_phypi.py <config>.daq\n")
    prompt = "    starting demo mode from configuration PhyPiDemo.daq"\
-         + "\n"+ 50*' ' + "type <ret> to continue, 'E' to exit -> " 
+         + "\n"+ 25*' ' + "type <ret> to continue, 'E+<ret>' to exit -> " 
    answ = kbdwait(prompt)   
    if answ == '':
      sys.argv.append("PhyPiDemo.daq")
