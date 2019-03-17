@@ -1,4 +1,4 @@
 # "device" config for ToyDataConfig.py 
 DAQModule: ReplayConfig
-csvFile: ~/git/PhyPiDAQ/examples/PhyPiData.csv 
+csvFile: ~/git/PhyPiDAQ/examples/PhyPiDemoData.csv 
 #csvSeparator: ','

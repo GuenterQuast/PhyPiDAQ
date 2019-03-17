@@ -45,7 +45,7 @@ def stop_processes(proclst):
       if p.is_alive(): p.terminate()
       time.sleep(1.)
 
-def kbdwait():
+def kbdwait(prompt = None):
   ''' 
     wait for keyboard input
   '''
@@ -55,7 +55,11 @@ def kbdwait():
   else: 
     get_input = input
  #  wait for input
-  get_input(50*' '+'type <ret> to exit -> ')
+  if prompt == None:
+    return get_input(50*' '+'type <ret> to exit -> ')
+  else:
+    return get_input(prompt)
+
 
 class RingBuffer(object):
   '''ring buffer to store N objcts

@@ -58,7 +58,6 @@ ChanColors: [darkblue, sienna]      # channel colours in display
 #
 # -- configuration options for graphical display 
 #
-Interval: 0.1                 # logging interval         
 #NHistoryPoints: 120           # number of points used in history buffer
 DisplayModule: DataLogger     # history of channel signals
 #DisplayModule: DataGraphs     # text, bar-graph, history and xy-view
@@ -71,9 +70,13 @@ Title: "Data from File"       # display title
 # - [0, 2]
 # - [1, 2]
 
+# 
+# -- parameters for data taking
+#  
+Interval: 0.1                 # logging interval         
+startActive: true             # start in "active" mode
 #
 # -- configuration options for output to file 
-#
 #DataFile:   testfile.csv     # file name for output file, 
 DataFile:   null              #  null to disable 
 #CSVseparator: ';'            # field separator, set to ';' for German Excel   
