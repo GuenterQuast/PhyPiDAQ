@@ -224,7 +224,19 @@ git pull           # eventually update to latest version of PhyPiDAQ
 
 The installation is now done and *PhyPiDAQ* is ready to be used.
 
+The last part of the inatallation procedure is also valid to update an exiting verion of `PhyPiDAQ` .
 
+To test the installaion without connected hardware or on a system other than the Raspberry Pi, PhyPiDAQ
+may be started in demo-mode:
+
+```bash
+cd ~/git/PhyPiDAQ  # change to installation directory
+./run_phypi.py     # execute run_phypi.py with configuration PhyPiDemo.daq
+```
+
+
+
+**Anmerkung**
 
 **Remark**
 

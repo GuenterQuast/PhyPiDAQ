@@ -28,9 +28,7 @@ Die Datenerfassung kann auch über die Kommandozeile gestartet werden:
 
 Wenn keine Konfigurationsdatei angegeben ist, wird der Standardwert `PhyPiConf.daq` verwendet.
 
-Das Unterverzeichnis `./examples/` enthält eine Reihe einfacher Python-Skripte, die die Verwendung der bereitgestellten Datenerfassungs- und Anzeigemodule mit minimalem Code veranschaulichen. Außerdem sind
-vorbereitete Konfigurationen (*.daq*-Dateien) enthalten, die für typische Messaufgaben mit dem Script  
-*run_phypi.py* verwendet werden können. 
+Das Unterverzeichnis `./examples/` enthält eine Reihe einfacher Python-Skripte, die die Verwendung der bereitgestellten Datenerfassungs- und Anzeigemodule mit minimalem Code veranschaulichen. Außerdem sind vorbereitete Konfigurationen (*.daq*-Dateien) enthalten, die für typische Messaufgaben mit dem Script  *run_phypi.py* verwendet werden können. 
 
 
 ## Konfigurationsdateien für PhyPiDAQ
@@ -234,6 +232,16 @@ Damit ist die Installation schon abgeschlossen und `PhyPiDAQ` ist bereit für de
 
 Die letzten Zeilen der Installationsvorschrift gelten auch, wenn eine schon installierte Version von
 `PhyPiDAQ` aktualisiert werden soll.
+
+
+
+Um die Installation auch ohne angeschlossene Hardware oder auf einem anderen System als dem 
+Rasbperry Pi zu testen, kann PhyPiDAQ im Demo-Modus gestartet werden:
+
+```bash
+cd ~/git/PhyPiDAQ  # ins Installationsverzeichnis wechseln
+./run_phypi.py     # run_phypi.py mit PhyPiDemo.daq ausführen
+```
 
 
 
