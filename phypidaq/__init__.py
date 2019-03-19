@@ -8,10 +8,10 @@
 .. moduleauthor:: Guenter Quast <g.quast@kit.edu>
 
 **phypidaq**
-    *data qcquisition and analysis with Raspberry Pi for Physics*  
+    *data acquisition and analysis with Raspberry Pi for Physics*  
 
-    a collction of toos to aquire data from a hardware device
-    and to display and anayze data 
+    a collction of toos to aquire data from hardware devices
+    and to display and analyze data 
 """
 
 # Import version info
