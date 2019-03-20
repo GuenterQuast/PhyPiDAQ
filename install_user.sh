@@ -31,8 +31,7 @@ if [ -d $DIR ]; then
 #  
     #copy config examples
   cp -auv config/ $DIR
-  cp -auv default.daq $DIR
-  cp -auv PhyPiConf.daq $DIR
+  cp -auv *.daq $DIR
 #
     # copy examples
   cp -auv examples/ $DIR
