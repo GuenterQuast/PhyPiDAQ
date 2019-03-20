@@ -24,6 +24,7 @@ setup(
     author='Guenter Quast',
     author_email='Guenter.Quast@online.de',
     packages=['phypidaq'],
+    package_data={'phypidaq': ['PhyPiDemoData.csv']},
     scripts=[],
     classifiers=[
     'Development Status :: 5 - stable',
