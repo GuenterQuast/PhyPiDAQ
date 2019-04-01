@@ -19,7 +19,7 @@ DeviceFile: config/ReplayConfig.yaml     # data from File
 #DeviceFile: config/MAX31855Config.yaml  # thermo element
 #DeviceFile: config/BMP180Config.yaml    # pressure/temperature sensor
 #DeviceFile: config/INA219Config.yaml    # Voltage/Current sensor
-#DeviceFile: config/MMA8451Config.yaml   # Accelerometer 
+#DeviceFile: config/MMA845xConfig.yaml   # Accelerometer 
 
 ## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  

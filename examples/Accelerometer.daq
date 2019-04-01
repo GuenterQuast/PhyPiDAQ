@@ -7,7 +7,7 @@
 #DeviceFile: MAX31865Config.yaml 
 #DeviceFile: GPIOCount.yaml
 #DeviceFile: BMP180Config.yaml  
-DeviceFile: MMA8451Config.yaml  
+DeviceFile: MMA845xConfig.yaml  
 
 DisplayModule: DataGraphs
 Title: Accelerometer
