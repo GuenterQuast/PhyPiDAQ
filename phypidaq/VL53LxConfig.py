@@ -10,7 +10,7 @@ import VL53L0X
 
 VL53_Ranges = ['short', 'medium', 'long']
 VL53L1_mmRanges = [0.,1300., 3000., 4000.]
-VL53L0_mmRanges = [1200., 1200., 1200., 2000., 2000.]
+VL53L0_mmRanges = [1200., 1200., 1200., 2000., 1200.]
 
 class VL53LxConfig(object):
   ''' VL53L1X and FL53L0X configuration and interface'''
@@ -37,7 +37,7 @@ class VL53LxConfig(object):
       if self.type==1:
         self.mmranges = VL53L1_mmRanges
       else:
-        self.mmranges = VL53L1_mmRanges
+        self.mmranges = VL53L0_mmRanges
       print("VL53Lx: range set to %s "%(self.mmranges[self.range]) )
            # possible vales VL53L1X:  1 short, 2 medium, 3 long
            # possible vales VL53L0X:  0, 1, 2 1.2 m 
