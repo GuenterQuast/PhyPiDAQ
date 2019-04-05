@@ -693,7 +693,7 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 - `config/MAX31865Config.yaml` Konvertger für PT-100 
 - `config/TCS34752Config.yaml` RGB-Sensor
 - ``config/AS7262Config.yaml` 6-Kanal Farbsensor
-- `config/VL53L1XConfig.yaml` Abstandssensor
+- `config/VL53LxConfig.yaml` Abstandssensor
 - `config/PSConfig.yaml`  PicoScope USB-Oszilloskop
 
 

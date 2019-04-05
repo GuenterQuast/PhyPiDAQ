@@ -387,7 +387,7 @@ sudo usermod -a -G tty pi
 - `phypidaq/AS7262Config`
     class for AS7262 six channel color sensor
 
-- `phypidaq/VL53L1XConfig`  
+- `phypidaq/VL53LxConfig`  
     class for VL53L1X distance sensor
 
 - `phypidaq/ToyDataConfig.py`  
