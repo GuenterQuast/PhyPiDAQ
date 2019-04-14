@@ -4,14 +4,16 @@ from __future__ import absolute_import
 
 import numpy as np, time, sys
 
-# import relevant pieces for VL53L1X distance sensor
+# import relevant pieces for VL53L0X /1X distance sensor
 import VL53L1X 
+import VL53L0X 
 
 VL53_Ranges = ['short', 'medium', 'long']
-VL53_mmRanges = [1300., 3000., 4000.]
+VL53L1_mmRanges = [0.,1300., 3000., 4000.]
+VL53L0_mmRanges = [1200., 1200., 1200., 2000., 1200.]
 
-class VL53L1XConfig(object):
-  ''' VL53L1X configuration and interface'''
+class VL53LxConfig(object):
+  ''' VL53L1X and FL53L0X configuration and interface'''
 
   def __init__(self, confdict = None):
     if confdict == None: confdict={}
@@ -22,10 +24,25 @@ class VL53L1XConfig(object):
 #    else:
     self.NChannels = 1 # sensor only has one channel
 
+# sensor type
+    if 'type' in confdict:
+      self.type = confdict['type']
+      print("VL53Lx: sensor set to VL53L%iX "%(self.type) )
+            # possible vales: 0, 1 
+    else: 
+      self.type=1  # VL53LX1 is default
+
     if 'range' in confdict:
       self.range = confdict['range']
-      print("VL53L1X: range set to %s "%(VL53_Ranges[self.range-1]) )
-           # possible vales: 1 short, 2 medium, 3 long
+      if self.type==1:
+        self.mmranges = VL53L1_mmRanges
+      else:
+        self.mmranges = VL53L0_mmRanges
+      print("VL53Lx: range set to %s "%(self.mmranges[self.range]) )
+           # possible vales VL53L1X:  1 short, 2 medium, 3 long
+           # possible vales VL53L0X:  0, 1, 2 1.2 m 
+           #                          3  2.0 m
+           #                          4  1.2 m, high speed (20ms)
     else: 
       self.range=2 # medium range
 
@@ -43,13 +60,17 @@ class VL53L1XConfig(object):
 
  # provide channel parameters
     self.ChanNams = ['d']
-    self.ChanLims = [[0., VL53_mmRanges[self.range - 1] ]] 
+    self.ChanLims = [[0., self.mmranges[self.range] ]] 
       
   def init(self):
   #Hardware configuration:
     try:
-    # Create a VL53L1X instance
-      self.vl53 = VL53L1X.VL53L1X(i2c_bus=self.busnum, i2c_address=self.I2CAddr) 
+     if self.type == 1:
+        # Create a VL53L1X instance
+        self.vl53 = VL53L1X.VL53L1X(i2c_bus=self.busnum, i2c_address=self.I2CAddr) 
+     else:
+        # Create a VL53L0X instance
+        self.vl53 = VL53L0X.VL53L0X(i2c_bus=self.busnum, i2c_address=self.I2CAddr) 
     except Exception as e:
       print("VLC53L1XConfig: Error initialising device - exit")
       print(str(e))

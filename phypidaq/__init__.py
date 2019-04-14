@@ -17,7 +17,7 @@
 # Import version info
 from ._version_info import *
 # and set version 
-_version_suffix = 'dev0'  # for suffixes such as 'rc' or 'beta' or 'alpha'
+_version_suffix = 'beta'  # for suffixes such as 'rc' or 'beta' or 'alpha'
 __version__ = _version_info._get_version_string()
 __version__ += _version_suffix
 
@@ -27,4 +27,4 @@ __all__ = [ "helpers", "Display", "DataLogger", "DataRecorder", "DataGraphs",
             "PSConfig", "MCP3x08Config", "ADS1115Config",
             "HX711Config", "MAX31865Config", "GPIOCount", "DS18B20Config", 
             "MAX31855Config", "BMP180Config", "BMPx80Config", "MMA8451Config", 
-            "INA219Config", "TCS34725Config", "AS7262Config", "VL53L1XConfig"]
+            "INA219Config", "TCS34725Config", "AS7262Config", "VL53LxConfig"]
