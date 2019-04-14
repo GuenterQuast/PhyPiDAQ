@@ -27,7 +27,7 @@ if len(sys.argv) > 1:
 if len(sys.argv) > 2:
   dt = float(sys.argv[2])
 if len(sys.argv) > 3:
-  dt = float(sys.argv[3])
+  dc = float(sys.argv[3])
 
 def pulse(pin, ton):
   gpio.output(pin, 1)
