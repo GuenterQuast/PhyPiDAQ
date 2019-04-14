@@ -6,5 +6,5 @@ DAQModule: GPIOCount
 GPIOpins: [26, 19] # GPIO pin numbers
 #GPIOpins: [20, 21] # GPIO pin numbers
 #GPIOpins:   [21] # GPIO pin numbers
-MModes:      [1]   # 0:rising, 1:falling edge
+#Modes:      [1]   # 0:rising, 1:falling edge
 
