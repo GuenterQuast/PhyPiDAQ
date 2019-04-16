@@ -715,7 +715,139 @@ Ergänzen Sie die fehlenden Begriffe für unser Beispiel des digitalen Thermomet
 
 <div style="page-break-after: always;"></div>
 
-# 6. Wir bauen einen digitalen Kraftsensor
+
+
+
+# 6. Wir untersuchen die Lade- und Entladekurve eines Kondensators
+
+**Material:**
+
+- 1 k&Omega; Widerstand (Farbcode: braun, schwarz, schwarz, braun, braun)
+- 100 k&Omega; Widerstand (Farbcode: braun, schwarz, schwarz, orange, braun)
+- Elektrolytkondensator 10 μF
+- Fotowiderstand (LDR Typ5516)
+- AD-Wandler ADS1115
+- Breadboard mit Spannungsversorgung und Netzteil
+- Breadboard-Leitungen in verschiedenen Farben
+- Raspberry Pi
+- Flachbandkabel
+
+**Durchführung:**
+
+In dieser Aufgabe soll die Spannung beim Laden und Entladen eines Kondensators dargestellt werden. Dazu legen wir zunächst die Lade- bzw. Entladezeit für unsere Schaltung fest.
+
+Das Produkt aus Widerstand und Kapazität ergibt **τ (Tau) = R* C** und wird die Zeitkonstante genannt. Mit dieser ist man in der Lage zu berechnen wann der Kondensator „voll“ geladen ist, oder zum Beispiel 63,2%, was genau einem **τ** entsprechen würde. In der Tabelle findest du noch mehr Werte für verschiedene τ‘s.
+
+| τ (Tau) | Laden: Uc(t) [%]  | Entladen auf: Uc(t) [%] |
+| --------| ------------------|-------------------------|
+| 1τ      | 63,2              |36,8                     |
+| 2τ      | 86,5              |13,5                     |
+| 3τ      | 95,0              |5,0                      |
+| 4τ      | 98,2              |1,8                      |
+| 5τ      | 99,3              |0,7                      |
+
+Man erkennt deutlich, dass nach 5τ der Kondensator nahezu voll geladen ist. Wir möchten in unserem Diagramm innerhalb von 10 Sekunden eine Lade- sowie eine Entladekurve darstellen.
+
+Wieviel Sekunden entspricht also in unserem Fall 5τ, wieviel 1τ?
+Notieren Sie Ihr Ergebnis in der Tabelle.
+
+| τ      | t [s] |
+| -------|-------|
+| 1      |       |
+| 5      |       |
+
+Wir haben einen 10μF Elektrolytkondensator zur Verfügung. Wie groß müssen wir den Widerstand R1 wählen? Berechne. (Zur Auswahl: 1k&Omega; und 100k&Omega;)
+
+R1 =
+
+Nachfolgend ist die zu vermessende Reihenschaltung aus Widerstand R1 und Kondensator C1 dargestellt. Das Potential Uc(t) wollen wir über der Zeit t auftragen. Kannst du auf der nächsten Seite bereits mit Bleistift einen Kurvenverlauf mit Hilfe der Tabelle und der berechneten Werte einzeichnen?
+
+![](images/course/cap_schematics_diagramm.png)
+
+Nun möchten wir die Kondensatorspannung Uc(t) mittels dem Analog-Digital-Wandler ADS1115 messen. Dieser wird über den I2C-BUS (Signal SDA und SCL) an den Raspberry Pi angebunden und mit Hilfe von PhyPiDAQ ausgelesen. Gleichzeitig schreiben wir ein kleines Stück Code, welches den Kondensator lädt während der LDR beleuchtet wird und wieder entlädt, wenn wenig Licht auf den LDR fällt.
+Dazu bauen wir zunächst folgende Schaltung auf dem Breadboard auf: (Netzteil noch nicht einstecken oder Flachbandkabel entfernen!)
+
+![](images/course/cap_fritzing.png)
+
+Nachdem wir sicher sind, dass alles korrekt aufgebaut ist wird das Netzteil und das Flachbandkabel eingesteckt. 
+
+Nun gehen wir analog wie bei der bereits programmierten Lichtsteuerung (3.6) vor und möchten den LDR zur Steuerung des Lade- und Entladevorgangs nutzen. Dazu verwenden wir die bereits programmierte Datei wieder. 
+
+Tipp: Die Tabulatortaste vervollständigt in der Konsole die Eingaben, sobald sie eindeutig sind!
+
+• In der Konsole wechseln wir mit dem Befehl ```cd PhyPi/MeineProgramme/``` in das Arbeitsverzeichnis.
+• Jetzt können wir mit dem Befehl ```ls``` den Inhalt des Ordners anzeigen und finden die Datei lichtautomatik.py wieder, welche wir mit ```cp lichtautomatik.py ladesteuerung.py``` kopieren. 
+• Diese Datei öffnen wir nun mittels ```idle ladesteuerung.py```
+
+Ändern Sie nun bei GPIO.setup(), sowie auch im weiteren Programm die Werte der GPIO’s ab, an die Sie den Ausgang (Ladesignal) und Eingang (LDR) angeschlossen haben. 
+
+```python
+import RPi.GPIO as GPIO 		# Wir importieren die Bibliothek GPIO.
+import time 					# Wir importieren die Bibliothek "time".
+GPIO.setmode(GPIO.BCM) 			# Wir geben an, wie die GPIO-Pins nummeriert sind.
+GPIO.setup(17, GPIO.IN) 		# GPIO-Pin 17 wird als Eingang festgelegt.
+GPIO.setup(26, GPIO.OUT) 		# GPIO-Pin 27 wird als Ausgang festgelegt.
+
+while True: 					# Dauerschleife (alles eingerueckte danach wird wiederholt).
+	statusGPIO17 = GPIO.input(17) 	# Wir fragen den Zustand von GPIO-Pin 17 ab
+	if statusGPIO17 == 1: 			# Wenn (if) der Zustand 1 ist, dann...
+	GPIO.output(26, GPIO.HIGH) 		# ...schalten wir die LED ein.
+	if statusGPIO17 == 0: 			# Wenn (if) der Zustand 0 ist, dann...
+	GPIO.output(26, GPIO.LOW) 		# ...schalten wir die LED aus.
+	time.sleep(0.1) 				# Wir warten 0.1 s (Raspberry Pi "schlaeft").
+```
+
+Um das Programm zu starten tippen Sie ```python3 ladesteuerung.py``` und bestätigen mit Enter.  
+
+Zum Beenden würde man nun ```Strg + c``` drücken, jedoch wollen wir parallel die Messung in PhyPiDAQ durchführen und starten daher PhyPiDAQ über das Symbol auf dem Desktop.
+
+Stellen Sie nun den Y-Achsen Bereich auf 0 bis 3,3V ein. Gehen Sie dazu in ```Configuration -> PhyPiConfig``` und klicken Sie rechts oben auf ```Edit-Mode``` um den Inhalt des Textfeldes ändern zu können.
+
+Ändere nun (ohne die Anführungszeichen)
+
+​	"##ChanLimits: "
+
+​	"- [0., 1.]   # chan 0"
+
+​	"- [0., 1.]   # chan 1"
+
+zu
+
+​	"##ChanLimits: "
+
+​	"- [0., 3.3]   # chan 0"
+
+​	"- [0., 3.3]   # chan 1"
+
+um den Y-Achsen-Bereich beider Kanäle auf 0 bis 3,3V einzustellen und klicke danach auf Save Config. Wechsle nun in den Tab Device Config und aktiviere den entsprechenden ADCChannel. Den Differentialmodus stellen wir auf false und die Samplerate bleibt bei 860.
+
+Welchen Wert stellen wir für Gain ein um eine Optimale Messung durchführen zu können?
+
+&nbsp;
+-----
+
+&nbsp;
+
+Stelle den von den gewählten Wert ein und speichern Sie wiederum mit Save Config. Nun starten wir die Datenerfassung im Tab Control indem wir auf StartRun klicken. Überprüfe nun die Funktion der Schaltung und speichere mittels Pause und Save ein Bild der Kurve ab!
+
+Das Schalten mittels der Helligkeitsänderung genau bei 5 Sekunden ist relativ schwierig. 
+Wie könnte man die Umschaltung automatisieren? 
+
+&nbsp;
+-----
+
+&nbsp;
+-----
+
+&nbsp;
+Puffer: Falls noch Zeit ist, dann erstelle ein Duplikat deines Programms und programmiere die Änderung und beobachte das Ergebnis.
+
+
+
+
+
+
+# 7. Wir bauen einen digitalen Kraftsensor
 
 Wir alle kennen digitale Waagen aus der Küche oder aus dem Bad. Wie funktioniert aber eine solche Waage und wie können wir Komponenten aus einer handelsüblichen Küchenwaage nutzen, um einen digitalen Kraftsensor für Physikexperimente zu bauen?
 
