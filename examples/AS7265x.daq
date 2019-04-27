@@ -1,0 +1,14 @@
+DeviceFile: AS7265xConfig.yaml    # 18 channel spectrometer 
+
+Interval: 2.5                   
+DisplayModule: DataGraphs
+Chan2Axes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Title: 'Color Spectrum'
+ChanLabels: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+ChanLimits: [ [0.,1.], [0.,1], [0.,1], [0.,1.], [0., 1.], [0.,1],[0.,1.], [0.,1], [0.,1], [0.,1.], [0., 1.], [0.,1],[0.,1.], [0.,1], [0.,1], [0.,1.], [0., 1.], [0.,1] ]
+ChanUnits: ['', '', '', '', '', '','', '', '', '', '', '','', '', '', '', '', '']
+ChanColors: [HX4B0096, HX7800ff, HX0083ff, HX00e6ff, HX00ffb2, HX00ff55, HXbbff00, HXffb300, HXff5300, HXff001d, HXff0028, HXFF0000, HXB40000, HX7D0000, HX3C0000, HX644B50, HXB4B4B4, HXE1E1E1]
+
+DataFile:   null                  # file name for output file 
+ 
+ 

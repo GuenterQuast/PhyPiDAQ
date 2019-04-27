@@ -1,0 +1,23 @@
+# example config fo AS7265x spectrometer
+
+DAQModule: AS7265xConfig
+
+Gain: 3                # 0-3 | b00=1x; b01=3.7x; b10=16x; b11=64x
+IntegrationTime : 5    # 0-255 | t=IntegrationTime * 2,8ms
+CalibrateData: 0       # 0,1 
+LEDDriveCurrent : 0    # 0,1 | 0=12.5mA; 1=25mA;
+ShutterLEDs : 1        # 0-7 | b001=white; b010=color; b100=ir
+TrimTo1: 1             # 0,1 | Set maximum measured value to 1
+
+
+
+
+
+
+
+
+
+
+
+
+

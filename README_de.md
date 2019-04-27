@@ -654,7 +654,9 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 - `phypidaq/VL53L1XConfig`  
     Klasse zur Ansteuerung des Abstandssensors VL53L1X 
 - `phypidaq/AS7262Config`    
-    Klasse für sechs-Kanal Farbsensor AS7262
+    Klasse für sechs-Kanal Farbsensor AS7262  
+- `phypidaq/AS7265xConfig`    
+    Klasse für 18-Kanal Spektralsensor AS7265x  
 - `phypidaq/ToyDataConfig.py`  
     Klasse zur Erzeugung simulierter Daten (für Test, Fehlersuche oder Übungsaufgaben)
 - `phypidaq/ReplayConfig`  
@@ -693,6 +695,7 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 - `config/MAX31865Config.yaml` Konvertger für PT-100 
 - `config/TCS34752Config.yaml` RGB-Sensor
 - ``config/AS7262Config.yaml` 6-Kanal Farbsensor
+- `config/AS7265xConfig.yaml` 18-Kanal Spektralsensor
 - `config/VL53LxConfig.yaml` Abstandssensor
 - `config/PSConfig.yaml`  PicoScope USB-Oszilloskop
 
@@ -752,6 +755,8 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
     RGB Farbsensor 
 - `examples/ColorSpectrum.daq`  
     sechs-Kanal Farbsensor
+- `examples/AS7265x.daq`  
+    18-Kanal Spektralsensor
 - `examples/ToyData.daq`
     Erzeugung und Anzeige von simulierten Daten 
 - `examples/ReplayData.daq`  
