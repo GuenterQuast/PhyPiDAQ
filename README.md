@@ -443,7 +443,7 @@ sudo usermod -a -G tty pi
 - `config/INA219Config.yaml` current-voltage sensor
 - `config/TCS34752Config.yaml` RGB sensor
 - `config/AS7262Config.yaml` 6 channel color sensor
-- `config/AS7262Config.yaml` 18 channel spectral sensor
+- `config/AS7265xConfig.yaml` 18 channel spectral sensor
 - `config/VL53L1XConfig.yaml` distance sensor
 - `config/PSConfig.yaml`  PicoScope usb oscilloscope
 
