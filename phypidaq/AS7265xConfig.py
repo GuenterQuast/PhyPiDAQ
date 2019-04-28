@@ -74,13 +74,8 @@ class AS7265xConfig(object):
   def init(self):
     self.AS7265x = AS7265x(self.busnum, self.I2CAddr) 
 
-    
-    if self.AS7265x.boardPresent() == 0:
-        print("AS7265xConfig: Error initialising device - check connection - exit")
-        print(str(e))
-        sys.exit(1)
-    else:
-      try:
+    try:
+      if self.AS7265x.boardPresent() != 0:
         self.AS7265x.initDev()
         self.AS7265x.setGain(self.gain)
         self.AS7265x.setIntegrationTime(self.IntT)
@@ -94,13 +89,14 @@ class AS7265xConfig(object):
            self.AS7265x.shutterLED("AS72652",1)
         if self.LEDShutter & 0x04: 
            self.AS7265x.shutterLED("AS72653",1)
-           
-         
-
-      except Exception as e:
-        print("AS7265xConfig: Error initialising device - exit")
-        print(str(e))
+      else:
+        print("AS7265xConfig: AS7265x not found - exit")
         sys.exit(1)
+              
+    except Exception as e:
+      print("AS7265xConfig: Error initialising device - exit")
+      print(str(e))
+      sys.exit(1)
 
   def acquireData(self, buf):
     
