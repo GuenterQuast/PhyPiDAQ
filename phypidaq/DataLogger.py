@@ -185,8 +185,8 @@ class DataLogger(object):
       if not self.XYmode:       
       # update history graph(s) 
         for i in range(self.NChan):
-          if n>1: # !!! fix to avoid permanent display of first object in blit mode
-            self.graphs[i].set_data(self.Ti, self.h[i])
+          #if n>1: # !!! fix to avoid permanent display of first object in blit mode
+          self.graphs[i].set_data(self.Ti, self.h[i])
       else:
       # update XY display 
         for i in range(len(self.graphs)):
