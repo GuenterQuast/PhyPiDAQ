@@ -385,7 +385,7 @@ class runPhyPiDAQ(object):
     if self.verbose:
       print('*==* script ' + sys.argv[0] + ': data taking active \n')
 
-    longInterval = 0.5 # definiton of a "long" readout interval
+    longInterval = 5. # definiton of a "long" readout interval
 
     interval = self.PhyPiConfDict['Interval']
     NChannels = self.PhyPiConfDict['NChannels']
@@ -437,7 +437,7 @@ class runPhyPiDAQ(object):
             if not cmdQ.empty():
               cmd = self.decodeCommand(cmdQ)  
               if cmd: break # got valid command
-            time.sleep( min(interval/100., longInterval/10.) )
+            time.sleep(longInterval/300.)
           if cmd >= 2: break  # end command received
 
         if self.DAQ_ACTIVE:

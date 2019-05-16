@@ -48,7 +48,7 @@ class GPIOCount(object):
         # create an instance of Count function for each pin 
         self.cbf.append(self.Count(gp))  
         # set call-back functions on each active pin
-        bounce_time = 5 # time for debouncing 
+        bounce_time = 1 # time for debouncing 
         if self.Modes[i]:  
           GPIO.add_event_detect(gp, GPIO.FALLING, bouncetime=bounce_time) 
         else: 

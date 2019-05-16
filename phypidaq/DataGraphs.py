@@ -248,20 +248,20 @@ class DataGraphs(object):
         self.Vhist[i, k] = dat[i]
     # update history graph
         self.h[i] = np.concatenate((self.Vhist[i, k+1:], self.Vhist[i, :k+1]), axis=0)
-        if n > 1: # !!! fix to avoid permanent display of first object in blit mode
-          self.graphs[i].set_data(self.Ti, self.h[i])
+##        if n > 1: # !!! fix to avoid permanent display of first object in blit mode
+        self.graphs[i].set_data(self.Ti, self.h[i])
     # update text display
-          if i%2:
-            bgn = '  ' 
-            end = '\n'
-          else:
-            bgn = ''
-            end = ''
-          txt += bgn + '%s: % #.4g%s'% (self.ChanNams[i], self.Vhist[i,k], 
-            self.ChanUnits[i]) + end 
+        if i%2:
+          bgn = '  ' 
+          end = '\n'
+        else:
+          bgn = ''
+          end = ''
+        txt += bgn + '%s: % #.4g%s'% (self.ChanNams[i], self.Vhist[i,k], 
+          self.ChanUnits[i]) + end 
     # update bar chart
-          self.bgraphs[i].set_height(dat[i])
-          self.animtxt.set_text(txt)
+        self.bgraphs[i].set_height(dat[i])
+        self.animtxt.set_text(txt)
       if self.XYmode:
     # update XY display 
         for i in range(len(self.XYgraphs)):

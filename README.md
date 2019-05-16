@@ -387,6 +387,9 @@ sudo usermod -a -G tty pi
 - `phypidaq/AS7262Config`
     class for AS7262 six channel color sensor
 
+- `phypidaq/AS7265xConfig`
+    class for AS7265x 18 channel spectral sensor 
+
 - `phypidaq/VL53LxConfig`  
     class for VL53L1X distance sensor
 
@@ -440,6 +443,7 @@ sudo usermod -a -G tty pi
 - `config/INA219Config.yaml` current-voltage sensor
 - `config/TCS34752Config.yaml` RGB sensor
 - `config/AS7262Config.yaml` 6 channel color sensor
+- `config/AS7265xConfig.yaml` 18 channel spectral sensor
 - `config/VL53L1XConfig.yaml` distance sensor
 - `config/PSConfig.yaml`  PicoScope usb oscilloscope
 
@@ -474,27 +478,22 @@ sudo usermod -a -G tty pi
 ### Configuration files for *run_phypi.py*
 - `examples/Amperemeter.daq`  
     display current and eventually voltage read from INA219 sensor
-
 - ``examples/Barometer.daq``  
     uses BMB180 or BMP280 sensors to display temperature and air pressure
-
 - ``examples/Accelerometer.daq``  
     uses MMA8451 to display x-, y- and z-acceleration
-
 - ``examples/NoiseMeter.daq``  
     measure noise with a microphone connected to PicoScope USB oscilloscope;
      displays the *rms* of 200 samples taken over a time periods of 20 ms.
     Can also be used with geophone SM-24
-
 - `examples/RGBsensor.daq`
     RGB color sensor
-
 - `examples/ColorSpectrum.daq`
     six channel color sensor
-
+- `examples/AS7265x.daq`
+    18 channel spectral sensor
 - `examples/ToyData.daq`
     generation and display of simulated data  
-
 - `examples/ReplayData.daq`   
     data from file (for demo mode)
 
