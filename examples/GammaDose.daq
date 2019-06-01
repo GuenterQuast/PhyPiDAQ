@@ -10,8 +10,8 @@ NHistoryPoints: 250
 Title: 'Gamma Ray Dose'
 
 ChanLabels: [Dosis, Dosis]        # names and units for channels 
-ChanLimits: [[0., 5.],[0., 5.]]    # range
-ChanUnits: ['µSv', 'µSv']         # unit(s)
+ChanLimits: [[0., 5.],[0., 5.]]   # range
+ChanUnits: ['µSv/h', 'µSv/h']     # unit(s)
 ChanColors: [darkblue, darkgreen] # channel colours for display
 
 Interval: 60.                 # logging interval 
