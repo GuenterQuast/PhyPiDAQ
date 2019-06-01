@@ -649,14 +649,16 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
     Klasse für den Widerstand-nach-digial-Wandler MAX31865
 - `phypidaq/PSConfig.py`  
     Klasse für PicoScope USB-Oszilloskope
-- `phypidaq/TCS34725Config`  
-    Klasse für TCS34725 RGB Farbsensor
 - `phypidaq/VL53L1XConfig`  
     Klasse zur Ansteuerung des Abstandssensors VL53L1X 
+- `phypidaq/TCS34725Config`  
+    Klasse für TCS34725 RGB Farbsensor
 - `phypidaq/AS7262Config`    
     Klasse für sechs-Kanal Farbsensor AS7262  
 - `phypidaq/AS7265xConfig`    
     Klasse für 18-Kanal Spektralsensor AS7265x  
+- `phypidaq/GDK101Config.py`  
+    Klasse für Gamma-Detektor GDK101 von FTLAB
 - `phypidaq/ToyDataConfig.py`  
     Klasse zur Erzeugung simulierter Daten (für Test, Fehlersuche oder Übungsaufgaben)
 - `phypidaq/ReplayConfig`  
@@ -692,11 +694,12 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 - `config/BMP280Config.yaml` Temperatur- und Drucksensor
 - `config/GPIOCount.yaml`  Freqeuenzmessung an GPIO-Pin
 - `config/MAX31855Config.yaml`  Konverter für Termoelement 
-- `config/MAX31865Config.yaml` Konvertger für PT-100 
+- `config/MAX31865Config.yaml` Konverter für PT-100 
 - `config/TCS34752Config.yaml` RGB-Sensor
 - ``config/AS7262Config.yaml` 6-Kanal Farbsensor
 - `config/AS7265xConfig.yaml` 18-Kanal Spektralsensor
 - `config/VL53LxConfig.yaml` Abstandssensor
+- `config/GDK101.yaml` Detektor für Gammastrahlung
 - `config/PSConfig.yaml`  PicoScope USB-Oszilloskop
 
 
@@ -757,6 +760,8 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
     sechs-Kanal Farbsensor
 - `examples/AS7265x.daq`  
     18-Kanal Spektralsensor
+- `examples/GammaDose.daq` 
+    Messung der Gammastahlungs-Dosis mit GDK101
 - `examples/ToyData.daq`
     Erzeugung und Anzeige von simulierten Daten 
 - `examples/ReplayData.daq`  

@@ -381,6 +381,9 @@ sudo usermod -a -G tty pi
 - `phypidaq/PSConfig.py`  
     class for PicoScope USB oscilloscopes
 
+- `phypidaq/VL53LxConfig`  
+    class for VL53L1X distance sensor
+
 - `phypidaq/TCS34725Config`
     class for TCS34725 RGB color sensor 
 
@@ -390,8 +393,8 @@ sudo usermod -a -G tty pi
 - `phypidaq/AS7265xConfig`
     class for AS7265x 18 channel spectral sensor 
 
-- `phypidaq/VL53LxConfig`  
-    class for VL53L1X distance sensor
+- `phypidaq/GDK101Config.py`  
+    class  for gamma ray detektor GDK101, FTLAB
 
 - `phypidaq/ToyDataConfig.py`  
     class to generate simulated data (for test, debugging or exercises) 
@@ -445,6 +448,7 @@ sudo usermod -a -G tty pi
 - `config/AS7262Config.yaml` 6 channel color sensor
 - `config/AS7265xConfig.yaml` 18 channel spectral sensor
 - `config/VL53L1XConfig.yaml` distance sensor
+- `config/GDK101.yaml` gamma-ray detector 
 - `config/PSConfig.yaml`  PicoScope usb oscilloscope
 
 
@@ -492,6 +496,8 @@ sudo usermod -a -G tty pi
     six channel color sensor
 - `examples/AS7265x.daq`
     18 channel spectral sensor
+- `examples/GammaDose.daq`  
+    measurement of gamma-ray dose with GDK101
 - `examples/ToyData.daq`
     generation and display of simulated data  
 - `examples/ReplayData.daq`   
