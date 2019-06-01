@@ -1,0 +1,3 @@
+# "device" config
+DAQModule: GDK101Config
+NChannels: 2 # 2nd channel for 10 min sliding average
