@@ -8,6 +8,7 @@ DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
 # optional: 
 #DeviceFile: config/MCP3008Config.yaml   # 10 bit ADC, SPI bus
 #DeviceFile: config/MCP3208Config.yaml   # 12 bit ADC, SPI bus
+#DeviceFile: config/groveADCConfig.yaml  # 12 bit ADC on grove RPI shield
 #DeviceFile: config/PSConfig.yaml        # PicoTechnology USB scope 
 #DeviceFile: config/MAX31865Config.yaml  # Pt 100 sensor
 #DeviceFile: config/GPIOCount.yaml       # frequency count
