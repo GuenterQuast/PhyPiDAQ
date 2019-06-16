@@ -145,9 +145,9 @@ class Display(object):
   # receive data via a Queue from package mutiprocessing
       cnt = 0
       lagging = False
-
+      Tlast = time.time()
+      
       while True:
-        T0 = time.time()
         if not Q.empty():
           data = Q.get()
           if type(data) != np.ndarray:
@@ -157,16 +157,18 @@ class Display(object):
         else:
           yield None # send empty event if no new data
 
-  # guarantee correct timing 
-        dtcor = interval - time.time() + T0
-        if dtcor > 0. :  
-          time.sleep(dtcor) 
+  # check timing precision 
+        T = time.time()
+        dt = T - Tlast
+        if dt - interval < interval*0.01:
           if lagging: 
             LblStatus.config(text='')
-            lagging=False
+          lagging=False
         else:
           lagging=True
           LblStatus.config(text='! lagging !', fg='red')
+        Tlast = T
+        
   # end of yieldEvt_fromQ
       sys.exit()
 

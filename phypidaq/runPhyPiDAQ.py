@@ -22,7 +22,7 @@ from scipy import interpolate
 from .Display import *
 
 from .DataRecorder import DataRecorder
-from .helpers import RingBuffer
+from .helpers import RingBuffer, DAQwait
 
 # ----- helper functions --------------------
 
@@ -428,6 +428,8 @@ class runPhyPiDAQ(object):
       T0 = time.time()
       brk = False
 
+      wait = DAQwait(interval) # initialize wait timer
+      
       while self.ACTIVE:
          
         # regularly check for command input for long intervals
@@ -467,7 +469,8 @@ class runPhyPiDAQ(object):
 
         # check for control input (from keyboard or display module)
         if not cmdQ.empty(): self.decodeCommand(cmdQ)
-
+      
+        wait() #
       # -- end while ACITVE 
 
 
