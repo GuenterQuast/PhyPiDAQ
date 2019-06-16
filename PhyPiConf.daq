@@ -79,3 +79,6 @@ DataFile:   null              #  null to disable
 #bufferData: PhyPiData    # file name to track latest data and eventually 
 #bufferData: null         #  store them, or null to switch off  
                      
+# enable output to fifo (a linux pipe) to send data to other processes
+DAQfifo: None
+#DAQfifo: PhyPiDAQ.fifo

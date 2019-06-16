@@ -11,7 +11,8 @@
 from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
 
-import sys, os, time, yaml, numpy as np, threading, multiprocessing as mp
+import sys, os, errno, time
+import yaml, numpy as np, threading, multiprocessing as mp
 
 # math module needed for formulae
 from math import *
@@ -329,6 +330,27 @@ class runPhyPiDAQ(object):
     else:
       self.RBuf = None
 
+  # buffer latest data (number of data points given by NHistoryPoints)
+    if 'DAQfifo' in PhyPiConfDict:
+      self.DAQfifo = PhyPiConfDict['DAQfifo']      
+    else:
+      self.DAQfifo = None
+      self.fifo = None
+      PhyPiConfDict['DAQfifo'] = self.DAQfifo
+    if self.DAQfifo:
+      print('PhyPiDAQ: opening fifo ', self.DAQfifo)
+      try:
+        os.mkfifo(self.DAQfifo)
+      except OSError as e:
+        if e.errno != errno.EEXIST: raise
+      self.fifo = open(self.DAQfifo, 'w', 1)   
+
+      # set-up a ring buffer 
+    if self.bufferFile != None:    
+      self.RBuf = RingBuffer(PhyPiConfDict['NHistoryPoints'])
+    else:
+      self.RBuf = None
+      
     if self.verbose > 1:
       print ('\nPhyPiDAQ Configuration:')
       print (yaml.dump(PhyPiConfDict) )
@@ -461,8 +483,16 @@ class runPhyPiDAQ(object):
           if self.RBuf != None:
             self.RBuf.store( self.data.tolist())
 
-        # ... and eventually record all data to disc
+        # ... and record all data to disc ...
           if self.DatRec: self.DatRec(self.data)
+
+        # ... and write to fifo
+          if self.fifo:
+            print(','.join(['{0:.3f}'.format(cnt*interval)] +
+                           ['{0:.4g}'.format(d) for d in self.data]),
+                  file = self.fifo)
+
+          wait() #
 
         else:   # paused mode
           time.sleep( min(interval/10., 0.2) )
@@ -470,7 +500,6 @@ class runPhyPiDAQ(object):
         # check for control input (from keyboard or display module)
         if not cmdQ.empty(): self.decodeCommand(cmdQ)
       
-        wait() #
       # -- end while ACITVE 
 
 
