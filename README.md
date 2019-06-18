@@ -53,21 +53,26 @@ Note that text following a ''#''-sign is ignored and contains descriptive commen
 # -- configuration files for hardware devices 
 #
 DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
-## optional: 
+# optional: 
 #DeviceFile: config/MCP3008Config.yaml   # 10 bit ADC, SPI bus
 #DeviceFile: config/MCP3208Config.yaml   # 12 bit ADC, SPI bus
-#DeviceFile: config/PSConfig.yaml        # PicoTechnology USB scope
+#DeviceFile: config/groveADCConfig.yaml  # 12 bit ADC on grove RPI shield
+#DeviceFile: config/PSConfig.yaml        # PicoTechnology USB scope 
 #DeviceFile: config/MAX31865Config.yaml  # Pt 100 sensor
 #DeviceFile: config/GPIOCount.yaml       # frequency count
 #DeviceFile: config/DS18B20Config.yaml   # digital temperature sensor
 #DeviceFile: config/MAX31855Config.yaml  # thermo element
 #DeviceFile: config/BMP180Config.yaml    # pressure/temperature sensor
 #DeviceFile: config/INA219Config.yaml    # Voltage/Current sensor
-#DeviceFile: config/MMA8451Config.yaml   # accelerometer 
-#DeviceFile: ToyData.yaml                # simulated data
+#DeviceFile: config/MMA845xConfig.yaml   # Accelerometer 
+#DeviceFile: config/VL53LxConfig.yaml    # ToF distance sensor 
 
 ## an example of multiple devices
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+# Demo options:
+#DeviceFile: ToyDataConfig.yaml          # simulated data
+#DeviceFile: config/ReplayConfig.yaml    # data from File
 
 #
 # -- configuration options for Channels 
@@ -76,20 +81,20 @@ ChanLabels: [U, U]                 # names for channels
 ChanUnits: [V, V]                  # units for channels 
 ChanColors: [darkblue, sienna]     # channel colours in display
 
-## eventually overwrite Channel Limits obtained from device config 
-#ChanLimits: 
-# - [0., 1.]   # chan 0
-# - [0., 1.]   # chan 1
-# - [0., 1.]   # chan 2
+# eventually overwrite Channel Limits obtained from device config 
+##ChanLimits: 
+## - [0., 1.]   # chan 0
+## - [0., 1.]   # chan 1
+## - [0., 1.]   # chan 2
 
-## calibration of raw channel values
-##   - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
+# calibration of channel values
+#  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
 #ChanCalib: 
 #  - 1.                       # chan0: simple calibration factor
 #  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
 #  - null                     # chan2: no calibration
 
-## apply formulae to (calibrated) channel values
+# apply formulae to (calibrated) channel values
 #ChanFormula:
 #  - c0 + c1  # chan0
 #  - c1          # chan1
@@ -98,10 +103,11 @@ ChanColors: [darkblue, sienna]     # channel colours in display
 #
 # -- configuration options for graphical display 
 #
-Interval: 0.1                # logging interval  
+Interval: 0.1                # logging interval         
 #NHistoryPoints: 120          # number of points used in history buffer
 DisplayModule: DataLogger    # history of channel signals
 #DisplayModule: DataGraphs    # text, bar-graph, history and xy-view
+#DisplayModule: null          # no graphical display 
 #Title: Demo                  # display title
 #XYmode:     false            # enable/disable XY-display
 ## if more than two channels active:
@@ -112,16 +118,23 @@ DisplayModule: DataLogger    # history of channel signals
 # - [1, 2]
 
 #
+# -- start in running or paused mode
+# startActive: true  # start in running mode
+
+#
 # -- configuration options for output to file 
 #
 #DataFile:   testfile.csv     # file name for output file, 
 DataFile:   null              #  null to disable 
-#CSVseparator: ';'            # field separator, set to ';' for German Excel  
+#CSVseparator: ';'            # field separator, set to ';' for German Excel   
 
 # enable buffering of latest data (depth NHistoryPoints from above)
 #bufferData: PhyPiData    # file name to track latest data and eventually 
 #bufferData: null         #  store them, or null to switch off  
-
+                     
+# enable output to fifo (a linux pipe) to send data to other processes
+DAQfifo: null
+#DAQfifo: PhyPiDAQ.fifo
 ```
 
 

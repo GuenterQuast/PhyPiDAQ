@@ -54,6 +54,7 @@ DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
 ## optional: 
 #DeviceFile: config/MCP3008Config.yaml   # 10 bit ADC, SPI-Bus
 #DeviceFile: config/MCP3208Config.yaml   # 12 bit ADC, SPI-Bus
+#DeviceFile: config/groveADCConfig.yaml  # 12 bit ADC auf Grove RPI Shield
 #DeviceFile: config/PSConfig.yaml        # PicoTechnology USB-Oszilloskop 
 #DeviceFile: config/MAX31865Config.yaml  # pt100 Temperatursensor
 #DeviceFile: config/GPIOCount.yaml       # Frequenzzaehler
@@ -62,10 +63,14 @@ DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
 #DeviceFile: config/BMP180Config.yaml    # Druck-/Temperatursensor
 #DeviceFile: config/INA219Config.yaml    # Strom-/Spannungssensor
 #DeviceFile: config/MMA8451Config.yaml   # Beschleunigungssensor
-#DeviceFile: ToyData.yaml                # Simulierte Daten
+#DeviceFile: config/VL53LxConfig.yaml    # Abstandssensor
 
 ## Beispiel für die Verwendung mehrer Sensoren:
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+# Demo options:
+#DeviceFile: ToyDataConfig.yaml          # simulierte Daten
+#DeviceFile: config/ReplayConfig.yaml    # Daten aus Datei
 
 #
 # -- Konfigurationsoptionen fuer Kanaele 
@@ -113,6 +118,10 @@ XYmode:     false            # XY-Darstellung ein/aus
 # - [2, 3]     # Voreinstellung [0,1], [0,2], ..., [0, n-1] bei n aktiven Kanaelen
 
 #
+# -- start in running or paused mode
+# startActive: true  # start in running mode
+
+#
 # -- Konfiguration fuer Ausgabe in Dateien
 #
 # Name der Ausgabedatei im CSV-Format
@@ -123,6 +132,10 @@ DataFile:   null              #   null falls keine Ausgebe gewuenscht
 # Speicherung der letzen NHistoryPoints Datenpunke
 #bufferData: PhyPiData    # Dateiname für (optionale) Speicherung 
 #bufferData: null         #  null zum Ausschalten; Voreinstellung: Datei PhyPiData.dat 
+
+# Ausgabe in Linux fifo (pipe) zum Senden von Daten an andere Prozesse
+DAQfifo: null
+#DAQfifo: PhyPiDAQ.fifo
 
 ```
 
