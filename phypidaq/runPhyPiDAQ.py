@@ -335,7 +335,6 @@ class runPhyPiDAQ(object):
       self.DAQfifo = PhyPiConfDict['DAQfifo']      
     else:
       self.DAQfifo = None
-      self.fifo = None
       PhyPiConfDict['DAQfifo'] = self.DAQfifo
     if self.DAQfifo:
       print('PhyPiDAQ: opening fifo ', self.DAQfifo)
@@ -343,7 +342,9 @@ class runPhyPiDAQ(object):
         os.mkfifo(self.DAQfifo)
       except OSError as e:
         if e.errno != errno.EEXIST: raise
-      self.fifo = open(self.DAQfifo, 'w', 1)   
+      self.fifo = open(self.DAQfifo, 'w', 1)
+    else:
+      self.fifo = None
 
       # set-up a ring buffer 
     if self.bufferFile != None:    
@@ -521,7 +522,7 @@ class runPhyPiDAQ(object):
       if self.DatRec: self.DatRec.close()
       for DEV in self.DEVs:
         DEV.closeDevice() # close down hardware device
-      display.close()
+      if DisplayModule != None: display.close()
       time.sleep(1.)
      
       if self.verbose:
