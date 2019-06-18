@@ -59,6 +59,7 @@ Interval: 0.1                # logging interval
 #NHistoryPoints: 120          # number of points used in history buffer
 DisplayModule: DataLogger    # history of channel signals
 #DisplayModule: DataGraphs    # text, bar-graph, history and xy-view
+#DisplayModule: null          # no graphical display 
 #Title: Demo                  # display title
 #XYmode:     false            # enable/disable XY-display
 ## if more than two channels active:
@@ -67,6 +68,10 @@ DisplayModule: DataLogger    # history of channel signals
 # - [0, 1]                    #  in xy-plot
 # - [0, 2]
 # - [1, 2]
+
+#
+# -- start in running or paused mode
+startActive: true  # start in running mode
 
 #
 # -- configuration options for output to file 
@@ -80,5 +85,5 @@ DataFile:   null              #  null to disable
 #bufferData: null         #  store them, or null to switch off  
                      
 # enable output to fifo (a linux pipe) to send data to other processes
-DAQfifo: None
+DAQfifo: null
 #DAQfifo: PhyPiDAQ.fifo

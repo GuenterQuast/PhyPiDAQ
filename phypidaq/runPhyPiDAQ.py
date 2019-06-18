@@ -420,11 +420,13 @@ class runPhyPiDAQ(object):
     if 'DAQCntrl' not in self.PhyPiConfDict:  
       self.PhyPiConfDict['DAQCntrl'] = True  # enable run control buttons
 
-    display = Display(interval = None, 
+    if DisplayModule != None:  
+      display = Display(interval = None, 
                     confdict = self.PhyPiConfDict, 
                     cmdQ = cmdQ,
                     datQ = datQ )
-    display.init()
+      display.init()
+
     self.ACTIVE = True #  background process(es) active
 
     if self.PhyPiConfDict['startActive']:
@@ -477,7 +479,8 @@ class runPhyPiDAQ(object):
           if self.Formulae: self.apply_formulae()
 
         # display data
-          display.show(self.data)
+          if DisplayModule != None:  
+            display.show(self.data)
 
         # store (latest) data in ring buffer as a list ...
           if self.RBuf != None:
