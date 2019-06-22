@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 ''' script RePlot.py
     usage: RePlot.py [filename] [[channel numbers]]
