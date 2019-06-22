@@ -23,29 +23,32 @@ if len(sys.argv)>=3:
   for i in range(len(sys.argv)-2):
     Channels.append(int(sys.argv[i+2]))
 
-# read Data
+# read data from file
 f = open(fnam)
-d = f.read()
+txtdata = f.read().splitlines()
 f.close
-rdata = d.splitlines() # input as individual lines
 
 # read and analyze header
-h0 = rdata[0][2:] # remove leading '#'
-h1 = rdata[1][2:]
-h2 = rdata[2][2:]
-print('Header:')
-print(h0)
-print(h1)
-print(h2)
-
+h0 = txtdata[0][2:] # remove leading '#'
+h1 = txtdata[1][2:]
+h2 = txtdata[2][2:]
 dT = float(h1.split(' ')[-1])
 tags = h2.split(',')
 # read data part 
-data = np.loadtxt(rdata, dtype=np.float32,
+data = np.loadtxt(txtdata, dtype=np.float32,
                            delimiter=',',
                            unpack=True)    
 Ndat = len(data[0])   # number of data points in file
 
+print('Data set header:')
+print(h0)
+print(h1)
+print(h2)
+print('Data set info:')
+print('  columns: ', len(tags), '  data points: ', Ndat)
+print('\ngenerating graph ...')
+
+# check if only selected channels wanted
 if len(Channels)==0:
   NChannels = len(tags)
   Channels = range(NChannels)
