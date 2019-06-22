@@ -1,13 +1,21 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-''' script readPipe 
-    usage: readPipe
+''' script readPipe.py
+    usage: readPipe [name of pipe]
+
+    Read data from a named linux pipe 
+    filled by run_phypi.py with option 
+    DAQfifo: <name of pipe>
 '''
 
 import sys, os, errno
 
-FiFo = "PhyPiDAQ.fifo"
-
+if len(sys.argv)>=2:
+  FiFo = sys.argv[1]
+else:
+  FiFo = "PhyPiDAQ.fifo"
+print('*==* ', sys.argv[0], ' Lese Daten aus Pipe',  FiFo)
+  
 # crate a fifo, ignore error if it already exists
 try:
   os.mkfifo(FiFo)
@@ -24,4 +32,5 @@ with open(FiFo) as f:
      break    
    print('Read: %s '%inp, end='')
       
+print('        empty line received, ending')
       

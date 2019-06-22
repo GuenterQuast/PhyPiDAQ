@@ -515,6 +515,8 @@ sudo usermod -a -G tty pi
     generation and display of simulated data  
 - `examples/ReplayData.daq`   
     data from file (for demo mode)
+- `examples/readPipe.py`  
+    read data from named linux pipe (*run_phypi.py* with option DAQfifo: \<pipe name\>)
 
 
 ###  Documentation
