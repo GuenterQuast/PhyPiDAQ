@@ -42,7 +42,7 @@ class DataLogger(object):
       v = ConfDict['ChanNams']
       self.ChanNams[0:min(len(v),Nc)] = v[0:min(len(v),Nc)]      
       
-    ColorList=['C1','C2','C3','C4','C5','C6','C7','C8','C9','C10','C11','C12'] 
+    ColorList=['C'+str(i) for i in range(Nc)] 
     if 'ChanColors' in ConfDict:
       self.ChanColors = ConfDict['ChanColors']
       if len(self.ChanColors) < self.NChan:

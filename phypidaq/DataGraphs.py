@@ -42,13 +42,13 @@ class DataGraphs(object):
       v = ConfDict['ChanNams']
       self.ChanNams[ 0 : min(len(v),Nc)] = v[0 : min(len(v),Nc)]
       
-    ColorList=['C1','C2','C3','C4','C5','C6','C7','C8','C9','C10','C11','C12'] 
+    ColorList=['C'+str(i) for i in range(Nc)] 
     if 'ChanColors' in ConfDict:
       self.ChanColors = ConfDict['ChanColors']
       if len(self.ChanColors) < Nc:
         self.ChanColors += ColorList[0: Nc - len(self.ChanColors)]
     else:
-      self.ChanColors = ['darkblue','sienna'] + ColorList[0 : Nc]
+      self.ChanColors = ['darkblue','sienna'] + ColorList[0 : Nc-2]
 
     self.ChanLabels = [''] * Nc
     if 'ChanLabels' in ConfDict:
