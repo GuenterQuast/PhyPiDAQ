@@ -8,7 +8,7 @@ class DataLogger(object):
 
     forked from picoDAQ.DataLogger
   '''
-
+  
   def __init__(self, ConfDict):
     '''Args:  ConfDict: configuration dictionary
     '''
@@ -16,21 +16,12 @@ class DataLogger(object):
 
    # get relevant settings from PhyPiConfDict
     self.dT = ConfDict['Interval'] 
-    if self.dT < 60:
-      self.tUnit = 's'
-      self.tUnitFactor = 1.
-    elif self.dT < 3600:
-      self.tUnit = 'min'
-      self.tUnitFactor = 1./60.
-    else:
-      self.tUnit = 'h'
-      self.tUnitFactor = 1./3600.
 
    # number of points for history
     if 'NHistoryPoints' in ConfDict:
       self.Npoints = min(ConfDict['NHistoryPoints'], 250)
     else:
-      self.Npoints = 120  
+      self.Npoints = 120
 
     self.NChan = ConfDict['NChannels']
 
@@ -48,7 +39,7 @@ class DataLogger(object):
       if len(self.ChanColors) < self.NChan:
         self.ChanColors += ColorList[0: self.NChan - len(self.ChanColors)]
     else:
-      self.ChanColors = ['darkblue','sienna'] + ColorList[0 : self.NChan]
+      self.ChanColors = ['darkblue','sienna'] + ColorList[0 : Nc-2]
 
     # Channel Labels are not shown, only support two axis labels
     self.ChanLabels = [''] * self.NChan
@@ -95,25 +86,32 @@ class DataLogger(object):
       # plot chan1 vs. chan0, chan2 vs. chan0, ..., last chan vs cha0
       self.xyPlots = [ [0,i] for i in range(1,Nc)]
 
+    self.graphs_initialized = False
+    
     # data structures needed throughout the class
-    self.Ti = self.dT * np.linspace(-self.Npoints+1, 0, self.Npoints) * self.tUnitFactor
     self.Vhist = np.zeros( [Nc, self.Npoints] )
     self.h = np.zeros( [Nc, self.Npoints] ) 
 
-# set up a figure to plot actual value(s)
+
+# create matplotlib figure object
     if self.XYmode:
-      fig = plt.figure("DataLogger", figsize=(6.3, 6.) )
-      fig.subplots_adjust(left=0.2, bottom=0.15, right=0.95, top=0.95,
+      self.fig = plt.figure("DataLogger", figsize=(6.3, 6.) )
+      self.fig.subplots_adjust(left=0.2, bottom=0.15, right=0.95, top=0.95,
                   wspace=None, hspace=.25)
     else:
-      fig = plt.figure("DataLogger", figsize=(6., 3.) )
-      fig.subplots_adjust(left=0.15, bottom=0.15, right=0.85, top=0.95,
+      self.fig = plt.figure("DataLogger", figsize=(6., 3.) )
+      self.fig.subplots_adjust(left=0.15, bottom=0.15, right=0.85, top=0.95,
                   wspace=None, hspace=.25)
+# -- end def __init__()
 
+  def initgraph(self, NPoints):
+    fig=self.fig
+    # set-up figure axes
+    self.get_Ti(NPoints)
     axes=[]
     if not self.XYmode:
   # history plot
-      axes.append(fig.add_subplot(1,1,1, facecolor='ivory'))
+      axes.append(fig.add_subplot(1,1,1, facecolor='ivory', label='history'))
       if self.NAxes > 1:
         axes.append(axes[0].twinx())
       for i in range(self.NAxes):
@@ -128,7 +126,7 @@ class DataLogger(object):
 
     else:
   # XY plot
-      axes.append(fig.add_subplot(1,1,1, facecolor='ivory'))
+      axes.append(fig.add_subplot(1,1,1, facecolor='ivory', label='xy'))
       axXY = axes[-1]
       cx = self.xyPlots[0][0]
       cy = self.xyPlots[0][1]
@@ -143,13 +141,29 @@ class DataLogger(object):
       axXY.set_title('XY-View', size='xx-large')
       axXY.grid(True, color='grey', linestyle = '--', alpha=0.3)
   
-    self.fig = fig
+    self.graphs_initialized = True     
     self.axes = axes
-# -- end def __init__
+# -- end def initgraph()
 
-  def init(self):
+  def get_Ti(self, NPoints):
+  # determine points on time-axis  
+    if self.dT < 60:
+      self.tUnit = 's'
+      self.tUnitFactor = 1.
+    elif self.dT < 3600:
+      self.tUnit = 'min'
+      self.tUnitFactor = 1./60.
+    else:
+      self.tUnit = 'h'
+      self.tUnitFactor = 1./3600.
+    self.Ti = self.dT * np.linspace(-NPoints+1, 0, NPoints) * self.tUnitFactor
+
+  def init(self, NPoints=None):
   # initialize objects to be animated
-
+    if NPoints==None: NPoints=self.Npoints
+    if not self.graphs_initialized:
+      self.initgraph(NPoints) # create matplotlib figure
+    
     self.graphs=()
   # history graphs
     if not self.XYmode:
@@ -173,7 +187,7 @@ class DataLogger(object):
 # -- end DataLogger.init()
 
   def __call__( self, data ):
-
+    # add data for last point in time (for animated plot)
     if data !=None: 
       n, dat = data
 
@@ -196,5 +210,21 @@ class DataLogger(object):
           self.graphs[i].set_data( self.h[cx, i1:],
                                      self.h[cy, i1:] )
     return self.graphs
-#- -end def DataLogger.__call__
+  #- -end def DataLogger.__call__
+
+  def plotall( self, dat ):
+    # plot data for all points in time at once (not for animation)
+    if not self.XYmode:       
+    # update history graph(s) 
+      for i in range(self.NChan):
+        self.graphs[i].set_data(self.Ti, dat[i])
+    else:
+    # update XY display 
+      for i in range(len(self.graphs)):
+        cx = self.xyPlots[i][0]
+        cy = self.xyPlots[i][1]  
+        self.graphs[i].set_data( dat[cx], dat[cy] )
+    return self.graphs
+  #- -end def DataLogger.plotall()
+
 #-end class DataLogger
