@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+'''very simple and minimalistic example to read data from a sensor 
+   and send output to stdout
+'''
 
 from random import randint
 from time import time, sleep
@@ -41,7 +43,7 @@ def main():
     device = ToyDataConfig()
     device.init()
 
-    dt = 1.0  # read-out interval in s
+    dt = 0.1  # read-out interval in s
     T0 = time()
 
     dat = array([0.0])
@@ -50,11 +52,11 @@ def main():
         print('starting readout,  type <ctrl-C> to stop')
         while True:
             device.acquireData(dat)
-            dT = int(time() - T0)
-            print(f'{dT}, {dat[0]:.2f}')
+            dT = time() - T0
+            print(f'{dT:.2f}, {dat[0]:.3f}')
             sleep(dt)
     except:
-        print(f'{dT+1}, {ERROR:.2f}')
+        print(f'{dT+1:.2f}, {ERROR:.3f}')
     finally:
         device.close()
 
