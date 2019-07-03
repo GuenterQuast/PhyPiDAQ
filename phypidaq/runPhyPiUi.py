@@ -121,6 +121,9 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
         exit(1)
 
       self.lE_DAQConfFile.setText(DAQconfFile)
+      RunTag = os.path.split(DAQconfFile)[1].split('.')[0]
+      self.lE_RunTag.setText(RunTag)
+      
       print('   - PhyPi configuration from file ' + DAQconfFile)
    # display config data in GUI
       self.pTE_phypiConfig.setPlainText(DAQconf)
@@ -198,7 +201,7 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
       if FileName is not '' :
         # print('selected File ' + str(FileName) )
         self.initDAQ(FileName)
-
+        
     def selectDeviceFile0(self):
       path2File = QtWidgets.QFileDialog.getOpenFileName(None,
           'Device config', self.ConfDir, 'yaml(*.yaml)')
