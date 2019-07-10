@@ -2,7 +2,7 @@
 from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
 
-import numpy as np, time, sys
+import numpy as np, sys
 
 class ToyDataConfig(object):
   '''generate artifical data to test/debug PhyPiDAQ

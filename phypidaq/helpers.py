@@ -61,6 +61,32 @@ def kbdwait(prompt = None):
     return get_input(prompt)
 
 
+class DAQwait(object):
+  '''class implementing sleep corrected wiht system time
+  '''
+  def __init__(self, dt):
+    '''Args:
+         dt: wait time in seconds
+    '''
+    self.dt = dt
+    self.lag = False # indicate occurrence of time lag
+    self.T0 = time.time()
+    
+  def __call__(self, T0=None):
+    '''gurantee correct timing  
+       Args: 
+         TO:   start time of action to be timed     
+                 if not given, take end-time of last wait
+    '''
+    if T0 != None: self.T0 = T0    
+    dtcor = self.dt - time.time() + self.T0
+    if dtcor > 0. :  
+      time.sleep(dtcor) 
+      self.lag=False
+    else:
+      self.lag=True
+    self.T0=time.time() # end of sleep = start of next interval   
+
 class RingBuffer(object):
   '''ring buffer to store N objcts
   '''

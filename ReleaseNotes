@@ -3,11 +3,27 @@ Release notes for PhyPiDAQ
 
 v1.0dev
 
-v9.3 March 27, 2019
+
+v9.4beta Jun 2019
+
+  - added output to fifo
+
+v9.3beta1 Jun 2019
+
+  - refactored timing - now controlled from main program 
+  - added support for GDK101 gamma ray detector
+  - support for 18 channel spectral sensor AS7265x
+  - support for MMA8452 accelerometer
+  - added display of charging/discharging a capacitor
+     to student course
+  - generalized suppor for distance sensor:
+     VL53L1X and VL53L0X
   
+v9.3beta March 27, 2019
+  
+v9.3dev0
 
-v9.3dev0 
-
+  - added possibility to replay saved data, capacitor as demo
   - added ReplayConfig.py to inject data from file 
   - added distance sensor VL53L1X
   

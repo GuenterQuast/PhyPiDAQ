@@ -54,6 +54,7 @@ DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
 ## optional: 
 #DeviceFile: config/MCP3008Config.yaml   # 10 bit ADC, SPI-Bus
 #DeviceFile: config/MCP3208Config.yaml   # 12 bit ADC, SPI-Bus
+#DeviceFile: config/groveADCConfig.yaml  # 12 bit ADC auf Grove RPI Shield
 #DeviceFile: config/PSConfig.yaml        # PicoTechnology USB-Oszilloskop 
 #DeviceFile: config/MAX31865Config.yaml  # pt100 Temperatursensor
 #DeviceFile: config/GPIOCount.yaml       # Frequenzzaehler
@@ -62,10 +63,14 @@ DeviceFile: config/ADS1115Config.yaml    # 16 bit ADC, I2C bus
 #DeviceFile: config/BMP180Config.yaml    # Druck-/Temperatursensor
 #DeviceFile: config/INA219Config.yaml    # Strom-/Spannungssensor
 #DeviceFile: config/MMA8451Config.yaml   # Beschleunigungssensor
-#DeviceFile: ToyData.yaml                # Simulierte Daten
+#DeviceFile: config/VL53LxConfig.yaml    # Abstandssensor
 
 ## Beispiel für die Verwendung mehrer Sensoren:
 #DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+# Demo options:
+#DeviceFile: ToyDataConfig.yaml          # simulierte Daten
+#DeviceFile: config/ReplayConfig.yaml    # Daten aus Datei
 
 #
 # -- Konfigurationsoptionen fuer Kanaele 
@@ -113,6 +118,10 @@ XYmode:     false            # XY-Darstellung ein/aus
 # - [2, 3]     # Voreinstellung [0,1], [0,2], ..., [0, n-1] bei n aktiven Kanaelen
 
 #
+# -- start in running or paused mode
+# startActive: true  # start in running mode
+
+#
 # -- Konfiguration fuer Ausgabe in Dateien
 #
 # Name der Ausgabedatei im CSV-Format
@@ -123,6 +132,10 @@ DataFile:   null              #   null falls keine Ausgebe gewuenscht
 # Speicherung der letzen NHistoryPoints Datenpunke
 #bufferData: PhyPiData    # Dateiname für (optionale) Speicherung 
 #bufferData: null         #  null zum Ausschalten; Voreinstellung: Datei PhyPiData.dat 
+
+# Ausgabe in Linux fifo (pipe) zum Senden von Daten an andere Prozesse
+DAQfifo: null
+#DAQfifo: PhyPiDAQ.fifo
 
 ```
 
@@ -649,14 +662,16 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
     Klasse für den Widerstand-nach-digial-Wandler MAX31865
 - `phypidaq/PSConfig.py`  
     Klasse für PicoScope USB-Oszilloskope
-- `phypidaq/TCS34725Config`  
-    Klasse für TCS34725 RGB Farbsensor
 - `phypidaq/VL53L1XConfig`  
     Klasse zur Ansteuerung des Abstandssensors VL53L1X 
+- `phypidaq/TCS34725Config`  
+    Klasse für TCS34725 RGB Farbsensor
 - `phypidaq/AS7262Config`    
     Klasse für sechs-Kanal Farbsensor AS7262  
 - `phypidaq/AS7265xConfig`    
     Klasse für 18-Kanal Spektralsensor AS7265x  
+- `phypidaq/GDK101Config.py`  
+    Klasse für Gamma-Detektor GDK101 von FTLAB
 - `phypidaq/ToyDataConfig.py`  
     Klasse zur Erzeugung simulierter Daten (für Test, Fehlersuche oder Übungsaufgaben)
 - `phypidaq/ReplayConfig`  
@@ -692,11 +707,12 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 - `config/BMP280Config.yaml` Temperatur- und Drucksensor
 - `config/GPIOCount.yaml`  Freqeuenzmessung an GPIO-Pin
 - `config/MAX31855Config.yaml`  Konverter für Termoelement 
-- `config/MAX31865Config.yaml` Konvertger für PT-100 
+- `config/MAX31865Config.yaml` Konverter für PT-100 
 - `config/TCS34752Config.yaml` RGB-Sensor
 - ``config/AS7262Config.yaml` 6-Kanal Farbsensor
 - `config/AS7265xConfig.yaml` 18-Kanal Spektralsensor
 - `config/VL53LxConfig.yaml` Abstandssensor
+- `config/GDK101.yaml` Detektor für Gammastrahlung
 - `config/PSConfig.yaml`  PicoScope USB-Oszilloskop
 
 
@@ -705,38 +721,30 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 
 - `examples/read_analog.py`  
     sehr minimalistisches Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
-
 - `examples/display_analog.py`  
     Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
     mit grafischer Anzeige des zeitlichen Verlaufs
-
 - `examples/display_analog2.py`  
     Beispiel zum Auslesen von zwei Kanälen von einem Analog-Digital-Wandler
     mit grafischer Anzeige des zeitlichen Verlaufs
-
 - `examples/read_INA210.py`  
     Beispiel zum Auslesen des Strom- und Spannungssensors INA219
-
 - ``examples/read_18B20.py``  
     Auslese des digitalen Temperatursensors DS18B20 
-
 - ``examples/readBMP180.py``  
     Auslese des digitalen Tempratur- und Drucksensors BMP180/280
-
 - `examples/readMMA8451.py`  
     Auslese des digitalen Beschleunigungssensors MMA8451
-
 - `examples/runOsci.py`  
     Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben (Vorgabe `PSOsci.yaml`)
-
 - `examples/GPIO-In-out.py`  
      Beispiel zur Ansteuerung der GPIO-Pins: Erzeugung einer Rechteckspannung am Ausgabe-Pin durch Verändern der Spannung am Eingabe-Pin
-
 - `examples/poissonLED.py`  
     erzeugt ein zufälliges Signal an GPIO-Pin gemäß Poisson-Prozess 
-
 - `examples/FreqGen.py`  
     erzeugt Signal fester Frequenz an GPIO-Pin
+- `examples/readPipe.py`  
+    liest Daten aus einer Linux-Pipe (*run_phypi.py* mit der Option DAQfifo:  \<name of pipe \>)
 
 ### Konfigurationsdateien für *run_phypi.py*
 - `examples/Amperemeter.daq`  
@@ -757,6 +765,8 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
     sechs-Kanal Farbsensor
 - `examples/AS7265x.daq`  
     18-Kanal Spektralsensor
+- `examples/GammaDose.daq` 
+    Messung der Gammastahlungs-Dosis mit GDK101
 - `examples/ToyData.daq`
     Erzeugung und Anzeige von simulierten Daten 
 - `examples/ReplayData.daq`  
