@@ -1,0 +1,27 @@
+
+@startuml
+interface IBusinessLogic{
+		+createModelFromYamlDom(modelDom: YamlDom): String
+	}
+	
+	
+	interface IModelInformation{
+		+getMeasurementConfig(): MeasurementConfiguration
+		+addBuildingBlock(id: String)
+		+removeBuildingBlock(id: String)
+		+addConnection(firstChannelId: String, secondChannelId: String)
+		+removeConnection(firstChannelId: String, secondChannelId: String)
+	
+	}
+	
+	
+	interface IPrototypCollection {
+		+getPrototyp(): BuildingBlock
+		+clonePrototyp(id: String)
+		+editPropertyOfPrototyp(key: String, value: Integer)
+	}
+	
+	Model.Core.MeasurementConfiguration ..|> IModelInformation
+	Model.Core.MeasurementConfiguration ..|> IBusinessLogic
+	Model.Core.PrototypCollection ..|> IPrototypCollection
+	@enduml
