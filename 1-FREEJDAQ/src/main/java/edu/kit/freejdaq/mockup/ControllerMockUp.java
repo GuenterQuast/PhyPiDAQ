@@ -5,46 +5,46 @@ public class ControllerMockUp {
 	ControllerModelImplement toModel = new ModelMockUp();
 	
 	public boolean blockAdded(String id) {
-		toModel.addBuildingBlock(id);
-		return true;
+		return toModel.addBuildingBlock(id);
+		
 		
 	}
 	
 	public boolean blockRemoved(String initId, long configId) {
-		toModel.removeBuildingBlock(initId, configId);
-		return true;
+		return toModel.removeBuildingBlock(initId, configId);
+		
 	}
 	
 	public boolean connectionAdded(String firstChannelId, String secondChannelId) {
-		toModel.addConnection(firstChannelId, secondChannelId);
-		return true;
+		return toModel.addConnection(firstChannelId, secondChannelId);
+		
 		
 	}
 	
 	public boolean connectionRemoved(String firstChannelId, String secondChannelId) {
-		toModel.removeConnection(firstChannelId, secondChannelId);
-		return true;
+		return toModel.removeConnection(firstChannelId, secondChannelId);
+	
 	}
 	
-	public void start(String[] sensorIds, IMStreamListener[] dataListeners) {
-		toModel.start(sensorIds, dataListeners);
+	public boolean start(String[] sensorIds, IMStreamListener[] dataListeners) {
+		return toModel.start(sensorIds, dataListeners);
 		
 	}
 	
-	public void pause() {
-		toModel.pause();
-		
-		
-	}
-	
-	public void resume() {
-		toModel.resume();
+	public boolean pause() {
+		return toModel.pause();
 		
 		
 	}
 	
-	public void reset() {
-		toModel.reset();
+	public boolean resume() {
+		return toModel.resume();
+		
+		
+	}
+	
+	public boolean reset() {
+		return toModel.reset();
 		
 	}
 
