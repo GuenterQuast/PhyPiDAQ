@@ -1,4 +1,4 @@
-package kit.edu.freejdaq.mockup;
+package edu.kit.freejdaq.mockup;
 
 public interface IMStreamListener {
 	public void receiveMDataSet(String channelId, long timeStamp, double value);

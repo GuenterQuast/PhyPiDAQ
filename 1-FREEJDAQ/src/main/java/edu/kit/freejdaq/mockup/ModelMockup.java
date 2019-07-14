@@ -1,6 +1,6 @@
-package kit.edu.freejdaq.mockup;
+package edu.kit.freejdaq.mockup;
 
-public class ModelMockup {
+public class ModelMockup implements ControllerModelInterface {
 	
 	// IModelInformation
 	public boolean addBuildingBlock(String id) {
