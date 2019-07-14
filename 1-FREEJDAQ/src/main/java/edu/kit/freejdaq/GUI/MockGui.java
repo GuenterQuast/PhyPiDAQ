@@ -1,4 +1,4 @@
-package edu.kit.freejdaq.GUI;
+ package edu.kit.freejdaq.GUI;
 
 public class MockGui {
 

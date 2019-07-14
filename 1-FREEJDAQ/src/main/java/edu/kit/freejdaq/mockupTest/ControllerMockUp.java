@@ -1,8 +1,8 @@
-package edu.kit.freejdaq.mockup;
+package mockup;
 
 public class ControllerMockUp implements FacadeViewController {
 	
-	ControllerModelImplement toModel = new ModelMockUp();
+	ControllerModelInterface toModel = new ModelMockup();
 	
 	public boolean blockAdded(String id) {
 		return toModel.addBuildingBlock(id);
@@ -15,13 +15,13 @@ public class ControllerMockUp implements FacadeViewController {
 		
 	}
 	
-	public boolean connectionAdded(String firstChannelId, String secondChannelId) {
+	public boolean addConnection(String firstChannelId, String secondChannelId) {
 		return toModel.addConnection(firstChannelId, secondChannelId);
 		
 		
 	}
 	
-	public boolean connectionRemoved(String firstChannelId, String secondChannelId) {
+	public boolean removeConnection(String firstChannelId, String secondChannelId) {
 		return toModel.removeConnection(firstChannelId, secondChannelId);
 	
 	}

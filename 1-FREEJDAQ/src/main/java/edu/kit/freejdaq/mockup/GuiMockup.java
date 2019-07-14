@@ -1,5 +1,7 @@
 
 public class GuiMockup {
+	
+	FacadeViewController facade = new ControllerMockUp();
 
 	public GuiMockup() {
 		
@@ -32,6 +34,39 @@ public class GuiMockup {
 	public void updateConfig() {
 		System.out.println(" Config updated");
 		
+	}
+	
+	public void blockPlaced(String id) {
+		facade.addBuildingBlock(id);
+	}
+	
+	public void blockRemoved(String initId, long configId) {
+		facade.removeBuildingBlock(initId, configId);
+	}
+	
+	public boolean connectionAdded(String firstChannelId, String secondChannelId) {
+		facade.addConnection(firstChannelId, secondChannelId);
+		
+	}
+	
+	public boolean connectionRemoved(String firstChannelId, String secondChannelId);
+		facade.removeConnection(firstChannelId, secondChannelId);
+	//MeasurementRun
+	
+	public boolean startPressed(String[] sensorIds, IMStreamListener[] dataListeners) {
+		facade.start(sensorIds, dataListeners);
+	}
+	
+	public boolean pausePressed() {
+		facade.pause();
+	}
+	
+	public boolean resumePressed() {
+		facade.resume();
+	}
+	
+	public boolean resetPressed() {
+		facade.reset();
 	}
 	
 	
