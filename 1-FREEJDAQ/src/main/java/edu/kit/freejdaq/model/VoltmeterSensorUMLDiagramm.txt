@@ -1,0 +1,60 @@
+@startuml
+'This space holds sensor related classes (Higher degree of detail in other diagramms)
+namespace edu.kit.freeDAQ.Sensor {
+	class Sensor
+}
+
+'This space holds explizit configuration blocks
+namespace edu.kit.freeDAQ.explizitConfigurationBlocks {
+Voltmeter -|> edu.kit.freeDAQ.Sensor.Sensor
+Voltmeter <|-down- INA219
+
+
+class Voltmeter{
+	measurementRange : int
+	sensorSize : Size
+	maxVoltBeforeFailure : 16
+	maxAmpBeforeFailure : 0.5
+	measurementRange : int
+	measurementRange : int
+
+	+getData() : int
+	+check(): boolean
+}
+
+INA219 *- INA219Size
+INA219Size -right-|> edu.kit.freeDAQ.attributes.Size
+
+class edu.kit.freeDAQ.attributes.Size
+note right: All measurements in mm
+
+class INA219Size {
+	width = 391
+	length = 490
+}
+class INA219 {
+
+}
+}
+
+'This space is holds classes which represent Attributes
+namespace edu.kit.freeDAQ.attributes {
+class Size{
+	width : int
+	length : int
+	height : int
+}
+
+class ChannelManager{
+	listOfChannels : Channel[]
+}
+
+class Channel{
+	function : String
+}
+ChannelManager *- Channel
+	edu.kit.freeDAQ.explizitConfigurationBlocks.Voltmeter "1" *- "0..1" Size
+}
+
+'Relations over namespace boundaries
+@enduml

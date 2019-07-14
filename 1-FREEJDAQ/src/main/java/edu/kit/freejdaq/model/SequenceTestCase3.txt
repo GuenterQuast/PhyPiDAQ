@@ -1,0 +1,68 @@
+@startuml
+
+
+
+actor "User" as U
+
+participant ":Userinterface" as UI
+participant "PR:PhyPiDAQ&Raspi" as PR
+participant "MK1:Measuring Configuration" as MK1
+participant "S1:Sensor" as S1
+participant "S2:Sensor" as S2
+participant "T1:Transformation" as T1
+activate UI
+
+activate MK1
+activate PR
+U -> UI: add Sensor S1 
+
+ 
+UI -> S1: <<create>>
+activate S1
+S1 --> UI: 
+
+UI -> PR: check(S1)
+PR --> UI:
+
+UI -> MK1: add(S1)
+MK1 --> UI : 
+UI --> U: show(S1)
+
+U -> UI: add Sensor S2
+UI -> S2: <<create>>
+activate S2
+S1 --> UI: 
+
+UI -> PR: check(S2)
+PR --> UI:
+
+UI -> MK1: add(S2)
+S2 --> UI: 
+
+UI --> U: show(S2)
+
+
+U -> UI: add Transformation T1
+UI -> T1: <<create>>
+activate T1
+T1 --> UI: 
+
+UI -> MK1: add T1
+MK1 --> UI : 
+UI -->U: show Transformation T1
+
+U -> UI: change settings of measuring configuration
+UI -> MK1: execute changes
+MK1 --> UI: 
+UI --> U: show changes
+U -> UI: save KonfigurationK1
+UI -> UI: save(K1)
+UI --> U
+
+
+
+
+
+
+
+@enduml

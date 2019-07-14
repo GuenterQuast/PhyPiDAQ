@@ -1,0 +1,61 @@
+@startuml
+'----------------------------------------------------------------------------------------
+/'Goal of the Sequenz Diagram
+In this Sequenz Diagram the normal process of a user adding and setting up a Transformation
+is displayed
+'/
+'----------------------------------------------------------------------------------------
+'----------------------------------------------------------------------------------------
+'Actors and Participants with the Abbreviations used
+'----------------------------------------------------------------------------------------
+actor "User" as U
+participant "UserInterface" as UI
+participant "ModelController" as MC
+participant "TransformationManager" as TM
+participant "BuildingBlock 1" as BB1
+participant "Transformation" as T
+participant "BuildingBlock2" as BB2
+'----------------------------------------------------------------------------------------
+'Interactions between the Actors and Participants
+'----------------------------------------------------------------------------------------
+activate UI
+activate MC
+U -> UI: show(Transformations)
+UI -> MC: transferCommand()
+MC -> TM: requests(ListOfAllTransformations)
+activate TM
+TM --> MC: returns(ListOfAllTransformations)
+MC --> UI: returns(ListOfAllTransformations)
+UI --> U: show(ListOfAllTransformations)
+U -> UI: dragAndDrop(Transformation)
+UI -> MC: transferCommand()
+MC -> T: <<create>>
+activate T
+T --> MC: give Feedback
+MC --> UI: display in
+U -> UI : connect BuildingBlock 1 to Transformation
+MC -> BB1: setTargetedInput()
+activate BB1
+MC -> T: setTargetedOutput()
+BB1 -> BB1: setTargetedInput()
+BB1 --> MC: give Feedback
+T -> T: setTargetedOutput()
+T --> MC: give Feedback
+MC --> UI: return()
+UI --> U: show updated view
+U -> UI: connect TransformationOutput to BuildingBlockInput
+UI -> MC: transferCommand()
+MC -> T: setTargetedOutput()
+MC -> BB2: setTargetedInput()
+activate BB2
+T -> T: setTargetedOutput()
+BB2 -> BB2: setTargetedInput()
+T --> MC: give Feedback
+BB2 --> MC: give Feedback
+MC --> UI: return()
+UI --> U: show updated view
+'----------------------------------------------------------------------------------------
+'----------------------------------------------------------------------------------------
+'----------------------------------------------------------------------------------------
+'----------------------------------------------------------------------------------------
+@enduml

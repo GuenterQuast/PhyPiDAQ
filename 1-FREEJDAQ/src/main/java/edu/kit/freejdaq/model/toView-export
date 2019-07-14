@@ -1,0 +1,45 @@
+
+Die Implementierung:
+
+
+ GUI.Configuration.RepresentationBlockView --|> Model.GraphicDataIolnterface
+ GUI.Exception.ExceptionWindowManager --|> Model.ExceptionInterface
+ GUI.Configuration.ConfigurationField --|> Model.UpdateInterface
+ GUI.Menues.PrototypeField --|> Model.UpdateInterface
+ 
+ Die Interfaces mit Verbindungen zum PickUpPointen
+ 
+ 
+PickUpPointViewFacades --> "*" UpdateInterface
+PickUpPointViewFacades -left-> GraphicDataIolnterface
+PickUpPointViewFacades --> ExceptionInterface
+PickUpPointViewFacades --> MeasurementDataInterface
+
+class PickUpPointViewFacades {
+	 + getUpdateInterfaces(): UpdateInterface[]
+	 + getGraphicDataIolnterface(): GraphicDataIolnterface
+	 + getExceptionInterface(): ExceptionInterface
+	 + getMeasurementDataInterface(): DataInterface
+ }
+
+ interface UpdateInterface {
+ 	+ updateConfig(): void
+ }
+
+interface GraphicDataIolnterface {
+	  + getContentsOfRepresentationBlocks(): BufferedImage[]
+ }
+ 
+ interface ExceptionInterface {
+	 + showGeneralException(title: String, description: String): void
+	 + showBuildingBlockException(id: String, title: String, description: String): void
+	 + showConnectionException(id: int, title: String, description: String): void
+ }
+
+ interface MeasurementDataInterface {
+ 	+ pushShellForVisualisation(..): void
+ }
+ 
+
+ 
+

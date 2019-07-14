@@ -1,0 +1,57 @@
+@startuml
+'----------------------------------------------------------------------------------------
+'All classes used in this UML Diagramm
+'----------------------------------------------------------------------------------------
+'abstract class Transformation
+'class Function
+'class MeasurementData
+'class Output
+'class Input
+'class LinearMapping
+'class DependendOutputTransformation
+'class CustomizedTransformation
+'class PredefinedTransformation
+'class DataAccesPoint
+'----------------------------------------------------------------------------------------
+'Class Attributes and methods
+'----------------------------------------------------------------------------------------
+
+
+
+
+'----------------------------------------------------------------------------------------
+'Class Interactions
+'----------------------------------------------------------------------------------------
+namespace TransformationLogic {
+	abstract class Transformation
+	CustomizedTransformation -up-|> Transformation
+	PredefinedTransformation -up-|> Transformation
+	LinearMapping -up-|> PredefinedTransformation
+	DependendOutputTransformation -up-|> PredefinedTransformation
+}
+
+abstract class BuildingBlock {
+	-id: int
+	-name: String
+	-listOfChannels: <<Channel>>
+	+setId()
+	+esttablishConnection(String ownSourceChannelID, String targetChannelID)
+	+getDataProvider(String channelID): DataProvider
+}
+BuildingBlock <|- TransformationLogic.Transformation
+'----------------------------------------------------------------------------------------
+'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
+'It stands here for a complete overview
+'----------------------------------------------------------------------------------------
+package kit.edu.freejdaq.configurationBlockManager {
+	abstract class ConfigurationBlockManager{
+		listOfBlocks : ConfigurationBlock[]
+		{abstract}+add(cb: ConfigurationBlock): boolean
+		+remove(cb: ConfigurationBlock): boolean
+		+showAllBocks(cb: ConfigurationBlock): boolean
+	}
+	ConfigurationBlockManager <|-down- TransformationManager
+}
+
+TransformationManager "1" *- "n" TransformationLogic.Transformation
+@enduml

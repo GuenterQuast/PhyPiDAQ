@@ -1,0 +1,73 @@
+@startuml
+
+class Director {
+	
+	+createSensorFromYaml(sensorFile: Yaml): Sensor
+	+constructXYRepresentation()
+	+constructNTimeRepresentation()
+	+constructDS18B20TemperatureSensor()
+	+constructBMPx80PressureSensor()
+	+constructINA219CurrentAndVoltageSensor() 
+	+constructMMA8451Accelerometer()
+
+	
+
+}
+
+class Builder {
+	-linkToYaml: String
+	+{abstract} fetchBuildingBlock(): BuildingBlock
+	+snakeYaml.load(): hashMap
+	
+
+	
+
+}
+
+
+class "java.util.HashMap<K,V>" as HM{
+
+
+}
+
+Builder "1" --> "1" HM
+
+
+class SnakeYamlParser {
+	+<<static>>parseYamlFile(Yaml fileToBeParsed): hashMap
+
+}
+
+note right of SnakeYamlParser
+  Already existing
+  parser for yaml files.
+end note
+
+
+SnakeYamlParser "1" --> "1" HM
+
+class SensorBuilder {
+	+fetchBuildingBlock(): BuildingBlock
+
+}
+class TransformationBuilder {
+	+fetchBuildingBlock(): BuildingBlock
+
+}
+class RepresentationBuilder {
+	+fetchBuildingBlock(): BuildingBlock
+
+}
+
+SensorBuilder -up-|> Builder
+TransformationBuilder -up-|> Builder
+RepresentationBuilder -up-|> Builder
+
+
+
+
+Director "1" --> "0..*" Builder : Staff
+
+
+
+@enduml
