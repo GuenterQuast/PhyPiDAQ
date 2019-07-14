@@ -1,4 +1,4 @@
-package Mock;
+package edu.kit.freejdaq.mockup;
 
 public class ControllerModelImplement implements ControllerModelInterface {
 
