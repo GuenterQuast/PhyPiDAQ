@@ -1,1 +1,1 @@
-resources for die Anwendung
+Resources for die Anwendung
