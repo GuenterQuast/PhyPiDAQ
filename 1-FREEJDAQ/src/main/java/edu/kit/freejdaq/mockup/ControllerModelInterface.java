@@ -2,19 +2,15 @@ package edu.kit.freejdaq.mockup;
 
 public interface ControllerModelInterface {
 	
-	public boolean addBlock(String id);
+	public boolean addBuildingBlock(String id);
 	
-	public boolean removeBlock(String id);
+	public boolean removeBuildingBlock(String initId, long configId);
 	
-	public boolean addConnection(String chId1, String chId2);
+	public boolean addConnection(String firstChannelId, String secondChannelId);
 	
-	public boolean removeConnection(String chId1, String chId2);
+	public boolean removeConnection(String firstChannelId, String secondChannelId);
 	
-	public boolean saveConfig(String path);
-	
-	public boolean loadConfig(String path);
-	
-	public boolean start();
+	public boolean start(String[] sensorIds, IMStreamListener[] dataListeners);
 	
 	public boolean pause();
 	
