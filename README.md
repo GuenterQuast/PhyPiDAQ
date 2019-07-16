@@ -469,28 +469,42 @@ sudo usermod -a -G tty pi
 
 - `examples/read_analog.py`  
     very minimalist example to read one channel from an analog-to-ditigal converter
+
 - ``examples/display_analog.py``  
     very minimalist example to read one channel from an analog-to-ditigal converter and
     display data as a history graph
+
 - ``examples/display_analog2.py``  
     read two channels from an analog-to-ditigal converter and
     display data as a history graph
+
 - `examples/read_INA210.py`  
     read data from INA219 current and voltage sensor
+
 - ``examples/read_18B20.py``s
      simple example to read the temperature sensor DS18B20
+
 - ``examples/readBMPx80.py``
     simple example to read the digital temperature  and pressure sensor BMP180/280
+
 - ``examples/readMMA8541.py``
     simple example to read the digital accelerometer MMA8451
+
 - `examples/runOsci.py`  
     run an oscilloscope display, configuration as specified in *.yaml* file (default is `PSOsci.yaml`)
+
 - `examples/GPIO-In-Out.py`  
     example to control  GPIO pins: generate square signal on output pin from variable voltage on input pin
+
 - `examples/poissonLED.py`  
     generate a random signal following Poisson statistics on a GPIO pin
+
 - `examples/FreqGen.py`  
     generate a fixed frequency signal on a GPIO pin  
+
+- `examples/set_MPC4725`  
+    example to set voltage on MCP4725 ditital-to-analog converter
+
 
 ### Configuration files for *run_phypi.py*
 - `examples/Amperemeter.daq`  

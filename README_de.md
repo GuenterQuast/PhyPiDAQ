@@ -721,30 +721,45 @@ aus dem Stromnetz aufgefangen werden. Höhere Störfrequenzen findet man in der 
 
 - `examples/read_analog.py`  
     sehr minimalistisches Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
+
 - `examples/display_analog.py`  
     Beispiel zum Auslesen eines Kanals von einem Analog-Digital-Wandler
     mit grafischer Anzeige des zeitlichen Verlaufs
+
 - `examples/display_analog2.py`  
     Beispiel zum Auslesen von zwei Kanälen von einem Analog-Digital-Wandler
     mit grafischer Anzeige des zeitlichen Verlaufs
+
 - `examples/read_INA210.py`  
     Beispiel zum Auslesen des Strom- und Spannungssensors INA219
+
 - ``examples/read_18B20.py``  
     Auslese des digitalen Temperatursensors DS18B20 
+
 - ``examples/readBMP180.py``  
     Auslese des digitalen Tempratur- und Drucksensors BMP180/280
+
 - `examples/readMMA8451.py`  
     Auslese des digitalen Beschleunigungssensors MMA8451
+
 - `examples/runOsci.py`  
     Oszillographenanzeigen wie in *.yaml*-Datei zur Konfiguration angegeben (Vorgabe `PSOsci.yaml`)
+
 - `examples/GPIO-In-out.py`  
      Beispiel zur Ansteuerung der GPIO-Pins: Erzeugung einer Rechteckspannung am Ausgabe-Pin durch Verändern der Spannung am Eingabe-Pin
+
 - `examples/poissonLED.py`  
     erzeugt ein zufälliges Signal an GPIO-Pin gemäß Poisson-Prozess 
+
 - `examples/FreqGen.py`  
     erzeugt Signal fester Frequenz an GPIO-Pin
+
 - `examples/readPipe.py`  
     liest Daten aus einer Linux-Pipe (*run_phypi.py* mit der Option DAQfifo:  \<name of pipe \>)
+
+- `examples/set_MCP4725.py`    
+
+    Beispiel zum Setzen des Spannungswerts für Analog-Digital-Wandler MCP4725
 
 ### Konfigurationsdateien für *run_phypi.py*
 - `examples/Amperemeter.daq`  
