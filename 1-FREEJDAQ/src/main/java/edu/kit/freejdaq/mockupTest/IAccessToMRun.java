@@ -1,4 +1,4 @@
-package mockup;
+package edu.kit.freejdaq.mockupTest;
 
 public interface IAccessToMRun {
 	public boolean start(String[] sensorIds, IMStreamListener[] dataListeners);

@@ -1,4 +1,4 @@
-package mockup;
+package edu.kit.freejdaq.mockupTest;
 
 public class ControllerMockUp implements FacadeViewController {
 	
