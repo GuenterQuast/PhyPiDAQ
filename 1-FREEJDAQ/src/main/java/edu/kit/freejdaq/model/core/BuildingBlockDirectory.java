@@ -18,8 +18,8 @@ import org.apache.logging.log4j.Logger;
 public class BuildingBlockDirectory {
 	
 	
-	private HashMap initHashMap;
-	private HashMap configHashMap;
+	private HashMap<String, BuildingBlock> initHashMap;
+	private HashMap<Long, BuildingBlock> configHashMap;
 	private static final Logger logger = LogManager.getLogger(BuildingBlockDirectory.class);
 	
 	
@@ -36,25 +36,29 @@ public class BuildingBlockDirectory {
 		return false;
 		}
 	public boolean addInitBuildingBlock(String id, BuildingBlock block ) {
-		return false;
+		initHashMap.put(id, block);
+		return true;
 		}
-	public boolean addConfigBuildingBlock(int id, BuildingBlock block ) {
-		return false;
+	public boolean addConfigBuildingBlock(long id, BuildingBlock block ) {
+		configHashMap.put(id, block);
+		return true;
 	}
-	public boolean removeConfigBuildingBlock(String id ) {
-		return false;
+	public boolean removeConfigBuildingBlock(Long id ) {
+		configHashMap.remove(id);
+		return true;
 		}
 	
-	//public BuildingBlock getInitBuildingBlock(String id ) {}
-	//public BuildingBlock getConfigBuildingBlock(int id ) {}
+	public BuildingBlock getInitBuildingBlock(String id ) {
+		return (BuildingBlock) initHashMap.get(id);
+	}
+	public BuildingBlock getConfigBuildingBlock(long id ) {
+		return (BuildingBlock) configHashMap.get(id);
+	}
 	public HashMap<String, BuildingBlock> getFullInitBlock() {
 		return initHashMap;
 	}
 	
-	
-	
-	
-	public HashMap<String, BuildingBlock> getFullConfigBlock() {
+	public HashMap<Long, BuildingBlock> getFullConfigBlock() {
 		return configHashMap;
 	}
 	public boolean addConfigConnection(String bbId1,  int chId1, int chId2, String bbId2) {
