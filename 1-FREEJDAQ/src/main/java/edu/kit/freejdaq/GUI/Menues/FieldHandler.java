@@ -11,4 +11,5 @@ import edu.kit.freejdaq.GUI.Button.*;
 
 public interface FieldHandler {
 
+	public void fieldWasOpened();
 }
