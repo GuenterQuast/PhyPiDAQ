@@ -2,7 +2,7 @@ package edu.kit.freejdaq.mockup;
 
 import java.util.HashMap;
 
-import edu.kit.freejdaq.model.BuildingBlock;
+import edu.kit.freejdaq.model.core.BuildingBlock;
 
 public class ModelMockup implements ControllerModelInterface {
 	

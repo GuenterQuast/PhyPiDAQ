@@ -1,8 +1,11 @@
 package edu.kit.freejdaq.mockup;
 
+import edu.kit.freejdaq.mockup.ControllerModelInterface;
+import edu.kit.freejdaq.mockup.ModelMockup;
+
 public class ControllerMockUp implements FacadeViewController {
 	
-	ControllerModelImplement toModel = new ModelMockUp();
+	ControllerModelInterface toModel = new ModelMockup();
 	
 	public boolean blockAdded(String id) {
 		return toModel.addBuildingBlock(id);
@@ -46,6 +49,30 @@ public class ControllerMockUp implements FacadeViewController {
 	public boolean reset() {
 		return toModel.reset();
 		
+	}
+
+	@Override
+	public boolean addBuildingBlock(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeBuildingBlock(String initId, long configId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addConnection(String firstChannelId, String secondChannelId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeConnection(String firstChannelId, String secondChannelId) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
