@@ -13,6 +13,7 @@ public class Main {
 		gui.pausePressed();
 		gui.resumePressed();
 		gui.resetPressed();
+		gui.blockPlaced("2");
 		
 		
 	}
