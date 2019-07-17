@@ -26,7 +26,7 @@ public class ConfigurationField {
 	//public void update() {}
 	
 	
-	// beachte: BuildingBlockView ist normalerweiﬂe abstract und kann nicht Instanziiert werden
+	// beachte: BuildingBlockView ist normalerweise abstract und kann nicht Instanziiert werden
 	public void add(BuildingBlock block) {
 			BuildingBlockView blockView = new BuildingBlockView(block.getInitId(), block);
 			buildingBlockViews.add(blockView);

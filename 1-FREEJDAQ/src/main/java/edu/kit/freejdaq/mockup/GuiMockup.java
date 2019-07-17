@@ -1,4 +1,3 @@
-package edu.kit.freejdaq.mockup;
 
 public class GuiMockup {
 	
@@ -50,12 +49,12 @@ public class GuiMockup {
 		
 	}
 	
-	public void connectionRemoved(String firstChannelId, String secondChannelId) {
+	public boolean connectionRemoved(String firstChannelId, String secondChannelId) {
 		facade.removeConnection(firstChannelId, secondChannelId);
 	}
 	//MeasurementRun
 	
-	public void startPressed(String[] sensorIds, IMStreamListener[] dataListeners) {
+	public vid startPressed(String[] sensorIds, IMStreamListener[] dataListeners) {
 		facade.start(sensorIds, dataListeners);
 	}
 	
