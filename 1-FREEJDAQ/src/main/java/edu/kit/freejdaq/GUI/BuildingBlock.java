@@ -2,7 +2,7 @@ package edu.kit.freejdaq.GUI;
 
 
 
-// placeHolder, später importiere diese Klasse aus dem Model
+// placeHolder, spaeter importiere diese Klasse aus dem Model
 public class BuildingBlock {
 	private String initId;
 	private long configId;

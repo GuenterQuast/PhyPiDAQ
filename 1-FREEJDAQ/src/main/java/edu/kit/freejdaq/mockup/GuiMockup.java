@@ -25,7 +25,7 @@ public class GuiMockup {
 		
 	}
 	
-	// keine Shell zur Zeit verfügbar
+	// keine Shell zur Zeit verfuegbar
 	//public void pushShellForVisualisation(Shell shell) {
 		
 		
@@ -49,8 +49,9 @@ public class GuiMockup {
 		
 	}
 	
-	public boolean connectionRemoved(String firstChannelId, String secondChannelId);
+	public boolean connectionRemoved(String firstChannelId, String secondChannelId) {
 		facade.removeConnection(firstChannelId, secondChannelId);
+	}
 	//MeasurementRun
 	
 	public boolean startPressed(String[] sensorIds, IMStreamListener[] dataListeners) {

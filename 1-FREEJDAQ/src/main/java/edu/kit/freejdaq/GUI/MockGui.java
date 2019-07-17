@@ -20,7 +20,7 @@ public class MockGui {
 	//public void pushShellForVisualisation(Shell shell) {}
 		
 	
-	// erstelle ein Gui Grundgerüst, das eine Prototypsammlung aus dem Model holt 
+	// erstelle ein Gui Grundgeruest, das eine Prototypsammlung aus dem Model holt 
 	
 	public void initializeGui() {
 		MainWindow mainWindow = MainWindow.getInstance();

@@ -27,7 +27,7 @@ public class GuiMockup {
 		
 	}
 	
-	// keine Shell zur Zeit verfügbar
+	// keine Shell zur Zeit verfuegbar
 	//public void pushShellForVisualisation(Shell shell) {
 		
 		

@@ -24,7 +24,7 @@ public interface ViewDirectoryInterface {
 	
 	
 	
-	// falls True, wie erkenne ich, was verändert wurde?
+	// falls True, wie erkenne ich, was veraendert wurde?
 	public boolean checkForUpdate();
 	
 	
