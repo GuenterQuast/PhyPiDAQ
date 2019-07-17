@@ -7,14 +7,14 @@ public class PickPointForAgentsBasedOnSsh {
 		return null;
 	}
 
-	public void getAccessToMRun() {
+	public IAccessToMRun getAccessToMRun() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
-	public void getAccessToSensorInfo() {
+	public IAccessToSensorInfo getAccessToSensorInfo() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }
