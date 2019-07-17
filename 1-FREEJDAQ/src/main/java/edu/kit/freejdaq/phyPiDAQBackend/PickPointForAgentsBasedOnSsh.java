@@ -1,10 +1,15 @@
 package edu.kit.freejdaq.phyPiDAQBackend;
 
 public class PickPointForAgentsBasedOnSsh {
+	
+	private final static PickPointForAgentsBasedOnSsh INSTANCE = new PickPointForAgentsBasedOnSsh();
+	
+	private PickPointForAgentsBasedOnSsh() {
+		// empty
+	}
 
 	public static PickPointForAgentsBasedOnSsh getPickPointForAgentsBasedOnSsh() {
-		// TODO Auto-generated method stub
-		return null;
+		return INSTANCE;
 	}
 
 	public IAccessToMRun getAccessToMRun() {
