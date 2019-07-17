@@ -1,6 +1,11 @@
 package edu.kit.freejdaq.model;
 
 public class ModelManager {
+
+	public boolean initializeModel() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
 	
 	
