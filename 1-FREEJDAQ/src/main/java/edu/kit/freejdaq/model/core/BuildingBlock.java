@@ -12,7 +12,7 @@ import edu.kit.freejdaq.model.representationLogic.*;
 import edu.kit.freejdaq.model.sensorLogic.*;
 import edu.kit.freejdaq.model.transformationLogic.*;
 
-abstract public class BuildingBlock {
+public abstract class BuildingBlock {
 	private ArrayList<InChannel> inChannels;
 	private ArrayList<OutChannel> outChannels;
 	private long configId;

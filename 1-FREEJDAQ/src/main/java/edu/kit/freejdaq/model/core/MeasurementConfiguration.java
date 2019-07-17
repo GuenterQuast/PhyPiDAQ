@@ -49,7 +49,7 @@ public class MeasurementConfiguration {
 		bbDirectory.addConfigBuildingBlock(blockConfigId, block );
 	} 
 	public void removeBuildingBlock(String initId, long configId) {
-		
+		// TODO
 		
 	} 
 	public void addConnection(String firstChannelId, String secondChannelId) {}
