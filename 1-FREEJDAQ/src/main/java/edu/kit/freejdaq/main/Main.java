@@ -1,10 +1,10 @@
 package edu.kit.freejdaq.main;
 
-import edu.kit.freejdaq.GUI.MainWindow;
+import edu.kit.freejdaq.backend.IAccessToMRun;
+import edu.kit.freejdaq.backend.IAccessToSensorInfo;
+import edu.kit.freejdaq.backend.PickPointForAgentsBasedOnSsh;
+import edu.kit.freejdaq.gui.MainWindow;
 import edu.kit.freejdaq.model.ModelManager;
-import edu.kit.freejdaq.phyPiDAQBackend.IAccessToMRun;
-import edu.kit.freejdaq.phyPiDAQBackend.IAccessToSensorInfo;
-import edu.kit.freejdaq.phyPiDAQBackend.PickPointForAgentsBasedOnSsh;
 
 /**
  * Initialisation/Main

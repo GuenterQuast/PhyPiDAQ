@@ -1,0 +1,3 @@
+﻿id: BMP180
+type: Sensor
+Units: Temperature,Pressure

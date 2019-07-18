@@ -1,18 +1,22 @@
 package edu.kit.freejdaq.model.core;
 
 
-import edu.kit.freejdaq.GUI.Configuration.BuildingBlockView;
+import edu.kit.freejdaq.gui.configuration.BuildingBlockView;
 import edu.kit.freejdaq.model.*;
-import java.util.ArrayList;
-import edu.kit.freejdaq.model.buildingBlockBuilder.*;
-import edu.kit.freejdaq.model.channelLogic.*;
-import edu.kit.freejdaq.model.core.*;
-import edu.kit.freejdaq.model.facadeViewModel.*;
-import edu.kit.freejdaq.model.representationLogic.*;
-import edu.kit.freejdaq.model.sensorLogic.*;
-import edu.kit.freejdaq.model.transformationLogic.*;
+import edu.kit.freejdaq.model.block.*;
+import edu.kit.freejdaq.model.channel.*;
 
-public abstract class BuildingBlock {
+import java.util.ArrayList;
+
+import edu.kit.freejdaq.model.core.*;
+import edu.kit.freejdaq.model.igui.*;
+import edu.kit.freejdaq.model.representation.*;
+import edu.kit.freejdaq.model.sensor.*;
+import edu.kit.freejdaq.model.transformation.*;
+
+
+// to do abstract BB
+public class BuildingBlock {
 	private ArrayList<InChannel> inChannels;
 	private ArrayList<OutChannel> outChannels;
 	private long configId;
@@ -23,7 +27,7 @@ public abstract class BuildingBlock {
 	public BuildingBlock(String initId) {
 		this.inChannels =  new ArrayList<InChannel>();
 		this.outChannels =  new ArrayList<OutChannel>();
-		this.setInitId(initId);
+		this.initId = initId;
 		
 		
 	}

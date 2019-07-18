@@ -3,13 +3,13 @@ package edu.kit.freejdaq.model.core;
 
 
 import edu.kit.freejdaq.model.*;
-import edu.kit.freejdaq.model.buildingBlockBuilder.*;
-import edu.kit.freejdaq.model.channelLogic.*;
+import edu.kit.freejdaq.model.block.*;
+import edu.kit.freejdaq.model.channel.*;
 import edu.kit.freejdaq.model.core.*;
-import edu.kit.freejdaq.model.facadeViewModel.*;
-import edu.kit.freejdaq.model.representationLogic.*;
-import edu.kit.freejdaq.model.sensorLogic.*;
-import edu.kit.freejdaq.model.transformationLogic.*;
+import edu.kit.freejdaq.model.igui.*;
+import edu.kit.freejdaq.model.representation.*;
+import edu.kit.freejdaq.model.sensor.*;
+import edu.kit.freejdaq.model.transformation.*;
 
 public class MeasurementRun {
 

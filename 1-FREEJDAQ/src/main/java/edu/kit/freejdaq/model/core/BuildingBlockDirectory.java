@@ -2,15 +2,16 @@ package edu.kit.freejdaq.model.core;
 
 
 import edu.kit.freejdaq.model.*;
-import java.util.HashMap;
-import edu.kit.freejdaq.model.buildingBlockBuilder.*;
-import edu.kit.freejdaq.model.channelLogic.*;
-import edu.kit.freejdaq.model.core.*;
-import edu.kit.freejdaq.model.facadeViewModel.*;
-import edu.kit.freejdaq.model.representationLogic.*;
-import edu.kit.freejdaq.model.sensorLogic.*;
-import edu.kit.freejdaq.model.transformationLogic.*;
+import edu.kit.freejdaq.model.block.*;
+import edu.kit.freejdaq.model.channel.*;
 
+import java.util.HashMap;
+
+import edu.kit.freejdaq.model.core.*;
+import edu.kit.freejdaq.model.igui.*;
+import edu.kit.freejdaq.model.representation.*;
+import edu.kit.freejdaq.model.sensor.*;
+import edu.kit.freejdaq.model.transformation.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,8 +26,8 @@ public class BuildingBlockDirectory {
 	
 	public BuildingBlockDirectory() {
 		
-		HashMap<String, BuildingBlock> initHashMap = new HashMap<String, BuildingBlock>();
-		HashMap<Long, BuildingBlock> configHashMap = new HashMap<Long, BuildingBlock>();
+		this.initHashMap = new HashMap<String, BuildingBlock>();
+		this.configHashMap = new HashMap<Long, BuildingBlock>();
 		
 	}
 	
@@ -36,11 +37,14 @@ public class BuildingBlockDirectory {
 		return false;
 		}
 	public boolean addInitBuildingBlock(String id, BuildingBlock block ) {
+		
 		initHashMap.put(id, block);
+		logger.trace("BuildingBlock added to BuildingBlockDirectory initHashMap with initId: " +  id );
 		return true;
 		}
 	public boolean addConfigBuildingBlock(long id, BuildingBlock block ) {
 		configHashMap.put(id, block);
+		logger.trace("BuildingBlock added to BuildingBlockDirectory configHashMap with configId: " +  id );
 		return true;
 	}
 	public boolean removeConfigBuildingBlock(Long id ) {

@@ -9,28 +9,15 @@
           <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
         <File name="File-Appender" fileName="${log-path}/xmlfilelog.log" >
-        <PatternLayout>
-            <pattern>
-                [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
-            </pattern>
-        </PatternLayout>
-       </File>
-       	   <rollingfile name="RollingFile-Appender" filename="${log-path}/rollingfile.log" filepattern="${archive}/rollingfile.log.%d{yyyy-MM-dd-hh-mm}.gz">
-            <patternlayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n">
-                <policies>
-                     <timebasedtriggeringpolicy>
-                     <sizebasedtriggeringpolicy size="5 MB">
-                </sizebasedtriggeringpolicy></timebasedtriggeringpolicy></policies>
-                     <defaultrolloverstrategy max="30">
-        </defaultrolloverstrategy></patternlayout></rollingfile>        
+         <PatternLayout  pattern=  "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+        </File>
       </Appenders>
       <Loggers>
       	   <Logger name="testing" level="info" additivity="false">
                <AppenderRef ref="File-Appender" level="error"/>  
-               <Appenderref ref="RollingFile-Appender" level="trace"/>
                <AppenderRef ref="Console" level="debug"/>             
            </Logger>
-        <Root level="error">
+        <Root level="trace">
           <AppenderRef ref="Console"/>
         </Root>
       </Loggers>

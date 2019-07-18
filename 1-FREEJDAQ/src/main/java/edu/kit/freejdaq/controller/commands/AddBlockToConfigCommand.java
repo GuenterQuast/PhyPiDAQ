@@ -1,7 +1,7 @@
 package edu.kit.freejdaq.controller.commands;
 
-import edu.kit.freejdaq.controller.modelfacade.IModelInformation;
-import edu.kit.freejdaq.controller.modelfacade.PickupPointModelFacade;
+import edu.kit.freejdaq.controller.imodel.IModelInformation;
+import edu.kit.freejdaq.controller.imodel.PickupPointModelFacade;
 
 public class AddBlockToConfigCommand implements Command {
 	
