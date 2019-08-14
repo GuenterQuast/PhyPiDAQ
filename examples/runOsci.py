@@ -5,7 +5,7 @@
      this script reads data from PicoScope 
      and displays them in oscilloscope mode 
 
-     Usage: ./runVoltmeter.py [<Oscilloscpope_config>.yaml Interval]
+     Usage: ./runOsci.py <Oscilloscope_config>.yaml
 '''
 
 from __future__ import print_function, division, unicode_literals
@@ -60,7 +60,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   print('    Device configuration from file ' + PSconfFile)
   try:
     with open(PSconfFile) as f:
-      PSconfDict=yaml.load(f)
+      PSconfDict=yaml.load(f, Loader=yaml.Loader)
   except:
     print('     failed to read scope configuration file ' + PSconfFile)
     exit(1)
