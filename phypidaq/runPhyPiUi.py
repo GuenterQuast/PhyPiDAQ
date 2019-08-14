@@ -157,7 +157,8 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
 
     def readDeviceConfig(self):
 #   read Device Configuration as specified by actual phypi DAQ config
-      phypiConfD=yaml.load(self.pTE_phypiConfig.toPlainText() )
+      phypiConfD=yaml.load(self.pTE_phypiConfig.toPlainText(),
+                           Loader=yaml.Loader )
       # find the device configuration file
       if "DeviceFile" in phypiConfD: 
         DevFiles = phypiConfD["DeviceFile"]
@@ -249,7 +250,7 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
       DAQconf = self.pTE_phypiConfig.toPlainText()
       # check if valid yaml syntax
       try:
-        DAQconfdict=yaml.load(DAQconf)       
+        DAQconfdict=yaml.load(DAQconf, Loader=yaml.Loader)       
       except Exception as e: 
         self.MB_Warning('Warning', 
           'PhyPi Config is not valid yaml format \n' + str(e))       
@@ -259,7 +260,7 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
       for i in range(self.NDeviceConfigs):
         DevConfs.append(self.pTE_DeviceConfigs[i].toPlainText()) 
         try:
-          _ =yaml.load(DevConfs[i])       
+          _ =yaml.load(DevConfs[i], Loader=yaml.Loader)       
         except Exception as e: 
           self.MB_Warning('Warning', 
              'Device Config %i is not valid yaml format \n'%(i) + str(e) )

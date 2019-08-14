@@ -160,7 +160,7 @@ class runPhyPiDAQ(object):
       print('  Configuration from file ' + PhyPiConfFile)
     try:
       with open(PhyPiConfFile) as f:
-        PhyPiConfDict = yaml.load(f)
+        PhyPiConfDict = yaml.load(f, Loader=yaml.Loader)
     except Exception as e:
       print('!!! failed to read configuration file ' + PhyPiConfFile)
       print(str(e))
@@ -207,7 +207,7 @@ class runPhyPiDAQ(object):
     for fnam in DevFiles:  
       try:
         f = open(fnam)
-        DEVconfDicts.append(yaml.load(f))
+        DEVconfDicts.append(yaml.load(f, Loader=yaml.Loader))
         f.close()
       except Exception as e:
         print('!!! failed to read configuration file ' + fnam)
