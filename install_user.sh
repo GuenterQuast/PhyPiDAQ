@@ -17,6 +17,7 @@ if [ -d $DIR ]; then
 #
     # create desktop icon
   cp -auv *.desktop $HOME/Desktop
+  chmod a+x $HOME/Desktop/*.desktop
 
     # copy documentation
   mkdir -p $DIR/doc
