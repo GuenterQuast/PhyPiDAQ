@@ -134,14 +134,18 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
 # - end initDAQ
 
     def setOptions(self):
-# set font for plainTextEdit to monospace
+      # set font for plainTextEdit to monospace
       monofont = QtGui.QFont()
       monofont.setStyleHint(QtGui.QFont.TypeWriter)
       monofont.setFamily("unexistentfont")        
       self.pTE_phypiConfig.setFont(monofont)
       self.pTE_DeviceConfig0.setFont(monofont)
       self.pTE_DeviceConfig1.setFont(monofont)
-
+      # no line wrap, horizontal scroll bar instead
+      self.pTE_phypiConfig.setLineWrapMode(0)
+      self.pTE_DeviceConfig0.setLineWrapMode(0)
+      self.pTE_DeviceConfig1.setLineWrapMode(0)
+      
     def setHelp_DE(self):
       self.TE_Help.setText(open('doc/Hilfe.html', 'r').read() ) 
 

@@ -1,0 +1,21 @@
+# configuration for PhyPiDAQ 
+
+## an example of multiple devices
+DeviceFile: [config/ADS1115Config.yaml, config/GPIOCount.yaml]  
+
+
+DisplayModule: DataLogger
+
+Interval: 0.1               # logging interval         
+
+ChanLabels: [U, U, f, f]          # names for channels 
+ChanUnits: [V, V, Hz, Hz]           # units for channels 
+XYmode:     false                 # enable XY-display
+
+# overwrite Channel Limits of Device 
+##ChanLimits: 
+## - [0., 1.]
+## - [0., 1.]
+
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 
