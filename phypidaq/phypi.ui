@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>705</width>
-    <height>590</height>
+    <height>615</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -32,7 +32,7 @@
       <x>-1</x>
       <y>0</y>
       <width>711</width>
-      <height>591</height>
+      <height>611</height>
      </rect>
     </property>
     <property name="toolTip">
@@ -76,7 +76,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>images/PhiPiLogo.png</pixmap>
+       <pixmap>../images/PhiPiLogo.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -147,8 +147,8 @@
      <widget class="QPushButton" name="pB_StartRun">
       <property name="geometry">
        <rect>
-        <x>599</x>
-        <y>517</y>
+        <x>589</x>
+        <y>525</y>
         <width>101</width>
         <height>40</height>
        </rect>
@@ -187,7 +187,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>images/open-folder.jpg</normaloff>images/open-folder.jpg</iconset>
+        <normaloff>../images/open-folder.jpg</normaloff>../images/open-folder.jpg</iconset>
       </property>
      </widget>
      <widget class="QPushButton" name="pB_abort">
@@ -210,7 +210,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>images/application-exit.jpg</normaloff>images/application-exit.jpg</iconset>
+        <normaloff>../images/application-exit.jpg</normaloff>../images/application-exit.jpg</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -271,7 +271,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>images/open-folder.jpg</normaloff>images/open-folder.jpg</iconset>
+        <normaloff>../images/open-folder.jpg</normaloff>../images/open-folder.jpg</iconset>
       </property>
      </widget>
      <widget class="QLabel" name="label_2">
@@ -287,7 +287,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>images/PhyPiDAQdiagram.png</pixmap>
+       <pixmap>../images/PhyPiDAQdiagram.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -355,7 +355,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_phypiConfig">
        <property name="enabled">
@@ -594,7 +594,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>images/flagUK.png</normaloff>images/flagUK.png</iconset>
+        <normaloff>../images/flagUK.png</normaloff>../images/flagUK.png</iconset>
       </property>
      </widget>
      <widget class="QPushButton" name="pB_Hilfe">
@@ -611,7 +611,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>images/flagDE.png</normaloff>images/flagDE.png</iconset>
+        <normaloff>../images/flagDE.png</normaloff>../images/flagDE.png</iconset>
       </property>
      </widget>
     </widget>
@@ -675,8 +675,6 @@
    </widget>
   </widget>
  </widget>
- <resources>
-  <include location="../picoCosmo/images/open-folder.jpg"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
