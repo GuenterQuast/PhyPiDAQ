@@ -78,4 +78,8 @@ DataFile:   null              #  null to disable
 # enable buffering of latest data (depth NHistoryPoints from above)
 #bufferData: PhyPiData    # file name to track latest data and eventually 
 #bufferData: null         #  store them, or null to switch off  
-                     
+
+# control status LEDs
+#RunLED: 20     # display run status on GPIO pin 20
+#ReadoutLED: 21 # display readout on GPIO pin 21
+ 
