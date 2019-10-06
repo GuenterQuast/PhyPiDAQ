@@ -480,7 +480,7 @@ class runPhyPiDAQ(object):
           for i, DEV in enumerate(self.DEVs):
             DEV.acquireData(self.data[self.ChanIdx_ofDevice[i] : ] )
 
-          if self.ReadoutLED: self.ReadoutLED.pulse(interval/10.) # pulse readout LED
+          if self.ReadoutLED: self.ReadoutLED.pulse(interval/2.) # pulse readout LED
 
         # eventually calibrate raw readings
           if self.CalibFuncts: self.apply_calibs()
