@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'phypi.ui'
 #
-# Created by: PyQt5 UI code generator 5.5.1
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_PhyPiWindow(object):
     def setupUi(self, PhyPiWindow):
         PhyPiWindow.setObjectName("PhyPiWindow")
-        PhyPiWindow.resize(705, 590)
+        PhyPiWindow.resize(705, 601)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -25,7 +25,7 @@ class Ui_PhyPiWindow(object):
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
         self.tab_Main = QtWidgets.QTabWidget(self.centralwidget)
-        self.tab_Main.setGeometry(QtCore.QRect(-1, 0, 711, 591))
+        self.tab_Main.setGeometry(QtCore.QRect(-1, 0, 711, 601))
         self.tab_Main.setStatusTip("")
         self.tab_Main.setObjectName("tab_Main")
         self.Tab_Control = QtWidgets.QWidget()
@@ -60,7 +60,7 @@ class Ui_PhyPiWindow(object):
         self.lE_DAQConfFile.setReadOnly(True)
         self.lE_DAQConfFile.setObjectName("lE_DAQConfFile")
         self.pB_StartRun = QtWidgets.QPushButton(self.Tab_Control)
-        self.pB_StartRun.setGeometry(QtCore.QRect(599, 517, 101, 40))
+        self.pB_StartRun.setGeometry(QtCore.QRect(591, 524, 101, 40))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("images/start.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pB_StartRun.setIcon(icon)
@@ -106,9 +106,10 @@ class Ui_PhyPiWindow(object):
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.Tab_Control)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(11, 475, 681, 31))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(11, 490, 681, 16))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label_Picture.raise_()
         self.label_caption.raise_()
