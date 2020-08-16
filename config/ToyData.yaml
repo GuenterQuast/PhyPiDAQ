@@ -1,0 +1,3 @@
+# "device" config for ToyDataConfig.py 
+DAQModule: ToyDataConfig
+NChannels: 2

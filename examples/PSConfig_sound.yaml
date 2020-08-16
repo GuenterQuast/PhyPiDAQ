@@ -1,0 +1,34 @@
+# example of a configuration file for PicoScope 2000 Series
+#    special version for model PS2x0yA series
+#    use PSConfig.yaml for PS2x0yB types
+
+DAQModule: PSConfig         
+
+#PSmodel: '2000'      # PS model 220xA
+PSmodel: '2000a'     # PS model 2x0xB
+
+# channel configuration 
+picoChannels: [A]
+ChanRanges: [5.] # for microphone with amplifier
+ChanModes: [AC]
+##ChanOffsets: [-0.049] # !!! not wanted here, and not possible for A series
+
+sampleTime: 2.0E-02
+Nsamples: 200
+
+# trigger
+trgActive: false  # true to activate
+trgChan: A
+trgThr: 0.
+trgTyp: Rising
+trgTO: 4  # set short time-out for A series
+          # vlaues < 4 lead to readout instabilities 
+
+## pretrig: 0.05 # !!! not for A series
+
+# signal generator 
+# frqSG: 100.E+3 # put 0. do disable
+frqSG: 0. 
+
+# special flags for PhyPiDAQ
+ChanAverages: ['rms'] # ['mean'] or ['rms']

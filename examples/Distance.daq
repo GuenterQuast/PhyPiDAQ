@@ -1,0 +1,23 @@
+# configuration for PhyPiDAQ 
+#   distance sensor VL53Lx 
+
+# device configuration files 
+DeviceFile: VL53LxConfig.yaml  
+
+#DisplayModule: DataLogger
+DisplayModule: DataGraphs
+NHistoryPoints: 250 
+
+Title: Distance
+        
+ChanLabels: [D] # names and units for channels 
+#ChanLimits: [[0.,3000.]]
+
+ChanUnits: ['mm']
+ChanColors: [darkblue, darkgreen]    # channel colours in display
+XYmode:     false                  # enable XY-display
+
+Interval: 0.1                  # logging interval 
+
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 

@@ -1,0 +1,5 @@
+# example config for AS7262 color sensor
+
+DAQModule: AS7262Config
+# NChannels: 6  # 6 is the only possible value
+

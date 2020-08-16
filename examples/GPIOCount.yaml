@@ -1,0 +1,10 @@
+# example configuration for couning rate on GPIO pins
+
+DAQModule: GPIOCount
+
+
+GPIOpins: [26, 19] # GPIO pin numbers
+#GPIOpins: [20, 21] # GPIO pin numbers
+#GPIOpins:   [21] # GPIO pin numbers
+#Modes:      [1]   # 0:rising, 1:falling edge
+

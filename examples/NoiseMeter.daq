@@ -1,0 +1,23 @@
+# configuration for PhyPiDAQ 
+#   display RMS of sound signal
+
+# device configuration files 
+DeviceFile: PSConfig_sound.yaml         
+#DeviceFile: PSConfig2000A_sound.yaml         
+
+#DisplayModule: DataLogger
+DisplayModule: DataGraphs
+Title: Noisemeter
+
+Interval: 0.05                    # logging interval         
+ChanLabels: [Volt, Volt]          # names an units for channels 
+ChanColors: [darkblue, sienna]    # channel colours in display
+XYmode:     false                 # enable XY-display
+
+# overwrite Channel Limits of Device 
+ChanLimits: 
+- [0., 2.5]  # scope at 5V, eff. Voltage is smaller
+## - [0., 1.]
+
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 

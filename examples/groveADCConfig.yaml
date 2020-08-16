@@ -1,0 +1,9 @@
+# example of a configuration file for grove ADC 
+
+DAQModule: groveADCConfig
+
+ADCChannels:   [0, 1, 2, 3]   # active Channels (0 - 7)
+
+
+##VRef:       5.0   # Reference Voltage
+

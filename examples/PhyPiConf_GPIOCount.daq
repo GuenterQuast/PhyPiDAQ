@@ -1,0 +1,24 @@
+# configuration for PhyPiDAQ 
+
+# device configuration files 
+#DeviceFile: ADS1115Config.yaml  
+#DeviceFile: myADS1115Config.yaml  
+#DeviceFile: MCP3008Config.yaml  
+#DeviceFile: PSConfig.yaml         
+DeviceFile: GPIOCount.yaml
+
+DisplayModule: DataLogger
+#DisplayModule: DataGraphs
+
+Interval: 1.                              # logging interval         
+ChanLabels: [Rate, Rate]     # names for channels 
+ChanUnits: [Hz, Hz]              # units
+ChanColors: [darkblue, darkred]    # channel colours in display
+
+# overwrite Channel Limits of Device 
+ChanLimits: 
+ - [0.0, 30.]
+ - [0.0, 60.]
+
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 

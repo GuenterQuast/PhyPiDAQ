@@ -1,0 +1,31 @@
+# configuration for PhyPiDAQ 
+#  read gamma ray dose from FTLAB GDK101 gamma detector
+
+# device configuration file
+DeviceFile: GDK101.yaml  
+
+DisplayModule: DataLogger
+NHistoryPoints: 250 
+
+ChanLabels: [Dosis, Dosis]        # names and units for channels 
+ChanLimits: [[0., 5.],[0., 5.]]   # range
+ChanColors: [darkblue, darkgreen] # channel colours for display
+
+# dose as given by sensor
+Title: 'Gamma Ray Dose'
+ChanUnits: ['µSv/h', 'µSv/h']     # unit(s)
+
+## or ##
+
+# translate to detected gamma rate in Hz
+#Title: 'Gamma Rate'
+#ChanCalib:
+# - 0.12
+# - 0.12
+#ChanUnits: ['Hz', 'Hz']     # unit(s)
+
+Interval: 60.                 # logging interval 
+startActive: true             # start in "active" mode
+
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 
