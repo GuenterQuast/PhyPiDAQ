@@ -13,12 +13,10 @@ Das Paket bietet eine Abstraktionsschicht für Messgeräte und Sensoren, die an 
  *Abb. 1*:  Darstellung der Zeitabhängigkeit von zwei Signalquellen an einem AD-Wandler
                     ![Figure 1](doc/Kondensator.png)
 
-Die Beschreibung des zu Grunde liegenden Konzepts, eine Liste der empfohlenen Komponenten und ausführlich  dokumentierte Beispiele finden sich in der [Masterarbeit von Moritz Aupperle](http://ekp-invenio.physik.uni-karlsruhe.de/record/49063) .
+Die Beschreibung des zu Grunde liegenden Konzepts, eine Liste der empfohlenen Komponenten und ausführlich dokumentierte Beispiele finden sich in der [Masterarbeit von Moritz Aupperle](http://ekp-invenio.physik.uni-karlsruhe.de/record/49063) .
 
 Für viele typische Messaufgaben werden Vorverstärker zur Impedanzanpassung (z.B. Elektrometer-Verstärker), zur Pegelanpassung oder zur Verstärkung kleiner Signale im µV-Bereich benätigt. Ein
- Vorschlag zur einfachen Realisierung solcher Schaltungen ist im Verzeichnis `Hardware/` dokumentiert.  
-
-
+ Vorschlag zur einfachen Realisierung solcher Schaltungen ist im Verzeichnis `Hardware/` und in der [Bachelor-Arbeit von Dominik Braig](https://publish.etp.kit.edu/record/21995) dokumentiert. 
 
 ## Schnellstart
 
