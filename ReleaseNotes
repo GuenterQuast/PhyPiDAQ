@@ -7,14 +7,14 @@ v1.0dev
   - support for MLX90393 magnetic field sensor
   - added description of hardware (preamplifiers)
   - support for ADC on Raspberry Pi Grove Base Hat
-  
+
 v9.4beta Jun 2019
 
   - added output to fifo
 
 v9.3beta1 Jun 2019
 
-  - refactored timing - now controlled from main program 
+  - refactored timing - now controlled from main program
   - added support for GDK101 gamma ray detector
   - support for 18 channel spectral sensor AS7265x
   - support for MMA8452 accelerometer
@@ -22,15 +22,15 @@ v9.3beta1 Jun 2019
      to student course
   - generalized suppor for distance sensor:
      VL53L1X and VL53L0X
-  
+
 v9.3beta March 27, 2019
-  
+
 v9.3dev0
 
   - added possibility to replay saved data, capacitor as demo
-  - added ReplayConfig.py to inject data from file 
+  - added ReplayConfig.py to inject data from file
   - added distance sensor VL53L1X
-  
+
 v0.92p1 post-release
 
   - added RGB sensor TCS24725 and color sensor AS7262
@@ -40,7 +40,7 @@ v0.92p1 post-release
 
 v0.92p0 post-release
 
-  - added Script GPIO-In-Out.py 
+  - added Script GPIO-In-Out.py
 
 v0.92 February 13, 2019
 
@@ -49,7 +49,7 @@ v0.92 February 13, 2019
 
 v0.9.1p2
 
-  - start of data acquisition in paused mode 
+  - start of data acquisition in paused mode
   - added pocoscope installation libraries and script installlibs.sh
   - support for INA219 current sensor
   - documented all *.daq Files
@@ -63,13 +63,13 @@ v0.9.1p1
   - support for MMA8451 accelerometer
   - added support for temperature and pressure sensor BMP180
   - improved error messages
-  
+
 v0.9.1  November 24, 2018
 
   - improved documentation
   - latest versions  of dependencies
   - added digital temperature sensor DS18B20
   - support for PS2204A,
-  - user install script, documentation 
+  - user install script, documentation
 
 v0.9.0 initial release October 7, 2018
