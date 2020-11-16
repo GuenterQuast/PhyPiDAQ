@@ -1,12 +1,21 @@
-import phypidaq  # from this directory
-import sys
+"""
+Setup script for the phypidaq module.
 
+This setup includes the test runner for the module and the setup class for
+package information
+"""
+import sys
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
+import phypidaq  # from this directory
 
-# class for running unit tests
-# from: https://pytest.org/latest/goodpractices.html
+
 class PyTest(TestCommand):
+    """
+    Test runner for the phypidaq module
+
+    For more info visit: https://pytest.org/latest/goodpractices.html
+    """
     user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
 
     def initialize_options(self):
@@ -34,7 +43,7 @@ setup(
     'Programming Language :: Python :: 3.5',
     ],
     url='http://www.ekp.kit.edu/~quast/',
-    license='GNU Public Licence',
+    license='MIT BSD 2-Clause',
     description='Data AcQuisition and analysis for Physics education with Raspberry Pi',
     long_description=open('README.md').read(),
     setup_requires=[\
