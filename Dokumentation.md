@@ -782,10 +782,10 @@ Der schematische Aufbau ist nachfolgend dargestellt:
 Die verwendete Wägezelle kann nach [dieser Anleitung](https://github.com/GuenterQuast/PhyPiDAQ/blob/master/doc/Bauanleitung_Kraftsensor.pdf) nachgebaut werden. 
             
 
-Zunächst wird die Wägezelle mit einer Betriebsspannung von $U=5V$ versorgt  
+Zunächst wird die Wägezelle mit einer Betriebsspannung von *U=5V* versorgt  
 und an eine Vorrichtung geschraubt, sodass Massestücke daran angehängt werden  
 können. Die Spannungsdifferenz der beiden Ausgänge der Wägezelle ist ein Maß  
-für die anliegende Kraft. Da dieser Unterschied typischerweise im $mV$-Bereich  
+für die anliegende Kraft. Da dieser Unterschied typischerweise im *mV*-Bereich  
 liegt, wird eine Verstärkung der Spannung mit dem Instrumentenverstärker  
 vorgenommen. Der Ausgang des Instrumentenverstärkers wird mit dem Eingang A0  
 des ADC verbunden. Da der notwendige Verstärkungsfaktor unbekannt ist, wird  
@@ -802,14 +802,14 @@ als Ausgabe gewählt.
 
 Ist der Aufbau abgeschlossen, so kann die Messung gestartet und mit verschiedenen  
 Massen der Verstärkungsfaktor so gewählt werden, dass eine Spannung sichtbar  
-ist. Der Verstärkungsfaktor beträgt hier $A = 18$. Bei laufender Messung werden  
+ist. Der Verstärkungsfaktor beträgt hier *A = 18*. Bei laufender Messung werden  
 nacheinander Massestücke bis 500 g in 50 g Schritten an die Wägezelle gehängt.  
 Des Weiteren wird die Spannung aufgenommen, wenn kein Massestück angehängt ist.  
 Anschließend werden die Messwerte exportiert und die Spannungen den jeweiligen  
 angehängten Massen zugeordnet. Durch zeitliches Mitteln der Spannungswerte  
 während der Zeit, als das jeweilige Massestück angehängt war, kann jeder Masse ein  
 Spannungswert zugeordnet werden. Es ergeben sich somit zehn Spannungswerte zu den  
-zehn Massestücken (Abb. 5.1). Es ist zu erkennen, dass die Spannung proportional  
+zehn Massestücken. Es ist zu erkennen, dass die Spannung proportional  
 zur angehängten Masse ist. Die Spannung, welche gemessen wird, ohne dass ein  
 Massestück angehängt ist, wird als Offset-Spannung von den anderen Spannungen  
 abgezogen. Nach Bestimmung der Ausgleichsfunktion kann diese Wägezelle somit als  
@@ -857,8 +857,8 @@ sampleRate: 860
 
 Im Folgenden wird der Photoeffekt genauer untersucht. Es soll für sechs verschiedene  
 Wellenlängen im Bereich von λ = 360 nm bis λ = 590 nm jeweils die sich ergebende   
-Gegenspannung gemessen werden. Anschließend soll das Verhältnis $h/e$, wobei $h$   
-das Plancksche Wirkungsquantum und $e$ die Elementarladung ist, bestimmt werden.  
+Gegenspannung gemessen werden. Anschließend soll das Verhältnis *h/e*, wobei *h*   
+das Plancksche Wirkungsquantum und *e* die Elementarladung ist, bestimmt werden.  
 
 Als Lichtquelle wird eine Quecksilber-Lampe verwendet, da diese auch im UV-Bereich   
 Licht emittiert. Mit Linsen wird der Lichtstrahl gebündelt und mit Interferenzfiltern  
@@ -887,7 +887,7 @@ der nachfolgenden Abbildung zu sehen:
 
 *Abb. 38*:  **Photoeffekt** schematischer Aufbau
                     ![Figure 38](Hardware/Fotos/photo_aufbau.png)  
-Der Kondensator mit $C=47µF$ muss ggf. angepasst werden, falls die Aufladung zu schnell oder zu langsam erfolgt.             
+Der Kondensator mit *C=47µF* muss ggf. angepasst werden, falls die Aufladung zu schnell oder zu langsam erfolgt.             
 
 
 In *PhyPiDAQ* kann folgende Config verwendet werden. (Die Plots weiter unten wurden erstellt, indem die Werte von *PhyPiDAQ* als *.csv* exportiert und anschließend in einem Python Script eingelesen wurden. Dies kann für die Mittelstufe beispielsweise genauso gut mit einer Exceltabelle oder ähnlichem erstellt werden.)
@@ -918,21 +918,21 @@ sampleRate: 860
 Die Messung kann nun gestartet werden und die Gegenspannung wird dargestellt, welche sich  
 aus der Aufladung des Kondensators duch den Photoeffekt ergibt. Zum Entladen wird der Kondensator wieder mit Masse verbunden.  
 
-Um das Verhältnis $h/e$ zu berechnen, wird zunächst die Energiebilanz aufgestellt.  
-Das einfallende Licht mit der Wellenlänge $λ$ hat die Frequenz $ν = λc$ und die Energie  
-$E_{Licht} = hν$. Die herausgelösten Elektronen haben nach Abzug der Austrittsarbeit die  
-kinetische Energie $E_{kin} = E_{Licht} − E_A$. Für die Energie des elektrischen Felds gilt  
-$E_{Feld} = U · e$, wobei $U$ die Gegenspannung und $e$ die Elementarladung ist. Im  
+Um das Verhältnis *h/e* zu berechnen, wird zunächst die Energiebilanz aufgestellt.  
+Das einfallende Licht mit der Wellenlänge *λ* hat die Frequenz *f = λc* und die Energie  
+*E<sub>Licht</sub> = hf*. Die herausgelösten Elektronen haben nach Abzug der Austrittsarbeit die  
+kinetische Energie *E<sub>kin</sub> = E<sub>Licht</sub> − E<sub>A</sub>*. Für die Energie des elektrischen Felds gilt  
+*E<sub>Feld</sub> = U · e*, wobei *U* die Gegenspannung und *e* die Elementarladung ist. Im  
 stationären Fall ist die Energie des elektrischen Feldes gleich groß wie die  
-kinetische Energie, $E_{Feld} = E_{kin}$, sodass sich eingesetzt $U·e=hν−E_A$ ergibt.  
-Für die Spannung $U$ gilt schließlich $U=h/e·ν+eA$. Das Verhältnis $h/e$ entspricht  
-der Steigung im $U$−$ν$-Diagramm in der unteren Abbildung. Der y-Achsenabschnitt entspricht  
-der Austrittsarbeit $E_A$, wobei ein negatives Vorzeichen dafür steht, dass diese  
-Arbeit aufgebracht werden muss. Die Abweichung von $(h/e)_{gemessen}$ zum Literaturwert  
-von $h/e = 4,14 ·10−15 Js/C$ beträgt 3,5%, was auf eine sehr präzise Messung  
+kinetische Energie, *E<sub>Feld</sub> = E<sub>kin</sub>*, sodass sich eingesetzt *U·e=hν−E<sub>A</sub>* ergibt.  
+Für die Spannung *U* gilt schließlich *U=h/e·f+eA*. Das Verhältnis *h/e* entspricht  
+der Steigung im *U*−*f*-Diagramm in der unteren Abbildung. Der y-Achsenabschnitt entspricht  
+der Austrittsarbeit *E<sub>A</sub>*, wobei ein negatives Vorzeichen dafür steht, dass diese  
+Arbeit aufgebracht werden muss. Die Abweichung von *(h/e)<sub>gemessen</sub>* zum Literaturwert  
+von *h/e = 4,14 ·10−15 Js/C* beträgt 3,5%, was auf eine sehr präzise Messung  
 hindeutet und das gesetzte Ziel des Messens im Prozentbereich erfüllt. Die  
-Austrittsarbeit für eine Kalium-Kathode beträgt $E_A = 2,25 eV$. Der y-Achsenabschnitt  
-entspricht $|U| = 1,97V$. Da hier keine weiteren Effekte wie zum Beispiel  
+Austrittsarbeit für eine Kalium-Kathode beträgt *E<sub>A</sub> = 2,25 eV*. Der y-Achsenabschnitt  
+entspricht *|U| = 1,97V*. Da hier keine weiteren Effekte wie zum Beispiel  
 Kontaktspannungen berücksichtigt werden, ist die Bestimmung der Austrittsarbeit  
 mit diesem Verfahren grundsätzlich nur mit größeren Unsicherheiten möglich.  
 Obwohl auf eine ausführliche Berechnung an dieser Stelle verzichtet wird und  
@@ -948,7 +948,7 @@ Photozelle für verschiedene Wellenlängen des einfallenden Lichts
                     ![Figure 39](Hardware/Fotos/photo_1.png)  
              
 *Abb. 40*:  **Photoeffekt**  Gegenspannung gegen Frequenz des Lichts  
-aufgetragen mit linearer Regression. Die Steigung entspricht dem Verhältnis $h/e$.  
+aufgetragen mit linearer Regression. Die Steigung entspricht dem Verhältnis *h/e*.  
                     ![Figure 40](Hardware/Fotos/photo_2.png)  
 
 
