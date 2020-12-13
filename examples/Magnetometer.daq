@@ -1,0 +1,24 @@
+# configuration for PhyPiDAQ 
+# Magnetometer with MLC90393 
+
+# device configuration files 
+#DeviceFile: MCP3008Config.yaml  
+#DeviceFile: PSConfig.yaml         
+#DeviceFile: MAX31865Config.yaml 
+#DeviceFile: GPIOCount.yaml
+#DeviceFile: BMP180Config.yaml  
+#DeviceFile: MMA845xConfig.yaml  
+DeviceFile: MLX90393Config.yaml  
+
+DisplayModule: DataGraphs
+Title: Magnetometer
+
+Interval: 0.1                    # logging interval         
+#ChanLabels: ['B'] # names and units for channels 
+#ChanLimits: [[-20., 20.],[-20., 20.],[-20., 20.]]
+#ChanUnits: ['mT', 'mT', 'mT']
+ChanColors: [darkblue, darkgreen, darkred]  # channel colours in display
+XYmode:     false                 # enable XY-display
+Chan2Axes: [0, 0, 0]              # assign all channels to axis0
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 

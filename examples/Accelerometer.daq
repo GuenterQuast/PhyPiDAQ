@@ -1,0 +1,23 @@
+# configuration for PhyPiDAQ 
+# Accelerometer with MMA8451 
+
+# device configuration files 
+#DeviceFile: MCP3008Config.yaml  
+#DeviceFile: PSConfig.yaml         
+#DeviceFile: MAX31865Config.yaml 
+#DeviceFile: GPIOCount.yaml
+#DeviceFile: BMP180Config.yaml  
+DeviceFile: MMA845xConfig.yaml  
+
+DisplayModule: DataGraphs
+Title: Accelerometer
+
+Interval: 0.1                    # logging interval         
+ChanLabels: [acceleration] # names and units for channels 
+#ChanLimits: [[-20., 20.],[-20., 20.],[-20., 20.]]
+ChanUnits: ['m/s²','m/s²','m/s²']
+ChanColors: [darkblue, darkgreen, darkred]  # channel colours in display
+XYmode:     false                 # enable XY-display
+Chan2Axes: [0, 0, 0]
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile             # file name for output file 

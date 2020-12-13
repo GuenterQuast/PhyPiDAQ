@@ -1,0 +1,60 @@
+# Configuration Options for PhyPiDAQ 
+
+# device configuration files 
+DeviceFile: ToyData.yaml
+
+DisplayModule: null
+# DisplayModule: DataLogger
+#DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+Title: Demo
+NHistoryPoints: 100
+Interval: 0.1                    # logging interval         
+#XYmode:     false                 # enable/disable XY-display
+XYmode:     true                 # enable/disable XY-display
+xyPlots:
+  - [0,1]
+  - [2,0]
+  - [0,3]
+  - [2,1]
+  - [3,1]
+  - [3,2]
+
+# channel-specific information
+ChanLabels: ['Rnd', 'Rnd']        # names for channels 
+ChanUnits: ['', '']               # units for channels 
+ChanColors: [darkblue, sienna]    # channel colours in display
+
+# eventually overwrite Channel Limits obtained from device config
+ChanLimits: 
+ - [0., 1.]   # chan 0
+ - [0., 1.]   # chan 1
+ - [0., 1.]   # chan 2
+ - [0., 1.]   # chan 2
+
+# calibration of channel values
+#  - null    or  - <factor> or  - [ [ <true values> ], [ <raw values> ] ]
+ChanCalib: 
+  - 1.                       # chan0: simple calibration factor
+  - [ [0.,1.], [0., 1.] ]    # chan1: interpolation: [true]([<raw>] )
+  - null                     # chan2: no calibration
+  - 1.
+  
+# apply formulae to calibrated channel values
+ChanFormula:
+  - sqrt(c0*c1)        # chan0 formula
+  - 0.5*c0/c1         # chan1 formula
+  - c0                 # chan2 reassign chan0
+  - c1                 # chan3 reassign chan1
+
+startActive: true  # start in running mode
+
+# name of output file
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile.csv         # file name for output file 
+#CSVseparator: ';'
+
+#bufferData: null    # file name to track latest data and evetually 
+                     #  store them, or null to switch off 
+
+DAQfifo: null        # output to fifo (a linux pipe) to send data to other processes
+DAQfifo: PhyPiDAQ.fifo

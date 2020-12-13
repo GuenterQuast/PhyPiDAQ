@@ -1,0 +1,4 @@
+# "device" config for ToyDataConfig.py 
+DAQModule: ReplayConfig
+csvFile: PhyPiData.csv 
+#csvSeparator: ','

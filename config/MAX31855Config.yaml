@@ -1,0 +1,14 @@
+# example of a configuration file for thermocouple-to-digital converter MAX31855
+
+DAQModule: MAX31855Config
+Unit: DEGREES_C # setting unit for temperature
+                 # possible values:
+                   # DEGREES_C
+                   # KELVIN
+                   # DEGREES_F
+CE: 0 # setting chip-select-pin
+       # 0 for CE0
+       # 1 for CE1
+
+
+

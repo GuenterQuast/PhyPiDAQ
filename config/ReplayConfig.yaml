@@ -1,0 +1,5 @@
+# "device" config for ToyDataConfig.py 
+DAQModule: ReplayConfig
+# csvFile: ~/git/PhyPiDAQ/examples/PhyPiDemoData.csv 
+#        if null or not given, take default from package
+#csvSeparator: ','

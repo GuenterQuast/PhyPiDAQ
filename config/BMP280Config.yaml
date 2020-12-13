@@ -1,0 +1,5 @@
+# example config for BMP180 temperature and pressure sensor
+
+DAQModule: BMPx80Config
+I2CADDR: 0x76 # 0x77 is default, 0x76 alternative
+

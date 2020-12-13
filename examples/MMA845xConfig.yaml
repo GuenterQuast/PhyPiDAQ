@@ -1,0 +1,5 @@
+# example config for MMA8451/2 accelerometer
+
+DAQModule: MMA845xConfig
+Range: 4G  # 2G, 4G or 8G
+

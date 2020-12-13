@@ -1,0 +1,29 @@
+# Konfiguration fuer PicoScope (2000 and 2000B Typen) 
+
+#PSmodel: '2000'      # PS model 220xA
+PSmodel: '2000a'     # PS model 2x0xB
+
+# channel configuration 
+picoChannels: [A, B]
+ChanRanges: [5.0, 1.0]
+ChanModes: [AC, AC]
+ChanOffsets: [0.0, 0.0] # !!! not for A series
+
+sampleTime: 40.0E-03
+Nsamples: 400
+
+# trigger
+
+
+trgActive: true  # true to activate
+trgChan: A
+trgThr: 1.0
+trgTyp: Rising
+trgTO: 1000  # set short time-out for A series
+          # vlaues < 4 lead to readout instabilities
+
+pretrig: 0.05 # !!! not for A series
+
+# signal generator 
+# frqSG: 100.E+3 # put 0. do disable
+frqSG: 0. 

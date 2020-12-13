@@ -1,0 +1,8 @@
+# example configuration for couning rate on GPIO pins
+
+DAQModule: TCS34725Config
+
+NChannels: 3 # 1 for intensity, 3 for R+G+B, 4 for R+G+B+intensity
+
+#Gain: 3      # 0 - 3 : x1, x4, x16, x60
+#IntT: 1      # 0 - 5 : 2.4ms, 24ms, 50ms, 101ms, 154ms, 700ms  

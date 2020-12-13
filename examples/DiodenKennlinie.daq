@@ -1,0 +1,53 @@
+# Configuration Options for PhyPiDAQ 
+
+# simultaneous recording of the response curves of three diodes
+#  - three diodes in series with resistors and common, vraiable supply voltage
+#  - measuremet of supply voltage and diode voltages
+#  - diode currents calculated from voltage drop over resistors using
+#      PhyPiDAQ formula feature
+
+#       - - - - - - - - - - - - - - - - - - - -
+
+# device configuration files 
+DeviceFile: ADS1115_Diode.yaml      # 4 active channels with gain 1
+
+
+# apply formulae to raw measured Voltages
+# c0 is (common) supply voltages, c1 - c3 diode voltages
+#    constants are resistor values in kOhm
+ChanFormula:
+ - c1                  #  U Diode c1
+ - (c0 - c1) / 0.120   #  I Diode c1
+ - c2                  #  U Diode c2
+ - (c0 - c2) / 0.100   #  I Diode c2
+ - c3                  #  U Diode c3
+ - (c0 - c3) / 0.082   #  I Diode c3
+
+# channel-specific information for calculated quantities
+ChanLabels: [U, I, U, I, U, I]      # Labes for channels 
+ChanUnits: [V, mA, V, mA, V, mA]    # units for channels 
+ChanColors: [red, darkred, green, darkgreen, blue, darkblue]
+
+# Channel Limits 
+ChanLimits: 
+ - [0., 3.5]   # U D1
+ - [0., 10.]   # I D1
+ - [0., 3.5]   # U D2
+ - [0., 10.]   # I D2
+ - [0., 3.5]   # U D3
+ - [0., 10.]   # I D3
+
+DisplayModule: DataLogger
+#DisplayModule: DataGraphs  # text, bar-graph, history and xy-view
+Chan2Axes: [0,1,0,1,0,1]
+Interval: 0.1                   # logging interval         
+XYmode:   true                  # enable/disable XY-display
+xyPlots:         # channels to display as x-y graph
+ - [0,1]
+ - [2,3]
+ - [4,5]
+
+# name of output file
+DataFile:   null                  # file name for output file 
+#DataFile:   testfile.csv         # file name for output file 
+#CSVseparator: ';'

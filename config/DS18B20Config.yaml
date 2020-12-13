@@ -1,0 +1,10 @@
+# example of a configuration file for digital thermometer DS18B20
+
+DAQModule: DS18B20Config
+Unit: DEGREES_C # setting unit for temperature
+                 # possible values:
+                   # DEGREES_C
+                   # KELVIN
+                   # DEGREES_F
+
+

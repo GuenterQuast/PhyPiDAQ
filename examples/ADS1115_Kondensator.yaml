@@ -1,0 +1,23 @@
+# example of a configuration file for ADC ADS1115
+
+DAQModule: ADS1115Config
+
+ADCChannels: [0, 1]         # active ADC-Channels
+                            # possible values: 0, 1, 2, 3
+                              # when using differential mode:
+                                #  -  0 = ADCChannel 0 minus ADCChannel 1
+                                #  -  1 = ADCChannel 0 minus ADCChannel 3
+                                #  -  2 = ADCChannel 1 minus ADCChannel 3
+                                #  -  3 = ADCChannel 2 minus ADCChannel 3
+DifModeChan: [false, false]   # enable differential mode for Channels
+Gain: [1, 1]                # programmable gain of ADC-Channel
+                              # possible values for Gain:
+                              #  - 2/3 = +/-6.144V
+                              #  -   1 = +/-4.096V
+                              #  -   2 = +/-2.048V  
+                              #  -   4 = +/-1.024V
+                              #  -   8 = +/-0.512V
+                              #  -  16 = +/-0.256V
+sampleRate: 860             # programmable Sample Rate of ADS1115
+                              # possible values for SampleRate: 
+                              # 8, 16, 32, 64, 128, 250, 475, 860

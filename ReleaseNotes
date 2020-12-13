@@ -1,0 +1,75 @@
+Release notes for PhyPiDAQ
+--------------------------
+
+v1.0dev
+
+  - improvments to graphical user interface
+  - support for MLX90393 magnetic field sensor
+  - added description of hardware (preamplifiers)
+  - support for ADC on Raspberry Pi Grove Base Hat
+
+v9.4beta Jun 2019
+
+  - added output to fifo
+
+v9.3beta1 Jun 2019
+
+  - refactored timing - now controlled from main program
+  - added support for GDK101 gamma ray detector
+  - support for 18 channel spectral sensor AS7265x
+  - support for MMA8452 accelerometer
+  - added display of charging/discharging a capacitor
+     to student course
+  - generalized suppor for distance sensor:
+     VL53L1X and VL53L0X
+
+v9.3beta March 27, 2019
+
+v9.3dev0
+
+  - added possibility to replay saved data, capacitor as demo
+  - added ReplayConfig.py to inject data from file
+  - added distance sensor VL53L1X
+
+v0.92p1 post-release
+
+  - added RGB sensor TCS24725 and color sensor AS7262
+  - added ToyDataConfig to test/debug w/o hardware
+  - refactoring of phypi.py and run_phypi.py
+      most of the code now in subdir. phypidaq/
+
+v0.92p0 post-release
+
+  - added Script GPIO-In-Out.py
+
+v0.92 February 13, 2019
+
+  - some fixes of small problems
+  - added simple display functionality (with minimal configuration)
+
+v0.9.1p2
+
+  - start of data acquisition in paused mode
+  - added pocoscope installation libraries and script installlibs.sh
+  - support for INA219 current sensor
+  - documented all *.daq Files
+  - made sure channel information in DataLogger and DataGraphs are initialised
+  - added option xyPlots to DataLogger and DataGraphs to select xy-Plots
+  - number of formulae in run_phypi now may exceed number of hardware chnannels
+  - added DiodenKennlinie.daq to record I(U) diagrams of three LEDs
+
+v0.9.1p1
+
+  - support for MMA8451 accelerometer
+  - added support for temperature and pressure sensor BMP180
+  - improved error messages
+
+v0.9.1  November 24, 2018
+
+  - improved documentation
+  - latest versions  of dependencies
+  - added digital temperature sensor DS18B20
+  - support for PS2204A,
+  - user install script, documentation
+
+v0.9.0 initial release October 7, 2018

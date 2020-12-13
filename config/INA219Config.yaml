@@ -1,0 +1,7 @@
+# example config for INA219 current sensor
+
+DAQModule: INA219Config
+
+NChannels: 1  # 2: current and voltage; 3: current, voltage and power
+maxAmp: 0.5  # current range in A, max. 3.1999 
+maxVolt: 16. # alternative: 32.
