@@ -896,8 +896,7 @@ which is evident from the relatively slow charging.
 *Fig. 39*: **Photo effect** Charging of a capacitor on a vacuum photocell for different wavelengths of the incident light
                     ![Figure 39](Hardware/Fotos/photo_1.png)  
              
-*Fig. 40*: **Photoeffect** Counter voltage versus frequency of light plotted  
-with linear regression. The slope corresponds to the ratio *h/e*. 
+*Fig. 40*: **Photoeffect** Saturation voltage versus frequency of light.  The slope of the straight line, obtained via linear regression, corresponds to the ratio *h/e*. 
                     ![Figure 40](Hardware/Fotos/photo_2.png)  
 
 
