@@ -1,5 +1,6 @@
-# example config for BMP180 temperature and pressure sensor
+# example config for BMP280 temperature and pressure sensor
 
-DAQModule: BMPx80Config
-I2CADDR: 0x76 # 0x77 is default, 0x76 alternative
-
+DAQModule: BMP280Config
+# I2CADDR: 0x76 # 0x77 is default, 0x76 alternative
+# SeaLevelPressure: 1013.25
+# NChannels: 2 # Description 1 (temperature), 2 (temperature, pressure), 3 (temperature, pressure, altitude)
