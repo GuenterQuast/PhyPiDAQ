@@ -26,6 +26,6 @@ __all__ = [ "helpers", "Display", "DataLogger", "DataRecorder", "DataGraphs",
             "ReplayConfig", "ToyDataConfig", 
             "PSConfig", "MCP3x08Config", "ADS1115Config", "groveADCConfig", "GPIOCount",
             "HX711Config", "MAX31865Config", "DS18B20Config", "INA219Config", 
-            "MAX31855Config", "BMP180Config", "BMPx80Config", "MMA8451Config", 
+            "MAX31855Config", "BMP280Config", "BMPx80Config", "MMA8451Config",
             "VL53LxConfig", "TCS34725Config", "AS7262Config", "AS7265xConfig",
-            "GDK101Config", "MLX90393Config" ]
+            "GDK101Config", "MLX90393Config", "BME280Config" ]
