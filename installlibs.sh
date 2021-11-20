@@ -16,6 +16,18 @@ sudo pip3 install spidev
 sudo pip3 install pyusb
 sudo pip3 install smbus2
 
+# adafruit libraries
+sudo pip3 install adafruit-circuitpython-busdevice
+sudo pip3 install adafruit-platformdetect
+sudo pip3 install adafruit-pureio
+sudo pip3 install adafruit-blinka
+
+# some sensors supported by circuitpython
+sudo pip3 install adafruit-circuitpython-bmp280
+sudo pip3 install adafruit-circuitpython-bme280
+sudo pip3 install adafruit-circuitpython-mlx90393
+
+
 sudo pip3 install installlibs/whl/*.whl # python wheels
 
 sudo pip3 install installlibs/tgz/*.tar.gz # python packages 
