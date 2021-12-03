@@ -1,6 +1,6 @@
 ### Die wichtigsten Applikationen
 
-Das Betriebsssystem `raspbian` des Raspberry Pi ist ein Linux-System, das von Hause aus schon viele Programme mitbringt. Eine Übersicht findet sich in dieser Liste. Sollte eines der aufgeführten Programme nicht vorhanden sein, kann es leicht mit dem Befehl  `sudo apt-get install <name>` auf der Kommandozeile nachinstalliert werden. Fast alle der unten aufgeführten Programm können auch über die grafische Bedienoberfläche des Raspberry Pi gestartet werden. 
+Das Betriebssystem `raspbian` des Raspberry Pi ist ein Linux-System, das von Hause aus schon viele Programme mitbringt. Eine Übersicht findet sich in dieser Liste. Sollte eines der aufgeführten Programme nicht vorhanden sein, kann es leicht mit dem Befehl  `sudo apt-get install <name>` auf der Kommandozeile nachinstalliert werden. Fast alle der unten aufgeführten Programm können auch über die grafische Bedienoberfläche des Raspberry Pi gestartet werden. 
 
 
 
