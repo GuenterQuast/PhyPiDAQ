@@ -1,7 +1,7 @@
 """
 .. module:: _version_info
    :platform: python 2.7, 3.4
-   :synopsis: Version 0.7.1 of picodaq, rel. Apr. 28, 2018
+   :synopsis: Version 1.01b of phypidaq
 
 .. moduleauthor:: Guenter Quast <guenter.quast@online.de>
 """
