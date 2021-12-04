@@ -24,7 +24,7 @@ sudo pip3 install adafruit-pureio
 sudo pip3 install adafruit-blinka
 
 # some sensors supported by circuitpython
-sudo pip3 install adafruit-circutipython-ina219
+sudo pip3 install adafruit-circuitpython-ina219
 sudo pip3 install adafruit-circuitpython-ina260
 sudo pip3 install adafruit-circuitpython-bmp280
 sudo pip3 install adafruit-circuitpython-bme280
