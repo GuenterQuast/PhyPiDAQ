@@ -542,6 +542,9 @@ class runPhyPiDAQ(object):
       self.ACTIVE = False
       if self.RunLED is not None: self.RunLED.pulse(-1) # RunLED off 
       if self.DatRec: self.DatRec.close()
+      if self.fifo:
+        print('', file = self.fifo)
+        self.fifo.close()
       for DEV in self.DEVs:
         DEV.closeDevice() # close down hardware device
       if DisplayModule is not None: display.close()
