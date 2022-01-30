@@ -31,7 +31,8 @@ except OSError as e:
     raise
 
 # set up a websocket for acces via ws://localhost:8314  
-host = 'localhost'
+# host = 'localhost' only local connections
+host=''   # connections from anywhere (if firewall permits)
 port = 8314
 dbg = False  
 async def data_provider(websocket, path):
@@ -47,13 +48,13 @@ async def data_provider(websocket, path):
         for inp in f:
           await websocket.send( inp )
           if inp == '\n':
-            print("empty input - end")
+            print("recieved empty input -> end")
             break
       print("end of file reached - closing")
       sys.exit(0)
 
 # start web service 
-print('** server running under uri ws://'+host+':',port)
+print('** server running under uri ws://'+host+':', port)
 start_server = websockets.serve(data_provider, host, port)
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
