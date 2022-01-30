@@ -27,10 +27,9 @@ except OSError as e:
 with open(FiFo) as f:
   #inp = f.read()  f.readline()
   for inp in f:
-   if inp == '\n':
-     print("empty input - closing")
-     break    
-   print('Read: %s '%inp, end='')
+    if inp == '\n':
+      break    
+    print('Read: %s '%inp, end='')
       
 print('        empty line received, ending')
       
