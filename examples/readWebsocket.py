@@ -17,7 +17,7 @@ print("*==* ", sys.argv[0], " Lese Daten von url ", uri)
 async def read_ws():
   """asyncronous read from websocket 
   """    
-  async with websockets.connect(uri) as websocket:
+  async with websockets.connect(uri, ping_interval=None) as websocket:
     # test connection  
     await websocket.send("req_connect")
     answ = await websocket.recv()
