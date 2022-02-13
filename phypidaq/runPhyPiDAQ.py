@@ -102,6 +102,7 @@ class runPhyPiDAQ(object):
     if cmd == 'E':
       if self.verbose > 1:
         print('\n' + sys.argv[0] + ': End command received')
+      print('')
       self.ACTIVE = False
       rc = 2
     elif cmd == 'P':

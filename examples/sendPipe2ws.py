@@ -10,7 +10,7 @@
     and send result to websocket on localhost:8314
 
     read data with script
-    readWebsocket.py ws://localhost:8314
+    readWebsocket.py ws://<servername>:8314
 """
 
 import sys, os, errno
@@ -31,7 +31,7 @@ except OSError as e:
     raise
 
 # set up a websocket for acces via ws://localhost:8314  
-# host = 'localhost' only local connections
+## host = 'localhost' #  only local connections
 host=''   # connections from anywhere (if firewall permits)
 port = 8314
 dbg = False  
