@@ -33,7 +33,8 @@ setup(
     author='Guenter Quast',
     author_email='Guenter.Quast@online.de',
     packages=['phypidaq'],
-    package_data={'phypidaq': ['PhyPiDemoData.csv']},
+    inlcude_package_data=True,
+    package_data={'phypidaq': ['PhyPiDemoData.csv', 'images/*', 'doc/*']},
     scripts=[],
     classifiers=[
     'Development Status :: 5 - stable',
