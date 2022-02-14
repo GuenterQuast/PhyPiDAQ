@@ -141,8 +141,10 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
           DAQconf = f.read()
       except:
         print('     failed to read DAQ configuration file ' + DAQconfFile)
-        exit(1)
+        #exit(1)
+        DAQconf='missing !'
 
+        
       self.lE_DAQConfFile.setText(DAQconfFile)
       RunTag = os.path.split(DAQconfFile)[1].split('.')[0]
       self.lE_RunTag.setText(RunTag)
@@ -192,8 +194,10 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
       elif "DAQModule" in phypiConfD: 
         DevFiles = phypiConfD["DAQModule"] + '.yaml' 
       else:
-        print('     no device configuration file given - exiting')
-        exit(1)
+        print('     no device configuration file given')
+        #exit(1)
+        return
+
 
 # if not a list, make it one
       if type(DevFiles) != type([]):
