@@ -139,11 +139,18 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
       try:
         with open(DAQconfFile, 'r') as f:
           DAQconf = f.read()
+          # check if file is valid yaml format
+          try:
+            _cfgD = yaml.load(DAQconf, Loader=yaml.Loader)
+          except Exception as e:
+            print('Exception: ', e)
+            print('     DAQ configuration not valid yaml format' + DAQconfFile)
+            return          
       except:
         print('     failed to read DAQ configuration file ' + DAQconfFile)
         #exit(1)
         DAQconf='missing !'
-
+        return
         
       self.lE_DAQConfFile.setText(DAQconfFile)
       RunTag = os.path.split(DAQconfFile)[1].split('.')[0]
