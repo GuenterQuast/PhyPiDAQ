@@ -29,6 +29,8 @@ sudo pip3 install adafruit-circuitpython-ina260
 sudo pip3 install adafruit-circuitpython-bmp280
 sudo pip3 install adafruit-circuitpython-bme280
 sudo pip3 install adafruit-circuitpython-mlx90393
+sudo pip3 install adafruit-circuitpython-max31855
+sudo pip3 install adafruit-circuitpython-max31865
 
 sudo pip3 install installlibs/whl/*.whl # python wheels
 sudo pip3 install installlibs/tgz/*.tar.gz # python packages 
