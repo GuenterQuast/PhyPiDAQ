@@ -32,9 +32,12 @@ sudo pip3 install adafruit-circuitpython-mlx90393
 sudo pip3 install adafruit-circuitpython-max31855
 sudo pip3 install adafruit-circuitpython-max31865
 
+# install this package (phypidaq)
+sudo pip3 install . 
+
+# install other collected libraries
 sudo pip3 install installlibs/whl/*.whl # python wheels
 sudo pip3 install installlibs/tgz/*.tar.gz # python packages 
 
 sudo dpkg -i installlibs/picoscopelibs/*.deb # picoscope 
 sudo usermod -a -G tty pi # grant acces to USB for user pi
-
