@@ -1,6 +1,16 @@
+---
 # PhyPiDAQ
 
+
 #### Data Acquisition and analysis for Physics education with Raspberry Pi
+
+---
+**Legacy version** supporting  Raspian versions *stretch* and *buster*
+
+Development of this version is discontinued; for latest developments see the 
+[PhyPiDAQ repository](https://github.com/PhyPiDAQ).
+
+---
 
 This is the **English** version of the documentation.
 
@@ -8,10 +18,10 @@ For German readers:
 Die **deutsche Version** dieses Dokuments findet sich unter dem Link [README_de.md](README_de.md) bzw. [README_de.pdf](README_de.pdf) .
 Aktuelle Präsentationen zur Projekt PhyPiDAQ:  http://ekpwww.etp.kit.edu/~quast/Projects/PhyPiDAQ/
 
+---
 
 
-
-This *python3*  code provides some basic functionality for data acquisition and visualisation like data logger, bar-chart, XY- or oscilloscope display and data recording on disk.  
+This *python3*  code provides some basic functionality for data acquisition and visualization like data logger, bar-chart, XY- or oscilloscope display and data recording on disk.  
 
 In addition to the GPIO inputs/outputs of the Raspberry Pi, the analogue-to-digital converters ADS1115 and MCP3008 and PicoScope USB-oscilloscopes are supported as input devices for analogue data, as well as a number of digital sensors using protocols like I²C or SPI.
 
