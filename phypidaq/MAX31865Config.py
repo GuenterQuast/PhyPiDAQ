@@ -2,6 +2,7 @@
 from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
 
+import sys
 import time
 import board
 import digitalio
@@ -31,9 +32,6 @@ class MAX31865Config(object):
         else:
             self.NWires = 3
 
-        # -- number of Channels
-        self.NChannels = 1
-
         # -- reference resistor
         if 'Rref' in conf_dict:
             self.Rref = conf_dict['Rref']
@@ -46,11 +44,27 @@ class MAX31865Config(object):
         else:
             self.R0 = 100.
 
+        # -- ChipSelect pin
+        if 'ChipSelect' in conf_dict:
+            CSpin = conf_dict['ChipSelect']
+        else:
+            CSpin = 5
+        if CSpin == 5:
+            self.CS = board.D5
+        elif CSpin == 6:
+            self.CS = board.D6
+        else:
+            print("MAX31865Config: Cannot use Chip-Select pin ", CSpin)
+            sys.exit(1) 
+ 
     def init(self):
         spi = board.SPI()
-        cs = digitalio.DigitalInOut(board.D5)
+        cs = digitalio.DigitalInOut(self.CS)
         self.sensor = adafruit_max31865.MAX31865(spi, cs, wires=self.NWires, rtd_nominal=self.R0,
                                                  ref_resistor=self.Rref)
+        if self.sensor.resistance == 0.:
+            print("MAX31865: unphysical resistance read, assuming SPI communication error")
+            sys.exit(1)
 
         # Provide configuration parameters
         self.ChanLims = [[-10., 110.]]

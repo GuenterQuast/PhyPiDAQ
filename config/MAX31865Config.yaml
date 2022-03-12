@@ -2,8 +2,9 @@
 
 DAQModule: MAX31865Config
 
-NChannels: 1      # number of channels (1: temperature; 2 temperature & resistance)
+NChannels: 2      # number of channels (1: temperature; 2 temperature & resistance)
 
 NWires: 3         # numbers of wires PT100
 Rref: 430         # value reference resistor MAX31865
 R0: 100.          # value resistor PT100 at 0°C
+ChipSelect: 5     # default value for Chip Select pin, either 5 or 6 
