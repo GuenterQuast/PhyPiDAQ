@@ -55,8 +55,8 @@ class MAX31865Config(object):
             self.CS = board.D6
         else:
             print("MAX31865Config: Cannot use Chip-Select pin ", CSpin)
-            sys.exit(1) 
- 
+            sys.exit(1)
+
     def init(self):
         spi = board.SPI()
         cs = digitalio.DigitalInOut(self.CS)
@@ -67,8 +67,12 @@ class MAX31865Config(object):
             sys.exit(1)
 
         # Provide configuration parameters
-        self.ChanLims = [[-10., 110.]]
-        self.ChanNams = [str(1)]
+        if self.NChannels == 1:
+            self.ChanLims = [[-10., 110.]]
+            self.ChanNams = ['T']
+        else:
+            self.ChanLims = [[-10., 110.], [0.9*self.R0, 1.1*self.R0]]
+            self.ChanNams = ['T', 'R']
 
     def acquireData(self, buf):
         # Read the temperature
